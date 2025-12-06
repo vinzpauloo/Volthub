@@ -10,8 +10,8 @@ export default function LayoutContainer({
   outerClassName?: string;
 }) {
   return (
-    <div className={cn("w-full overflow-x-hidden", outerClassName)}>
-      <div className={cn("max-w-[1600px] w-full mx-auto px-4 sm:px-6 md:px-8 flex justify-center", className)}>
+    <div className={cn("w-full", outerClassName)}>
+      <div className={cn("max-w-[1600px]  mx-auto px-4", className)}>
         {children}
       </div>
     </div>
