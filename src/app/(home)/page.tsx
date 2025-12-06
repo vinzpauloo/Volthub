@@ -23,7 +23,7 @@ import {
 
 export default function Home() {
   return (
-    <main className="flex flex-col w-full overflow-x-hidden">
+    <main className="flex flex-col w-full flex-1 overflow-x-hidden">
       <HoverEffects />
 
       {/* Carousel Banner */}
