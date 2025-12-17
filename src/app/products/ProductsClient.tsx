@@ -35,7 +35,14 @@ export default function ProductsClient() {
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [categoryBanner, setCategoryBanner] = useState<Record<string, any>>({});
+  interface CategoryBanner {
+    title: string;
+    description: string;
+    image: string;
+    video?: string;
+  }
+  
+  const [categoryBanner, setCategoryBanner] = useState<Record<string, CategoryBanner>>({});
   const [totalProducts, setTotalProducts] = useState(0);
   const [loading, setLoading] = useState(true);
   const [searching, setSearching] = useState(false);
@@ -71,7 +78,7 @@ export default function ProductsClient() {
     async function fetchProducts() {
       // Only show full loading spinner on initial load
       // For subsequent searches, show a subtle indicator
-      const isInitialLoad = products.length === 0 && !searchQuery;
+      const isInitialLoad = products.length === 0 && !debouncedSearchQuery;
       if (isInitialLoad) {
         setLoading(true);
       } else {
@@ -106,7 +113,7 @@ export default function ProductsClient() {
     }
 
     fetchProducts();
-  }, [activeCategory, debouncedSearchQuery]);
+  }, [activeCategory, debouncedSearchQuery, products.length]);
 
   const showBackToTop = activeCategory === "all";
 

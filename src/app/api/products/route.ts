@@ -1,6 +1,30 @@
 import { NextResponse } from "next/server";
 import { createServerClient } from "@/lib/supabase";
-import type { ProductCategory } from "@/app/products/components/productData";
+import type { ProductCategory, Product } from "@/app/products/components/productData";
+
+// Type for product data from Supabase (before transformation)
+interface SupabaseProduct {
+  id: string;
+  name: string;
+  subtitle: string | null;
+  category: ProductCategory;
+  tag: string | null;
+  image: string;
+  images: string[] | null;
+  price: string | null;
+  description: string | null;
+  variations: Product["variations"] | null;
+  specifications: Product["specifications"] | null;
+  features: Product["features"] | null;
+}
+
+// Type for category banner
+interface CategoryBanner {
+  title: string;
+  description: string;
+  image: string;
+  video?: string;
+}
 
 export async function GET(request: Request) {
   try {
@@ -50,11 +74,11 @@ export async function GET(request: Request) {
     // Apply search filter if search term is provided
     if (search && search.length > 0) {
       const searchLower = search.toLowerCase();
-      const beforeCount = filteredProducts.length;
+      // const beforeCount = filteredProducts.length;
       
 
       
-      filteredProducts = filteredProducts.filter((product: any) => {
+      filteredProducts = filteredProducts.filter((product: SupabaseProduct) => {
         const name = (product.name || "").toLowerCase();
         const matches = 
           name.includes(searchLower);
@@ -78,14 +102,14 @@ export async function GET(request: Request) {
       .from("category_banners")
       .select("*");
 
-    const categoryBanner: Record<string, any> = {};
+    const categoryBanner: Record<string, CategoryBanner> = {};
     if (banners) {
       banners.forEach((banner) => {
         categoryBanner[banner.category] = {
           title: banner.title,
           description: banner.description,
           image: banner.image,
-          video: banner.video,
+          video: banner.video || undefined,
         };
       });
     }
@@ -97,7 +121,7 @@ export async function GET(request: Request) {
     }
 
     // Transform products to match expected format (handle JSONB fields)
-    const transformedProducts = filteredProducts.map((product: any) => ({
+    const transformedProducts = filteredProducts.map((product: SupabaseProduct) => ({
       id: product.id,
       name: product.name,
       subtitle: product.subtitle,
