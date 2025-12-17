@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import type React from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 import { philippineRegions, interestOptions, socialIcons } from "./contactData";
 import ContactHeader from "./ContactHeader";
@@ -12,6 +12,7 @@ import ContactInfo from "./ContactInfo";
 
 export default function ContactForm() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [formState, setFormState] = useState({
     firstName: "",
     lastName: "",
@@ -380,12 +381,15 @@ export default function ContactForm() {
         body: JSON.stringify(formState),
       });
 
-      if (!response.ok) {
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
         throw new Error("Failed to send message");
       }
 
       alert("Your request has been sent to our team. We'll be in touch shortly.");
 
+      // Clear form state
       setFormState({
         firstName: "",
         lastName: "",
@@ -397,6 +401,24 @@ export default function ContactForm() {
         interest: "",
         details: "",
       });
+
+      // Reset all dropdown states
+      setIsDropdownOpen(false);
+      setIsRegionOpen(false);
+      setIsProvinceOpen(false);
+      setIsCityOpen(false);
+      setIsDetailsReadOnly(false);
+      
+      // Reset dropdown positions
+      setDropdownStyle({});
+      setRegionDropdownPosition(null);
+      setProvinceDropdownPosition(null);
+      setCityDropdownPosition(null);
+
+      // Clear URL parameters to prevent form from being pre-filled on refresh
+      if (window.location.search) {
+        router.replace(window.location.pathname);
+      }
     } catch (error) {
       console.error(error);
       alert("Something went wrong while sending your message. Please try again.");

@@ -95,17 +95,17 @@ export async function POST(request: Request) {
     });
 
     try {
-      await transporter.sendMail({
-        // Gmail requires the authenticated account as the actual sender
-        from: `"${firstName} ${lastName} via VoltHub" <${
-          process.env.SMTP_FROM || process.env.SMTP_USER
-        }>`,
-        to: "admin-help@volthub-ev.com",
-        subject,
-        text: body,
-        // This makes replies go directly to the email entered in the form
-        replyTo: email || undefined,
-      });
+    await transporter.sendMail({
+      // Gmail requires the authenticated account as the actual sender
+      from: `"${firstName} ${lastName} via VoltHub" <${
+        process.env.SMTP_FROM || process.env.SMTP_USER
+      }>`,
+      to: "admin-help@volthub-ev.com",
+      subject,
+      text: body,
+      // This makes replies go directly to the email entered in the form
+      replyTo: email || undefined,
+    });
 
       // Update database to mark email as sent
       if (submission?.id) {
