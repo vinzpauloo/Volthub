@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 import ProductDetail from "../components/ProductDetail";
 import type { Product } from "../components/productData";
+import BackToTopButton from "@/components/common/BackToTopButton";
 
 export default function ProductDetailClient() {
   const params = useParams();
@@ -97,6 +98,7 @@ export default function ProductDetailClient() {
       <LayoutContainer>
         <ProductDetail product={product} />
       </LayoutContainer>
+      <BackToTopButton />
     </main>
   );
 }
