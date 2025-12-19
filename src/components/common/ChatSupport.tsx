@@ -13,12 +13,18 @@ const ChatSupport = () => {
   const [messages, setMessages] = useState<Array<{ id: number; text: string; sender: "user" | "support" }>>([]);
   const [isTyping, setIsTyping] = useState(false);
   const [currentProductId, setCurrentProductId] = useState<string | null>(null);
+  const [currentPagePath, setCurrentPagePath] = useState<string | null>(null);
   const [lastUserMessage, setLastUserMessage] = useState<string>("");
   const chatEndRef = useRef<HTMLDivElement>(null);
 
-  // Detect if we're on a product page
+  // Detect current page (product pages and other pages)
   useEffect(() => {
     if (!pathname) return;
+    
+    // Always set the current page path
+    setCurrentPagePath(pathname);
+    
+    // Check if we're on a product page
     const productMatch = pathname.match(/^\/products\/(.+)$/);
     if (productMatch) {
       const productId = productMatch[1];
@@ -120,6 +126,7 @@ const ChatSupport = () => {
             message: userMessage,
             conversationHistory: recentMessages,
             productId: currentProductId,
+            currentPagePath: currentPagePath,
           }),
         });
 
@@ -236,7 +243,7 @@ const ChatSupport = () => {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed inset-0 md:inset-auto md:bottom-24 md:right-6 z-[100] w-full h-full md:w-96 md:h-[600px] bg-white md:rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 fade-in-0 duration-300">
+        <div className="fixed inset-0 md:inset-auto md:bottom-24 md:right-6 z-100 w-full h-full md:w-96 md:h-[600px] bg-white md:rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-4 fade-in-0 duration-300">
           {/* Header */}
           <div className="bg-green-500 text-white px-4 py-3 flex items-center justify-between">
             <div className="flex items-center gap-2 md:gap-3">
