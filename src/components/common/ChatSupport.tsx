@@ -15,7 +15,36 @@ const ChatSupport = () => {
   const [currentProductId, setCurrentProductId] = useState<string | null>(null);
   const [currentPagePath, setCurrentPagePath] = useState<string | null>(null);
   const [lastUserMessage, setLastUserMessage] = useState<string>("");
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
+
+  // Generate or retrieve session ID from localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      let storedSessionId = localStorage.getItem("volthub_chat_session_id");
+      
+      // Generate new session ID if none exists or if it's older than 24 hours
+      if (!storedSessionId) {
+        storedSessionId = `chat_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+        localStorage.setItem("volthub_chat_session_id", storedSessionId);
+        localStorage.setItem("volthub_chat_session_created", Date.now().toString());
+      } else {
+        // Check if session is older than 24 hours (86400000 ms)
+        const sessionCreated = localStorage.getItem("volthub_chat_session_created");
+        if (sessionCreated) {
+          const age = Date.now() - parseInt(sessionCreated, 10);
+          if (age > 86400000) {
+            // Create new session
+            storedSessionId = `chat_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+            localStorage.setItem("volthub_chat_session_id", storedSessionId);
+            localStorage.setItem("volthub_chat_session_created", Date.now().toString());
+          }
+        }
+      }
+      
+      setSessionId(storedSessionId);
+    }
+  }, []);
 
   // Detect current page (product pages and other pages)
   useEffect(() => {
@@ -127,6 +156,7 @@ const ChatSupport = () => {
             conversationHistory: recentMessages,
             productId: currentProductId,
             currentPagePath: currentPagePath,
+            sessionId: sessionId,
           }),
         });
 
@@ -137,6 +167,14 @@ const ChatSupport = () => {
 
         const data = await response.json();
         setIsTyping(false);
+        
+        // Update session ID if server returned a new one (fallback case)
+        if (data.sessionId && data.sessionId !== sessionId && typeof window !== "undefined") {
+          setSessionId(data.sessionId);
+          localStorage.setItem("volthub_chat_session_id", data.sessionId);
+          localStorage.setItem("volthub_chat_session_created", Date.now().toString());
+        }
+        
         setMessages((prev) => [
           ...prev,
           {

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getRelevantContext } from "@/lib/rag/knowledgeBase";
+import { createServerClient } from "@/lib/supabase";
 
 /**
  * Chat API Route - Integrates with Ollama LLM (local or cloud)
@@ -348,13 +349,82 @@ async function callOllama(
  */
 export async function POST(request: Request) {
   try {
-    const { message, conversationHistory = [], productId, currentPagePath } = await request.json();
+    const { message, conversationHistory = [], productId, currentPagePath, sessionId } = await request.json();
 
     if (!message || typeof message !== "string") {
       return NextResponse.json(
         { error: "Message is required" },
         { status: 400 }
       );
+    }
+
+    // Initialize Supabase client
+    const supabase = createServerClient();
+
+    // Generate session ID if not provided (fallback)
+    let chatSessionId = sessionId || `chat_${Date.now()}_${Math.random().toString(36).substring(2, 15)}`;
+
+    // Ensure session exists in database (create or update)
+    const { data: existingSession } = await supabase
+      .from("chat_sessions")
+      .select("id, session_id")
+      .eq("session_id", chatSessionId)
+      .single();
+
+    if (!existingSession) {
+      // Create new session
+      const { data: newSession, error: sessionError } = await supabase
+        .from("chat_sessions")
+        .insert({
+          session_id: chatSessionId,
+          page_path: currentPagePath || null,
+          product_id: productId || null,
+          started_at: new Date().toISOString(),
+          last_message_at: new Date().toISOString(),
+        })
+        .select("id, session_id")
+        .single();
+
+      if (sessionError) {
+        console.error("Error creating chat session:", sessionError);
+        // Continue even if session creation fails, but log the error
+      } else {
+        console.log("Created new chat session:", newSession?.session_id);
+      }
+    } else {
+      // Update existing session
+      const { error: updateError } = await supabase
+        .from("chat_sessions")
+        .update({
+          page_path: currentPagePath || null,
+          product_id: productId || null,
+          last_message_at: new Date().toISOString(),
+        })
+        .eq("session_id", chatSessionId);
+
+      if (updateError) {
+        console.error("Error updating chat session:", updateError);
+      }
+    }
+
+    // Save user message to database
+    const { data: userMessageData, error: userMessageError } = await supabase
+      .from("chat_messages")
+      .insert({
+        session_id: chatSessionId,
+        sender: "user",
+        message: message,
+        product_id: productId || null,
+        page_path: currentPagePath || null,
+      })
+      .select();
+
+    if (userMessageError) {
+      console.error("Error saving user message:", userMessageError);
+      console.error("Session ID:", chatSessionId);
+      console.error("Error details:", JSON.stringify(userMessageError, null, 2));
+    } else {
+      console.log("User message saved successfully:", userMessageData?.[0]?.id);
     }
 
     // Get current product info if productId is provided
@@ -391,9 +461,30 @@ export async function POST(request: Request) {
       ? await callCloudLLM(messages, context, currentProduct, currentPagePath)
       : await callOllama(messages, context, currentProduct, currentPagePath);
 
+    // Save support response to database
+    const { data: supportMessageData, error: supportMessageError } = await supabase
+      .from("chat_messages")
+      .insert({
+        session_id: chatSessionId,
+        sender: "support",
+        message: response,
+        product_id: productId || null,
+        page_path: currentPagePath || null,
+      })
+      .select();
+
+    if (supportMessageError) {
+      console.error("Error saving support message:", supportMessageError);
+      console.error("Session ID:", chatSessionId);
+      console.error("Error details:", JSON.stringify(supportMessageError, null, 2));
+    } else {
+      console.log("Support message saved successfully:", supportMessageData?.[0]?.id);
+    }
+
     return NextResponse.json({
       response,
       contextUsed: context.length > 0,
+      sessionId: chatSessionId, // Always return session ID so client can store it
     });
   } catch (error: unknown) {
     console.error("Chat API error:", error);

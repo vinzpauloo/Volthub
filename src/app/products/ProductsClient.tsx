@@ -151,14 +151,14 @@ export default function ProductsClient() {
                     </div>
                   </div>
                 )}
-                <ProductGrid
+            <ProductGrid
                   products={products}
-                  activeCategory={activeCategory}
-                  searchQuery={searchQuery}
-                  onSearchQueryChange={setSearchQuery}
+              activeCategory={activeCategory}
+              searchQuery={searchQuery}
+              onSearchQueryChange={setSearchQuery}
                   categories={categories}
                   totalProducts={totalProducts}
-                />
+            />
               </div>
             )}
           </div>
