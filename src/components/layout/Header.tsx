@@ -80,6 +80,11 @@ const navItems: NavItem[] = [
   //   description: "Impact stories and sustainability metrics",
   // },
   {
+    label: "Partners",
+    href: "/partners",
+    description: "Become a location partner",
+  },
+  {
     label: "Contact",
     href: "/contact",
     description: "Quote requests and support channels",
@@ -185,7 +190,7 @@ const Header = () => {
 
         <div className="hidden lg:flex items-center space-x-6 ml-8">
           <span className="text-sm font-orbitron text-emerald-200 tracking-widest hidden 2xl:block">
-            +63 9659700823
+            +63 9682323704
           </span>
           <Link
             href="/contact"

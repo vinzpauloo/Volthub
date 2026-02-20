@@ -84,13 +84,9 @@ function findMatchingProducts(query: string): Product[] {
   });
 }
 
-// Get product price only
-function getProductPrice(product: Product): string {
-  if (product.price) {
-    return `**${product.name}**\n\nPrice: ${product.price}`;
-  } else {
-    return `**${product.name}**\n\nPlease contact us for pricing information.`;
-  }
+// Redirect pricing queries to contact
+function getProductPricingRedirect(product: Product): string {
+  return `**${product.name}**\n\nFor current pricing on this product, please contact our sales team or submit a quote request through our contact form at /contact. Our team will provide you with an up-to-date quotation tailored to your needs.`;
 }
 
 // Get product specifications only
@@ -133,17 +129,13 @@ function getProductOverview(product: Product): string {
   if (product.subtitle) {
     info += `${product.subtitle}\n\n`;
   }
-  
-  if (product.price) {
-    info += `Price: ${product.price}\n\n`;
-  }
-  
+
   if (details?.description) {
     info += `**Overview:**\n${details.description}\n\n`;
   } else if (product.description) {
     info += `**Overview:**\n${product.description}\n\n`;
   }
-  
+
   if (details?.variations && details.variations.length > 0) {
     info += `**Available Models/Variations:**\n`;
     details.variations.slice(0, 5).forEach(variation => {
@@ -153,7 +145,9 @@ function getProductOverview(product: Product): string {
       info += `... and ${details.variations.length - 5} more variations\n`;
     }
   }
-  
+
+  info += `\nFor pricing, please contact our sales team or visit /contact.`;
+
   return info;
 }
 
@@ -281,9 +275,6 @@ function getRelatedProducts(product: Product): string {
     if (related.subtitle) {
       info += ` - ${related.subtitle}`;
     }
-    if (related.price) {
-      info += ` (${related.price})`;
-    }
     info += `\n`;
   });
   
@@ -300,15 +291,11 @@ function getRelatedProducts(product: Product): string {
 function getProductInfo(product: Product): string {
   const details = productDetails[product.id];
   let info = `**${product.name}**\n`;
-  
+
   if (product.subtitle) {
     info += `${product.subtitle}\n\n`;
   }
-  
-  if (product.price) {
-    info += `Price: ${product.price}\n\n`;
-  }
-  
+
   if (details?.description) {
     info += `**Overview:**\n${details.description}\n\n`;
   } else if (product.description) {
@@ -352,7 +339,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
   // Greetings
   if (normalizedMessage.match(/\b(hi|hello|hey|greetings|good morning|good afternoon|good evening)\b/)) {
     if (contextProduct) {
-      return `Hello! I see you're viewing **${contextProduct.name}**. I can help you with questions about this product, including specifications, features, pricing, installation, and warranty. What would you like to know?`;
+      return `Hello! I see you're viewing **${contextProduct.name}**. I can help you with questions about this product, including specifications, features, installation, and more. What would you like to know?`;
     }
     return "Hello! I'm VoltHub's AI customer support assistant. I can help you with information about our products, services, and company. What would you like to know?";
   }
@@ -372,7 +359,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
     const evProducts = products.filter(p => p.category === 'ev-charging');
     let response = `**EV Charging Station Products:**\n\nWe offer ${evProducts.length} EV charging solutions:\n\n`;
     evProducts.forEach(product => {
-      response += `• ${product.name}${product.price ? ` - ${product.price}` : ''}\n`;
+      response += `• ${product.name}\n`;
     });
     response += `\nWould you like details about a specific EV charging product?`;
     return response;
@@ -382,7 +369,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
     const solarProducts = products.filter(p => p.category === 'solar-street');
     let response = `**Solar Street Lighting Products:**\n\nWe offer ${solarProducts.length} solar street lighting solutions:\n\n`;
     solarProducts.forEach(product => {
-      response += `• ${product.name}${product.price ? ` - ${product.price}` : ''}\n`;
+      response += `• ${product.name}\n`;
     });
     response += `\nWould you like details about a specific solar street light product?`;
     return response;
@@ -392,7 +379,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
     const smartHomeProducts = products.filter(p => p.category === 'smart-home');
     let response = `**Smart Home IPS Products:**\n\nWe offer ${smartHomeProducts.length} smart home power solutions:\n\n`;
     smartHomeProducts.forEach(product => {
-      response += `• ${product.name}${product.price ? ` - ${product.price}` : ''}\n`;
+      response += `• ${product.name}\n`;
     });
     response += `\nWould you like details about a specific smart home IPS product?`;
     return response;
@@ -402,7 +389,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
     const powerProducts = products.filter(p => p.category === 'cabinet');
     let response = `**Power Supply Products:**\n\nWe offer ${powerProducts.length} power supply and energy storage solutions:\n\n`;
     powerProducts.forEach(product => {
-      response += `• ${product.name}${product.price ? ` - ${product.price}` : ''}\n`;
+      response += `• ${product.name}\n`;
     });
     response += `\nWould you like details about a specific power supply product?`;
     return response;
@@ -411,28 +398,25 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
   // Price queries - return ONLY price
   if (normalizedMessage.match(/\b(price|cost|how much|pricing|expensive|cheap|affordable|amount|purchase|buy|purchase price)\b/)) {
     if (contextProduct) {
-      return getProductPrice(contextProduct);
+      return getProductPricingRedirect(contextProduct);
     }
     const matchingProducts = findMatchingProducts(userMessage);
     if (matchingProducts.length > 0) {
       if (matchingProducts.length === 1) {
-        return getProductPrice(matchingProducts[0]);
+        return getProductPricingRedirect(matchingProducts[0]);
       } else {
-        let response = `**Pricing Information:**\n\n`;
+        let response = `I found ${matchingProducts.length} products matching your query:\n\n`;
         matchingProducts.slice(0, 5).forEach(product => {
-          if (product.price) {
-            response += `• ${product.name}: ${product.price}\n`;
-          } else {
-            response += `• ${product.name}: Please contact us for pricing\n`;
-          }
+          response += `• ${product.name}\n`;
         });
         if (matchingProducts.length > 5) {
-          response += `\n... and ${matchingProducts.length - 5} more products. Please specify which product you'd like pricing for.`;
+          response += `\n... and ${matchingProducts.length - 5} more products.\n`;
         }
+        response += `\nFor current pricing on any of these products, please contact our sales team or submit a quote request through our contact form at /contact.`;
         return response;
       }
     }
-    return "I can help you with pricing information. Could you please specify which product you're interested in? For example: 'What is the price of EV charging station?' or 'How much does a solar street light cost?'";
+    return "For current pricing on our products, please contact our sales team or submit a quote request through our contact form at /contact. If you'd like to know about product specifications or features, just let me know which product you're interested in!";
   }
   
   // Product search - prioritize context product if available
@@ -451,7 +435,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
     // If asking about current product
     if (isAboutCurrentProduct) {
       if (normalizedMessage.match(/\b(price|cost|how much|pricing|amount)\b/)) {
-        return getProductPrice(contextProduct);
+        return getProductPricingRedirect(contextProduct);
       }
       if (normalizedMessage.match(/\b(spec|specification|specs|technical|dimensions|capacity|power|voltage|current|wattage|output|input|rating)\b/)) {
         return getProductSpecs(contextProduct);
@@ -484,7 +468,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
     if (matchingProducts.length === 1) {
       // Check if asking for specific info
       if (normalizedMessage.match(/\b(price|cost|how much|pricing|amount)\b/)) {
-        return getProductPrice(matchingProducts[0]);
+        return getProductPricingRedirect(matchingProducts[0]);
       }
       if (normalizedMessage.match(/\b(spec|specification|specs|technical|dimensions|capacity|power|voltage|current|wattage|output|input|rating)\b/)) {
         return getProductSpecs(matchingProducts[0]);
@@ -511,7 +495,6 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
       matchingProducts.slice(0, 5).forEach(product => {
         response += `**${product.name}**\n`;
         if (product.subtitle) response += `${product.subtitle}\n`;
-        if (product.price) response += `Price: ${product.price}\n`;
         response += `\n`;
       });
       if (matchingProducts.length > 5) {
@@ -620,7 +603,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
   
   // Warranty queries
   if (normalizedMessage.match(/\b(warranty|guarantee|warranties|covered|repair|service)\b/)) {
-    return "Most of our products come with a **3-year warranty**. This includes coverage for manufacturing defects and component failures under normal use conditions. For specific warranty terms and conditions for a particular product, please contact our sales team or visit the product detail page.";
+    return "For warranty and guarantee information on specific products, please contact our sales team who can provide the most up-to-date coverage details for your chosen product.";
   }
   
   // Installation queries
@@ -644,7 +627,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
   
   // Default response - only show if it's a very general query
   if (normalizedMessage.length < 20 || normalizedMessage.match(/\b(help|what can you|what do you|assist|hello|hi|hey)\b/)) {
-    return `I'm here to help you with information about VoltHub's products and services. You can ask me about:\n\n• Our company and services\n• Product information and specifications\n• Pricing\n• Installation services\n• Warranty information\n• Product categories (EV Charging, Solar Street Lights, Smart Home IPS, Power Supplies)\n\nIf I couldn't answer your question, I can help you contact our team directly. Would you like me to forward your question to our support team?`;
+    return `I'm here to help you with information about VoltHub's products and services. You can ask me about:\n\n• Our company and services\n• Product information and specifications\n• Installation services\n• Product categories (EV Charging, Solar Street Lights, Smart Home IPS, Power Supplies)\n\nFor pricing inquiries, please contact our sales team or visit /contact.\n\nIf I couldn't answer your question, I can help you contact our team directly. Would you like me to forward your question to our support team?`;
   }
   
   // If we get here and can't answer, show contact option

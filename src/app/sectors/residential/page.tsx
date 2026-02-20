@@ -21,7 +21,6 @@ const streetLights = [
     size: "495*205*80mm",
     battery: "3.2V 65Ah",
     solarPanel: "70W",
-    price: "₱17,346.00",
     image: "/Product/StreetLamp/F2L.png",
   },
   {
@@ -31,7 +30,6 @@ const streetLights = [
     size: "550*240*100mm",
     battery: "3.2V 80Ah",
     solarPanel: "70W",
-    price: "₱19,661.75",
     image: "/Product/StreetLamp/F2L.png",
   },
   {
@@ -41,7 +39,6 @@ const streetLights = [
     size: "650*300*130mm",
     battery: "3.2V 65Ah",
     solarPanel: "70W",
-    price: "₱17,036.25",
     image: "/Product/StreetLamp/LVXC.png",
   },
   {
@@ -51,7 +48,6 @@ const streetLights = [
     size: "650*300*130mm",
     battery: "3.2V 80Ah",
     solarPanel: "70W",
-    price: "₱18,939.00",
     image: "/Product/StreetLamp/LVXC.png",
   },
 ];
@@ -63,7 +59,6 @@ const storageSystems = [
     ratedPower: "3KW/AC 220V",
     battery: "5.3kWh",
     solarPanel: "36V670W*4",
-    price: "₱255,502.45",
     description:
       "Small home / backup kit. Can run 1 HP aircon plus lights, fans, TV, laptop. About 4-5 hours usable.",
     image: "/Product/SmartHome/SMP2.png",
@@ -74,7 +69,6 @@ const storageSystems = [
     ratedPower: "5KW/AC 220V",
     battery: "10.6kWh",
     solarPanel: "36V670W*6",
-    price: "₱388,122.65",
     description:
       "Standard home / small business. Can run 1-2 HP aircon, refrigerator, lights, fans, TV, computers. Around 5-6 hours usable.",
     image: "/Product/SmartHome/SMP3.png",
@@ -85,7 +79,6 @@ const storageSystems = [
     ratedPower: "5KW/AC 220V",
     battery: "15.9kWh",
     solarPanel: "36V670W*8",
-    price: "₱526,117.75",
     description:
       "Longer backup, same power. Good for rural homes with frequent long outages or stores with freezers.",
     image: "/Product/SmartHome/SMP4.png",
@@ -96,7 +89,6 @@ const evChargers = [
   {
     model: "DPEV-7k",
     type: "7 kW Single-gun AC Charging Pile",
-    price: "₱18,062.50",
     description:
       "AC 'slow' charger for residential, office, hotel parking. Low installation cost, suitable as basic amenity charger.",
     image: "/Product/EV/59.png",
@@ -201,9 +193,6 @@ export default function ResidentialSector() {
                 <div className="p-6 space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-semibold">{system.kWh}</h3>
-                    <span className="text-2xl font-bold text-primary">
-                      {system.price}
-                    </span>
                   </div>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
@@ -260,9 +249,6 @@ export default function ResidentialSector() {
                   <th className="px-6 py-4 text-left font-semibold">
                     Solar Panel
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold">
-                    Unit Price
-                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -292,9 +278,6 @@ export default function ResidentialSector() {
                     </td>
                     <td className="px-6 py-4 text-slate-600">
                       {light.solarPanel}
-                    </td>
-                    <td className="px-6 py-4 font-semibold text-primary">
-                      {light.price}
                     </td>
                   </tr>
                 ))}
@@ -329,17 +312,16 @@ export default function ResidentialSector() {
                 )}
                 <h3 className="text-xl font-semibold mb-2">{charger.type}</h3>
                 <p className="text-sm text-slate-600 mb-4">{charger.description}</p>
-                <div className="flex items-center justify-between mb-4">
+                <div className="mb-4">
                   <span className="text-sm text-slate-500">Model: {charger.model}</span>
-                  <span className="text-2xl font-bold text-primary">{charger.price}</span>
                 </div>
                 <Link
                   href={`/contact?subject=installation&product=ev-charging&model=${encodeURIComponent(
                     charger.model
-                  )}&productName=${encodeURIComponent(charger.type)}&price=${encodeURIComponent(charger.price)}`}
+                  )}&productName=${encodeURIComponent(charger.type)}`}
                   className="block w-full text-center bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors"
                 >
-                  Request Installation
+                  Contact for Quote
                 </Link>
               </div>
             ))}
@@ -357,7 +339,7 @@ export default function ResidentialSector() {
             />
             <div className="grid md:grid-cols-2 gap-6 mt-12">
               {[
-                "3-year warranty on all products",
+                "Dedicated customer support",
                 "Professional installation service",
                 "Payment terms: 30% advance, balance before shipping",
                 "Production time: 20-25 working days",

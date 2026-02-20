@@ -81,6 +81,7 @@ const footerColumns = [
       // { label: "Case Studies", href: "/case-studies" },
       // { label: "Careers", href: "/contact" },
       // { label: "News", href: { pathname: "/about", hash: "insights" } },
+      { label: "Become a Partner", href: "/partners" },
       { label: "Contact", href: "/contact" },
     ],
   },
@@ -191,14 +192,14 @@ const Footer = () => {
             <div className="space-y-2 md:space-y-3 text-gray-400">
             <p className="text-sm md:text-base leading-relaxed select-text">
                 <span className="font-bold text-white">Phone:</span>{" "}
-                <a href="tel:+639659700823" className="hover:underline">
-                  +63 9659700823
+                <a href="tel:+639682323704" className="hover:underline">
+                  +63 9682323704
                 </a>
               </p>
               <p className="text-sm md:text-base leading-relaxed select-text">
                 <span className="font-bold text-white">Email:</span>{" "}
-                <a href="mailto:admin-help@volthub-ev.com" className="hover:underline">
-                  admin-help@volthub-ev.com
+                <a href="mailto:admin@volthub.ph" className="hover:underline">
+                  admin@volthub.ph
                 </a>  
               </p>
               <p className="text-sm md:text-base leading-relaxed select-text">

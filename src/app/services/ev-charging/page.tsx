@@ -163,7 +163,7 @@ export default function EVChargingSolutions() {
         <LayoutContainer>
           <div className="text-center mb-16">
             <SectionHeading
-              title="EV Charging Solutions & Pricing"
+              title="EV Charging Solutions"
               description="Choose the right charging solution for your needs"
             />
           </div>
@@ -172,7 +172,6 @@ export default function EVChargingSolutions() {
               {
                 model: "DPEV-7k",
                 type: "7 kW Single-gun AC Charging Pile",
-                price: "₱18,062.50",
                 description: "AC 'slow' charger for residential, office, hotel parking. Low installation cost, suitable as basic amenity charger.",
                 image: "/Product/EV/59.png",
                 features: [
@@ -186,7 +185,6 @@ export default function EVChargingSolutions() {
               {
                 model: "DPEV-60k",
                 type: "60 kW Dual-gun DC Charging Pile",
-                price: "₱361,250.00",
                 description: "Entry-level DC fast charger. Good for malls, supermarkets, city public charging. Can support 1-2 vehicles at a time.",
                 image: "/Product/EV/89.png",
                 features: [
@@ -200,7 +198,6 @@ export default function EVChargingSolutions() {
               {
                 model: "DPEV-120k",
                 type: "120kW Dual-gun DC Charging Pile",
-                price: "₱446,250.00",
                 description: "Standard fast charger. Perfect for highway rest stops, big commercial centers, fleet depots with higher turnover.",
                 image: "/Product/EV/89.png",
                 features: [
@@ -214,7 +211,6 @@ export default function EVChargingSolutions() {
               {
                 model: "DPEV-160k",
                 type: "160 kW Single-gun DC Charging Pile",
-                price: "₱573,750.00",
                 description: "High-power fast charger. Perfect for premium charging hubs, expressway service areas, sites serving EVs that support higher charging power.",
                 image: "/Product/EV/53.png",
                 features: [
@@ -228,7 +224,6 @@ export default function EVChargingSolutions() {
               {
                 model: "DPEV-400k",
                 type: "400 kW Single-gun DC Charging Pile",
-                price: "₱1,030,625.00",
                 description: "Ultra-fast DC charger. For flagship highway stations, bus/truck depots needing very high power. Allows very short charging stops.",
                 image: "/Product/EV/64.png",
                 features: [
@@ -268,12 +263,6 @@ export default function EVChargingSolutions() {
                     <p className="text-sm text-white/90">Model: {charger.model}</p>
                   </div>
                   <div className="p-6">
-                    <div className="text-center mb-4">
-                      <div className="text-2xl font-bold text-primary mb-2">
-                        {charger.price}
-                      </div>
-                      <p className="text-sm text-gray-600">Unit Price</p>
-                    </div>
                     <p className="text-sm text-gray-600 mb-4">{charger.description}</p>
                     <ul className="space-y-2 mb-6">
                       {charger.features.map((feature, fIdx) => (
@@ -284,10 +273,10 @@ export default function EVChargingSolutions() {
                       ))}
                     </ul>
                     <Link
-                      href={`/contact?subject=installation&product=ev-charging&model=${encodeURIComponent(charger.model)}&productName=${encodeURIComponent(charger.type)}&price=${encodeURIComponent(charger.price)}`}
+                      href={`/contact?subject=installation&product=ev-charging&model=${encodeURIComponent(charger.model)}&productName=${encodeURIComponent(charger.type)}`}
                       className={`block w-full ${colorClasses[charger.color as keyof typeof colorClasses]} text-white py-3 rounded-xl font-semibold text-center transition-colors`}
                     >
-                      Request Installation
+                      Contact for Pricing
                     </Link>
                   </div>
                 </div>

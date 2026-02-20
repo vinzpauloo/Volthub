@@ -41,7 +41,7 @@ export const carouselSlides = [
     title: "Residential Energy Storage",
     subtitle: "Energy Independence Starts at Home",
     description:
-      "Reduce electricity bills by 70% with smart home battery systems. Store solar energy for round-the-clock power, protect against outages, and achieve true energy independence. 10+ year warranty included.",
+      "Reduce electricity bills by 70% with smart home battery systems. Store solar energy for round-the-clock power, protect against outages, and achieve true energy independence.",
     image: "/HomeBanner/LVXC.png",
     backgroundImage: "/HomeBanner/banner2.png",
     mobileBackgroundImage: "/HomeBanner/banner2m.png",
@@ -158,7 +158,7 @@ export const productShowcases = [
     ],
     trustIndicators: [
       { icon: RiBatteryChargeLine, text: "Dual Charging", color: "text-emerald-700" },
-      { icon: RiShieldCheckLine, text: "Warranty Included", color: "text-primary" },
+      { icon: RiShieldCheckLine, text: "Certified Quality", color: "text-primary" },
       { icon: RiSpeedUpLine, text: "Fast Setup", color: "text-accent" },
     ],
     imagePosition: "left" as const,
@@ -295,9 +295,9 @@ export const userSegments = [
   {
     title: "For Homeowners",
     description:
-      "Cut electricity bills by up to 70% and achieve true energy independence. Protect your home from outages while increasing property value. 10+ year warranty included.",
+      "Cut electricity bills by up to 70% and achieve true energy independence. Protect your home from outages while increasing property value.",
     icon: RiUserLine,
-    features: ["Save Up to 70% on Bills", "Energy Independence", "Increase Home Value", "10+ Year Warranty"],
+    features: ["Save Up to 70% on Bills", "Energy Independence", "Increase Home Value", "24/7 Support"],
     cta: "Get Free Consultation",
     link: "/contact" as Route,
     color: "from-primary to-accent",
@@ -429,11 +429,6 @@ export const faqs = [
     question: "How long does installation take?",
     answer:
       "Residential installations typically take 1-3 days, while commercial projects can take 1-2 weeks depending on the scale. Our team will provide a detailed timeline during the consultation phase.",
-  },
-  {
-    question: "What is the warranty period?",
-    answer:
-      "Our products come with a 10+ year warranty on batteries and 25+ year warranty on solar panels. We also offer extended warranty options for additional peace of mind.",
   },
   {
     question: "Do you offer financing options?",

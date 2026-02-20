@@ -94,16 +94,23 @@ export async function POST(request: Request) {
       },
     });
 
+    // Route price/quote inquiries to judy@volthub.ph, everything else to admin
+    const isPriceInquiry = interest === "ev-charging-quote" ||
+      interest === "solar-installation-quote" ||
+      interest === "solar-street-light-quote" ||
+      (details && details.toLowerCase().includes("quote"));
+    const recipientEmail = isPriceInquiry
+      ? (process.env.PRICE_INQUIRY_EMAIL || "judy@volthub.ph")
+      : (process.env.CONTACT_EMAIL || "admin@volthub.ph");
+
     try {
     await transporter.sendMail({
-      // Gmail requires the authenticated account as the actual sender
       from: `"${firstName} ${lastName} via VoltHub" <${
         process.env.SMTP_FROM || process.env.SMTP_USER
       }>`,
-      to: "admin-help@volthub-ev.com",
+      to: recipientEmail,
       subject,
       text: body,
-      // This makes replies go directly to the email entered in the form
       replyTo: email || undefined,
     });
 

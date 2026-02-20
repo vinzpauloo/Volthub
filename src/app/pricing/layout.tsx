@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Pricing - VoltHub",
-  description: "Transparent pricing for VoltHub's energy solutions. Explore flexible plans for EV charging, solar installation, and energy storage systems. Get quotes tailored to your needs.",
+  title: "Pricing | VoltHub",
+  description:
+    "Contact VoltHub for custom pricing on EV charging, solar installation, and energy storage solutions tailored to your needs.",
 };
 
 export default function PricingLayout({
@@ -12,4 +13,3 @@ export default function PricingLayout({
 }) {
   return <>{children}</>;
 }
-

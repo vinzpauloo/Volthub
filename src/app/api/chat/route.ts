@@ -110,8 +110,9 @@ async function callOllama(
   try {
     // Build the prompt with context
     let systemPrompt = `You are a helpful AI customer support assistant for VoltHub Electric Power Generation Services Corporation. 
-You help customers with questions about products, services, pricing, specifications, installation, and warranty information.
-Be friendly, professional, and concise. If you don't know something, suggest contacting the support team.`;
+You help customers with questions about products, services, specifications, and installation.
+Be friendly, professional, and concise. If you don't know something, suggest contacting the support team.
+IMPORTANT: Never share specific prices or currency amounts. For any pricing questions, direct users to contact the sales team or submit a quote request through the contact form at /contact.`;
 
     // Add current page context
     if (currentProduct) {

@@ -13,8 +13,8 @@ const companyInfo = {
   name: "VoltHub Electric Power Generation Services Corporation",
   established: "January 17, 2025",
   address: "High Street South Corporate Plaza Tower 2, 11th Ave, Bonifacio Global City, Taguig, Philippines",
-  phone: "+63 9659700823",
-  email: "admin-help@volthub-ev.com",
+  phone: "+639682323704",
+  email: "admin@volthub.ph",
   website: "https://volthubs.app.netlify",
   description: "A forward-looking energy technology company specializing in EV charging infrastructure, solar power systems, and smart energy solutions.",
   mission: "Building the blueprint for a cleaner energy economy. We provide end-to-end services—from design, engineering, and installation to maintenance and system optimization—tailored for commercial, residential, and industrial clients.",
@@ -90,7 +90,7 @@ For inquiries, support, returns, warranties, or any questions, please contact us
     let productContent = `Product: ${product.name}`;
     if (product.subtitle) productContent += `\nSubtitle: ${product.subtitle}`;
     if (product.description) productContent += `\nDescription: ${product.description}`;
-    if (product.price) productContent += `\nPrice: ${product.price}`;
+    // Price data intentionally excluded — inquiry-only pricing model
     if (product.tag) productContent += `\nTag: ${product.tag}`;
     productContent += `\nCategory: ${product.category}`;
 
@@ -181,70 +181,68 @@ For inquiries, support, returns, warranties, or any questions, please contact us
 - System testing and commissioning
 - Training and documentation
 - Maintenance and system optimization
-- 3-year warranty on most products
 - Technical support and consultation`,
     metadata: {}
   });
 
-  // Add pricing and quotation information
+  // Add product specifications
   chunks.push({
-    id: 'pricing-street-lights',
+    id: 'specs-street-lights',
     type: 'product',
-    content: `Street Lights - Pricing and Specifications:
+    content: `Street Lights - Product Specifications:
 
 INTEGRATED LIGHT MODELS:
-- F2-050 (8m pole): LED 50W, Size: 1319*460*60mm, Lithium battery: 12.8V 45Ah, Solar Panel: 100W - ₱45,164.50
-- F2-080 (9m pole): LED 80W, Size: 1490*640*60mm, Lithium battery: 25.6V 45Ah, Solar Panel: 160W - ₱62,717.00
-- F2-100 (10m pole): LED 100W, Size: 1490*730*60mm, Lithium battery: 25.6V 52Ah, Solar Panel: 200W - ₱71,803.00
-- F2-120 (12m pole): LED 120W, Size: 1650*830*60mm, Lithium battery: 25.6V 60Ah, Solar Panel: 240W - ₱81,228.25
+- F2-050 (8m pole): LED 50W, Size: 1319*460*60mm, Lithium battery: 12.8V 45Ah, Solar Panel: 100W
+- F2-080 (9m pole): LED 80W, Size: 1490*640*60mm, Lithium battery: 25.6V 45Ah, Solar Panel: 160W
+- F2-100 (10m pole): LED 100W, Size: 1490*730*60mm, Lithium battery: 25.6V 52Ah, Solar Panel: 200W
+- F2-120 (12m pole): LED 120W, Size: 1650*830*60mm, Lithium battery: 25.6V 60Ah, Solar Panel: 240W
 
 SPLIT STREET LIGHT MODELS:
-- LVQ2-050 (8m pole): LED 50W, Size: 935*415*210mm, Lithium battery: 14.8V 45Ah, Solar Panel: 100W - ₱37,981.25
-- LVQ2-080 (9m pole): LED 80W, Size: 935*415*210mm, Lithium battery: 12.8V 90Ah, Solar Panel: 200W - ₱54,088.25
-- LVQ2-100 (10m pole): LED 100W, Size: 935*415*210mm, Lithium battery: 25.6V 48Ah, Solar Panel: 250W - ₱60,224.25
-- LVQ2-120 (12m pole): LED 120W, Size: 935*415*210mm, Lithium battery: 25.6V 60Ah, Solar Panel: 300W - ₱70,003.50
+- LVQ2-050 (8m pole): LED 50W, Size: 935*415*210mm, Lithium battery: 14.8V 45Ah, Solar Panel: 100W
+- LVQ2-080 (9m pole): LED 80W, Size: 935*415*210mm, Lithium battery: 12.8V 90Ah, Solar Panel: 200W
+- LVQ2-100 (10m pole): LED 100W, Size: 935*415*210mm, Lithium battery: 25.6V 48Ah, Solar Panel: 250W
+- LVQ2-120 (12m pole): LED 120W, Size: 935*415*210mm, Lithium battery: 25.6V 60Ah, Solar Panel: 300W
 
 ALL IN TWO LIGHT MODELS:
-- LVXC-120 (5m pole): LED 20W, Size: 495*205*80mm, Lithium battery: 3.2V 65Ah, Solar Panel: 70W - ₱17,346.00
-- LVXC-130 (6m pole): LED 30W, Size: 550*240*100mm, Lithium battery: 3.2V 80Ah, Solar Panel: 70W - ₱19,661.75
-- LVXC-320 (5m pole): LED 20W, Size: 650*300*130mm, Lithium battery: 3.2V 65Ah, Solar Panel: 70W - ₱17,036.25
-- LVXC-330 (6m pole): LED 30W, Size: 650*300*130mm, Lithium battery: 3.2V 80Ah, Solar Panel: 70W - ₱18,939.00
+- LVXC-120 (5m pole): LED 20W, Size: 495*205*80mm, Lithium battery: 3.2V 65Ah, Solar Panel: 70W
+- LVXC-130 (6m pole): LED 30W, Size: 550*240*100mm, Lithium battery: 3.2V 80Ah, Solar Panel: 70W
+- LVXC-320 (5m pole): LED 20W, Size: 650*300*130mm, Lithium battery: 3.2V 65Ah, Solar Panel: 70W
+- LVXC-330 (6m pole): LED 30W, Size: 650*300*130mm, Lithium battery: 3.2V 80Ah, Solar Panel: 70W
 
-Payment Terms: 30% bank transfer in advance, balance before shipping
-Price Validity: 15 days from quotation date
 Production Time: 20-25 working days after receiving payment
 Package: Standard Export package
-Warranty: 3 years`,
+
+Contact us for current pricing and quotation details.`,
     metadata: {}
   });
 
   chunks.push({
-    id: 'pricing-mobile-energy-storage',
+    id: 'specs-mobile-energy-storage',
     type: 'product',
-    content: `Mobile Energy Storage Power Systems - Pricing and Specifications:
+    content: `Mobile Energy Storage Power Systems - Product Specifications:
 
 SMALL HOME / BACKUP KITS:
-- 5kWh / 3kW: Rated Power 3KW/AC 220V, Lithium Battery 5.3kWh, Solar Panel 36V 670W x 4 - ₱255,502.45
+- 5kWh / 3kW: Rated Power 3KW/AC 220V, Lithium Battery 5.3kWh, Solar Panel 36V 670W x 4
   Use: Small home/backup kit. Can run 1 HP aircon (~750W) plus lights, fans, TV, laptop. About 4-5 hours usable at 1kW average.
   Market: Backup for small houses during brownouts, sari-sari stores, off-grid tiny homes, farm huts.
 
-- 10kWh / 5kW: Rated Power 5KW/AC 220V, Lithium Battery 10.6kWh, Solar Panel 36V 670W x 6 - ₱388,122.65
+- 10kWh / 5kW: Rated Power 5KW/AC 220V, Lithium Battery 10.6kWh, Solar Panel 36V 670W x 6
   Use: Standard home/small business. Can run 1-2 HP aircon, refrigerator, lights, fans, TV, computers. About 5-6 hours at 1.5-2kW average.
   Market: Urban homes for long brownouts, small clinics, small offices, BPO satellite office, internet café, small resort cottage.
 
-- 15kWh / 5kW: Rated Power 5KW/AC 220V, Lithium Battery 15.9kWh, Solar Panel 36V 670W x 8 - ₱526,117.75
+- 15kWh / 5kW: Rated Power 5KW/AC 220V, Lithium Battery 15.9kWh, Solar Panel 36V 670W x 8
   Use: Longer backup, same power. Same 5kW max as 10kWh but larger battery.
   Market: Rural homes with frequent long outages, stores with freezers, small cell sites.
 
-- 20kWh / 10kW: Rated Power 10KW/AC 220V, Lithium Battery 21.2kWh, Solar Panel 36V 670W x 12 - ₱838,344.15
+- 20kWh / 10kW: Rated Power 10KW/AC 220V, Lithium Battery 21.2kWh, Solar Panel 36V 670W x 12
   Use: Larger home/small commercial. Can run multiple aircons (3-4 HP total), refrigerator/freezer, lights, computers, pumps.
   Market: Large homes with multiple AC units, small resorts, restaurants, bakeries, small manufacturing, community facilities.
 
-- 25kWh / 10kW: Rated Power 10KW/AC 220V, Lithium Battery 26.5kWh, Solar Panel 36V 670W x 14 - ₱963,918.40
+- 25kWh / 10kW: Rated Power 10KW/AC 220V, Lithium Battery 26.5kWh, Solar Panel 36V 670W x 14
   Use: More hours, same power. Full day-night cycle backup for moderate loads.
   Market: Off-grid homes, cold storage for small agri businesses, small hospitals/clinics.
 
-- 30kWh / 10kW: Rated Power 10KW/AC 220V, Lithium Battery 31.8kWh, Solar Panel 36V 670W x 16 - ₱1,112,638.22
+- 30kWh / 10kW: Rated Power 10KW/AC 220V, Lithium Battery 31.8kWh, Solar Panel 36V 670W x 16
   Use: Mini-microgrid. At 2-3kW average, can run through the night.
   Market: Off-grid communities, remote resorts, island communities, telecom towers, farms with pumps and cold storage.
 
@@ -252,73 +250,77 @@ Rule of thumb for Philippines:
 - Basic rural home (no AC) – 5 kWh or 10 kWh
 - Middle-class home with 1-2 AC units – 10-20 kWh
 - Large house / small business – 20-30 kWh
-- Resort, small factory, island microgrid – 20-30 kWh (maybe multiple units)`,
+- Resort, small factory, island microgrid – 20-30 kWh (maybe multiple units)
+
+Contact us for current pricing and quotation details.`,
     metadata: {}
   });
 
   chunks.push({
-    id: 'pricing-off-grid-systems-small',
+    id: 'specs-off-grid-systems-small',
     type: 'product',
-    content: `Off-Grid Power Generation Systems - Small to Medium Scale (40-261 kWh):
+    content: `Off-Grid Power Generation Systems - Small to Medium Scale (40-261 kWh) Product Specifications:
 
 SMALL COMMERCIAL / REMOTE FACILITY:
-- 40kWh / 20kW: Rated Power 20KW/AC 380V/220V, Lithium Battery 40.96kWh, Solar Panel 670W x 30 - ₱1,823,684.10
+- 40kWh / 20kW: Rated Power 20KW/AC 380V/220V, Lithium Battery 40.96kWh, Solar Panel 670W x 30
   Can power: 5-10 small houses, water refilling station, rice mill, small cold room plus office & lighting, cell tower + equipment shelter.
   Market: Off-grid tourist sites, poultry/piggery/fish farms, telecom sites reducing diesel use.
 
-- 60kWh / 30kW: Rated Power 30KW/AC 380V/220V, Lithium Battery 61.4kWh, Solar Panel 670W x 40 - ₱2,694,050.62
+- 60kWh / 30kW: Rated Power 30KW/AC 380V/220V, Lithium Battery 61.4kWh, Solar Panel 670W x 40
   Can power: Small resort (10+ rooms, kitchen, bar, pool pump), medium agricultural facility, cluster of 10-20 households.
   Market: Island barangays, remote mountain communities, bigger manufacturing workshops.
 
-- 80kWh / 40kW: Rated Power 40KW/AC 380V/220V, Lithium Battery 83.2kWh, Solar Panel 670W x 60 - ₱3,918,051.35
+- 80kWh / 40kW: Rated Power 40KW/AC 380V/220V, Lithium Battery 83.2kWh, Solar Panel 670W x 60
   Use: Microgrid for barangay center or campus.
   Market: School campus, barangay center + streetlights + market area, medium resort or eco-park.
 
-- 100kWh / 50kW: Rated Power 50KW/AC 380V/220V, Lithium Battery 100.3kWh, Solar Panel 670W x 72 - ₱4,593,349.12
+- 100kWh / 50kW: Rated Power 50KW/AC 380V/220V, Lithium Battery 100.3kWh, Solar Panel 670W x 72
   Use: Microgrid for barangay center or campus.
   Market: School campus, barangay center + streetlights + market area, medium resort or eco-park.
 
 VILLAGE / INDUSTRIAL-SCALE:
-- 215kWh / 100kW: Rated Power 100KW/AC 400V/220V, Lithium Battery 215.04kWh, Solar Panel 670W x 144 - ₱7,754,538.15
-- 233kWh / 110kW: Rated Power 110KW/AC 400V/220V, Lithium Battery 232.9kWh, Solar Panel 670W x 144 - ₱8,148,259.90
-- 261kWh / 110kW: Rated Power 110KW/AC 400V/220V, Lithium Battery 261.2kWh, Solar Panel 670W x 144 - ₱8,714,233.62
+- 215kWh / 100kW: Rated Power 100KW/AC 400V/220V, Lithium Battery 215.04kWh, Solar Panel 670W x 144
+- 233kWh / 110kW: Rated Power 110KW/AC 400V/220V, Lithium Battery 232.9kWh, Solar Panel 670W x 144
+- 261kWh / 110kW: Rated Power 110KW/AC 400V/220V, Lithium Battery 261.2kWh, Solar Panel 670W x 144
   These are serious microgrids: Can supply tens of houses plus businesses, or one small industrial plant.
   Market: Whole small islands/sitios (dozens of households), LGU projects (solarizing barangays, ports, fish landing centers), large commercial farms, cold-storage hubs, ice plants.
 
 Simple explanation:
 - kWh (battery) = how long it can run when sun is gone
 - kW (rated power) = how many appliances/machines can run at the same time
-- Panels (number of 670W) = how fast you can recharge batteries each day`,
+- Panels (number of 670W) = how fast you can recharge batteries each day
+
+Contact us for current pricing and quotation details.`,
     metadata: {}
   });
 
   chunks.push({
-    id: 'pricing-off-grid-systems-large',
+    id: 'specs-off-grid-systems-large',
     type: 'product',
-    content: `Off-Grid Power Generation Systems - Large Scale (466-2700 kWh):
+    content: `Off-Grid Power Generation Systems - Large Scale (466-2700 kWh) Product Specifications:
 
 MINI POWER PLANT FOR SMALL TOWN CENTER:
-- 466kWh / 220kW: Rated Power 220KW/AC 400V/220V, Lithium Battery 465.8kWh, Solar Panel 670W x 288 - ₱16,173,481.20
-- 522kWh / 220kW: Rated Power 220KW/AC 400V/220V, Lithium Battery 522.4kWh, Solar Panel 670W x 288 - ₱17,256,213.80
+- 466kWh / 220kW: Rated Power 220KW/AC 400V/220V, Lithium Battery 465.8kWh, Solar Panel 670W x 288
+- 522kWh / 220kW: Rated Power 220KW/AC 400V/220V, Lithium Battery 522.4kWh, Solar Panel 670W x 288
   Possible uses: Town center (municipal hall, market, street lighting, shops), large commercial building, single big industrial customer.
   Market: LGU-led solar microgrid for island with few hundred residents, private industrial estates, big poultry integrators, packing plants.
 
 VILLAGE OR ISLAND GRID:
-- 783kWh / 300kW: Rated Power 300KW/AC 400V/220V, Lithium Battery 783.6kWh, Solar Panel 670W x 444 - ₱26,311,107.50
+- 783kWh / 300kW: Rated Power 300KW/AC 400V/220V, Lithium Battery 783.6kWh, Solar Panel 670W x 444
   Can act as main power plant for: Whole small island barangay with few hundred households, large resort complex, cluster of factories.
   At 150kW average → around 5 hours of storage; with solar, can cover day + part of night.
 
 SMALL UTILITY LEVEL / INDUSTRIAL PARK:
-- 1075kWh / 500kW: Rated Power 500KW/AC 400V/220V, Lithium Battery 1075.2kWh, Solar Panel 670W x 728 - ₱42,239,802.20
-- 1205kWh / 500kW: Rated Power 500KW/AC 400V/220V, Lithium Battery 1205.76kWh, Solar Panel 670W x 728 - ₱46,423,089.50
+- 1075kWh / 500kW: Rated Power 500KW/AC 400V/220V, Lithium Battery 1075.2kWh, Solar Panel 670W x 728
+- 1205kWh / 500kW: Rated Power 500KW/AC 400V/220V, Lithium Battery 1205.76kWh, Solar Panel 670W x 728
   These are serious systems: Main power for small island town, industrial park or export zone tenant, large university or hospital campus.
   If average demand is 250-300kW → roughly 3-4 hours of battery at full output.
 
 TOWN OR ISLAND-LEVEL POWER PLANT:
-- 1800kWh / 1000kW: Rated Power 1000KW/AC 400V/220V, Lithium Battery 1806.3kWh, Solar Panel 670W x 1484 - ₱71,207,141.30
-- 2000kWh / 1000kW: Rated Power 1000KW/AC 400V/220V, Lithium Battery 2025.67kWh, Solar Panel 670W x 1484 - ₱76,276,300.40
-- 2300kWh / 1000kW: Rated Power 1000KW/AC 400V/220V, Lithium Battery 2362.28kWh, Solar Panel 670W x 1484 - ₱81,766,894.90
-- 2700kWh / 1000kW: Rated Power 1000KW/AC 400V/220V, Lithium Battery 2700.9kWh, Solar Panel 670W x 1484 - ₱85,828,342.80
+- 1800kWh / 1000kW: Rated Power 1000KW/AC 400V/220V, Lithium Battery 1806.3kWh, Solar Panel 670W x 1484
+- 2000kWh / 1000kW: Rated Power 1000KW/AC 400V/220V, Lithium Battery 2025.67kWh, Solar Panel 670W x 1484
+- 2300kWh / 1000kW: Rated Power 1000KW/AC 400V/220V, Lithium Battery 2362.28kWh, Solar Panel 670W x 1484
+- 2700kWh / 1000kW: Rated Power 1000KW/AC 400V/220V, Lithium Battery 2700.9kWh, Solar Panel 670W x 1484
   Main power plant for whole town or large island, or dedicated plant for big industrial complex.
   All are 1 MW (peak output) - can supply power equivalent to hundreds of typical homes plus businesses.
   Market: Electric cooperatives, private utilities, LGUs with grants/PPP, large industrial/commercial sites, large high-end tourism projects.
@@ -329,65 +331,60 @@ How to position in Philippine market:
 - Industrial & commercial estates: Export zones, industrial parks, big cold-storage sites
 - High-end tourism/mining/remote camps: Large mining camps, big island resorts, mixed-use developments
 
-Simple messaging: "Solar power plant in a box" - provides power to entire island or industrial complex. Can replace or greatly reduce diesel generators, cutting fuel costs and noise.`,
+Simple messaging: "Solar power plant in a box" - provides power to entire island or industrial complex. Can replace or greatly reduce diesel generators, cutting fuel costs and noise.
+
+Contact us for current pricing and quotation details.`,
     metadata: {}
   });
 
   chunks.push({
-    id: 'pricing-ev-charging',
+    id: 'specs-ev-charging',
     type: 'product',
-    content: `EV Charging Stations - Pricing and Specifications:
+    content: `EV Charging Stations - Product Specifications:
 
 AC CHARGING (SLOW CHARGER):
-- DPEV-7k (7 kW Single-gun AC): ₱18,062.50
+- DPEV-7k (7 kW Single-gun AC)
   Type: AC "slow" charger
   Use: Residential, office, hotel parking - locations where cars stay parked for many hours
   Selling point: Low installation cost, suitable as "basic amenity" charger
 
 DC FAST CHARGING:
-- DPEV-60k (60 kW Dual-gun DC): ₱361,250.00
+- DPEV-60k (60 kW Dual-gun DC)
   Type: Entry-level DC fast charger
   Use: Malls, supermarkets, city public charging, medium-sized fleets (delivery vans, taxis)
   Selling point: Good balance of cost and speed; can support 1-2 vehicles at a time
 
-- DPEV-120k (120 kW Dual-gun DC): ₱446,250.00
+- DPEV-120k (120 kW Dual-gun DC)
   Type: Standard fast charger
   Use: Highway rest stops, big commercial centers, fleet depots with higher turnover
   Selling point: "Fast top-up within a coffee break"; attractive for inter-city travel
 
-- DPEV-160k (160 kW Single-gun DC): ₱573,750.00
+- DPEV-160k (160 kW Single-gun DC)
   Type: High-power fast charger
   Use: Premium charging hubs, expressway service areas, sites serving EVs that support higher charging power
   Selling point: Faster sessions, future-proof for newer EVs
 
-- DPEV-400k (400 kW Single-gun DC): ₱1,030,625.00
+- DPEV-400k (400 kW Single-gun DC)
   Type: Ultra-fast DC charger
   Use: Flagship highway stations, bus/truck depots needing very high power
-  Selling point: For vehicles that can accept >200 kW, allows very short charging stops; strong marketing value ("ultra-fast charging up to 400 kW")`,
+  Selling point: For vehicles that can accept >200 kW, allows very short charging stops; strong marketing value ("ultra-fast charging up to 400 kW")
+
+Contact us for current pricing and quotation details.`,
     metadata: {}
   });
 
   chunks.push({
-    id: 'pricing-general-info',
+    id: 'quotation-general-info',
     type: 'service',
-    content: `General Pricing and Quotation Information:
+    content: `General Quotation and Product Selection Information:
 
-PAYMENT TERMS:
-- 30% bank transfer in advance
-- Balance before shipping
-
-PRICE VALIDITY:
-- Prices are valid for 15 days from quotation date
-- Quotation date: 24th November 2025
+For current pricing, please contact our sales team or submit an inquiry through our contact form at /contact.
 
 PRODUCTION TIME:
 - 20-25 working days after receiving payment
 
 PACKAGING:
 - Standard Export package
-
-WARRANTY:
-- 3 years warranty on products
 
 PRODUCT SELECTION GUIDE:
 When helping customers choose products, ask:
@@ -606,7 +603,7 @@ function getPageInfoFromPath(path: string | null): { name: string; description: 
     },
     '/services': { 
       name: 'Services', 
-      description: 'the services page with information about installation services, site assessment, engineering, maintenance, system optimization, training, and 3-year warranty' 
+      description: 'the services page with information about installation services, site assessment, engineering, maintenance, system optimization, training, and technical support' 
     },
     '/about': { 
       name: 'About', 

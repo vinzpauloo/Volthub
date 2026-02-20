@@ -145,14 +145,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     return baseImages;
   }, [product.images, product.image, product.id, selectedVariant?.image]);
   const [selectedImage, setSelectedImage] = useState(() => allImages[0] || product.image);
-  const [activeTab, setActiveTab] = useState<"overview" | "specifications" | "reviews" | "projects" | "documentation">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "specifications" | "reviews" | "projects">("overview");
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const currentPrice =
-    pricedVariations.length > 0
-      ? pricedVariations[selectedVariantIndex]?.price ?? product.price
-      : product.price;
   const descriptionText =
     selectedVariant?.description ?? details?.description;
   
@@ -227,7 +223,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           details={details}
           categoryLabel={categoryLabel}
           displayProductName={displayProductName}
-          currentPrice={currentPrice}
           selectedVariantIndex={selectedVariantIndex}
           setSelectedVariantIndex={setSelectedVariantIndex}
           pricedVariations={pricedVariations}
@@ -246,7 +241,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           details={details}
           categoryLabel={categoryLabel}
           displayProductName={displayProductName}
-          currentPrice={currentPrice}
           selectedVariantIndex={selectedVariantIndex}
           setSelectedVariantIndex={setSelectedVariantIndex}
           pricedVariations={pricedVariations}
@@ -256,8 +250,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           setSelectedImage={setSelectedImage}
           allImages={allImages}
           openImageModal={openImageModal}
-          isCabinetProduct={isCabinetProduct}
-          isContainerProduct={isContainerProduct}
         />
       )}
 
@@ -265,17 +257,10 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t-2 border-slate-200 shadow-2xl z-50 p-4 safe-area-inset-bottom">
         <div className="flex items-center gap-3 max-w-7xl mx-auto">
           <div className="flex-1">
-            {currentPrice && !isCabinetProduct && !isContainerProduct ? (
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold text-slate-900">{currentPrice}</span>
-                <span className="text-xs text-slate-500">per unit</span>
-              </div>
-            ) : (
-              <div className="text-sm font-semibold text-slate-900">Request Pricing</div>
-            )}
+            <div className="text-sm font-semibold text-slate-900">Request a Quote</div>
           </div>
           <Link
-            href={`/contact?subject=${isEVProduct ? 'quote' : 'rfq'}&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(displayProductName)}&quantity=${quantity}&price=${encodeURIComponent(currentPrice || '')}`}
+            href={`/contact?subject=${isEVProduct ? 'quote' : 'rfq'}&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(displayProductName)}&quantity=${quantity}`}
             className="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition-all text-base"
           >
             <span>{isEVProduct ? 'Get Quote' : 'Request RFQ'}</span>
@@ -340,21 +325,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 {isEVProduct ? "Reviews" : "Case Studies"}
               </span>
             </button>
-            {!isEVProduct && (
-              <button
-                onClick={() => setActiveTab("documentation")}
-                className={`px-3 md:px-6 py-2 md:py-3 font-semibold text-xs md:text-sm transition-colors border-b-2 whitespace-nowrap ${
-                  activeTab === "documentation"
-                    ? "border-primary text-primary"
-                    : "border-transparent text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                <span className="flex items-center gap-1 md:gap-2">
-                  <RiDownloadLine className="h-3 w-3 md:h-4 md:w-4" />
-                  Documentation
-                </span>
-              </button>
-            )}
             <button
               onClick={() => setActiveTab("projects")}
               className={`px-3 md:px-6 py-2 md:py-3 font-semibold text-xs md:text-sm transition-colors border-b-2 whitespace-nowrap ${
@@ -424,18 +394,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 <h3 className="text-xl md:text-2xl font-bold text-slate-900">
                   {isEVProduct ? "Technical Specifications" : "Complete Technical Specifications"}
                 </h3>
-                {!isEVProduct && (
-                  <button
-                    onClick={() => {
-                      const specSheetUrl = `/specs/${product.id}.pdf`;
-                      window.open(specSheetUrl, '_blank');
-                    }}
-                    className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-semibold"
-                  >
-                    <RiDownloadLine className="h-4 w-4" />
-                    <span>Download Full Spec Sheet</span>
-                  </button>
-                )}
               </div>
               {currentSpecifications && currentSpecifications.length > 0 && (
                 <div className="overflow-x-auto">
@@ -775,105 +733,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </div>
           )}
 
-          {activeTab === "documentation" && !isEVProduct && (
-            <div className="space-y-4 md:space-y-6">
-              <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3 md:mb-4">
-                Technical Documentation & Resources
-              </h3>
-              <p className="text-sm text-slate-600 mb-6">
-                Download technical documentation, CAD files, and installation guides for your project planning.
-              </p>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Spec Sheet PDF */}
-                <button
-                  onClick={() => {
-                    const specSheetUrl = `/specs/${product.id}.pdf`;
-                    window.open(specSheetUrl, '_blank');
-                  }}
-                  className="group flex items-center gap-4 p-4 bg-white rounded-xl border-2 border-slate-200 hover:border-primary hover:shadow-lg transition-all text-left"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <RiFileList3Line className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-slate-900 mb-1">Product Specification Sheet</h4>
-                    <p className="text-xs text-slate-600">Complete technical specifications in PDF format</p>
-                  </div>
-                  <RiDownloadLine className="h-5 w-5 text-slate-400 group-hover:text-primary transition-colors" />
-                </button>
-
-                {/* Installation Guide */}
-                <button
-                  onClick={() => {
-                    const installGuideUrl = `/docs/${product.id}-installation.pdf`;
-                    window.open(installGuideUrl, '_blank');
-                  }}
-                  className="group flex items-center gap-4 p-4 bg-white rounded-xl border-2 border-slate-200 hover:border-primary hover:shadow-lg transition-all text-left"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <RiFileList3Line className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-slate-900 mb-1">Installation Guide</h4>
-                    <p className="text-xs text-slate-600">Step-by-step installation instructions</p>
-                  </div>
-                  <RiDownloadLine className="h-5 w-5 text-slate-400 group-hover:text-primary transition-colors" />
-                </button>
-
-                {/* CAD Files */}
-                <button
-                  onClick={() => {
-                    const cadUrl = `/cad/${product.id}.dwg`;
-                    window.open(cadUrl, '_blank');
-                  }}
-                  className="group flex items-center gap-4 p-4 bg-white rounded-xl border-2 border-slate-200 hover:border-primary hover:shadow-lg transition-all text-left"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <RiFileList3Line className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-slate-900 mb-1">CAD Drawing (DWG)</h4>
-                    <p className="text-xs text-slate-600">AutoCAD compatible drawing files</p>
-                  </div>
-                  <RiDownloadLine className="h-5 w-5 text-slate-400 group-hover:text-primary transition-colors" />
-                </button>
-
-                {/* BIM Objects */}
-                <button
-                  onClick={() => {
-                    const bimUrl = `/bim/${product.id}.rfa`;
-                    window.open(bimUrl, '_blank');
-                  }}
-                  className="group flex items-center gap-4 p-4 bg-white rounded-xl border-2 border-slate-200 hover:border-primary hover:shadow-lg transition-all text-left"
-                >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                    <RiFileList3Line className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="font-semibold text-slate-900 mb-1">BIM Object (RFA)</h4>
-                    <p className="text-xs text-slate-600">Revit-compatible BIM files</p>
-                  </div>
-                  <RiDownloadLine className="h-5 w-5 text-slate-400 group-hover:text-primary transition-colors" />
-                </button>
-              </div>
-
-              <div className="bg-slate-50 rounded-xl border-2 border-slate-200 p-6 mt-6">
-                <h4 className="text-base font-semibold text-slate-900 mb-2">Need Additional Documentation?</h4>
-                <p className="text-sm text-slate-600 mb-4">
-                  For custom configurations, detailed engineering drawings, or project-specific documentation, 
-                  please contact our technical support team.
-                </p>
-                <Link
-                  href={`/contact?subject=documentation&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(displayProductName)}`}
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-semibold"
-                >
-                  <RiChat3Line className="h-4 w-4" />
-                  <span>Request Custom Documentation</span>
-                </Link>
-              </div>
-            </div>
-          )}
 
           {activeTab === "projects" && (
             <div className="space-y-6">
@@ -1613,15 +1472,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </details>
           <details className="group bg-slate-50 rounded-lg border border-slate-200 p-4 md:p-5">
             <summary className="font-semibold text-slate-900 cursor-pointer text-sm md:text-base flex items-center justify-between">
-              <span>What warranty coverage is included?</span>
-              <span className="text-primary text-xl">+</span>
-            </summary>
-            <p className="mt-3 text-sm md:text-base text-slate-600 leading-relaxed">
-              All products come with a comprehensive 3-year warranty covering manufacturing defects, parts replacement, and technical support.
-            </p>
-          </details>
-          <details className="group bg-slate-50 rounded-lg border border-slate-200 p-4 md:p-5">
-            <summary className="font-semibold text-slate-900 cursor-pointer text-sm md:text-base flex items-center justify-between">
               <span>Is maintenance required?</span>
               <span className="text-primary text-xl">+</span>
             </summary>
@@ -1637,9 +1487,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             <div className="mt-3 text-sm md:text-base text-slate-600 leading-relaxed space-y-2">
               <p>
                 <strong>Payment Term:</strong> 30% bank transfer in advance, the balance before shipping.
-              </p>
-              <p>
-                <strong>Price Validity:</strong> The price is valid for 15 days since the quotation date.
               </p>
               <p>
                 <strong>Production Time:</strong> 20-25 working days after receiving the payment.

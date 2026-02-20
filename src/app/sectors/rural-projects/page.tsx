@@ -21,7 +21,6 @@ const streetLights = [
     size: "495*205*80mm",
     battery: "3.2V 65Ah",
     solarPanel: "70W",
-    price: "₱17,346.00",
     type: "All in Two Light",
     image: "/Product/StreetLamp/F2L.png",
   },
@@ -32,7 +31,6 @@ const streetLights = [
     size: "550*240*100mm",
     battery: "3.2V 80Ah",
     solarPanel: "70W",
-    price: "₱19,661.75",
     type: "All in Two Light",
     image: "/Product/StreetLamp/F2L.png",
   },
@@ -43,7 +41,6 @@ const streetLights = [
     size: "650*300*130mm",
     battery: "3.2V 65Ah",
     solarPanel: "70W",
-    price: "₱17,036.25",
     type: "All in Two Light",
     image: "/Product/StreetLamp/LVXC.png",
   },
@@ -54,7 +51,6 @@ const streetLights = [
     size: "650*300*130mm",
     battery: "3.2V 80Ah",
     solarPanel: "70W",
-    price: "₱18,939.00",
     type: "All in Two Light",
     image: "/Product/StreetLamp/LVXC.png",
   },
@@ -65,7 +61,6 @@ const streetLights = [
     size: "1319*460*60mm",
     battery: "12.8V 45Ah",
     solarPanel: "100W",
-    price: "₱45,164.50",
     type: "Integrated Light",
     image: "/Product/StreetLamp/F1L.png",
   },
@@ -76,7 +71,6 @@ const streetLights = [
     size: "935*415*210mm",
     battery: "14.8V 45Ah",
     solarPanel: "100W",
-    price: "₱37,981.25",
     type: "Split Street Light",
     image: "/Product/StreetLamp/RKlv02.png",
   },
@@ -89,7 +83,6 @@ const storageSystems = [
     ratedPower: "3KW/AC 220V",
     battery: "5.3kWh",
     solarPanel: "36V670W*4",
-    price: "₱255,502.45",
     description: "Small home / backup kit. Can run 1 HP aircon plus lights, fans, TV, laptop. About 4-5 hours usable. Perfect for basic rural homes.",
     image: "/Product/SmartHome/SMP2.png",
   },
@@ -99,7 +92,6 @@ const storageSystems = [
     ratedPower: "5KW/AC 220V",
     battery: "10.6kWh",
     solarPanel: "36V670W*6",
-    price: "₱388,122.65",
     description: "Standard home / small business. Can run 1-2 HP aircon, refrigerator, lights, fans, TV, computers. Around 5-6 hours usable.",
     image: "/Product/SmartHome/SMP3.png",
   },
@@ -109,7 +101,6 @@ const storageSystems = [
     ratedPower: "5KW/AC 220V",
     battery: "15.9kWh",
     solarPanel: "36V670W*8",
-    price: "₱526,117.75",
     description: "Longer backup, same power. Good for rural homes with frequent long outages or stores with freezers that must stay cold overnight.",
     image: "/Product/SmartHome/SMP4.png",
   },
@@ -119,7 +110,6 @@ const storageSystems = [
     ratedPower: "10KW/AC 220V",
     battery: "21.2kWh",
     solarPanel: "36V670W*12",
-    price: "₱838,344.15",
     description: "Larger home / small business. Can run multiple aircons (3-4 HP total), refrigerator/freezer, lights, computers.",
     image: "/Product/SmartHome/SMP5.png",
   },
@@ -129,7 +119,6 @@ const storageSystems = [
     ratedPower: "20KW/AC 380V/220V",
     battery: "40.96kWh",
     solarPanel: "670W*30PCS",
-    price: "₱1,823,684.10",
     description: "Small commercial / remote facility. Can power 5-10 small houses, or a water refilling station, rice mill, small cold room.",
     image: "/Product/cabinet/20k.png",
   },
@@ -139,7 +128,6 @@ const storageSystems = [
     ratedPower: "30KW/AC 380V/220V",
     battery: "61.4kWh",
     solarPanel: "670W*40PCS",
-    price: "₱2,694,050.62",
     description: "Small community or larger business. Can power a small resort (10+ rooms, kitchen, bar, pool pump) or small agricultural facility.",
     image: "/Product/cabinet/30k.png",
   },
@@ -149,14 +137,12 @@ const evChargers = [
   {
     model: "DPEV-7k",
     type: "7 kW Single-gun AC Charging Pile",
-    price: "₱18,062.50",
     description: "AC 'slow' charger for residential, office, hotel parking. Low installation cost, suitable as basic amenity charger for rural areas.",
     image: "/Product/EV/59.png",
   },
   {
     model: "DPEV-60k",
     type: "60 kW Dual-gun DC Charging Pile",
-    price: "₱361,250.00",
     description: "Entry-level DC fast charger. Good for rural commercial centers, small towns, and community charging stations.",
     image: "/Product/EV/89.png",
   },
@@ -257,7 +243,6 @@ export default function RuralProjectsSector() {
                 <div className="p-6 space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-semibold">{system.kWh}</h3>
-                    <span className="text-lg font-bold text-primary">{system.price}</span>
                   </div>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
@@ -307,7 +292,6 @@ export default function RuralProjectsSector() {
                   <th className="px-6 py-4 text-left font-semibold">LED Light</th>
                   <th className="px-6 py-4 text-left font-semibold">Battery</th>
                   <th className="px-6 py-4 text-left font-semibold">Solar Panel</th>
-                  <th className="px-6 py-4 text-left font-semibold">Unit Price</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -331,7 +315,6 @@ export default function RuralProjectsSector() {
                     <td className="px-6 py-4 text-slate-600">{light.ledLight}</td>
                     <td className="px-6 py-4 text-slate-600">{light.battery}</td>
                     <td className="px-6 py-4 text-slate-600">{light.solarPanel}</td>
-                    <td className="px-6 py-4 font-semibold text-primary">{light.price}</td>
                   </tr>
                 ))}
               </tbody>
@@ -365,15 +348,14 @@ export default function RuralProjectsSector() {
                 )}
                 <h3 className="text-xl font-semibold mb-2">{charger.type}</h3>
                 <p className="text-sm text-slate-600 mb-4">{charger.description}</p>
-                <div className="flex items-center justify-between mb-4">
+                <div className="mb-4">
                   <span className="text-sm text-slate-500">Model: {charger.model}</span>
-                  <span className="text-2xl font-bold text-primary">{charger.price}</span>
                 </div>
                 <Link
-                  href={`/contact?subject=installation&product=ev-charging&model=${encodeURIComponent(charger.model)}&productName=${encodeURIComponent(charger.type)}&price=${encodeURIComponent(charger.price)}`}
+                  href={`/contact?subject=installation&product=ev-charging&model=${encodeURIComponent(charger.model)}&productName=${encodeURIComponent(charger.type)}`}
                   className="block w-full text-center bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors"
                 >
-                  Request Installation
+                  Contact for Quote
                 </Link>
               </div>
             ))}
@@ -434,7 +416,7 @@ export default function RuralProjectsSector() {
             />
             <div className="grid md:grid-cols-2 gap-6 mt-12">
               {[
-                "3-year warranty on all products",
+                "Dedicated customer support",
                 "Professional installation and maintenance",
                 "Payment terms: 30% advance, balance before shipping",
                 "Production time: 20-25 working days",

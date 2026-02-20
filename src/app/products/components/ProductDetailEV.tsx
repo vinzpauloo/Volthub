@@ -6,7 +6,6 @@ import Link from "next/link";
 import { 
   RiCheckLine,
   RiStarLine,
-  RiShieldCheckLine,
   RiAwardLine,
   RiArrowRightSLine,
   RiArrowDownSLine,
@@ -19,7 +18,6 @@ interface ProductDetailEVProps {
   details: typeof productDetails[string] | undefined;
   categoryLabel: string | undefined;
   displayProductName: string;
-  currentPrice: string | undefined;
   selectedVariantIndex: number;
   setSelectedVariantIndex: (index: number) => void;
   pricedVariations: Array<{ name: string; price?: string }>;
@@ -38,7 +36,6 @@ export default function ProductDetailEV({
   details,
   categoryLabel,
   displayProductName,
-  currentPrice,
   selectedVariantIndex,
   setSelectedVariantIndex,
   pricedVariations,
@@ -152,19 +149,8 @@ export default function ProductDetailEV({
             </span>
           </div>
 
-          {/* 3. Value Proposition - Price & Key Benefits */}
+          {/* 3. Value Proposition - Key Benefits */}
           <div className="pt-1.5 border-t border-slate-200">
-            {/* Price - Prominent */}
-            {currentPrice && (
-              <div className="mb-2">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900">
-                    {currentPrice}
-                  </span>
-                  <span className="text-xs md:text-sm text-slate-500">per unit</span>
-                </div>
-              </div>
-            )}
 
             {/* Key Benefits - Accordion/Collapsible */}
             {details && details.features && details.features.length > 0 && (
@@ -303,7 +289,7 @@ export default function ProductDetailEV({
           <div className="pt-1.5 border-t border-slate-200">
             {/* Primary CTA - Get Quote (Most Dominant) */}
             <Link
-              href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(displayProductName)}&quantity=${quantity}&price=${encodeURIComponent(currentPrice || '')}`}
+              href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(displayProductName)}&quantity=${quantity}`}
               className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-white font-bold px-4 py-2.5 md:py-3 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base group"
             >
               <span>Get Quote</span>
@@ -315,10 +301,6 @@ export default function ProductDetailEV({
           <div className="pt-1.5 border-t border-slate-200 space-y-1.5">
             <div className="flex flex-wrap items-center gap-2 md:gap-3">
               <div className="flex items-center gap-1 text-[10px] md:text-xs text-slate-600">
-                <RiShieldCheckLine className="h-3 w-3 md:h-3.5 md:w-3.5 text-primary flex-shrink-0" />
-                <span>5-Year Warranty</span>
-              </div>
-              <div className="flex items-center gap-1 text-[10px] md:text-xs text-slate-600">
                 <RiAwardLine className="h-3 w-3 md:h-3.5 md:w-3.5 text-primary flex-shrink-0" />
                 <span>Certified Quality</span>
               </div>
@@ -329,7 +311,6 @@ export default function ProductDetailEV({
             </div>
             <div className="text-[10px] md:text-xs text-slate-500 space-y-0.5">
               <p>✓ Free consultation and site assessment</p>
-              <p>✓ Professional installation included</p>
               <p>✓ 24/7 customer support</p>
             </div>
           </div>

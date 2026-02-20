@@ -216,9 +216,6 @@ export default function Services() {
                     <div className="text-sm text-gray-600">
                       7 kW Single-gun
                     </div>
-                    <div className="text-xs text-blue-500 mt-1">
-                      From ₱18,062.50
-                    </div>
                   </div>
                   <div className="text-center p-4 bg-green-50 rounded-lg">
                     <div className="text-2xl font-bold text-green-600 mb-1">
@@ -227,9 +224,6 @@ export default function Services() {
                     <div className="text-sm text-gray-600">
                       60-160kW Charging
                     </div>
-                    <div className="text-xs text-green-500 mt-1">
-                      From ₱361,250.00
-                    </div>
                   </div>
                   <div className="text-center p-4 bg-purple-50 rounded-lg">
                     <div className="text-2xl font-bold text-purple-600 mb-1">
@@ -237,9 +231,6 @@ export default function Services() {
                     </div>
                     <div className="text-sm text-gray-600">
                       400kW Premium Speed
-                    </div>
-                    <div className="text-xs text-purple-500 mt-1">
-                      From ₱1,030,625.00
                     </div>
                   </div>
                 </div>
@@ -308,8 +299,8 @@ export default function Services() {
                         desc: "Real-time system monitoring and optimization",
                       },
                       {
-                        title: "Warranty & Maintenance",
-                        desc: "25-year performance guarantee",
+                        title: "Maintenance Support",
+                        desc: "Ongoing system maintenance and support",
                       },
                     ].map((item, idx) => (
                       <div key={idx} className="flex items-start space-x-3">
@@ -332,9 +323,6 @@ export default function Services() {
                     <div className="text-sm text-gray-600">
                       Solar-Powered Lighting
                     </div>
-                    <div className="text-xs text-yellow-500 mt-1">
-                      From ₱17,036.25
-                    </div>
                   </div>
                   <div className="text-center p-4 bg-orange-50 rounded-lg">
                     <div className="text-2xl font-bold text-orange-600 mb-1">
@@ -343,9 +331,6 @@ export default function Services() {
                     <div className="text-sm text-gray-600">
                       5-30kWh Mobile Systems
                     </div>
-                    <div className="text-xs text-orange-500 mt-1">
-                      From ₱255,502.45
-                    </div>
                   </div>
                   <div className="text-center p-4 bg-red-50 rounded-lg">
                     <div className="text-2xl font-bold text-red-600 mb-1">
@@ -353,9 +338,6 @@ export default function Services() {
                     </div>
                     <div className="text-sm text-gray-600">
                       40kWh+ Off-Grid Systems
-                    </div>
-                    <div className="text-xs text-red-500 mt-1">
-                      From ₱1,823,684.10
                     </div>
                   </div>
                 </div>

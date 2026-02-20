@@ -54,7 +54,7 @@ const ChatSupport = () => {
       if (currentProductId) {
         const product = getProductById(currentProductId);
         if (product) {
-          welcomeMessage += `I see you're viewing **${product.name}**. I can help you with questions about this product, including specifications, features, pricing, installation, and warranty. What would you like to know?`;
+          welcomeMessage += `I see you're viewing **${product.name}**. I can help you with questions about this product, including specifications, features, installation, and more. What would you like to know?`;
         } else {
           welcomeMessage += "I can help you with information about our products, services, and company. What would you like to know?";
         }

@@ -51,7 +51,6 @@ export default function ContactForm() {
     const model = searchParams.get("model");
     const productName = searchParams.get("productName");
     const quantity = searchParams.get("quantity");
-    const price = searchParams.get("price");
     const details = searchParams.get("details");
 
     // If interest is directly provided, use it
@@ -152,30 +151,12 @@ export default function ContactForm() {
         detailsText += ". Please contact me with pricing and availability information.";
       }
       
-      // Add quantity and price below the details text
-      if (quantity || price) {
-        detailsText += "\n\n";
-        if (quantity) {
-          detailsText += `Quantity: ${quantity}`;
-        }
-        if (quantity && price) {
-          detailsText += "\n";
-        }
-        if (price) {
-          // For installation, use "Price" instead of "Starting Price"
-          const priceLabel = subject === "installation" ? "Unit Price" : "Starting Price";
-          detailsText += `${priceLabel}: ${price}`;
-        }
+      // Add quantity below the details text
+      if (quantity) {
+        detailsText += `\n\nQuantity: ${quantity}`;
       }
-      
+
       setFormState((prev) => ({ ...prev, details: detailsText }));
-      
-      // Make details and interest readonly if price is present (came from product/installation page)
-      if (price) {
-        setIsDetailsReadOnly(true);
-      } else {
-        setIsDetailsReadOnly(false);
-      }
     } else if (details) {
       // If details parameter is provided directly (e.g., from chat), use it
       setFormState((prev) => ({ ...prev, details }));

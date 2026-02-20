@@ -68,28 +68,24 @@ const technicalSpecs = [
     voltage: "12V - 24V DC",
     capacity: "50W - 200W",
     efficiency: "≥95%",
-    warranty: "5 Years",
   },
   {
     product: "Solar System Residential",
     voltage: "400V - 800V DC",
     capacity: "5kW - 20kW",
     efficiency: "≥98%",
-    warranty: "25 Years",
   },
   {
     product: "EV Charger Level 2",
     voltage: "240V AC",
     capacity: "7.2kW - 22kW",
     efficiency: "≥94%",
-    warranty: "3 Years",
   },
   {
     product: "Battery Storage",
     voltage: "48V - 800V DC",
     capacity: "10kWh - 500kWh",
     efficiency: "≥95%",
-    warranty: "10 Years",
   },
 ];
 
@@ -159,7 +155,6 @@ export default function Solutions() {
                     <th className="px-6 py-4 font-semibold">Voltage Range</th>
                     <th className="px-6 py-4 font-semibold">Capacity</th>
                     <th className="px-6 py-4 font-semibold">Efficiency</th>
-                    <th className="px-6 py-4 font-semibold">Warranty</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -169,7 +164,6 @@ export default function Solutions() {
                       <td className="px-6 py-4 text-gray-600">{spec.voltage}</td>
                       <td className="px-6 py-4 text-gray-600">{spec.capacity}</td>
                       <td className="px-6 py-4 text-gray-600">{spec.efficiency}</td>
-                      <td className="px-6 py-4 text-gray-600">{spec.warranty}</td>
                     </tr>
                   ))}
                 </tbody>

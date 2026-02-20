@@ -164,14 +164,14 @@ export const contactInfo = [
   {
     icon: RiPhoneLine,
     title: "Phone",
-    detail: "+63 9659700823",
-    link: "tel:+639659700823",
+    detail: "+63 9682323704",
+    link: "tel:+639682323704",
   },
   {
     icon: RiMailLine,
     title: "Email",
-    detail: "admin-help@volthub-ev.com",
-    link: "mailto:admin-help@volthub-ev.com",
+    detail: "admin@volthub.ph",
+    link: "mailto:admin@volthub.ph",
   },
   {
     icon: RiMapPinLine,

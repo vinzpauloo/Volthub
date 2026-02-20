@@ -100,7 +100,6 @@ export const products: Product[] = [
     tag: " Dual-gun DC Charging Pile ",
     image: "/Product/EV/53.png",
     images: ["/Product/EV/53.png", "/Product/EV/yellow/110.png", "/Product/EV/yellow/197.jpg"],
-    price: "P573,750.00",
     description: "DPEV-160KM / DPEV-240KM - 160kW / 240kW Dual-Gun DC high-power fast charger. Ideal for premium charging hubs, expressway service areas, and sites serving EVs that support higher charging power. Features single-gun full power or dual-gun current sharing modes. Faster sessions, future-proof for newer EVs.",
   },
   {
@@ -118,7 +117,6 @@ export const products: Product[] = [
       "/Product/EV/small/173.jpg",
       "/Product/EV/small/192.jpg",
     ],
-    price: "₱18,062.50",
   },
   {
     id: "ev-charging-64",
@@ -148,7 +146,6 @@ export const products: Product[] = [
       "/Product/EV/green/162.jpg",
       "/Product/EV/green/163.jpg",
     ],
-    price: "₱361,250.00",
     description: "DPEV-60K / DPEV-120K - 60kW / 120kW Dual-Gun DC high-power fast charger. Ideal for premium charging hubs, expressway service areas, and sites serving EVs that support higher charging power. Features single-gun full power or dual-gun current sharing modes. Faster sessions, future-proof for newer EVs.",
   },
   // Solar Street Lights products
@@ -167,7 +164,6 @@ export const products: Product[] = [
     category: "solar-street",
     tag: "Integrated Light",
     image: "/Product/StreetLamp/F2L.png",
-    price: "₱45,164.50",
     images: [
       "/Product/StreetLamp/F2L.png",
       "/Product/StreetLamp/f2/prod4.png",
@@ -186,7 +182,6 @@ export const products: Product[] = [
     category: "solar-street",
     tag: "Split Street Light",
     image: "/Product/StreetLamp/RKlv02.png",
-    price: "₱17,346.00",
     images: [
       "/Product/StreetLamp/RKlv02.png",
       "/Product/StreetLamp/lvxc2/prod1.png",
@@ -206,7 +201,6 @@ export const products: Product[] = [
     category: "solar-street",
     tag: "All in Two Light",
     image: "/Product/StreetLamp/RKS.png",
-    price: "₱17,036.25",
     images: [
       "/Product/StreetLamp/RKS.png",
       "/Product/StreetLamp/lvq2/prod1.png",
@@ -227,7 +221,6 @@ export const products: Product[] = [
     category: "solar-street",
     tag: "All in Two Light",
     image: "/Product/StreetLamp/LVXC.png",
-    price: "₱17,036.25",
     images: [
       "/Product/StreetLamp/LVXC.png",
       "/Product/StreetLamp/lvxc3/prod1.png",
@@ -259,7 +252,6 @@ export const products: Product[] = [
       "/Product/SmartHome/disc3.png",
       "/Product/SmartHome/disc4.png",
     ],
-    price: "₱255,502.45",
   },
   {
     id: "smart-home-smp3",
@@ -279,7 +271,6 @@ export const products: Product[] = [
       "/Product/SmartHome/disc3.png",
       "/Product/SmartHome/disc4.png",
     ],
-    price: "₱388,122.65",
   },
   {
     id: "smart-home-smp4",
@@ -298,7 +289,6 @@ export const products: Product[] = [
       "/Product/SmartHome/disc3.png",
       "/Product/SmartHome/disc4.png",
     ],
-    price: "₱526,117.75",
   },
   {
     id: "smart-home-smp5",
@@ -318,7 +308,6 @@ export const products: Product[] = [
       "/Product/SmartHome/disc3.png",
       "/Product/SmartHome/disc4.png",
     ],
-    price: "₱838,344.15",
   },
   {
     id: "smart-home-smp6",
@@ -338,7 +327,6 @@ export const products: Product[] = [
       "/Product/SmartHome/disc3.png",
       "/Product/SmartHome/disc4.png",
     ],
-    price: "₱963,918.40",
   },
   {
     id: "smart-home-smp7",
@@ -357,7 +345,6 @@ export const products: Product[] = [
       "/Product/SmartHome/disc3.png",
       "/Product/SmartHome/disc4.png",
     ],
-    price: "₱1,112,638.22",
   },
   // Cabinet Type Power Supply products
   {
@@ -373,7 +360,6 @@ export const products: Product[] = [
       "/Product/cabinet/cb14/prod3.png",
       "/Product/cabinet/cb14/prod4.png",
     ],
-    price: "₱7,754,538.15",
   },
   {
     id: "cabinet-15",
@@ -388,7 +374,6 @@ export const products: Product[] = [
       "/Product/cabinet/cb15/prod2.png",
       "/Product/cabinet/cb14/prod2.png",
     ],
-    price: "₱17,256,213.80",
   },
   {
     id: "cabinet-16",
@@ -404,7 +389,6 @@ export const products: Product[] = [
       "/Product/cabinet/cb16/prod3.png",
       "/Product/cabinet/cb14/prod2.png",
     ],
-    price: "₱26,311,107.50",
   },
   {
     id: "cabinet-item4",
@@ -422,7 +406,6 @@ export const products: Product[] = [
       "/Product/cabinet/disc2.png",
       "/Product/cabinet/disc3.png",
     ],
-    price: "₱1,823,684.10",
   },
   // Container Type Power Supply products
   {
@@ -441,7 +424,6 @@ export const products: Product[] = [
       "/Product/containertype/prod5.png",
       "/Product/containertype/prod6.png",
     ],
-    price: "₱42,239,802.20",
   },
 ];
 
@@ -498,7 +480,6 @@ export const productDetails: Record<string, {
       { label: "Cooling Method", value: "Forced air cooling" },
       { label: "Protection Level", value: "IP55" },
       { label: "Acoustic Noise", value: "≤ 65dB" },
-      { label: "Warranty", value: "3 Years" },
     ],
     features: [
       "High cost-effectiveness: Highly integrated design, reducing the floor area, and saving on site rental and infrastructure costs",
@@ -566,7 +547,6 @@ export const productDetails: Record<string, {
       { label: "Atmospheric Pressure", value: "70~106kPa" },
       { label: "Altitude", value: "≤2000m" },
       { label: "Protection Level", value: "IP55 (dustproof and waterproof)" },
-      { label: "Warranty", value: "3 Years" },
     ],
     features: [
       "Multiple protections: Electrical protections (overvoltage, undervoltage, overtemperature, short circuit), complying with national and industry safety standards",
@@ -672,7 +652,6 @@ export const productDetails: Record<string, {
       { label: "Cooling Method", value: "Forced air cooling" },
       { label: "Protection Grade", value: "IP55" },
       { label: "Acoustic Noise", value: "≤65dB" },
-      { label: "Warranty", value: "3 Years" },
     ],
     features: [
       "Ultra-fast Charging: Ultra-fast charging speed significantly reduces waiting time for users, enhancing the charging experience and the attractiveness of charging stations",
@@ -692,28 +671,24 @@ export const productDetails: Record<string, {
       {
         name: "F2-050 Model",
         value: "50W LED, 100W Solar Panel",
-        price: "₱45,164.50",
         description: "LED: 50W | Size: 1319×460×60mm | Battery: 12.8V 45Ah | Solar Panel: 100W | Pole Height: 8m",
         image: "/Product/StreetLamp/f50.png",
       },
       {
         name: "F2-080 Model",
         value: "80W LED, 160W Solar Panel",
-        price: "₱62,717.00",
         description: "LED: 80W | Size: 1490×640×60mm | Battery: 25.6V 45Ah | Solar Panel: 160W | Pole Height: 9m",
         image: "/Product/StreetLamp/f80.png",
       },
       {
         name: "F2-100 Model",
         value: "100W LED, 200W Solar Panel",
-        price: "₱71,803.00",
         description: "LED: 100W | Size: 1490×730×60mm | Battery: 25.6V 52Ah | Solar Panel: 200W | Pole Height: 10m",
         image: "/Product/StreetLamp/f100.png",
       },
       {
         name: "F2-120 Model",
         value: "120W LED, 240W Solar Panel",
-        price: "₱81,228.25",
         description: "LED: 120W | Size: 1650×830×60mm | Battery: 25.6V 60Ah | Solar Panel: 240W | Pole Height: 12m",
         image: "/Product/StreetLamp/f120.png",
       },
@@ -737,7 +712,6 @@ export const productDetails: Record<string, {
       { label: "Battery Material", value: "LFP high-temperature resistant material" },
       { label: "Optical Lens", value: "Polycarbonate (PC) outdoor optical lenses" },
       { label: "Safety Protection", value: "Two hardware protections + one software protection" },
-      { label: "Warranty", value: "3 Years" },
     ],
     features: [
       "Precision grade high-quality aluminum alloy die-casting, patented private molds",
@@ -778,7 +752,6 @@ export const productDetails: Record<string, {
       { label: "Solar Panel", value: "36V 670W × 4 panels (2.68kW total)" },
       { label: "Battery Type", value: "LiFePO4" },
       { label: "Cycle Life", value: "6000+ cycles" },
-      { label: "Warranty", value: "3 Years" },
       { label: "Max Continuous Load", value: "3kW" },
       { label: "Typical Runtime", value: "4-5 hours at 1kW average load" },
       { label: "Included Components", value: "Splice bracket + wiring" },
@@ -815,7 +788,6 @@ export const productDetails: Record<string, {
       { label: "Solar Panel", value: "36V 670W × 6 panels (4.02kW total)" },
       { label: "Battery Type", value: "LiFePO4" },
       { label: "Cycle Life", value: "6000+ cycles" },
-      { label: "Warranty", value: "3 Years" },
       { label: "Max Continuous Load", value: "5kW" },
       { label: "Typical Runtime", value: "5-6 hours at 1.5-2kW average load" },
       { label: "Included Components", value: "Splice bracket + wiring" },
@@ -852,7 +824,6 @@ export const productDetails: Record<string, {
       { label: "Solar Panel", value: "36V 670W × 8 panels (5.36kW total)" },
       { label: "Battery Type", value: "LiFePO4" },
       { label: "Cycle Life", value: "6000+ cycles" },
-      { label: "Warranty", value: "3 Years" },
       { label: "Max Continuous Load", value: "5kW" },
       { label: "Included Components", value: "Splice bracket + wiring" },
       { label: "Output Voltage", value: "220V AC" },
@@ -887,7 +858,6 @@ export const productDetails: Record<string, {
       { label: "Solar Panel", value: "36V 670W × 12 panels (8.04kW total)" },
       { label: "Battery Type", value: "LiFePO4" },
       { label: "Cycle Life", value: "6000+ cycles" },
-      { label: "Warranty", value: "3 Years" },
       { label: "Max Continuous Load", value: "10kW" },
       { label: "Included Components", value: "Splice bracket + wiring" },
       { label: "Output Voltage", value: "220V AC (380/400V three-phase available)" },
@@ -923,7 +893,6 @@ export const productDetails: Record<string, {
       { label: "Solar Panel", value: "36V 670W × 14 panels (9.38kW total)" },
       { label: "Battery Type", value: "LiFePO4" },
       { label: "Cycle Life", value: "6000+ cycles" },
-      { label: "Warranty", value: "3 Years" },
       { label: "Max Continuous Load", value: "10kW" },
       { label: "Included Components", value: "Splice bracket + wiring" },
       { label: "Output Voltage", value: "220V AC (380/400V three-phase available)" },
@@ -959,7 +928,6 @@ export const productDetails: Record<string, {
       { label: "Solar Panel", value: "36V 670W × 16 panels (10.72kW total)" },
       { label: "Battery Type", value: "LiFePO4" },
       { label: "Cycle Life", value: "6000+ cycles" },
-      { label: "Warranty", value: "3 Years" },
       { label: "Max Continuous Load", value: "10kW" },
       { label: "Included Components", value: "Splice bracket + wiring" },
       { label: "Output Voltage", value: "220V AC (380/400V three-phase available)" },
@@ -983,21 +951,18 @@ export const productDetails: Record<string, {
         name: "215kWh / 100kW", 
         value: "Village / Industrial-Scale Microgrid",
         description: "215.04kWh battery, 100kW rated power, 400V/220V output. Includes 144×670W solar panels (96.48kW total). Can supply tens of houses plus businesses, or one small industrial plant.",
-        price: "₱7,754,538.15",
         image: "/Product/cabinet/cb14/215.png"
       },
       { 
         name: "233kWh / 110kW", 
         value: "Advanced Village / Industrial-Scale Microgrid",
         description: "232.9kWh battery, 110kW rated power, 400V/220V output. Includes 144×670W solar panels (96.48kW total). Enhanced capacity for whole small communities or industrial sites.",
-        price: "₱8,148,259.90",
         image: "/Product/cabinet/cb14/233.png"
       },
       { 
         name: "261kWh / 110kW", 
         value: "Maximum Capacity Village / Industrial-Scale Microgrid",
         description: "261.2kWh battery, 110kW rated power, 400V/220V output. Includes 144×670W solar panels (96.48kW total). Maximum capacity for the most demanding village or industrial applications.",
-        price: "₱8,714,233.62",
         image: "/Product/cabinet/cb14/261.png"
       },
       { name: "Type", value: "Off-Grid Power Generation System" },
@@ -1014,7 +979,6 @@ export const productDetails: Record<string, {
       { label: "Voltage", value: "400V / 220V" },
       { label: "Battery Type", value: "LiFePO4" },
       { label: "Cycle Life", value: "6000+ cycles" },
-      { label: "Warranty", value: "3 Years" },
       { label: "Output Voltage", value: "380V/400V three-phase + 220V" },
       { label: "Included Components", value: "Splice bracket + wiring" },
     ],
@@ -1047,14 +1011,12 @@ export const productDetails: Record<string, {
         name: "466kWh / 220kW", 
         value: "Large-Scale Industrial / Community Microgrid",
         description: "465.8kWh battery, 220kW rated power, 400V/220V output. Includes 288×670W solar panels (192.96kW total). Ultra-high capacity for large-scale industrial and community applications.",
-        price: "₱16,173,481.20",
         image: "/Product/cabinet/cb15/466.png"
       },
       { 
         name: "522kWh / 220kW", 
         value: "Maximum Capacity Industrial / Community Microgrid",
         description: "522.4kWh battery, 220kW rated power, 400V/220V output. Includes 288×670W solar panels (192.96kW total). Maximum capacity for the most demanding large-scale applications.",
-        price: "₱17,256,213.80",
         image: "/Product/cabinet/cb15/522.png"
       },
       { name: "Type", value: "Off-Grid Power Generation System" },
@@ -1069,7 +1031,6 @@ export const productDetails: Record<string, {
       { label: "Voltage", value: "400V / 220V" },
       { label: "Battery Type", value: "LiFePO4" },
       { label: "Cycle Life", value: "6000+ cycles" },
-      { label: "Warranty", value: "3 Years" },
       { label: "Output Voltage", value: "380V/400V three-phase + 220V" },
       { label: "Included Components", value: "Splice bracket + wiring" },
     ],
@@ -1110,7 +1071,6 @@ export const productDetails: Record<string, {
       { label: "Voltage", value: "400V / 220V" },
       { label: "Battery Type", value: "LiFePO4" },
       { label: "Cycle Life", value: "6000+ cycles" },
-      { label: "Warranty", value: "3 Years" },
       { label: "Output Voltage", value: "380V/400V three-phase + 220V" },
       { label: "Included Components", value: "Splice bracket + wiring" },
     ],
@@ -1142,28 +1102,24 @@ export const productDetails: Record<string, {
         name: "40kWh / 20kW", 
         value: "Small Commercial / Remote Facility",
         description: "40.96kWh battery, 20kW rated power, 380V/220V output. Includes 30×670W solar panels (20.1kW total). Can power: 5-10 small houses, or a water refilling station, rice mill, small cold room, plus office & lighting, or a cell tower + equipment shelter with extra capacity. Market: Off-grid tourist sites with a few cottages, poultry/piggery/fish farms (lighting, blowers, small machinery), telecom sites that want to reduce diesel use.",
-        price: "₱1,823,684.10",
         image: "/Product/cabinet/20.png"
       },
       { 
         name: "60kWh / 30kW", 
         value: "Small Community or Larger Business",
         description: "61.4kWh battery, 30kW rated power, 380V/220V output. Includes 40×670W solar panels (26.8kW total). Can power: a small resort (10+ rooms, kitchen, bar, pool pump), a medium agricultural facility (irrigation pumps, storage, office), or a cluster of 10-20 households with controlled use. Market: Island barangays, remote mountain communities, bigger manufacturing workshops (welding, small machines).",
-        price: "₱2,694,050.62",
         image: "/Product/cabinet/30.png"
       },
       { 
         name: "80kWh / 40kW", 
         value: "Microgrid for a Barangay Center or Campus",
         description: "83.2kWh battery, 40kW rated power, 380V/220V output. Includes 60×670W solar panels (40.2kW total). Suitable for: school campus (several buildings, lights, fans, computers), barangay center + streetlights + market area, or medium resort or eco-park with many cottages plus common facilities. Good where diesel gensets are currently used daily, and fuel is expensive. Many loads are running at the same time (kitchen, laundry, ACs, pumps).",
-        price: "₱3,918,051.35",
         image: "/Product/cabinet/40.png"
       },
       { 
         name: "100kWh / 50kW", 
         value: "Microgrid for a Barangay Center or Campus",
         description: "100.3kWh battery, 50kW rated power, 380V/220V output. Includes 72×670W solar panels (48.24kW total). Suitable for: school campus (several buildings, lights, fans, computers), barangay center + streetlights + market area, or medium resort or eco-park with many cottages plus common facilities. Good where diesel gensets are currently used daily, and fuel is expensive. Many loads are running at the same time (kitchen, laundry, ACs, pumps).",
-        price: "₱4,593,349.12",
         image: "/Product/cabinet/50.png"
       },
       { name: "Type", value: "Off-Grid Power Generation System" },
@@ -1177,7 +1133,6 @@ export const productDetails: Record<string, {
       { label: "Battery Capacity", value: "40.96kWh / 61.4kWh / 83.2kWh / 100.3kWh (Lithium Battery)" },
       { label: "Solar Panel", value: "670W × 30-72 panels (20.1kW - 48.24kW total)" },
       { label: "Voltage", value: "380V / 220V" },
-      { label: "Warranty", value: "3 Years" },
       { label: "Output Voltage", value: "380V/400V three-phase + 220V" },
     ],
     features: [
@@ -1207,13 +1162,11 @@ export const productDetails: Record<string, {
         name: "DPEV-60K",
         value: "60kW Dual-Gun DC Charger",
         description: "60kW Dual-Gun DC fast charging station",
-        price: "₱361,250.00",
       },
       {
         name: "DPEV-120K",
         value: "120kW Dual-Gun DC Charger",
         description: "120kW Dual-Gun DC fast charging station",
-        price: "₱446,250.00",
       },
       { name: "Type", value: "High-power fast charger" },
       { name: "Rated Power", value: "60kW (DPEV-60K) / 120kW (DPEV-120K)" },
@@ -1263,7 +1216,6 @@ export const productDetails: Record<string, {
       { label: "Cooling Method", value: "Forced air cooling" },
       { label: "Protection Grade", value: "IP55" },
       { label: "Acoustic Noise", value: "≤65dB" },
-      { label: "Warranty", value: "3 Years" },
     ],
     features: [
       "Convenient and easy to use: Low power configuration, effectively reducing energy consumption costs, with low maintenance expenses and high cost-effectiveness",
@@ -1292,28 +1244,24 @@ export const productDetails: Record<string, {
       {
         name: "LVQ2-050 Model",
         value: "50W LED, 100W Solar Panel",
-        price: "₱37,981.25",
         description: "LED: 50W | Size: 935×415×210mm | Battery: 14.8V 45Ah | Solar Panel: 100W | Pole Height: 8m",
         image: "/Product/StreetLamp/lvq2/l50.png",
       },
       {
         name: "LVQ2-080 Model",
         value: "80W LED, 200W Solar Panel",
-        price: "₱54,088.25",
         description: "LED: 80W | Size: 935×415×210mm | Battery: 12.8V 90Ah | Solar Panel: 200W | Pole Height: 9m",
         image: "/Product/StreetLamp/lvq2/l80.png",
       },
       {
         name: "LVQ2-100 Model",
         value: "100W LED, 250W Solar Panel",
-        price: "₱60,224.25",
         description: "LED: 100W | Size: 935×415×210mm | Battery: 25.6V 48Ah | Solar Panel: 250W | Pole Height: 10m",
         image: "/Product/StreetLamp/lvq2/l100.png",
       },
       {
         name: "LVQ2-120 Model",
         value: "120W LED, 300W Solar Panel",
-        price: "₱70,003.50",
         description: "LED: 120W | Size: 935×415×210mm | Battery: 25.6V 60Ah | Solar Panel: 300W | Pole Height: 12m",
         image: "/Product/StreetLamp/lvq2/l120.png",
       },
@@ -1334,7 +1282,6 @@ export const productDetails: Record<string, {
       { label: "Pole Height", value: "8m / 9m / 10m / 12m (Split)" },
       { label: "Working Time", value: "12+ hours (3-5 rainy days backup)" },
       { label: "Protection Level", value: "IP65" },
-      { label: "Warranty", value: "3 Years" },
     ],
     features: [
       "Split Street Light design with separate solar panel and LED fixture",
@@ -1357,14 +1304,12 @@ export const productDetails: Record<string, {
       {
         name: "LVXC-120 Model",
         value: "20W LED, 70W Solar Panel",
-        price: "₱17,346.00",
         description: "LED: 20W | Size: 495×205×80mm | Battery: 3.2V 65Ah | Solar Panel: 70W | Pole Height: 5m",
         image: "/Product/StreetLamp/lvxc2/c120.png",
       },
       {
         name: "LVXC-130 Model",
         value: "30W LED, 70W Solar Panel",
-        price: "₱19,661.75",
         description: "LED: 30W | Size: 550×240×100mm | Battery: 3.2V 80Ah | Solar Panel: 70W | Pole Height: 6m",
         image: "/Product/StreetLamp/lvxc2/c130.png",
       },
@@ -1385,7 +1330,6 @@ export const productDetails: Record<string, {
       { label: "Pole Height", value: "5m / 6m" },
       { label: "Working Time", value: "12+ hours (3-5 rainy days backup)" },
       { label: "Protection Level", value: "IP65" },
-      { label: "Warranty", value: "3 Years" },
     ],
     features: [
       "All in Two Light integrated design",
@@ -1408,14 +1352,12 @@ export const productDetails: Record<string, {
       {
         name: "LVXC-320 Model",
         value: "20W LED, 70W Solar Panel",
-        price: "₱17,036.25",
         description: "LED: 20W | Size: 650×300×130mm | Battery: 3.2V 65Ah | Solar Panel: 70W | Pole Height: 5m",
         image: "/Product/StreetLamp/lvxc3/c320.png",
       },
       {
         name: "LVXC-330 Model",
         value: "30W LED, 70W Solar Panel",
-        price: "₱18,939.00",
         description: "LED: 30W | Size: 650×300×130mm | Battery: 3.2V 80Ah | Solar Panel: 70W | Pole Height: 6m",
         image: "/Product/StreetLamp/lvxc3/c330.png",
       },
@@ -1436,7 +1378,6 @@ export const productDetails: Record<string, {
       { label: "Pole Height", value: "5m / 6m" },
       { label: "Working Time", value: "12+ hours (3-5 rainy days backup)" },
       { label: "Protection Level", value: "IP65" },
-      { label: "Warranty", value: "3 Years" },
     ],
     features: [
       "All in Two Light integrated design",
@@ -1458,80 +1399,68 @@ export const productDetails: Record<string, {
       {
         name: "1075kWh System",
         value: "500KW/AC, 1075.2kWh Battery, 728×670W Solar Panels",
-        price: "₱42,239,802.20",
         description: "Rated Power: 500KW/AC | Voltage: 400V/220V | Lithium Battery Capacity: 1075.2kWh | Solar Panel: 670W × 728PCS (487.76kW total) | Included Components: Splice bracket + wiring",
         specifications: [
           { label: "Rated Power", value: "500kW (AC)" },
           { label: "Battery Capacity", value: "1075.2kWh (Lithium Battery)" },
           { label: "Solar Panel", value: "670W × 728 panels (487.76kW total)" },
           { label: "Output Voltage", value: "400V/380V three-phase + 220V" },
-          { label: "Warranty", value: "3 Years" },
-        ],
+            ],
       },
       {
         name: "1205kWh System",
         value: "500KW/AC, 1205.76kWh Battery, 728×670W Solar Panels",
-        price: "₱46,423,089.50",
         description: "Rated Power: 500KW/AC | Voltage: 400V/220V | Lithium Battery Capacity: 1205.76kWh | Solar Panel: 670W × 728PCS (487.76kW total) | Included Components: Splice bracket + wiring",
         specifications: [
           { label: "Rated Power", value: "500kW (AC)" },
           { label: "Battery Capacity", value: "1205.76kWh (Lithium Battery)" },
           { label: "Solar Panel", value: "670W × 728 panels (487.76kW total)" },
           { label: "Output Voltage", value: "400V/380V three-phase + 220V" },
-          { label: "Warranty", value: "3 Years" },
-        ],
+            ],
       },
       {
         name: "1800kWh System",
         value: "1000KW/AC, 1806.3kWh Battery, 1484×670W Solar Panels",
-        price: "₱71,207,141.30",
         description: "Rated Power: 1000KW/AC | Voltage: 400V/220V | Lithium Battery Capacity: 1806.3kWh | Solar Panel: 670W × 1484PCS (994.28kW total) | Included Components: Splice bracket + wiring",
         specifications: [
           { label: "Rated Power", value: "1000kW (AC)" },
           { label: "Battery Capacity", value: "1806.3kWh (Lithium Battery)" },
           { label: "Solar Panel", value: "670W × 1484 panels (994.28kW total)" },
           { label: "Output Voltage", value: "400V/380V three-phase + 220V" },
-          { label: "Warranty", value: "3 Years" },
-        ],
+            ],
       },
       {
         name: "2000kWh System",
         value: "1000KW/AC, 2025.67kWh Battery, 1484×670W Solar Panels",
-        price: "₱76,276,300.40",
         description: "Rated Power: 1000KW/AC | Voltage: 400V/220V | Lithium Battery Capacity: 2025.67kWh | Solar Panel: 670W × 1484PCS (994.28kW total) | Included Components: Splice bracket + wiring",
         specifications: [
           { label: "Rated Power", value: "1000kW (AC)" },
           { label: "Battery Capacity", value: "2025.67kWh (Lithium Battery)" },
           { label: "Solar Panel", value: "670W × 1484 panels (994.28kW total)" },
           { label: "Output Voltage", value: "400V/380V three-phase + 220V" },
-          { label: "Warranty", value: "3 Years" },
-        ],
+            ],
       },
       {
         name: "2300kWh System",
         value: "1000KW/AC, 2362.28kWh Battery, 1484×670W Solar Panels",
-        price: "₱81,766,894.90",
         description: "Rated Power: 1000KW/AC | Voltage: 400V/220V | Lithium Battery Capacity: 2362.28kWh | Solar Panel: 670W × 1484PCS (994.28kW total) | Included Components: Splice bracket + wiring",
         specifications: [
           { label: "Rated Power", value: "1000kW (AC)" },
           { label: "Battery Capacity", value: "2362.28kWh (Lithium Battery)" },
           { label: "Solar Panel", value: "670W × 1484 panels (994.28kW total)" },
           { label: "Output Voltage", value: "400V/380V three-phase + 220V" },
-          { label: "Warranty", value: "3 Years" },
-        ],
+            ],
       },
       {
         name: "2700kWh System",
         value: "1000KW/AC, 2700.9kWh Battery, 1484×670W Solar Panels",
-        price: "₱85,828,342.80",
         description: "Rated Power: 1000KW/AC | Voltage: 400V/220V | Lithium Battery Capacity: 2700.9kWh | Solar Panel: 670W × 1484PCS (994.28kW total) | Included Components: Splice bracket + wiring",
         specifications: [
           { label: "Rated Power", value: "1000kW (AC)" },
           { label: "Battery Capacity", value: "2700.9kWh (Lithium Battery)" },
           { label: "Solar Panel", value: "670W × 1484 panels (994.28kW total)" },
           { label: "Output Voltage", value: "400V/380V three-phase + 220V" },
-          { label: "Warranty", value: "3 Years" },
-        ],
+            ],
       },
       { name: "Available Capacities", value: "1075kWh / 1205kWh / 1800kWh / 2000kWh / 2300kWh / 2700kWh" },
       { name: "Rated Power", value: "500KW/AC (1075kWh, 1205kWh) / 1000KW/AC (1800kWh, 2000kWh, 2300kWh, 2700kWh)" },
@@ -1547,7 +1476,6 @@ export const productDetails: Record<string, {
       { label: "Output Voltage", value: "400V/380V three-phase + 220V" },
       { label: "Typical Storage", value: "3-6 hours at full output" },
       { label: "Coverage", value: "24/7 with solar + backup diesel" },
-      { label: "Warranty", value: "3 Years" },
     ],
     features: [
       "Small utility-level / industrial park containerized BESS system",

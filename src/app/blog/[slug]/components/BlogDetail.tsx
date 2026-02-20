@@ -16,7 +16,6 @@ import {
   RiGlobalLine,
   RiArrowRightLine
 } from "react-icons/ri";
-import EnergySavingsCalculator from "@/app/(home)/components/EnergySavingsCalculator";
 // import LayoutContainer from "@/components/layout/LayoutContainer";
 
 interface Resource {
@@ -217,7 +216,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
       </div>
 
       <h2>Long-Term Value</h2>
-      <p>Beyond the payback period, energy systems continue generating savings for decades. With 25+ year warranties on solar panels and 10+ year warranties on batteries, your investment provides long-term value. Over a 25-year period, a typical residential solar and storage system can generate <strong>₱2.5M - ₱5M</strong> in energy savings, far exceeding the initial investment.</p>
+      <p>Beyond the payback period, energy systems continue generating savings for decades. With high-quality components and professional installation, your investment provides long-term value. Over a 25-year period, a typical residential solar and storage system can generate <strong>₱2.5M - ₱5M</strong> in energy savings, far exceeding the initial investment.</p>
 
       <h2>Additional Benefits</h2>
       <p>Renewable energy systems can also increase property values. Studies show that homes with solar panels sell for <strong>3-4% more</strong> than comparable homes without them. For businesses, energy independence and sustainability credentials can enhance brand value and attract environmentally conscious customers and employees.</p>
@@ -581,18 +580,8 @@ export default function BlogDetail({ resource }: BlogDetailProps) {
         dangerouslySetInnerHTML={{ __html: content.content }}
       />
 
-      {/* Energy Savings Calculator - Only for ROI blog */}
-      {resource.slug === "energy-savings-calculator-roi-analysis" && (
-        <div className="mt-12 md:mt-16">
-          <EnergySavingsCalculator
-            title="Try Our Free Energy Savings Calculator"
-            description="Enter your details below to get instant estimates of your potential savings, payback period, and 25-year lifetime savings."
-          />
-        </div>
-      )}
-
-      {/* Key Takeaways Section - Only for non-ROI blogs */}
-      {resource.slug !== "energy-savings-calculator-roi-analysis" && (
+      {/* Key Takeaways Section */}
+      {(
         <div className="mt-12 md:mt-16 p-6 md:p-10 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 shadow-sm">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">

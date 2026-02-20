@@ -21,7 +21,6 @@ const streetLights = [
     size: "1319*460*60mm",
     battery: "12.8V 45Ah",
     solarPanel: "100W",
-    price: "₱45,164.50",
     type: "Integrated Light",
     image: "/Product/StreetLamp/F1L.png",
   },
@@ -32,7 +31,6 @@ const streetLights = [
     size: "1490*640*60mm",
     battery: "25.6V 45Ah",
     solarPanel: "160W",
-    price: "₱62,717.00",
     type: "Integrated Light",
     image: "/Product/StreetLamp/F1L.png",
   },
@@ -43,7 +41,6 @@ const streetLights = [
     size: "1490*730*60mm",
     battery: "25.6V 52Ah",
     solarPanel: "200W",
-    price: "₱71,803.00",
     type: "Integrated Light",
     image: "/Product/StreetLamp/F1L.png",
   },
@@ -54,7 +51,6 @@ const streetLights = [
     size: "1650*830*60mm",
     battery: "25.6V 60Ah",
     solarPanel: "240W",
-    price: "₱81,228.25",
     type: "Integrated Light",
     image: "/Product/StreetLamp/F1L.png",
   },
@@ -65,7 +61,6 @@ const streetLights = [
     size: "935*415*210mm",
     battery: "14.8V 45Ah",
     solarPanel: "100W",
-    price: "₱37,981.25",
     type: "Split Street Light",
     image: "/Product/StreetLamp/RKlv02.png",
   },
@@ -76,7 +71,6 @@ const streetLights = [
     size: "935*415*210mm",
     battery: "12.8V 90Ah",
     solarPanel: "200W",
-    price: "₱54,088.25",
     type: "Split Street Light",
     image: "/Product/StreetLamp/RKlv02.png",
   },
@@ -87,7 +81,6 @@ const streetLights = [
     size: "935*415*210mm",
     battery: "25.6V 48Ah",
     solarPanel: "250W",
-    price: "₱60,224.25",
     type: "Split Street Light",
     image: "/Product/StreetLamp/RKS.png",
   },
@@ -98,7 +91,6 @@ const streetLights = [
     size: "935*415*210mm",
     battery: "25.6V 60Ah",
     solarPanel: "300W",
-    price: "₱70,003.50",
     type: "Split Street Light",
     image: "/Product/StreetLamp/RKS.png",
   },
@@ -111,7 +103,6 @@ const storageSystems = [
     ratedPower: "50KW/AC 380V/220V",
     battery: "100.3kWh",
     solarPanel: "670W*72PCS",
-    price: "₱4,593,349.12",
     description:
       "Microgrid for a barangay center or campus. Suitable for school campus, barangay center + streetlights + market area.",
     image: "/Sector/sampleproducts/13.png",
@@ -122,7 +113,6 @@ const storageSystems = [
     ratedPower: "100KW/AC 400V/220V",
     battery: "215.04kWh",
     solarPanel: "670W*144PCS",
-    price: "₱7,754,538.15",
     description:
       "Village / industrial-scale. Can supply tens of houses plus businesses, or one small industrial plant.",
     image: "/Sector/sampleproducts/14.png",
@@ -133,7 +123,6 @@ const storageSystems = [
     ratedPower: "220KW/AC 400V/220V",
     battery: "465.8kWh",
     solarPanel: "670W*288PCS",
-    price: "₱16,173,481.20",
     description:
       "Mini power plant for a small town center or big factory. A town center: municipal hall, market, street lighting, plus many nearby shops.",
     image: "/Sector/sampleproducts/15.png",
@@ -144,7 +133,6 @@ const storageSystems = [
     ratedPower: "300KW/AC 400V/220V",
     battery: "783.6kWh",
     solarPanel: "670W*444PCS",
-    price: "₱26,311,107.50",
     description:
       "Village or island grid. Can act as the main power plant for a whole small island barangay with a few hundred households.",
     image: "/Sector/sampleproducts/16.png",
@@ -155,21 +143,18 @@ const evChargers = [
   {
     model: "DPEV-60k",
     type: "60 kW Dual-gun DC Charging Pile",
-    price: "₱361,250.00",
     description: "Entry-level DC fast charger. Good for malls, supermarkets, city public charging. Can support 1-2 vehicles at a time.",
     image: "/Product/EV/89.png",
   },
   {
     model: "DPEV-120k",
     type: "120 kW Dual-gun DC Charging Pile",
-    price: "₱446,250.00",
     description: "Standard fast charger. Perfect for highway rest stops, big commercial centers, fleet depots with higher turnover.",
     image: "/Product/EV/89.png",
   },
   {
     model: "DPEV-160k",
     type: "160 kW Single-gun DC Charging Pile",
-    price: "₱573,750.00",
     description: "High-power fast charger. Perfect for premium charging hubs, expressway service areas, sites serving EVs that support higher charging power.",
     image: "/Product/EV/53.png",
   },
@@ -262,7 +247,6 @@ export default function SmartCitiesSector() {
                   <th className="px-6 py-4 text-left font-semibold">LED Light</th>
                   <th className="px-6 py-4 text-left font-semibold">Battery</th>
                   <th className="px-6 py-4 text-left font-semibold">Solar Panel</th>
-                  <th className="px-6 py-4 text-left font-semibold">Unit Price</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -286,7 +270,6 @@ export default function SmartCitiesSector() {
                     <td className="px-6 py-4 text-slate-600">{light.ledLight}</td>
                     <td className="px-6 py-4 text-slate-600">{light.battery}</td>
                     <td className="px-6 py-4 text-slate-600">{light.solarPanel}</td>
-                    <td className="px-6 py-4 font-semibold text-primary">{light.price}</td>
                   </tr>
                 ))}
               </tbody>
@@ -301,7 +284,7 @@ export default function SmartCitiesSector() {
               </li>
               <li className="flex items-start gap-2">
                 <RiCheckLine className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Price valid for 15 days since quotation date</span>
+                <span>Contact us for current pricing</span>
               </li>
               <li className="flex items-start gap-2">
                 <RiCheckLine className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -310,10 +293,6 @@ export default function SmartCitiesSector() {
               <li className="flex items-start gap-2">
                 <RiCheckLine className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                 <span>Package: Standard Export package</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <RiCheckLine className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                <span>Warranty: 3 years</span>
               </li>
             </ul>
           </div>
@@ -346,9 +325,6 @@ export default function SmartCitiesSector() {
                 <div className="p-6 space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-semibold">{system.kWh}</h3>
-                    <span className="text-sm font-bold text-primary">
-                      {system.price}
-                    </span>
                   </div>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between">
@@ -405,15 +381,14 @@ export default function SmartCitiesSector() {
                 )}
                 <h3 className="text-xl font-semibold mb-2">{charger.type}</h3>
                 <p className="text-sm text-slate-600 mb-4">{charger.description}</p>
-                <div className="flex items-center justify-between mb-4">
+                <div className="mb-4">
                   <span className="text-sm text-slate-500">Model: {charger.model}</span>
-                  <span className="text-2xl font-bold text-primary">{charger.price}</span>
                 </div>
                 <Link
-                  href={`/contact?subject=installation&product=ev-charging&model=${encodeURIComponent(charger.model)}&productName=${encodeURIComponent(charger.type)}&price=${encodeURIComponent(charger.price)}`}
+                  href={`/contact?subject=installation&product=ev-charging&model=${encodeURIComponent(charger.model)}&productName=${encodeURIComponent(charger.type)}`}
                   className="block w-full text-center bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors"
                 >
-                  Request Installation
+                  Contact for Quote
                 </Link>
               </div>
             ))}
@@ -474,7 +449,7 @@ export default function SmartCitiesSector() {
             />
             <div className="grid md:grid-cols-2 gap-6 mt-12">
               {[
-                "3-year warranty on all products",
+                "Dedicated customer support",
                 "Professional installation and maintenance",
                 "Payment terms: 30% advance, balance before shipping",
                 "Production time: 20-25 working days",

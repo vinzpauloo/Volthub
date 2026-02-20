@@ -20,7 +20,6 @@ const storageSystems = [
     ratedPower: "20KW/AC 380V/220V",
     battery: "40.96kWh",
     solarPanel: "670W*30PCS",
-    price: "₱1,823,684.10",
     description:
       "Small commercial / remote facility. Can power 5-10 small houses or a water refilling station, rice mill, small cold room.",
     image: "/Product/cabinet/20k.png",
@@ -31,7 +30,6 @@ const storageSystems = [
     ratedPower: "30KW/AC 380V/220V",
     battery: "61.4kWh",
     solarPanel: "670W*40PCS",
-    price: "₱2,694,050.62",
     description:
       "Small community or larger business. Can power a small resort (10+ rooms, kitchen, bar, pool pump).",
     image: "/Product/cabinet/30k.png",
@@ -42,7 +40,6 @@ const storageSystems = [
     ratedPower: "50KW/AC 380V/220V",
     battery: "100.3kWh",
     solarPanel: "670W*72PCS",
-    price: "₱4,593,349.12",
     description:
       "Microgrid for a barangay center or campus. Suitable for school campus, barangay center + streetlights + market area.",
       image: "/Product/cabinet/50k.png",
@@ -53,7 +50,6 @@ const storageSystems = [
     ratedPower: "100KW/AC 400V/220V",
     battery: "215.04kWh",
     solarPanel: "670W*144PCS",
-    price: "₱7,754,538.15",
     description:
       "Village / industrial-scale. Can supply tens of houses plus businesses, or one small industrial plant.",
       image: "/Product/cabinet/200kwh.png",
@@ -64,7 +60,6 @@ const storageSystems = [
     ratedPower: "220KW/AC 400V/220V",
     battery: "465.8kWh",
     solarPanel: "670W*288PCS",
-    price: "₱16,173,481.20",
     description:
       "Mini power plant for a small town center or big factory. A town center: municipal hall, market, street lighting, plus many nearby shops.",
       image: "/Product/cabinet/500kwh.png",
@@ -75,7 +70,6 @@ const storageSystems = [
     ratedPower: "300KW/AC 400V/220V",
     battery: "783.6kWh",
     solarPanel: "670W*444PCS",
-    price: "₱26,311,107.50",
     description:
       "Village or island grid. Can act as the main power plant for a whole small island barangay with a few hundred households.",
     image: "/Product/containertype/con1.png",
@@ -86,7 +80,6 @@ const storageSystems = [
     ratedPower: "500KW/AC 400V/220V",
     battery: "1075.2kWh",
     solarPanel: "670W*728PCS",
-    price: "₱42,239,802.20",
     description:
       "Small utility level / industrial park. The main power for a small island town that currently relies on diesel gensets.",
     image: "/Product/containertype/con1.png",
@@ -97,7 +90,6 @@ const storageSystems = [
     ratedPower: "1000KW/AC 400V/220V",
     battery: "1806.3kWh",
     solarPanel: "670W*1484PCS",
-    price: "₱71,207,141.30",
     description:
       "Main power plant for a whole town or large island. Can power an entire island town or large industrial estate, cutting diesel consumption by 60-90%.",
     image: "/Product/containertype/con1.png",
@@ -108,7 +100,6 @@ const storageSystems = [
     ratedPower: "1000KW/AC 400V/220V",
     battery: "2700.9kWh",
     solarPanel: "670W*1484PCS",
-    price: "₱85,828,342.80",
     description:
       "Maximum independence from diesel, with longer night-time coverage. For projects aiming for maximum independence from diesel.",
     image: "/Product/containertype/con1.png",
@@ -119,7 +110,6 @@ const evChargers = [
   {
     model: "DPEV-160k",
     type: "160 kW Single-gun DC Charging Pile",
-    price: "₱573,750.00",
     description:
       "High-power fast charger. Perfect for premium charging hubs, expressway service areas, sites serving EVs that support higher charging power.",
     image: "/Product/EV/53.png",
@@ -127,7 +117,6 @@ const evChargers = [
   {
     model: "DPEV-400k",
     type: "400 kW Single-gun DC Charging Pile",
-    price: "₱1,030,625.00",
     description:
       "Ultra-fast DC charger. For flagship highway stations, bus/truck depots needing very high power. Allows very short charging stops.",
     image: "/Product/EV/64.png",
@@ -235,7 +224,6 @@ export default function IndustrialSector() {
                     <div className="p-6 space-y-4">
                       <div className="flex items-center justify-between">
                         <h4 className="text-lg font-semibold">{system.kWh}</h4>
-                        <span className="text-sm font-bold text-primary">{system.price}</span>
                       </div>
                       <div className="space-y-2 text-xs">
                         <div className="flex justify-between">
@@ -290,7 +278,6 @@ export default function IndustrialSector() {
                     <div className="p-6 space-y-4">
                       <div className="flex items-center justify-between">
                         <h4 className="text-lg font-semibold">{system.kWh}</h4>
-                        <span className="text-sm font-bold text-primary">{system.price}</span>
                       </div>
                       <div className="space-y-2 text-xs">
                         <div className="flex justify-between">
@@ -349,17 +336,14 @@ export default function IndustrialSector() {
                 )}
                 <h3 className="text-2xl font-semibold mb-2">{charger.type}</h3>
                 <p className="text-sm text-slate-600 mb-4">{charger.description}</p>
-                <div className="flex items-center justify-between mb-4">
+                <div className="mb-4">
                   <span className="text-sm text-slate-500">Model: {charger.model}</span>
-                  <span className="text-3xl font-bold text-primary">
-                    {charger.price}
-                  </span>
                 </div>
                 <Link
-                  href={`/contact?subject=installation&product=ev-charging&model=${encodeURIComponent(charger.model)}&productName=${encodeURIComponent(charger.type)}&price=${encodeURIComponent(charger.price)}`}
+                  href={`/contact?subject=installation&product=ev-charging&model=${encodeURIComponent(charger.model)}&productName=${encodeURIComponent(charger.type)}`}
                   className="block w-full text-center bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary/90 transition-colors"
                 >
-                  Request Installation
+                  Contact for Quote
                 </Link>
               </div>
             ))}
@@ -424,7 +408,7 @@ export default function IndustrialSector() {
                 "Scalable from 40kWh to 2.7MWh capacity",
                 "Can replace or reduce diesel generator dependency",
                 "Professional installation and commissioning",
-                "Long-term warranty and support",
+                "Long-term maintenance and support",
                 "ROI-focused with fuel cost savings",
                 "24/7 monitoring and maintenance available",
                 "Compliance with industrial safety standards",

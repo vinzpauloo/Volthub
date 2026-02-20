@@ -7,7 +7,6 @@ import {
   RiChat3Line,
   RiShieldCheckLine,
   RiAwardLine,
-  RiDownloadLine,
   RiArrowRightSLine
 } from "react-icons/ri";
 import { Product, productDetails } from "./productData";
@@ -17,7 +16,6 @@ interface ProductDetailB2BProps {
   details: typeof productDetails[string] | undefined;
   categoryLabel: string | undefined;
   displayProductName: string;
-  currentPrice: string | undefined;
   selectedVariantIndex: number;
   setSelectedVariantIndex: (index: number) => void;
   pricedVariations: Array<{ name: string; price?: string }>;
@@ -27,8 +25,6 @@ interface ProductDetailB2BProps {
   setSelectedImage: (img: string) => void;
   allImages: string[];
   openImageModal: (index: number) => void;
-  isCabinetProduct: boolean;
-  isContainerProduct: boolean;
 }
 
 export default function ProductDetailB2B({
@@ -36,7 +32,6 @@ export default function ProductDetailB2B({
   details,
   categoryLabel,
   displayProductName,
-  currentPrice,
   selectedVariantIndex,
   setSelectedVariantIndex,
   pricedVariations,
@@ -46,8 +41,6 @@ export default function ProductDetailB2B({
   setSelectedImage,
   allImages,
   openImageModal,
-  isCabinetProduct,
-  isContainerProduct,
 }: ProductDetailB2BProps) {
   return (
     <div className="space-y-6 md:space-y-8">
@@ -110,7 +103,7 @@ export default function ProductDetailB2B({
                 Critical Specifications
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-                {/* Extract key specs: Voltage, Capacity, Power, Dimensions, Warranty */}
+                {/* Extract key specs: Voltage, Capacity, Power, Dimensions */}
                 {details.specifications
                   .filter((spec) => {
                     const lowerLabel = spec.label.toLowerCase();
@@ -119,7 +112,6 @@ export default function ProductDetailB2B({
                       lowerLabel.includes("capacity") ||
                       (lowerLabel.includes("power") && (lowerLabel.includes("rated") || lowerLabel.includes("output"))) ||
                       lowerLabel.includes("dimension") ||
-                      lowerLabel.includes("warranty") ||
                       lowerLabel.includes("model") ||
                       lowerLabel.includes("battery") ||
                       lowerLabel.includes("solar panel")
@@ -177,73 +169,19 @@ export default function ProductDetailB2B({
                   <RiCheckLine className="h-5 w-5 text-primary flex-shrink-0" />
                   <span>UL Listed (where applicable)</span>
                 </div>
-                <div className="flex items-center gap-2 text-sm text-slate-700">
-                  <RiShieldCheckLine className="h-5 w-5 text-primary flex-shrink-0" />
-                  <span>5-Year Warranty</span>
-                </div>
               </div>
             </div>
 
-            {/* 3. Pricing Strategy - B2B Appropriate */}
+            {/* 3. Pricing - Inquiry Based */}
             <div className="pt-2 border-t border-slate-200">
-              {(() => {
-                // For high-value items (cabinet products), show "Call for Pricing"
-                // For smaller items (solar street lights), show base price with bulk discount note
-                const isHighValue = isCabinetProduct || isContainerProduct;
-                const isSmallItem = product.category === "solar-street";
-                
-                if (isHighValue) {
-                  return (
-                    <div>
-                      <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
-                        Call for Pricing
-                      </div>
-                      <p className="text-sm text-slate-600">
-                        Contact us for contractor pricing and bulk order discounts
-                      </p>
-                    </div>
-                  );
-                } else if (isSmallItem && currentPrice) {
-                  return (
-                    <div>
-                      <div className="flex items-baseline gap-2 mb-2">
-                        <span className="text-3xl md:text-4xl font-bold text-slate-900">
-                          {currentPrice}
-                        </span>
-                        <span className="text-sm text-slate-500">base price</span>
-                      </div>
-                      <p className="text-xs text-slate-600 bg-primary/5 rounded-lg p-2">
-                        <strong>Bulk Discounts Available:</strong> Contact us for pricing on orders of 10+ units
-                      </p>
-                    </div>
-                  );
-                } else if (currentPrice) {
-                  return (
-                    <div>
-                      <div className="flex items-baseline gap-2 mb-2">
-                        <span className="text-3xl md:text-4xl font-bold text-slate-900">
-                          {currentPrice}
-                        </span>
-                        <span className="text-sm text-slate-500">per unit</span>
-                      </div>
-                      <p className="text-xs text-slate-600">
-                        Volume pricing available for bulk orders
-                      </p>
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div>
-                      <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
-                        Request Pricing
-                      </div>
-                      <p className="text-sm text-slate-600">
-                        Contact us for detailed pricing and bulk order quotes
-                      </p>
-                    </div>
-                  );
-                }
-              })()}
+              <div>
+                <div className="text-2xl md:text-3xl font-bold text-slate-900 mb-2">
+                  Request Pricing
+                </div>
+                <p className="text-sm text-slate-600">
+                  Contact us for detailed pricing and bulk order quotes
+                </p>
+              </div>
             </div>
 
             {/* 4. Configuration & Volume - Technical Dropdowns */}
@@ -274,7 +212,7 @@ export default function ProductDetailB2B({
                     
                     return (
                       <option key={variant.name} value={idx}>
-                        {label} {variant.price ? `- ${variant.price}` : ''}
+                        {label}
                       </option>
                     );
                   })}
@@ -314,20 +252,7 @@ export default function ProductDetailB2B({
                 <RiArrowRightSLine className="h-6 w-6 group-hover:translate-x-1 transition-transform" />
               </Link>
 
-              {/* Secondary Action - Download Spec Sheet */}
-              <button
-                onClick={() => {
-                  // Generate or link to PDF spec sheet
-                  const specSheetUrl = `/specs/${product.id}.pdf`; // You'll need to create these PDFs
-                  window.open(specSheetUrl, '_blank');
-                }}
-                className="flex items-center justify-center gap-2 w-full bg-white hover:bg-slate-50 text-primary font-semibold px-6 py-3 md:py-4 rounded-xl border-2 border-primary transition-all duration-300 text-base md:text-lg"
-              >
-                <RiDownloadLine className="h-5 w-5" />
-                <span>Download Spec Sheet (PDF)</span>
-              </button>
-
-              {/* Tertiary - Contact Sales */}
+              {/* Secondary - Contact Sales */}
               <Link
                 href={`/contact?subject=sales&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(displayProductName)}`}
                 className="flex items-center justify-center gap-2 w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-6 py-3 rounded-xl transition-all duration-300 text-sm md:text-base"
@@ -342,10 +267,8 @@ export default function ProductDetailB2B({
               <div className="text-xs md:text-sm text-slate-600 space-y-2">
                 <p className="font-semibold text-slate-900">Procurement Support:</p>
                 <p>✓ Custom configurations available</p>
-                <p>✓ Technical documentation & CAD files</p>
                 <p>✓ Project consultation & site assessment</p>
                 <p>✓ Installation & commissioning services</p>
-                <p>✓ Extended warranty options</p>
               </div>
             </div>
           </div>
