@@ -1,140 +1,158 @@
 import { NextResponse } from "next/server";
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - nodemailer types are not included in this project
-import nodemailer from "nodemailer";
-// import { createServerClient } from "@/lib/supabase";
+import { Resend } from "resend";
+import { buildEmailHtml } from "@/lib/email";
 
-export async function POST(request: Request) {
+function getResendClient(): Resend {
+  return new Resend(process.env.RESEND_API_KEY);
+}
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function sanitizeName(name: string): string {
+  return name.replace(/[^\p{L}\p{N}\s'-]/gu, "").trim();
+}
+
+const interestLabels: Record<string, string> = {
+  // Products
+  "ev-charging-station": "EV Charging Station",
+  "solar-street-lights": "Solar Street Lights",
+  "smart-home-ips": "Smart Home IPS",
+  "cabinet-type-power-supply": "Power Supplies",
+  "container-type-power-supply": "Container Type Power Supply",
+  // Services - EV Charging
+  "ev-charging-installation": "EV Charging Installation",
+  "ev-charging-quote": "EV Charging Quote",
+  "ac-charger-installation": "AC Charger Installation (7kW)",
+  "dc-fast-charger-installation": "DC Fast Charger Installation (60-400kW)",
+  // Services - Solar Installation
+  "solar-energy-installation": "Solar Energy Installation",
+  "solar-installation-quote": "Solar Installation Quote",
+  "street-light-installation": "Street Light Installation",
+  "solar-street-light-quote": "Solar Street Light Quote",
+  "off-grid-power-generation": "Off-Grid Power Generation System",
+  "energy-storage-installation": "Energy Storage Installation",
+  // Sector-Specific
+  "residential-solutions": "Residential Solutions",
+  "commercial-solutions": "Commercial Solutions",
+  "industrial-solutions": "Industrial Solutions",
+  "rural-projects": "Rural Projects",
+  // Partners
+  "location-partner": "Location Partner",
+  // Lead capture
+  "newsletter-signup": "Newsletter Signup",
+  "free-guide-download": "Free Guide Download",
+  // General
+  "general-inquiry": "General Inquiry",
+  "technical-support": "Technical Support",
+  "maintenance-service": "Maintenance Service",
+};
+
+export async function POST(request: Request): Promise<NextResponse> {
   try {
-    const { firstName, lastName, email, phone, region, province, city, interest, details } =
-      await request.json();
+    const body: unknown = await request.json();
 
-    // const supabase = createServerClient();
+    if (
+      typeof body !== "object" ||
+      body === null ||
+      Array.isArray(body)
+    ) {
+      return NextResponse.json(
+        { ok: false, error: "Invalid request body" },
+        { status: 400 },
+      );
+    }
 
-    const interestLabels: Record<string, string> = {
-      // Products
-      "ev-charging-station": "EV Charging Station",
-      "solar-street-lights": "Solar Street Lights",
-      "smart-home-ips": "Smart Home IPS",
-      "cabinet-type-power-supply": "Power Supplies",
-      "container-type-power-supply": "Container Type Power Supply",
-      // Services - EV Charging
-      "ev-charging-installation": "EV Charging Installation",
-      "ev-charging-quote": "EV Charging Quote",
-      "ac-charger-installation": "AC Charger Installation (7kW)",
-      "dc-fast-charger-installation": "DC Fast Charger Installation (60-400kW)",
-      // Services - Solar Installation
-      "solar-energy-installation": "Solar Energy Installation",
-      "solar-installation-quote": "Solar Installation Quote",
-      "street-light-installation": "Street Light Installation",
-      "solar-street-light-quote": "Solar Street Light Quote",
-      "off-grid-power-generation": "Off-Grid Power Generation System",
-      "energy-storage-installation": "Energy Storage Installation",
-      // Sector-Specific
-      "residential-solutions": "Residential Solutions",
-      "commercial-solutions": "Commercial Solutions",
-      "industrial-solutions": "Industrial Solutions",
-      "rural-projects": "Rural Projects",
-      // General
-      "general-inquiry": "General Inquiry",
-      "technical-support": "Technical Support",
-      "maintenance-service": "Maintenance Service",
-    };
+    const {
+      firstName: rawFirstName,
+      lastName: rawLastName,
+      email,
+      phone,
+      region,
+      province,
+      city,
+      interest,
+      details,
+    } = body as Record<string, unknown>;
 
-    const interestLabel =
-      interestLabels[interest as keyof typeof interestLabels] ?? "Inquiry";
+    // Validate required fields
+    if (
+      typeof rawFirstName !== "string" || rawFirstName.trim() === "" ||
+      typeof rawLastName !== "string" || rawLastName.trim() === "" ||
+      typeof email !== "string" || email.trim() === ""
+    ) {
+      return NextResponse.json(
+        { ok: false, error: "First name, last name, and email are required" },
+        { status: 400 },
+      );
+    }
 
+    if (!EMAIL_REGEX.test(email)) {
+      return NextResponse.json(
+        { ok: false, error: "Invalid email address" },
+        { status: 400 },
+      );
+    }
+
+    const firstName = sanitizeName(rawFirstName);
+    const lastName = sanitizeName(rawLastName);
+
+    if (firstName === "" || lastName === "") {
+      return NextResponse.json(
+        { ok: false, error: "Name contains invalid characters" },
+        { status: 400 },
+      );
+    }
+
+    const interestKey = typeof interest === "string" ? interest : "general-inquiry";
+    const interestLabel = interestLabels[interestKey] ?? "Inquiry";
     const subject = `${interestLabel} - ${firstName} ${lastName}`;
 
-    const bodyLines = [
-      "",
-      "",
-      details || "",
-      "",
-      `${firstName} ${lastName}`,
-      phone ? `Phone Number: ${phone}` : "",
-      email ? `Email Address: ${email}` : "",
-      region ? `Region: ${region}` : "",
-      province ? `Province: ${province}` : "",
-      city ? `City: ${city}` : "",
-    ].filter(Boolean);
-
-    const body = bodyLines.join("\n");
-
-    // Save to database first
-    // const { data: submission, error: dbError } = await supabase
-    //   .from("contact_submissions")
-    //   .insert({
-    //     first_name: firstName,
-    //     last_name: lastName,
-    //     email: email,
-    //     phone: phone || null,
-    //     region: region || null,
-    //     province: province || null,
-    //     city: city || null,
-    //     interest: interest,
-    //     details: details || null,
-    //   })
-    //   .select()
-    //   .single();
-
-    // if (dbError) {
-    //   console.error("Error saving contact submission to database:", dbError);
-    //   // Continue with email even if DB save fails
-    //   }
-
-    // Send email
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: false,
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
+    const html = buildEmailHtml({
+      subject,
+      firstName,
+      lastName,
+      email,
+      phone: typeof phone === "string" ? phone : undefined,
+      region: typeof region === "string" ? region : undefined,
+      province: typeof province === "string" ? province : undefined,
+      city: typeof city === "string" ? city : undefined,
+      interestLabel,
+      details: typeof details === "string" ? details : undefined,
     });
 
     // Route price/quote inquiries to judy@volthub.ph, everything else to admin
-    const isPriceInquiry = interest === "ev-charging-quote" ||
-      interest === "solar-installation-quote" ||
-      interest === "solar-street-light-quote" ||
-      (details && details.toLowerCase().includes("quote"));
+    const isPriceInquiry =
+      interestKey === "ev-charging-quote" ||
+      interestKey === "solar-installation-quote" ||
+      interestKey === "solar-street-light-quote" ||
+      (typeof details === "string" && details.toLowerCase().includes("quote"));
+
     const recipientEmail = isPriceInquiry
       ? (process.env.PRICE_INQUIRY_EMAIL || "judy@volthub.ph")
       : (process.env.CONTACT_EMAIL || "admin@volthub.ph");
 
-    try {
-    await transporter.sendMail({
-      from: `"${firstName} ${lastName} via VoltHub" <${
-        process.env.SMTP_FROM || process.env.SMTP_USER
-      }>`,
+    const { error: sendError } = await getResendClient().emails.send({
+      from: "VoltHub <noreply@volthub.ph>",
       to: recipientEmail,
       subject,
-      text: body,
-      replyTo: email || undefined,
+      html,
+      replyTo: email,
     });
 
-      // Update database to mark email as sent
-      // if (submission?.id) {
-      //   await supabase
-      //     .from("contact_submissions")
-      //     .update({
-      //       email_sent: true,
-      //       email_sent_at: new Date().toISOString(),
-      //     })
-      //     .eq("id", submission.id);
-      // }
-    } catch (emailError) {
-      console.error("Error sending email:", emailError);
-      // Don't fail the request if email fails, submission is already saved
+    if (sendError) {
+      console.error("Resend error:", sendError);
+      return NextResponse.json(
+        { ok: false, error: "Failed to send email" },
+        { status: 500 },
+      );
     }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error("Error sending contact email:", error);
+    console.error("Error in contact route:", error);
     return NextResponse.json(
       { ok: false, error: "Failed to send email" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

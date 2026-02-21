@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { RiArrowRightLine, RiDownloadLine, RiMailLine } from "react-icons/ri";
 import LayoutContainer from "@/components/layout/LayoutContainer";
@@ -16,6 +17,8 @@ interface LeadCaptureSectionProps {
   quoteCta?: string;
 }
 
+type FormStatus = "idle" | "loading" | "success" | "error";
+
 export default function LeadCaptureSection({
   badge = "Get Started Today",
   title,
@@ -27,6 +30,68 @@ export default function LeadCaptureSection({
   consultationCta = "Schedule Free Consultation",
   quoteCta = "Get Instant Quote",
 }: LeadCaptureSectionProps) {
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState<FormStatus>("idle");
+
+  const [guideName, setGuideName] = useState("");
+  const [guideEmail, setGuideEmail] = useState("");
+  const [guideStatus, setGuideStatus] = useState<FormStatus>("idle");
+
+  async function handleNewsletterSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+    e.preventDefault();
+    if (!newsletterEmail.trim()) return;
+
+    setNewsletterStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: "Newsletter",
+          lastName: "Subscriber",
+          email: newsletterEmail.trim(),
+          interest: "newsletter-signup",
+        }),
+      });
+      const data: { ok: boolean } = await res.json();
+      setNewsletterStatus(data.ok ? "success" : "error");
+      if (data.ok) setNewsletterEmail("");
+    } catch {
+      setNewsletterStatus("error");
+    }
+  }
+
+  async function handleGuideSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
+    e.preventDefault();
+    if (!guideName.trim() || !guideEmail.trim()) return;
+
+    setGuideStatus("loading");
+    try {
+      const nameParts = guideName.trim().split(/\s+/);
+      const firstName = nameParts[0];
+      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(" ") : "-";
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email: guideEmail.trim(),
+          interest: "free-guide-download",
+        }),
+      });
+      const data: { ok: boolean } = await res.json();
+      setGuideStatus(data.ok ? "success" : "error");
+      if (data.ok) {
+        setGuideName("");
+        setGuideEmail("");
+      }
+    } catch {
+      setGuideStatus("error");
+    }
+  }
+
   return (
     <section className="section-spacing bg-gradient-to-br from-primary via-primary/95 to-accent text-white">
       <LayoutContainer>
@@ -47,19 +112,30 @@ export default function LeadCaptureSection({
                 <h3 className="text-2xl font-semibold">{newsletterTitle}</h3>
               </div>
               <p className="text-white/90 mb-6">{newsletterDescription}</p>
-              <form className="space-y-4">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
-                />
-                <button
-                  type="submit"
-                  className="w-full bg-white text-primary px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
-                >
-                  Subscribe
-                </button>
-              </form>
+              {newsletterStatus === "success" ? (
+                <p className="text-green-200 font-medium py-3">Thanks for subscribing!</p>
+              ) : (
+                <form className="space-y-4" onSubmit={handleNewsletterSubmit}>
+                  <input
+                    type="email"
+                    required
+                    placeholder="Enter your email"
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
+                  />
+                  {newsletterStatus === "error" && (
+                    <p className="text-red-200 text-sm">Something went wrong. Please try again.</p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={newsletterStatus === "loading"}
+                    className="w-full bg-white text-primary px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-60 disabled:hover:scale-100"
+                  >
+                    {newsletterStatus === "loading" ? "Subscribing..." : "Subscribe"}
+                  </button>
+                </form>
+              )}
             </div>
 
             {/* Free Resource Download */}
@@ -71,24 +147,38 @@ export default function LeadCaptureSection({
                 <h3 className="text-2xl font-semibold">{resourceTitle}</h3>
               </div>
               <p className="text-white/90 mb-6">{resourceDescription}</p>
-              <form className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Your name"
-                  className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
-                />
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
-                />
-                <button
-                  type="submit"
-                  className="w-full bg-white text-primary px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105"
-                >
-                  Download Free Guide
-                </button>
-              </form>
+              {guideStatus === "success" ? (
+                <p className="text-green-200 font-medium py-3">Check your email for the guide!</p>
+              ) : (
+                <form className="space-y-4" onSubmit={handleGuideSubmit}>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Your name"
+                    value={guideName}
+                    onChange={(e) => setGuideName(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
+                  />
+                  <input
+                    type="email"
+                    required
+                    placeholder="Your email"
+                    value={guideEmail}
+                    onChange={(e) => setGuideEmail(e.target.value)}
+                    className="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50"
+                  />
+                  {guideStatus === "error" && (
+                    <p className="text-red-200 text-sm">Something went wrong. Please try again.</p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={guideStatus === "loading"}
+                    className="w-full bg-white text-primary px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 hover:scale-105 disabled:opacity-60 disabled:hover:scale-100"
+                  >
+                    {guideStatus === "loading" ? "Submitting..." : "Download Free Guide"}
+                  </button>
+                </form>
+              )}
             </div>
           </div>
 
@@ -117,4 +207,3 @@ export default function LeadCaptureSection({
     </section>
   );
 }
-
