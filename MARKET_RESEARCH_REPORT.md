@@ -295,73 +295,150 @@ The Philippines stands at a critical inflection point across all three of VoltHu
 
 ### 4.1 Market Size & Growth
 
-| Segment | 2025 Value | Projected Value | CAGR |
-|---------|-----------|-----------------|------|
-| **Battery Energy Storage (BESS)** | USD 1.0-3.1B | USD 9.8B (2031) | 21.5% |
-| **Residential Energy Storage** | USD 1.1B | Growing | 17%+ |
-| **Data Center Power** | USD 463M | Growing | 12.5% |
+| Source | 2024/2025 Value | Forecast | CAGR |
+|--------|----------------|----------|------|
+| Mobility Foresights | USD 3.1B (2025) | USD 9.8B by 2031 | 21.5% |
+| Data Bridge Market Research | USD 1.02B (2024) | USD 3.47B by 2032 | 16.71% |
+| Ken Research (residential only) | USD 1.1B | USD 2.81B by 2033 | 17.14% |
+| Data Center Power Market | USD 462.9M (2025) | USD 833.78M by 2030 | 12.5% |
+
+The Philippines is expected to **dominate ASEAN BESS deployments** in the near term, with the government projecting 22-25 GW of BESS by 2050 (from just 0.6 GW in 2024).
 
 ### 4.2 Market Drivers
 
 **Highest Electricity Prices in Asia:**
 - Residential: **USD 0.214/kWh** (253% of Asian average)
-- Commercial: PHP 11-15/kWh
+- Meralco residential rate: PHP 12.16-13.47/kWh (2025 range)
+- Commercial: PHP 9.15-15/kWh
+- Almost double Thailand's rates, nearly **7x Malaysia's**
 - Energy is often the second-largest operating expense after payroll
-- Creates powerful economic incentive for storage and self-generation
+- Data center power cost: USD 154/MWh (2nd highest in SE Asia after Singapore)
 
 **Grid Reliability Issues:**
-- 14,016 MW peak demand vs. aging infrastructure
-- Frequent brownouts, especially outside Metro Manila
-- Visayas and Mindanao grids remain constrained
+- ~30 GW installed capacity for 115M+ people — low compared to Vietnam/Thailand
+- 2024 El Nino crisis: 19 power plants on forced outage simultaneously in Luzon
+- Only **28% of committed power projects** reach commercial operation
+- Single-connection transmission corridors in many areas (no redundancy)
+- Panay Island and Negros outages caused PHP 400-500M in daily economic losses
+- Peak demand growing at ~5% annually: 20,669 MW (2025) → 28,631 MW (2030) → 53,679 MW (2040)
 
 **Typhoon Vulnerability:**
-- 6 typhoons in 30 days in 2024
-- USD 5.64B in annual economic damage
-- Drives demand for backup power and resilient energy systems
+- 6 typhoons in 30 days in 2024 (unprecedented) — affecting 13M+ people
+- **~1.2% of GDP annually** in economic damage (~USD 5.64B in 2024), projected to reach 7% by 2030
+- 2025: Typhoon Tino displaced 1.8M; power restored to only 60% initially, full restoration took a month
+- Solar-powered evacuation centers proved critical (providing the only electricity in affected towns)
 - 74% of population exposed to natural disaster risks
+
+**Malampaya Gas Field Depletion:**
+- Currently supplies 30% of Luzon's energy
+- Expected depletion by 2024-2025
+- Driving urgent pivot to LNG imports and accelerating RE/storage deployment
 
 ### 4.3 Policy Tailwinds
 
-- **Energy Storage Systems Act** (passed House Feb 2026 with 192-3 vote): 7-year income tax holiday, VAT zero-rating
-- **GEA-4 mandates**: Storage integration for 9,378 MW of renewable capacity
+- **Energy Storage Systems Act** (House Bill 6676, passed Feb 2026 with 192-3 vote):
+  - 7-year income tax holiday
+  - VAT zero-rating on local purchases
+  - Customs duty exemption on imported equipment
+  - Special 10% corporate income tax after ITH expiration
+  - Net operating loss carry-over for first 3 years
+  - Now sent to Senate for deliberation
+- **GEA-4 mandates**: 1,100 MW solar+storage with minimum 4-hour duration; total 9,378 MW RE (2026-2029)
 - **100% foreign ownership** permitted — triggered USD 13.7B in Chinese investment commitments
-- **Rural electrification grants**: PHP 5B for mini-grids and off-grid solar+storage
+- **Rural electrification**: PHP 80.9B needed for total electrification by 2028; 1.2M+ unserved households
+- **DOE Circular DC2023-04-0008**: Formal framework for ESS in the electric power industry
 
-### 4.4 Product Segments Relevant to VoltHub
+### 4.4 Key BESS Projects
 
-**Smart Home Indoor Power Systems (IPS):**
-- Demand driven by frequent outages, typhoon resilience needs
-- Growing middle class investing in home backup power
-- PHP 100,000-150,000 for home battery systems
+| Project | Capacity | Developer | Status |
+|---------|----------|-----------|--------|
+| **Terra Solar** | 3.5 GWp solar + **4.5 GWh BESS** | Solar Philippines / SPNEC | BOI Green Lane; Phase 1 targeting Feb 2026 COD |
+| **Citicore Solar Batangas 1** | 197 MWp solar + 320 MWh BESS | Citicore | First "solar baseload" plant; inaugurated |
+| **Sungrow-Citicore** | **1.5 GWh BESS** supply | Sungrow + CREC | Supply agreement signed |
+| **ABB-UPSI Bataan** | 50 MW (part of 240 MW) | ABB + UPSI | Grid resilience for Luzon/Visayas |
+| **SN Aboitiz (SNAP) Magat** | 20 MW BESS | Hitachi Energy (EPC) | Final investment decision completed |
+| **LFP Gigafactory** | — | StB Group | Philippines' first; under construction in Tarlac |
+
+### 4.5 Product Segments Relevant to VoltHub
+
+**Smart Home Indoor Power Systems (IPS) & Portable Power:**
+- Demand driven by frequent outages, typhoon resilience, remote work
+- Home battery systems: PHP 100,000-150,000 (USD 1,700-2,600)
 - Solar + storage residential systems: PHP 460,000-900,000+
-- Prices expected to decrease 10-15% in 2025
+- Residential lithium-ion pricing: PHP 15,000-25,000/kWh (~USD 260-440/kWh)
+- LiFePO4 is the dominant technology (safety, lifespan, tropical climate resilience)
+- 82% of households interested in rooftop solar, but only 20% have definitive plans (price sensitivity)
+- **Portable power stations** shifting from luxury to necessity — typhoon preparedness, remote work
+- Market leaders: EcoFlow (#1 globally), BLUETTI, Jackery, Anker SOLIX
+
+**UPS Systems:**
+- Philippines UPS market growing at 5.40% CAGR (2025-2033)
+- Vertiv launched Philippines-exclusive Liebert PSA650-PH (designed for local needs)
+- Data center and IT infrastructure demand surging
+- 85% of businesses planning cloud migration by end of 2026
 
 **Power Supply Cabinets & Container Systems:**
-- Data center boom driving demand (USD 463M market, 12.5% CAGR)
-- Industrial/commercial UPS and backup power
-- Container-based BESS for grid-scale storage
-- Mining, manufacturing, and cold storage applications
+- Data center market: USD 633-735M (2024-25) → USD 1.97-2.48B (2030-31)
+- ICT sector needs 300-500 MW baseload by 2026
+- Philippines build cost: USD 6.5-7.5M/MW (competitive vs. Singapore, Thailand)
+- ~28 operational colocation data centers; 13+ upcoming
+- Key project: Endec/Narra Technology Park — 300 MW campus at New Clark City
+- C&I storage eliminates peak demand charges (30-70% of commercial bills)
+- Key vendors: ABB, Schneider Electric, Rittal, Eaton, Vertiv
 
 **Solar Street Light Battery Systems:**
 - Integral component of solar street lighting infrastructure
 - LiFePO4 batteries replacing lead-acid
 - Smart controllers with IoT connectivity
 
-### 4.5 Competitive Landscape
+### 4.6 BESS Cost Trends
 
-| Tier | Players | Position |
-|------|---------|----------|
-| **Chinese Brands** | Sungrow, BYD, Huawei, CATL, AlphaESS | Dominant on price and distribution |
-| **Premium Brands** | Tesla, ABB, LG | Command trust premium |
-| **Local Developers** | Meralco, Aboitiz, San Miguel, Citicore | Major project developers |
-| **Local Integrators** | Solaric, Solar Up, Blue Sigma | Last-mile distribution and installation |
+| Metric | Value |
+|--------|-------|
+| Utility-scale BESS (today) | ~USD 200,000/MWh (down from USD 1M/MWh five years ago) |
+| Lithium-ion cell prices | Under USD 90/kWh (down 75% from 2015) |
+| C&I BESS in Philippines | USD 393-581/kWh |
+| Residential lithium-ion | PHP 15,000-25,000/kWh (~USD 260-440/kWh) |
 
-### 4.6 Key Projects
+### 4.7 Competitive Landscape
 
-- **Terra Solar**: 4.5 GWh BESS (largest announced)
-- **160 MW** BESS added in Luzon and Visayas in 2025
-- Solar-plus-storage projected to be cheapest dispatchable power by 2030
-- Negative midday pricing already occurring — storage becoming essential
+**Grid-Scale BESS:**
+
+| Tier | Players | Notes |
+|------|---------|-------|
+| **Chinese (Dominant)** | Sungrow, BYD, CATL, Huawei, Trina Storage | 1.5 GWh+ supply deals; best pricing |
+| **Western/International** | ABB (240 MW), Wartsila (49 MW), Hitachi Energy, Fluence | Premium; grid resilience projects |
+| **Korean** | LG Energy Solution, Samsung SDI | Significant regional share |
+
+**Residential/Commercial Storage:**
+
+| Tier | Brands |
+|------|--------|
+| Premium | Tesla Powerwall, BYD Battery-Box, LG RESU, Panasonic EverVolt |
+| Mid-Tier (Sweet Spot) | Huawei, Growatt, Sungrow, AlphaESS |
+| Budget/Emerging | PolarESS, Sunsynk, GSL ENERGY, Megarevo, Dyness |
+
+**Local Players:**
+- **Major developers**: Meralco, Aboitiz Power (PHP 78.1B capex), San Miguel Global Power, Citicore, Solar Philippines
+- **Integrators**: Solaric, Solar Up, IAN Solar, Blue Sigma, DIANTER, Solaren Power
+- **Innovators**: NexVolt (first to offer fractionalized BESS for SMEs)
+
+### 4.8 Philippines Energy Mix Context (2024-2025)
+
+| Source | Share of Generation | Installed MW |
+|--------|---------------------|-------------|
+| Coal | ~57-62% (declining) | 13,006 MW |
+| Natural Gas | ~15-17.5% (rising — LNG imports) | 3,732 MW |
+| Hydro | ~8-9% | 3,836 MW |
+| Geothermal | ~8-9% | 1,952 MW |
+| Solar | ~2-3% (growing) | 2,857 MW |
+| Energy Storage | — | 634 MW |
+| Biomass | ~1% | 595 MW |
+| Wind | ~1% | 427 MW |
+| Oil | ~1% (declining) | 3,448 MW |
+| **Total** | — | **30,487 MW** |
+
+**Renewables total: ~21-22%** of generation (target: 35% by 2030, 50% by 2040)
 
 ---
 
@@ -660,10 +737,24 @@ VoltHub's unique positioning should be the **integrated clean energy ecosystem**
 
 ### Energy Storage & Power Systems
 - [6W Research — Philippines Battery Energy Storage System Market 2025-2031](https://www.6wresearch.com/industry-report/philippines-battery-energy-storage-system-market)
+- [Mobility Foresights — Philippines BESS Market Size and Forecasts 2031](https://mobilityforesights.com/product/philippines-battery-energy-storage-systems-market/)
+- [Data Bridge — Philippines BESS Market to 2032](https://www.databridgemarketresearch.com/nucleus/philippines-battery-energy-storage-system-market)
 - [Energy Storage News — Philippines entering era where storage is indispensable](https://www.energy-storage.news/philippines-entering-an-era-where-energy-storage-is-indispensable-says-solar-pioneer/)
+- [Energy Storage News — Philippines House passes Energy Storage Framework](https://www.energy-storage.news/philippines-house-of-representatives-passes-national-energy-storage-framework-legislation/)
+- [Energy Storage News — Philippines fast-tracks Terra Solar 4.5GWh BESS](https://www.energy-storage.news/philippines-government-fast-tracks-worlds-largest-solar-and-storage-project-with-4-5gwh-bess/)
+- [Energy Storage News — Sungrow-CREC 1.5GWh BESS Supply Agreement](https://www.energy-storage.news/sungrow-crec-ink-1-5gwh-bess-supply-agreement-in-the-philippines/)
+- [SolarQuarter — Philippine House Passes Energy Storage Systems Act](https://solarquarter.com/2026/02/05/philippine-house-passes-energy-storage-systems-act-to-boost-energy-storage-and-grid-stability/)
 - [Manila Times — Grid reality drives solar-storage strategy](https://www.manilatimes.net/2026/02/21/business/science-technology/grid-reality-drives-solar-storage-strategy-in-the-philippines/2281902)
+- [Mordor Intelligence — Philippines Data Center Power Market](https://www.mordorintelligence.com/industry-reports/philippines-data-center-power-market)
+- [Eco-Business — Philippines data center hub challenges](https://www.eco-business.com/news/high-costs-higher-risks-can-the-philippines-power-its-data-centre-hub-ambitions/)
+- [US Trade.gov — Philippines Energy Storage Market](https://www.trade.gov/market-intelligence/philippines-energy-storage-market)
+- [Ken Research — Philippines Residential BESS Market](https://www.kenresearch.com/philippines-residential-lithium-ion-battery-energy-storage-systems-market)
+- [IMARC — Philippines UPS System Market 2033](https://www.imarcgroup.com/philippines-ups-system-market)
 - [IMARC — Philippines LED Market Size](https://www.imarcgroup.com/philippines-led-market)
 - [Expert Market Research — Philippines LED Lighting Market 2035](https://www.expertmarketresearch.com/reports/philippines-led-lighting-market)
+- [PIDS — Electricity Supply Interruptions in the Philippines](https://pidswebs.pids.gov.ph/CDN/document/pidsdps2248.pdf)
+- [Manila Bulletin — 19 Generating Units on Forced Outages](https://mb.com.ph/2024/4/15/with-19-generating-units-on-forced-outages-rotational-brownout-probabilities-raised-for-luzon-grid)
+- [DOE Philippines — Power Sector Situation](https://doe.gov.ph/power-sector-situation)
 
 ### Business Environment & Investment
 - [Expert Market Research — Philippines Renewable Energy Market 2035](https://www.expertmarketresearch.com/reports/philippines-renewable-energy-market)
