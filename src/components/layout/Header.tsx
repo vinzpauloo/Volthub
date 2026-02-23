@@ -74,11 +74,11 @@ const navItems: NavItem[] = [
     href: "/about",
     description: "Company history and market insights",
   },
-  // {
-  //   label: "Case Studies",
-  //   href: "/case-studies",
-  //   description: "Impact stories and sustainability metrics",
-  // },
+  {
+    label: "Insights",
+    href: "/insights",
+    description: "Philippines clean energy market data and analysis",
+  },
   {
     label: "Partners",
     href: "/partners",

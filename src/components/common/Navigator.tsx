@@ -119,6 +119,12 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
     description: "Learn about our company history and market insights.",
   },
 
+  insights: {
+    title: "Insights",
+    href: "/insights",
+    description: "Philippines clean energy market data and analysis.",
+  },
+
   partners: {
     title: "Partners",
     href: "/partners",
