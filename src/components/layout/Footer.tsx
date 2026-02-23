@@ -78,9 +78,7 @@ const footerColumns = [
     heading: "Company",
     links: [
       { label: "About Us", href: "/about" },
-      // { label: "Case Studies", href: "/case-studies" },
-      // { label: "Careers", href: "/contact" },
-      // { label: "News", href: { pathname: "/about", hash: "insights" } },
+      { label: "Market Insights", href: "/insights" },
       { label: "Become a Partner", href: "/partners" },
       { label: "Contact", href: "/contact" },
     ],
