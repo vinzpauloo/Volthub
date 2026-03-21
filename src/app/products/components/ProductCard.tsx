@@ -41,11 +41,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           {/* Logo overlay - top left */}
           <div className="absolute top-3 left-3 z-10">
             <Image
-              src="/logo2.png"
-              alt="Volthub Logo"
-              width={80}
-              height={80}
-              className="h-12 w-12 md:h-14 md:w-14 object-contain drop-shadow-lg"
+              src="/green-volthub-logo-transparent.png"
+              alt="VoltHub logo"
+              width={120}
+              height={32}
+              className="h-6 md:h-8 w-auto object-contain opacity-50 drop-shadow-lg"
             />
           </div>
         </div>

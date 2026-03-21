@@ -170,19 +170,16 @@ const Header = () => {
       )}
     >
       <LayoutContainer className="py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center space-x-3 group">
-          <span className="w-12 h-12 rounded-lg overflow-hidden flex items-center justify-center glow-effect bg-white">
+        <Link href="/" className="flex items-center group glow-effect">
+          <span className="bg-green-100 rounded-lg px-3 py-1.5">
             <Image
-              src="/logo.jpg"
+              src="/green-volthub-logo-transparent.png"
               alt="VoltHub logo"
-              width={48}
+              width={180}
               height={48}
-              className="object-cover"
+              className="h-7 w-auto object-contain"
               priority
             />
-          </span>
-          <span className="text-2xl font-bold gradient-text font-orbitron tracking-wide">
-            VoltHub
           </span>
         </Link>
 
@@ -217,19 +214,16 @@ const Header = () => {
       >
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between p-6 border-b border-white/10">
-            <Link href="/" className="flex items-center space-x-3">
-              <span className="w-10 h-10 rounded-lg overflow-hidden bg-white flex items-center justify-center">
+            <Link href="/" className="flex items-center">
+              <span className="bg-green-100 rounded-lg px-2.5 py-1">
                 <Image
-                  src="/logo.jpg"
+                  src="/green-volthub-logo-transparent.png"
                   alt="VoltHub logo"
-                  width={40}
+                  width={150}
                   height={40}
-                  className="object-cover"
+                  className="h-6 w-auto object-contain"
                   priority
                 />
-              </span>
-              <span className="text-xl font-bold gradient-text font-orbitron">
-                VoltHub
               </span>
             </Link>
             <button
