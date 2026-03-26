@@ -39,7 +39,7 @@ export default function ProductGridShowcase({ products }: ProductGridShowcasePro
         */}
           <div className="grid md:grid-cols-3 gap-6 md:gap-6 items-stretch">
           {/* Top Left - Commercial (Wide Card) - Spans 2 columns */}
-          <Link href="/products/ev-charging-53" className="relative group md:col-span-2 block cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
+          <Link href="/products/ev-dc-fq-120" className="relative group md:col-span-2 block cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
             {/* Background image for Commercial EV Charger card */}
             <div className="absolute inset-0 rounded-2xl md:rounded-3xl overflow-hidden lg:h-[350px] h-full transition-all duration-300 group-hover:brightness-110">
               <Image
@@ -83,7 +83,7 @@ export default function ProductGridShowcase({ products }: ProductGridShowcasePro
           </Link>
 
           {/* Top Right - Residential (Tall Card) - Spans 2 rows */}
-          <Link href="/products/ev-charging-89" className="relative group md:col-start-3 md:row-start-1 md:row-span-2 h-full md:self-stretch block cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
+          <Link href="/products/ev-dc-dd" className="relative group md:col-start-3 md:row-start-1 md:row-span-2 h-full md:self-stretch block cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
           
             <div className="relative bg-transparent rounded-2xl md:rounded-3xl overflow-hidden shadow-xl h-full flex flex-col transition-all duration-300">
               {/* Background image for Residential EV Charger card */}
@@ -135,7 +135,7 @@ export default function ProductGridShowcase({ products }: ProductGridShowcasePro
           </Link>
 
           {/* Bottom Left - Advanced (Small Card) */}
-          <Link href="/products/ev-charging-64" className="relative group md:row-start-2 h-full block cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
+          <Link href="/products/ev-dc-fd" className="relative group md:row-start-2 h-full block cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
             <div
               className={`absolute inset-0 bg-linear-to-br ${advancedProduct.gradientColors.from} ${advancedProduct.gradientColors.to} rounded-2xl md:rounded-3xl blur-3xl group-hover:blur-2xl transition-all duration-500 opacity-50`}
             />
@@ -187,7 +187,7 @@ export default function ProductGridShowcase({ products }: ProductGridShowcasePro
           </Link>
 
           {/* Bottom Middle - Home (Small Card) */}
-          <Link href="/products/ev-charging-59" className="relative group md:row-start-2 h-80 max-h-80 block cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
+          <Link href="/products/ev-dc-wd" className="relative group md:row-start-2 h-80 max-h-80 block cursor-pointer rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
             {/* Background image for Premium EV Charger card */}
             <div className="absolute inset-0 rounded-2xl md:rounded-3xl overflow-hidden transition-all duration-300 group-hover:brightness-110">
               <Image

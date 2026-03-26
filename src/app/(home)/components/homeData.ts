@@ -153,7 +153,7 @@ export const productShowcases = [
       { icon: RiFlashlightLine, text: "Smart Grid Integration", color: "text-accent" },
     ],
     ctas: [
-      { text: "View Dual-Gun EV Charger Products", href: "/products/ev-charging-89" as Route, variant: "primary" as const },
+      { text: "View Dual-Gun EV Charger Products", href: "/products/ev-dc-dd" as Route, variant: "primary" as const },
       { text: "Get Free Quote", href: "/contact" as Route, variant: "secondary" as const },
     ],
     trustIndicators: [
@@ -183,7 +183,7 @@ export const productShowcases = [
       { icon: RiHomeGearLine, text: "Smart Management", color: "text-green-600" },
     ],
     ctas: [
-      { text: "Explore DC EV Charger Products", href: "/products/ev-charging-64" as Route, variant: "primary" as const },
+      { text: "Explore DC EV Charger Products", href: "/products/ev-dc-fd" as Route, variant: "primary" as const },
       { text: "Request Demo", href: "/contact" as Route, variant: "secondary" as const },
     ],
     trustIndicators: [
@@ -213,7 +213,7 @@ export const productShowcases = [
       { icon: RiShieldCheckLine, text: "Safe & Certified", color: "text-green-600" },
     ],
     ctas: [
-      { text: "View AC EV Charger Products", href: "/products/ev-charging-59" as Route, variant: "primary" as const },
+      { text: "View Wall-Mounted EV Charger Products", href: "/products/ev-dc-wd" as Route, variant: "primary" as const },
       { text: "Get Free Quote", href: "/contact" as Route, variant: "secondary" as const },
     ],
     trustIndicators: [
@@ -244,7 +244,7 @@ export const productShowcases = [
       { icon: RiSpeedUpLine, text: "Future-Proof Design", color: "text-accent" },
     ],
     ctas: [
-      { text: "View Commercial EV Charger Products", href: "/products/ev-charging-53" as Route, variant: "primary" as const },
+      { text: "View Commercial EV Charger Products", href: "/products/ev-dc-fq-120" as Route, variant: "primary" as const },
       { text: "Get Free Consultation", href: "/contact" as Route, variant: "secondary" as const },
     ],
     trustIndicators: [

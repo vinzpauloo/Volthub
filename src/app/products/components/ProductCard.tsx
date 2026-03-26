@@ -45,7 +45,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               alt="VoltHub logo"
               width={120}
               height={32}
-              className="h-6 md:h-8 w-auto object-contain opacity-50 drop-shadow-lg"
+              className="h-4 md:h-5 w-auto object-contain opacity-30 drop-shadow-sm"
             />
           </div>
         </div>
