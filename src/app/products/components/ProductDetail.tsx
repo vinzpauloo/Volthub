@@ -1309,69 +1309,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       <p className="text-sm text-slate-600 text-center">Reliable illumination linking barangays, farms, and rural hubs.</p>
                     </div>
                   </>
-                ) : product.id === "ev-charging-89" ? (
-                  <>
-                    <div className="group cursor-pointer w-full md:w-[calc(25%-1.125rem)]">
-                      <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-100 mb-3">
-                        <Image
-                          src="/Product/EV/green/96.jpg"
-                          alt="Office building parking lot"
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <h4 className="font-bold text-white text-lg">Office building parking lot</h4>
-                        </div>
-                      </div>
-                      <p className="text-sm text-slate-600 text-center">Ideal for corporate and business facilities</p>
-                    </div>
-                    <div className="group cursor-pointer w-full md:w-[calc(25%-1.125rem)]">
-                      <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-100 mb-3">
-                        <Image
-                          src="/Product/EV/green/97.jpg"
-                          alt="Residential community"
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <h4 className="font-bold text-white text-lg">Residential community</h4>
-                        </div>
-                      </div>
-                      <p className="text-sm text-slate-600 text-center">Perfect for apartment complexes and housing developments</p>
-                    </div>
-                    <div className="group cursor-pointer w-full md:w-[calc(25%-1.125rem)]">
-                      <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-100 mb-3">
-                        <Image
-                          src="/Product/EV/green/98.jpg"
-                          alt="Commercial parking lot"
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <h4 className="font-bold text-white text-lg">Commercial parking lot</h4>
-                        </div>
-                      </div>
-                      <p className="text-sm text-slate-600 text-center">Suitable for shopping centers and retail facilities</p>
-                    </div>
-                    <div className="group cursor-pointer w-full md:w-[calc(25%-1.125rem)]">
-                      <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-100 mb-3">
-                        <Image
-                          src="/Product/EV/green/99.jpg"
-                          alt="Small enterprise parking lot"
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                        <div className="absolute bottom-0 left-0 right-0 p-4">
-                          <h4 className="font-bold text-white text-lg">Small enterprise parking lot</h4>
-                        </div>
-                      </div>
-                      <p className="text-sm text-slate-600 text-center">Perfect for small businesses and local enterprises</p>
-                    </div>
-                  </>
                 ) : (
                   <>
                     {/* Dynamically render variations with images for EV products */}
