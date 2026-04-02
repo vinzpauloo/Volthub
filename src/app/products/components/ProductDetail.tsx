@@ -49,18 +49,18 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     (p) => p.category === product.category && p.id !== product.id
   );
   
-  // Variant-based pricing (for products that define prices on variations)
-  const pricedVariations =
+  // Selectable variations: include priced variations OR variations with distinct images (e.g. AC charger screen/no-screen variants)
+  const selectableVariations =
     details?.variations?.filter(
-      (v) => typeof v.price === "string" && 
-      (!v.name.toLowerCase().includes("model") || 
+      (v) => (typeof v.price === "string" || typeof v.image === "string") &&
+      (!v.name.toLowerCase().includes("model") ||
        v.name.toLowerCase().includes("f2-") ||
        v.name.toLowerCase().includes("lvq2-") ||
        v.name.toLowerCase().includes("lvxc-"))
     ) ?? [];
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const selectedVariant =
-    pricedVariations.length > 0 ? pricedVariations[selectedVariantIndex] : undefined;
+    selectableVariations.length > 0 ? selectableVariations[selectedVariantIndex] : undefined;
 
   // Get display name with variation
   const displayProductName = useMemo(() => {
@@ -225,7 +225,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           displayProductName={displayProductName}
           selectedVariantIndex={selectedVariantIndex}
           setSelectedVariantIndex={setSelectedVariantIndex}
-          pricedVariations={pricedVariations}
+          selectableVariations={selectableVariations}
           quantity={quantity}
           setQuantity={setQuantity}
           selectedImage={selectedImage}
@@ -243,7 +243,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           displayProductName={displayProductName}
           selectedVariantIndex={selectedVariantIndex}
           setSelectedVariantIndex={setSelectedVariantIndex}
-          pricedVariations={pricedVariations}
+          selectableVariations={selectableVariations}
           quantity={quantity}
           setQuantity={setQuantity}
           selectedImage={selectedImage}

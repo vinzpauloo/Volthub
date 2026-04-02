@@ -20,7 +20,7 @@ interface ProductDetailEVProps {
   displayProductName: string;
   selectedVariantIndex: number;
   setSelectedVariantIndex: (index: number) => void;
-  pricedVariations: Array<{ name: string; price?: string }>;
+  selectableVariations: Array<{ name: string; price?: string }>;
   quantity: number;
   setQuantity: (value: number | ((prev: number) => number)) => void;
   selectedImage: string;
@@ -38,7 +38,7 @@ export default function ProductDetailEV({
   displayProductName,
   selectedVariantIndex,
   setSelectedVariantIndex,
-  pricedVariations,
+  selectableVariations,
   quantity,
   setQuantity,
   selectedImage,
@@ -188,13 +188,13 @@ export default function ProductDetailEV({
           </div>
 
           {/* 4. Customization - Variations */}
-          {pricedVariations.length > 0 && (
+          {selectableVariations.length > 0 && (
             <div className="pt-1.5 border-t border-slate-200">
               <label className="block text-xs md:text-sm font-semibold text-slate-900 mb-2">
                 Select Capacity
               </label>
               <div className="flex flex-wrap gap-1.5 md:gap-2">
-                {pricedVariations.map((variant, idx) => {
+                {selectableVariations.map((variant, idx) => {
                   let label = variant.name;
                   const f2Match = variant.name.match(/(F2-\d+)/i);
                   const lvq2Match = variant.name.match(/(LVQ2-\d+)/i);

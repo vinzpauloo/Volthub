@@ -18,7 +18,7 @@ interface ProductDetailB2BProps {
   displayProductName: string;
   selectedVariantIndex: number;
   setSelectedVariantIndex: (index: number) => void;
-  pricedVariations: Array<{ name: string; price?: string }>;
+  selectableVariations: Array<{ name: string; price?: string }>;
   quantity: number;
   setQuantity: (value: number | ((prev: number) => number)) => void;
   selectedImage: string;
@@ -34,7 +34,7 @@ export default function ProductDetailB2B({
   displayProductName,
   selectedVariantIndex,
   setSelectedVariantIndex,
-  pricedVariations,
+  selectableVariations,
   quantity,
   setQuantity,
   selectedImage,
@@ -185,7 +185,7 @@ export default function ProductDetailB2B({
             </div>
 
             {/* 4. Configuration & Volume - Technical Dropdowns */}
-            {pricedVariations.length > 0 && (
+            {selectableVariations.length > 0 && (
               <div className="pt-2 border-t border-slate-200">
                 <label className="block text-sm md:text-base font-semibold text-slate-900 mb-3">
                   Technical Configuration
@@ -195,7 +195,7 @@ export default function ProductDetailB2B({
                   onChange={(e) => setSelectedVariantIndex(parseInt(e.target.value))}
                   className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none text-base font-medium bg-white"
                 >
-                  {pricedVariations.map((variant, idx) => {
+                  {selectableVariations.map((variant, idx) => {
                     let label = variant.name;
                     const f2Match = variant.name.match(/(F2-\d+)/i);
                     const lvq2Match = variant.name.match(/(LVQ2-\d+)/i);

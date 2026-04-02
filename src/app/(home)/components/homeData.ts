@@ -213,7 +213,7 @@ export const productShowcases = [
       { icon: RiShieldCheckLine, text: "Safe & Certified", color: "text-green-600" },
     ],
     ctas: [
-      { text: "View Wall-Mounted EV Charger Products", href: "/products/ev-dc-wd" as Route, variant: "primary" as const },
+      { text: "View AC Home Charger", href: "/products/ev-ac-ws-cdz-21kw" as Route, variant: "primary" as const },
       { text: "Get Free Quote", href: "/contact" as Route, variant: "secondary" as const },
     ],
     trustIndicators: [
