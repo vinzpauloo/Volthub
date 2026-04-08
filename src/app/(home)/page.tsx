@@ -14,7 +14,6 @@ import StatsSection from "./components/StatsSection";
 // import SocialProofSection from "./components/SocialProofSection";
 import FAQSection from "./components/FAQSection";
 import ProjectCasesSection from "./components/ProjectCasesSection";
-// import EnergySavingsCalculator from "./components/EnergySavingsCalculator";
 // import VideoSection from "./components/VideoSection";
 import {
   carouselSlides,
@@ -89,7 +88,7 @@ export default function Home() {
       {/* Project Cases Section */}
       <ProjectCasesSection
         title="Customer Project Cases"
-        description="Government / UNDP / World Bank / NGO Projects"
+        description="Public Sector, NGO, and Development Projects"
         badge="Our Work"
         projectCases={projectCases}
       />
@@ -101,12 +100,6 @@ export default function Home() {
         testimonials={testimonials}
         trustBadges={trustBadges}
         showCertifications={false}
-      /> */}
-
-      {/* Energy Savings Calculator Section */}
-      {/* <EnergySavingsCalculator
-        title="Energy Savings Calculator"
-        description="Discover how much you could save with VoltHub's energy solutions. Get an instant estimate of your potential savings and ROI."
       /> */}
 
       {/* Video Section */}

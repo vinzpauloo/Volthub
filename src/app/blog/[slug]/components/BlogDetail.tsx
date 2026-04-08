@@ -89,7 +89,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
       </ul>
 
       <h2>Range Anxiety vs. Charger Anxiety</h2>
-      <p>While EV interest remains high, "charger anxiety" (finding a working charger) is the #1 barrier. Businesses that offer reliable high-speed charging are seeing massive increases in foot traffic. This presents a significant opportunity for:</p>
+      <p>While EV interest remains high, "charger anxiety" (finding a working charger) is a commonly cited barrier for EV drivers. Businesses that offer reliable high-speed charging may see additional foot traffic from EV drivers looking for convenient charging stops. Public charging access can present opportunities for:</p>
       <ul>
         <li>Retail centers and shopping malls</li>
         <li>Restaurants and cafes</li>
@@ -99,15 +99,11 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
       </ul>
 
       <h2>Why Your Business Needs a Station Now</h2>
-      <p>The data is clear: businesses with EV charging stations attract customers with higher disposable income and keep them on-site longer. Whether you run a retail center, a hotel, or a dedicated fueling station, an EV charger is now as essential as Wi-Fi.</p>
+      <p>Public charging access can help businesses attract EV drivers, who may spend additional time on-site during charging sessions. Whether you operate a retail center, a hotel, or a dedicated charging station, offering EV charging is an increasingly common amenity alongside other visitor services.</p>
       <div class="stats-grid">
         <div class="stat-item">
           <div class="stat-number">20-30</div>
-          <div class="stat-label">Minutes average charging time</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">35%</div>
-          <div class="stat-label">Increase in foot traffic</div>
+          <div class="stat-label">Minutes average fast-charging time</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">50-150kW</div>
@@ -191,39 +187,6 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
     author: "VoltHub Mobility Team",
     date: "January 28, 2025",
     readingTime: "8 mins",
-  },
-  "energy-savings-calculator-roi-analysis": {
-    content: `
-      <div class="intro-section">
-        <p class="lead-text">Want to know exactly how much you could save with renewable energy? Try our interactive calculator below and get instant estimates of your potential savings, payback period, and ROI!</p>
-        <p>Calculating the return on investment (ROI) for renewable energy systems helps you make informed decisions about your energy infrastructure investments. ROI analysis goes beyond simple payback calculations to provide a comprehensive view of the financial benefits over the entire system lifespan.</p>
-      </div>
-
-      <h2>Understanding Your Investment</h2>
-      <p>The initial investment includes not just the solar panels and batteries, but also inverters, mounting hardware, electrical work, permits, and installation labor. However, this upfront cost is often significantly offset by federal tax credits, state rebates, and utility incentives that can reduce the net cost by <strong>30-50%</strong>.</p>
-
-      <h2>How Energy Savings Work</h2>
-      <p>Energy savings are calculated based on your current electricity consumption and rates, projected system production, and how much of that production you'll use versus export to the grid. Areas offering net metering allow excess energy production to be credited back to your account, further enhancing your savings.</p>
-
-      <div class="highlight-box">
-        <p><strong>Typical Payback Periods:</strong></p>
-        <ul>
-          <li><strong>Residential systems:</strong> 5-8 years</li>
-          <li><strong>Commercial systems:</strong> 3-6 years</li>
-          <li><strong>Industrial systems:</strong> 2-5 years</li>
-        </ul>
-        <p>Remember, the payback period is just the beginning—your system continues generating free electricity for decades afterward!</p>
-      </div>
-
-      <h2>Long-Term Value</h2>
-      <p>Beyond the payback period, energy systems continue generating savings for decades. With high-quality components and professional installation, your investment provides long-term value. Over a 25-year period, a typical residential solar and storage system can generate <strong>₱2.5M - ₱5M</strong> in energy savings, far exceeding the initial investment.</p>
-
-      <h2>Additional Benefits</h2>
-      <p>Renewable energy systems can also increase property values. Studies show that homes with solar panels sell for <strong>3-4% more</strong> than comparable homes without them. For businesses, energy independence and sustainability credentials can enhance brand value and attract environmentally conscious customers and employees.</p>
-    `,
-    author: "VoltHub Finance Team",
-    date: "January 28, 2025",
-    readingTime: "5 mins",
   },
   "smart-grid-integration-powering-the-future": {
     content: `
@@ -315,102 +278,83 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
   "commercial-energy-solutions-business-guide": {
     content: `
       <div class="intro-section">
-        <p class="lead-text">⚡️ Conquer Peak Demand: How VoltHub Energy Storage Cuts Utility Bills and Fortifies Your Business</p>
-        <p>Commercial energy costs are rapidly becoming a significant portion of operational expenses. One of the most punishing aspects is peak shaving, where utility companies charge significantly higher rates during peak demand periods (typically in the afternoon and early evening).</p>
+        <p class="lead-text">Managing Peak Demand: How VoltHub Energy Storage Strengthens Your Business</p>
+        <p>Commercial energy costs are a meaningful portion of operational expenses for many Philippine businesses. One of the most challenging aspects is peak demand, where utility rates are typically higher during afternoon and early-evening hours.</p>
         <div class="highlight-box">
-          <p><strong>Did you know?</strong> Using stored energy during these peak hours instead of drawing from the grid can dramatically reduce your demand charges, often accounting for <strong>30-50% of your commercial electricity bills</strong>.</p>
+          <p><strong>Why it matters:</strong> Using stored energy during peak hours instead of drawing exclusively from the grid can help businesses manage demand charges, which often make up a meaningful share of commercial electricity bills. Actual impact depends on your site's load profile and tariff structure.</p>
         </div>
-        <p>This isn't just about saving money; it's about reliability. Business-critical operations like data centers, manufacturing, healthcare, and cold storage facilities simply cannot afford downtime. Even brief power outages can lead to significant losses, from spoiled inventory to production downtime and data loss.</p>
+        <p>This isn't only about cost management; it's also about reliability. Business-critical operations like data centers, manufacturing, healthcare, and cold storage cannot afford unplanned downtime. Even brief power interruptions can disrupt inventory, production, and data.</p>
       </div>
 
-      <h2>The Rising Cost of Doing Business (And How to Fight It)</h2>
-      <p>Commercial energy costs are rapidly becoming a significant portion of operational expenses. One of the most punishing aspects is peak shaving, where utility companies charge significantly higher rates during peak demand periods (typically in the afternoon and early evening).</p>
-      
+      <h2>Sizing a System to Your Operations</h2>
+      <p>VoltHub designs commercial energy storage around your site's actual consumption, peak demand profile, and backup priorities rather than a one-size-fits-all package.</p>
+
       <div class="benefits-grid">
         <div class="benefit-card">
           <div class="benefit-icon">🏪</div>
           <h3>Small Commercial Installations</h3>
-          <p><strong>40-200kWh:</strong> Ideal for retail, small offices, and restaurants.</p>
+          <p><strong>40-200kWh:</strong> Retail, small offices, and restaurants.</p>
         </div>
         <div class="benefit-card">
           <div class="benefit-icon">🏢</div>
           <h3>Large Commercial Installations</h3>
-          <p><strong>400-800kWh+:</strong> Designed for major manufacturing, shopping centers, and hotels.</p>
+          <p><strong>400-800kWh+:</strong> Manufacturing, shopping centers, and hotels.</p>
         </div>
       </div>
 
-      <p>VoltHub offers solutions tailored to your specific business needs that can power essential operations for several hours during an outage and provide significant peak shaving benefits during normal operation.</p>
+      <p>VoltHub offers solutions tailored to your business needs — designed to power essential operations during an outage and support peak demand management during normal operation.</p>
 
-      <h2>The VoltHub Advantage: Financial Gains and Operational Security</h2>
-      <p>Commercial energy storage typically provides payback within <strong>3–6 years</strong>, with many businesses seeing <strong>20-40% reduction in energy costs immediately</strong>. The financial benefits come from multiple sources, including:</p>
+      <h2>The VoltHub Advantage: Resilience and Operational Security</h2>
+      <p>Commercial energy storage can contribute to better energy cost management, outage protection, and sustainability outcomes. The operational benefits come from multiple sources, including:</p>
 
       <div class="benefits-list">
         <div class="benefit-item">
-          <h3>Demand Charge Reduction</h3>
-          <p>The largest contributor, allowing you to use stored energy when rates are high.</p>
+          <h3>Demand Charge Management</h3>
+          <p>Using stored energy during periods when utility rates are higher.</p>
         </div>
         <div class="benefit-item">
           <h3>Time-of-Use Optimization</h3>
-          <p>Charging when rates are low and discharging when rates are high.</p>
+          <p>Charging when rates are lower and discharging when rates are higher, where tariff structures allow.</p>
         </div>
         <div class="benefit-item">
-          <h3>Significant Incentives</h3>
-          <p>Leveraging tax credits, rebates, and accelerated depreciation that can reduce the net cost of a system by <strong>30-50%</strong>.</p>
+          <h3>Available Incentives</h3>
+          <p>Where applicable, tax credits, rebates, and accelerated depreciation may help reduce the net cost of a system. Availability depends on your local rules and accounting treatment.</p>
         </div>
       </div>
 
-      <p>When combined with energy savings, many commercial systems achieve payback in just a few years. After that, they continue generating pure savings for the remainder of their <strong>15-20 year lifespan</strong>.</p>
+      <p>Outcomes vary by site, tariff, and usage pattern. VoltHub will discuss expected operational benefits with you during a site assessment — we don't publish guaranteed savings, payback periods, or return-on-investment figures because those depend on factors specific to your facility.</p>
 
       <div class="highlight-box success">
-        <p><strong>🌱 Beyond the Bottom Line: Sustainability and Leadership</strong></p>
-        <p>Choosing VoltHub positions your business as a leader in sustainability, enhancing your brand reputation, attracting environmentally conscious customers and employees, and helping you meet increasingly stringent environmental regulations and corporate sustainability goals.</p>
+        <p><strong>🌱 Beyond Operations: Sustainability and Leadership</strong></p>
+        <p>Choosing VoltHub supports your sustainability goals, strengthens brand reputation with environmentally conscious customers and employees, and helps you meet evolving environmental standards and corporate sustainability commitments.</p>
       </div>
 
-      <h2>Seamless Implementation: Our Comprehensive 4-Step Process</h2>
-      <p>Our team handles everything from initial assessment to system deployment. We ensure minimal disruption and optimal performance with a comprehensive strategy:</p>
+      <h2>Seamless Implementation: Our 4-Step Process</h2>
+      <p>Our team handles everything from initial assessment to deployment, with a focus on minimal disruption and reliable performance:</p>
 
       <div class="ecosystem-features">
         <div class="ecosystem-item">
           <h3>1. Initial Assessment and System Design</h3>
-          <p>We begin with a comprehensive energy audit to understand your consumption patterns, peak demand periods, and backup power requirements. This informs the system design to ensure we recommend the optimal size and configuration for your specific needs.</p>
+          <p>We begin with an energy audit to understand your consumption patterns, peak demand periods, and backup power requirements. This informs a system design sized to your specific needs.</p>
         </div>
         <div class="ecosystem-item">
           <h3>2. Professional Installation</h3>
-          <p>Installation is carefully planned to minimize disruption to your business operations, with our experienced technicians working efficiently and often completing installations during off-hours or in phases.</p>
+          <p>Installation is planned to minimize disruption to your operations, with experienced technicians working efficiently and often during off-hours or in phases.</p>
         </div>
         <div class="ecosystem-item">
           <h3>3. Training and Scheduling</h3>
-          <p>Once installed, we provide comprehensive training for your staff and establish a maintenance schedule to ensure optimal long-term performance.</p>
+          <p>Once installed, we provide training for your staff and establish a maintenance schedule for long-term performance.</p>
         </div>
         <div class="ecosystem-item">
           <h3>4. Ongoing Support</h3>
-          <p>VoltHub solutions have successfully implemented energy solutions, achieving significant cost savings and sustainability improvements.</p>
-        </div>
-      </div>
-
-      <div class="highlight-box">
-        <p><strong>Success Story:</strong> A manufacturing facility in Metro Manila that utilized VoltHub reduced its monthly electricity costs by <strong>35%</strong> through peak shaving and load shifting while achieving payback in just <strong>4 years</strong>.</p>
-      </div>
-
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number">3-6</div>
-          <div class="stat-label">Years to Payback</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">20-40%</div>
-          <div class="stat-label">Immediate Cost Reduction</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">15-20</div>
-          <div class="stat-label">Year System Lifespan</div>
+          <p>We stay with you after commissioning — monitoring, maintenance, and support for the life of the system.</p>
         </div>
       </div>
 
       <div class="cta-section">
-        <h2>🚀 Ready to Take Control of Your Energy Costs?</h2>
-        <p>Stop losing money to peak demand charges and secure your operations against unexpected outages.</p>
-        <p><strong>VoltHub is more than storage—it's an investment in your financial and operational future.</strong></p>
+        <h2>Ready to Discuss Your Site?</h2>
+        <p>Talk to our commercial team about an energy storage solution sized to your operations. Every project starts with an assessment of your facility, loads, and goals.</p>
+        <p><strong>VoltHub is more than storage — it's a partnership for resilient, sustainable operations.</strong></p>
       </div>
     `,
     author: "VoltHub Commercial Team",
@@ -615,45 +559,20 @@ export default function BlogDetail({ resource }: BlogDetailProps) {
       {/* CTA Section */}
       <div className="mt-12 md:mt-16 p-8 md:p-10 bg-gradient-to-br from-primary via-primary/95 to-accent rounded-2xl shadow-xl text-white">
         <div className="max-w-2xl">
-          {resource.slug === "energy-savings-calculator-roi-analysis" ? (
+          {resource.slug === "commercial-energy-solutions-business-guide" ? (
             <>
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                Ready to Start Saving?
+                Ready to Manage Peak Demand and Strengthen Your Operations?
               </h3>
               <p className="text-white/90 mb-6 text-lg leading-relaxed">
-                Now that you&apos;ve seen your potential savings, let&apos;s make it a reality. Our energy consultants use advanced modeling software to create detailed financial projections tailored to your specific circumstances.
+                Manage peak demand and secure your operations against unexpected outages. Schedule a consultation and discover how VoltHub&apos;s commercial energy storage is sized to your facility and operational goals.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
                 >
-                  Get a Free Consultation
-                  <RiArrowRightLine className="h-5 w-5" />
-                </Link>
-                <Link
-                  href="/products"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-lg font-semibold hover:bg-white/20 transition-all"
-                >
-                  Explore Our Solutions
-                  <RiArrowRightLine className="h-5 w-5" />
-                </Link>
-              </div>
-            </>
-          ) : resource.slug === "commercial-energy-solutions-business-guide" ? (
-            <>
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">
-                Ready to Conquer Peak Demand and Cut Your Energy Costs?
-              </h3>
-              <p className="text-white/90 mb-6 text-lg leading-relaxed">
-                Stop losing money to peak demand charges and secure your operations against unexpected outages. Get a free consultation and discover how VoltHub can reduce your energy costs by 20-40% with payback in just 3-6 years.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
-                >
-                  Get Free Commercial Consultation
+                  Schedule a Commercial Consultation
                   <RiArrowRightLine className="h-5 w-5" />
                 </Link>
                 <Link

@@ -23,7 +23,7 @@ interface ProjectCasesSectionProps {
 
 export default function ProjectCasesSection({
   title = "Customer Project Cases",
-  description = "Government / UNDP / World Bank / NGO Projects",
+  description = "Public Sector, NGO, and Development Projects",
   badge = "Our Work",
   projectCases,
 }: ProjectCasesSectionProps) {

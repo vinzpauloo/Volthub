@@ -28,7 +28,7 @@ interface SocialProofSectionProps {
 }
 
 export default function SocialProofSection({
-  badge = "Trusted By Thousands",
+  badge = "Customer Voices",
   title,
   description,
   testimonials,

@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthubs.netlify.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
   const articleUrl = `${siteUrl}/blog/${slug}`;
   const imageUrl = resource.image.startsWith("http") ? resource.image : `${siteUrl}${resource.image}`;
 
@@ -42,11 +42,6 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
       author: "VoltHub Mobility Team",
       date: "2025-01-28",
       readingTime: "8 mins",
-    },
-    "energy-savings-calculator-roi-analysis": {
-      author: "VoltHub Finance Team",
-      date: "2025-01-28",
-      readingTime: "5 mins",
     },
     "smart-grid-integration-powering-the-future": {
       author: "VoltHub Technology Team",

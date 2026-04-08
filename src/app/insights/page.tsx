@@ -11,7 +11,7 @@ import WhyPhilippinesSection from "./components/why-philippines-section";
 import NewsletterCtaSection from "./components/newsletter-cta-section";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://volthubs.netlify.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
 
 export const metadata: Metadata = {
   title: "Market Insights | Philippines Clean Energy & EV Charging - VoltHub",

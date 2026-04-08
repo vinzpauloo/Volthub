@@ -374,7 +374,7 @@ export default function CommercialSector() {
           <div className="max-w-4xl mx-auto">
             <SectionHeading
               title="Why Choose Our Commercial Solutions"
-              description="Designed for business reliability and ROI"
+              description="Designed for business reliability and operational resilience"
             />
             <div className="grid md:grid-cols-2 gap-6 mt-12">
               {[
@@ -383,7 +383,7 @@ export default function CommercialSector() {
                 "Payment terms: 30% advance, balance before shipping",
                 "Production time: 20-25 working days",
                 "Scalable solutions for growing businesses",
-                "ROI-focused energy savings",
+                "Designed to support energy cost management",
                 "24/7 monitoring and support available",
                 "Compliance with local regulations",
               ].map((benefit, idx) => (

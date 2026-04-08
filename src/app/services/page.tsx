@@ -280,7 +280,7 @@ export default function Services() {
                     {[
                       {
                         title: "Energy Audit & Design",
-                        desc: "Custom system sizing and ROI analysis",
+                        desc: "Custom system sizing and site-specific analysis",
                       },
                       {
                         title: "Financing Assistance",
@@ -503,20 +503,6 @@ export default function Services() {
                       <p className="text-base md:text-lg">
                         Professional installation services across major regions
                       </p>
-                      <div className="mt-6 grid grid-cols-3 gap-2 md:gap-4 text-xs md:text-sm">
-                        <div>
-                          <div className="text-2xl font-bold">50+</div>
-                          <div>Service Centers</div>
-                        </div>
-                        <div>
-                          <div className="text-2xl font-bold">200+</div>
-                          <div>Certified Technicians</div>
-                        </div>
-                        <div>
-                          <div className="text-2xl font-bold">24hr</div>
-                          <div>Response Time</div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>

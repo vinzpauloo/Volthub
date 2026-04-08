@@ -91,7 +91,7 @@ const storageSystems = [
     battery: "1806.3kWh",
     solarPanel: "670W*1484PCS",
     description:
-      "Main power plant for a whole town or large island. Can power an entire island town or large industrial estate, cutting diesel consumption by 60-90%.",
+      "Main power plant for a whole town or large island. Can power an entire island town or large industrial estate while significantly reducing dependence on diesel generation.",
     image: "/Product/containertype/con1.png",
   },
   {
@@ -409,7 +409,7 @@ export default function IndustrialSector() {
                 "Can replace or reduce diesel generator dependency",
                 "Professional installation and commissioning",
                 "Long-term maintenance and support",
-                "ROI-focused with fuel cost savings",
+                "Designed to support fuel cost management",
                 "24/7 monitoring and maintenance available",
                 "Compliance with industrial safety standards",
               ].map((benefit, idx) => (

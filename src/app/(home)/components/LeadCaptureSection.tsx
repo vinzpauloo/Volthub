@@ -26,9 +26,9 @@ export default function LeadCaptureSection({
   newsletterTitle = "Newsletter",
   newsletterDescription = "Stay updated with the latest energy solutions, tips, and exclusive offers.",
   resourceTitle = "Free Guide",
-  resourceDescription = 'Download our comprehensive guide: "Complete Guide to Energy Savings" - absolutely free!',
-  consultationCta = "Schedule Free Consultation",
-  quoteCta = "Get Instant Quote",
+  resourceDescription = 'Download our comprehensive guide: "Complete Guide to Clean Energy" - absolutely free!',
+  consultationCta = "Schedule a Consultation",
+  quoteCta = "Request a Quote",
 }: LeadCaptureSectionProps) {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [newsletterStatus, setNewsletterStatus] = useState<FormStatus>("idle");

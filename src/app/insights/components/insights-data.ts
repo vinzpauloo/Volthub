@@ -120,24 +120,24 @@ export const evChargingData: MarketSectionData = {
 export const solarEnergyData: MarketSectionData = {
   id: "solar-energy",
   badge: "Solar Energy",
-  title: "Solar is the Cheapest Power Source",
+  title: "Solar is Increasingly Cost-Competitive",
   description:
-    "Solar energy in the Philippines has reached a tipping point. With an LCOE roughly one-quarter of grid electricity costs, solar delivers 4-5 year residential payback periods — and under 3 years in island provinces running on diesel.",
+    "Solar energy in the Philippines has reached a tipping point. Industry research indicates solar LCOE is roughly a quarter of grid electricity costs, making clean energy attractive for residential and commercial investors across the archipelago.",
   keyStats: [
     {
       value: "1/4",
       label: "Grid Price",
-      context: "Solar LCOE vs. Meralco rates",
-    },
-    {
-      value: "4-5 yr",
-      label: "Payback",
-      context: "Residential grid-tied solar",
+      context: "Industry-cited solar LCOE vs. Meralco rates",
     },
     {
       value: "<1%",
       label: "Rooftop Penetration",
-      context: "Massive untapped potential in cities",
+      context: "Untapped potential in cities",
+    },
+    {
+      value: "36+ GW",
+      label: "Pipeline",
+      context: "Solar development across the archipelago",
     },
   ],
   growthData: [
@@ -254,7 +254,7 @@ export const macroDrivers: MacroDriver[] = [
   {
     title: "Electricity Cost",
     stat: "USD 0.214/kWh",
-    description: "Highest in Asia — strong ROI for clean energy",
+    description: "Highest in Asia — strong economic case for clean energy",
   },
   {
     title: "Population",

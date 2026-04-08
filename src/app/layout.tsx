@@ -23,7 +23,7 @@ const orbitron = Orbitron({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthubs.netlify.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
 const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-MHLCDHH4";
 const uetId = process.env.NEXT_PUBLIC_UET_ID || "187244204";
 
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     default: "VoltHub - Smart Energy Storage & EV Charging Solutions",
     template: "%s | VoltHub",
   },
-  description: "Cut energy costs by up to 40% with VoltHub's next-generation energy storage and EV charging solutions. Commercial and residential solar, battery storage, and smart grid integration across the Philippines.",
+  description: "Power your operations with VoltHub's next-generation energy storage and EV charging solutions. Commercial and residential solar, battery storage, and smart grid integration across the Philippines.",
   keywords: [
     "energy storage",
     "EV charging",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "VoltHub Energy",
     title: "VoltHub - Smart Energy Storage & EV Charging Solutions",
-    description: "Cut energy costs by up to 40% with VoltHub's next-generation energy storage and EV charging solutions. Commercial and residential solar, battery storage, and smart grid integration.",
+    description: "Power your operations with VoltHub's next-generation energy storage and EV charging solutions. Commercial and residential solar, battery storage, and smart grid integration.",
     images: [
       {
         url: "/HomeBanner/banner1.png",
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "VoltHub - Smart Energy Storage & EV Charging Solutions",
-    description: "Cut energy costs by up to 40% with VoltHub's next-generation energy storage and EV charging solutions.",
+    description: "Power your operations with VoltHub's next-generation energy storage and EV charging solutions.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",
   },

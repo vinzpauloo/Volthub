@@ -96,7 +96,7 @@ export default function ProductSidebar({
             Trusted Energy Storage Supplier
           </p>
           <p className="text-white/70">
-            Certified safety, bankable performance and global project experience.
+            Certified safety, dependable performance and global project experience.
           </p>
         </div>
       </aside>
