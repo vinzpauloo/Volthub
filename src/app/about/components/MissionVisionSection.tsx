@@ -10,7 +10,7 @@ export default function MissionVisionSection() {
         </h3>
         <p className="text-gray-700 leading-relaxed text-lg">
           <span className="font-bold text-gray-900">
-            Volthhub Electric Power Generation Services Corporation
+            Volthub Electric Power Generation Services Corporation
           </span>{" "}
           is committed to revolutionizing the energy sector by delivering
           cutting-edge electronic solutions for power generation. We specialize

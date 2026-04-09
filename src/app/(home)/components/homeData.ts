@@ -24,14 +24,14 @@ export const carouselSlides = [
     title: "Powering Tomorrow, Today",
     subtitle: "Smart Power. Clean Future.",
     description:
-      "Cut energy costs by up to 40% and achieve energy independence with VoltHub's next-generation energy storage and EV charging solutions. Join thousands of businesses saving millions on utility bills.",
+      "Take control of your energy with VoltHub's next-generation energy storage and EV charging solutions. Power your home or business with clean, reliable energy built for the Philippines.",
     image: "/HomeBanner/89.png",
     backgroundImage: "/HomeBanner/banner1.png",
     mobileBackgroundImage: "/HomeBanner/banner1m.png",
     mobileBackgroundPosition: "right center",
     showimg: false,
     descriptionClassName: "w-full md:w-1/2 md:ml-auto md:max-w-2xl",
-    buttonText: "Calculate Your Savings",
+    buttonText: "Request a Quote",
     buttonLink: "/contact",
     gradient: "bg-gradient-to-br from-primary/90 via-primary/70 to-transparent",
     layout: "side-by-side" as const,
@@ -41,7 +41,7 @@ export const carouselSlides = [
     title: "Residential Energy Storage",
     subtitle: "Energy Independence Starts at Home",
     description:
-      "Reduce electricity bills by 70% with smart home battery systems. Store solar energy for round-the-clock power, protect against outages, and achieve true energy independence.",
+      "Smart home battery systems help you store solar energy for round-the-clock power, protect against outages, and take a meaningful step toward energy independence.",
     image: "/HomeBanner/LVXC.png",
     backgroundImage: "/HomeBanner/banner2.png",
     mobileBackgroundImage: "/HomeBanner/banner2m.png",
@@ -55,10 +55,10 @@ export const carouselSlides = [
   },
   {
     id: 3,
-    title: "Conquer Peak Demand Charges",
-    subtitle: "Cut Commercial Energy Costs by 20-40%",
+    title: "Manage Peak Demand with Confidence",
+    subtitle: "Commercial Energy Storage for Resilient Operations",
     description:
-      "Stop losing money to peak demand charges. VoltHub's commercial energy storage systems provide payback in 3-6 years while protecting your business from costly outages. Achieve 30-50% reduction in demand charges.",
+      "VoltHub's commercial energy storage systems help you manage peak demand, protect critical operations from outages, and build a more resilient energy footprint. Talk to our team about a solution sized for your site.",
     image: "/HomeBanner/banner3product.png",
     backgroundImage: "/HomeBanner/banner3.png",
     mobileBackgroundImage: "/HomeBanner/banner3m.png",
@@ -75,7 +75,7 @@ export const carouselSlides = [
     title: "EV Charging Infrastructure",
     subtitle: "Future-Ready Mobility Solutions",
     description:
-      "Build comprehensive EV charging networks with ultra-fast 50-150kW DC chargers. Attract customers, increase foot traffic by 35%, and future-proof your business with smart grid integration.",
+      "Build comprehensive EV charging networks with ultra-fast 50-150kW DC chargers. Future-proof your business with smart grid integration and reliable, enterprise-grade infrastructure.",
     image:
       "https://readdy.ai/api/search-image?query=electric%20vehicle%20charging%20station%20network%2C%20modern%20EV%20charging%20infrastructure%2C%20smart%20grid%20technology%2C%20sustainable%20transportation%2C%20clean%20mobility%20future&width=1920&height=1080&seq=hero004&orientation=landscape",
     backgroundImage: "/HomeBanner/banner4.png",
@@ -295,19 +295,19 @@ export const userSegments = [
   {
     title: "For Homeowners",
     description:
-      "Cut electricity bills by up to 70% and achieve true energy independence. Protect your home from outages while increasing property value.",
+      "Take charge of your home's energy. Store solar power for round-the-clock use, protect your household from outages, and move toward energy independence.",
     icon: RiUserLine,
-    features: ["Save Up to 70% on Bills", "Energy Independence", "Increase Home Value", "24/7 Support"],
-    cta: "Get Free Consultation",
+    features: ["Energy Independence", "Outage Protection", "Solar Self-Consumption", "24/7 Support"],
+    cta: "Schedule a Consultation",
     link: "/contact" as Route,
     color: "from-primary to-accent",
   },
   {
     title: "For Businesses",
-    description: "Reduce energy costs by 20-40% and achieve payback in 3-6 years. Protect critical operations from outages while meeting sustainability goals.",
+    description: "Strengthen your operations with commercial energy storage and EV charging. Protect critical operations from outages while advancing your sustainability goals.",
     icon: RiBuildingLine,
-    features: ["20-40% Cost Reduction", "3-6 Year Payback", "24/7 Support", "Scalable Solutions"],
-    cta: "Calculate Your Savings",
+    features: ["Peak Demand Management", "Operational Resilience", "24/7 Support", "Scalable Solutions"],
+    cta: "Request a Quote",
     link: "/contact" as Route,
     color: "from-accent to-primary",
   },
@@ -329,7 +329,7 @@ export const testimonials = [
     role: "Homeowner",
     location: "Metro Manila, Philippines",
     rating: 5,
-    text: "VoltHub's residential battery system has cut our electricity bills by 70%. The installation was seamless and the support team is excellent.",
+    text: "VoltHub's residential battery system has made a meaningful difference in our energy use. The installation was seamless and the support team is excellent.",
     image: "👩",
   },
   {
@@ -337,7 +337,7 @@ export const testimonials = [
     role: "Business Owner",
     location: "Taguig City, Philippines",
     rating: 5,
-    text: "Our commercial solar installation exceeded expectations. We've reduced our energy costs significantly and the ROI is impressive.",
+    text: "Our commercial solar installation exceeded expectations. The VoltHub team delivered on time and the system has been running smoothly.",
     image: "👨",
   },
   {
@@ -352,18 +352,10 @@ export const testimonials = [
 
 // Trust Badges
 export const trustBadges = [
-  { name: "ISO 9001 Certified", icon: RiShieldCheckLine },
-  { name: "Energy Star Partner", icon: RiLeafLine },
-  { name: "UL Listed", icon: RiShieldCheckLine },
-  { name: "25+ Countries", icon: RiGlobalLine },
-];
-
-// ROI Calculator Benefits
-export const roiCalculatorBenefits = [
-  "Calculate potential energy savings",
-  "Estimate ROI and payback period",
-  "Compare different solutions",
-  "Get personalized recommendations",
+  { name: "Quality-Assured Workmanship", icon: RiShieldCheckLine },
+  { name: "Philippine-Based Support", icon: RiLeafLine },
+  { name: "Certified Equipment", icon: RiShieldCheckLine },
+  { name: "Philippines Nationwide", icon: RiGlobalLine },
 ];
 
 // Video Items
@@ -393,14 +385,6 @@ export const resources = [
     imageAlt: "EV Charging Infrastructure: Future of Transportation",
   },
   {
-    slug: "energy-savings-calculator-roi-analysis",
-    title: "💰 Calculate Your Energy Savings: Free ROI Calculator Inside!",
-    description: "Discover exactly how much you could save with renewable energy. Try our interactive calculator and see your potential savings in seconds!",
-    type: "Tool",
-    image: "/Blog/blog3desc1.png",
-    imageAlt: "Energy Savings Calculator - Calculate Your ROI",
-  },
-  {
     slug: "smart-grid-integration-powering-the-future",
     title: "Upgrade Your Energy: How Smart Grid Technology Powers the Future",
     description: "Discover how smart grid technology transforms your home into an intelligent energy ecosystem. Learn about two-way energy flow, automated savings, and future-proof solutions.",
@@ -410,8 +394,8 @@ export const resources = [
   },
   {
     slug: "commercial-energy-solutions-business-guide",
-    title: "⚡️ Conquer Peak Demand: How VoltHub Energy Storage Cuts Utility Bills and Fortifies Your Business",
-    description: "Discover how commercial energy storage systems can reduce operational costs by 20-40%, achieve payback in 3-6 years, and protect your business from costly outages.",
+    title: "Managing Peak Demand: How VoltHub Energy Storage Strengthens Your Business",
+    description: "Learn how commercial energy storage systems help businesses manage peak demand, improve operational resilience, and protect critical operations from costly outages.",
     type: "Guide",
     image: "/Blog/blog5T.png",
     imageAlt: "Commercial energy solutions - Peak demand management and cost savings",

@@ -6,11 +6,12 @@ import WhoWeAreSection from "./components/WhoWeAreSection";
 import WhatWeDoSection from "./components/WhatWeDoSection";
 import HistorySection from "./components/HistorySection";
 import LeadershipStatsSection from "./components/LeadershipStatsSection";
+import CompanyInformationSection from "./components/CompanyInformationSection";
 import MarketInsightsSection from "./components/MarketInsightsSection";
 import SectionHeading from "@/components/marketing/SectionHeading";
 import BackToTopButton from "@/components/common/BackToTopButton";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthubs.netlify.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
 
 export const metadata: Metadata = {
   title: "About Us - VoltHub",
@@ -70,6 +71,7 @@ export default function About() {
         <WhoWeAreSection />
         <WhatWeDoSection />
         <LeadershipStatsSection />
+        <CompanyInformationSection />
         {/* <OperationsCarouselSection /> */}
         <MarketInsightsSection />
         <HistorySection />

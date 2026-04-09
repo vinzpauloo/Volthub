@@ -17,7 +17,7 @@ export async function generateMetadata({
   const { id } = await params;
   const product = getProductById(id);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthubs.netlify.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
   const productUrl = `${siteUrl}/products/${id}`;
 
   if (!product) {

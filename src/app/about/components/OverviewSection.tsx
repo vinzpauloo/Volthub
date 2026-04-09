@@ -6,7 +6,7 @@ export default function OverviewSection() {
       </h3>
       <p className="text-gray-700 leading-relaxed text-lg ">
         <span className="font-bold text-gray-900">
-          Volthhub Electric Power Generation Services Corporation
+          Volthub Electric Power Generation Services Corporation
         </span>{" "}
         is a forward-looking energy technology company specializing in EV charging
         infrastructure, solar power systems, and smart energy solutions. We

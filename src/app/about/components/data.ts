@@ -1,75 +1,120 @@
 export const leadershipStats = [
-  { label: "Top 5%", value: "Global Renewable Firms" },
-  { label: "$2.8B", value: "Project Value Delivered" },
+  { label: "Founded 2025", value: "Taguig City, Philippines" },
+  { label: "Clean Energy", value: "Solar, Storage & EV Charging" },
 ];
+
+export interface CompanyRegistrationField {
+  label: string;
+  value: string;
+}
+
+export const companyInformation: {
+  legalName: string;
+  tradeName: string;
+  incorporationDate: string;
+  incorporationPlace: string;
+  registeredOffice: string;
+  founders: string[];
+  registrations: CompanyRegistrationField[];
+} = {
+  legalName: "VOLTHUB ELECTRONIC POWER GENERATION SERVICES CORP.",
+  tradeName: "VoltHub.PH",
+  incorporationDate: "January 17, 2025",
+  incorporationPlace: "Taguig City, Philippines",
+  registeredOffice:
+    "Unit 2503, High Street South Corporate Plaza Tower 2, 11th Street corner 26th Avenue, Fort Bonifacio, Bonifacio Global City, Taguig City 1635, Metro Manila, Philippines",
+  founders: [
+    "David Zhang",
+    "Vincent Paul Lim Oo",
+    "Atty. Maria Evita R. Igot",
+  ],
+  registrations: [
+    {
+      label: "SEC Registration No.",
+      value: "2025010184535-18 (January 17, 2025)",
+    },
+    {
+      label: "BIR TIN",
+      value: "667-401-960-000 (RDO 044 – Taguig-Pateros East)",
+    },
+    {
+      label: "Taxpayer Type",
+      value: "Domestic Corporation",
+    },
+    {
+      label: "PSIC (Primary)",
+      value: "35100 – Electric Power Generation, Transmission and Distribution (EV Charging Station)",
+    },
+    {
+      label: "PSIC (Secondary)",
+      value:
+        "45109 – Sale of Other Motor Vehicles (Trading of Electric Vehicle); 45209 – Maintenance of Motor Vehicles, N.E.C. (Electric Vehicle Services)",
+    },
+  ],
+};
 
 export const marketInsights = [
   {
     title: "$1.8T",
-    detail: "Global renewable market size (2024)",
+    detail: "Global renewable market size (industry reports, 2024)",
     color: "text-blue-600 bg-blue-50",
   },
   {
     title: "30%",
-    detail: "Global electricity from renewables",
+    detail: "Share of global electricity from renewables (IEA)",
     color: "text-green-600 bg-green-50",
   },
   {
     title: "85%",
-    detail: "Solar cost reduction (2010-2024)",
+    detail: "Solar cost reduction 2010-2024 (industry reports)",
     color: "text-yellow-600 bg-yellow-50",
   },
   {
     title: "13.7M",
-    detail: "Renewable energy jobs worldwide",
+    detail: "Renewable energy jobs worldwide (IRENA)",
     color: "text-purple-600 bg-purple-50",
   },
 ];
 
 export const operationsHighlights = [
   {
-    title: "Global Presence",
+    title: "Philippines Focus",
     description:
-      "Operating in 25+ countries with 12 manufacturing facilities across Southeast Asia.",
-    metric: "25+ Countries",
-    subtext: "12 Manufacturing Facilities in Southeast Asia",
+      "Headquartered in Taguig City, Philippines, with operations focused on the domestic clean-energy and EV charging market.",
+    metric: "Taguig City",
+    subtext: "Serving the Philippines",
   },
   {
-    title: "Expert Team",
+    title: "Experienced Team",
     description:
-      "450+ engineers, technicians, and consultants with deep clean-energy expertise.",
-    metric: "450+ Experts",
-    subtext: "85% with Advanced Degrees",
+      "Our engineers, technicians, and consultants combine expertise in energy systems, finance, and technology.",
+    metric: "Expert Team",
+    subtext: "Energy, Finance & Technology",
   },
   {
-    title: "Industry Recognition",
+    title: "Standards & Practices",
     description:
-      "Clean Energy Innovation Award, Solar Power World Top Contractor, ESA Excellence Award.",
-    metric: "15+ Awards",
-    subtext: "UN Global Compact Recognition",
+      "Committed to clean-energy standards and responsible business practices.",
+    metric: "Industry",
+    subtext: "Standards & Practices",
   },
   {
-    title: "Financial Performance",
+    title: "Clean-Energy Focus",
     description:
-      "$500M+ invested in R&D and 350% YoY revenue growth backed by leading investors.",
-    metric: "$500M+ R&D",
-    subtext: "350% YoY Growth",
+      "Investing in solar-powered EV hubs, energy storage, and smart grid integration for the Philippines market.",
+    metric: "R&D",
+    subtext: "Clean-Energy Solutions",
   },
   {
-    title: "Customer Excellence",
+    title: "Customer Support",
     description:
-      "98.5% satisfaction, 24/7 support in 7 languages, average 4-hour response.",
-    metric: "98.5% Rating",
-    subtext: "50K+ Customers",
+      "Dedicated customer support, professional installation and commissioning, and long-term maintenance for every project.",
+    metric: "Dedicated",
+    subtext: "Customer Support",
   },
 ];
 
-export const partnerships = [
-  { name: "Tesla Energy", detail: "Battery Technology" },
-  { name: "Microsoft Azure", detail: "Cloud & AI" },
-  { name: "Schneider Electric", detail: "Grid Solutions" },
-  { name: "ABB Group", detail: "Power Electronics" },
-];
+export const partnerships: { name: string; detail: string }[] = [];
 
 export const masonryItems = [
   {

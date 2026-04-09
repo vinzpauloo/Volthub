@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthubs.netlify.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
 
 export const metadata: Metadata = {
   title: "Solar Installation Services - VoltHub",
-  description: "Turn-key solar solutions from consultation to connection. Professional installation of solar street lights, energy storage systems, and off-grid power generation. Custom system sizing and ROI analysis.",
+  description: "Turn-key solar solutions from consultation to connection. Professional installation of solar street lights, energy storage systems, and off-grid power generation with site-specific system sizing.",
   keywords: [
     "solar installation",
     "solar panel installation",
@@ -12,7 +12,6 @@ export const metadata: Metadata = {
     "solar energy systems",
     "off-grid solar",
     "solar power installation",
-    "solar ROI analysis",
     "solar system sizing",
     "VoltHub solar",
   ],
@@ -22,7 +21,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/services/solar-installation`,
     siteName: "VoltHub Energy",
     title: "Solar Installation Services - VoltHub",
-    description: "Turn-key solar solutions from consultation to connection. Professional installation of solar street lights, energy storage systems, and off-grid power generation. Custom system sizing and ROI analysis.",
+    description: "Turn-key solar solutions from consultation to connection. Professional installation of solar street lights, energy storage systems, and off-grid power generation with site-specific system sizing.",
     images: [
       {
         url: "/Sector/solarbg1.jpg",

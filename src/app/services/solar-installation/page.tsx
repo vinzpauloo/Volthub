@@ -74,11 +74,11 @@ export default function SolarInstallation() {
               {
                 icon: RiBarChartLine,
                 title: "Energy Audit & Design",
-                desc: "Custom system sizing and ROI analysis tailored to your energy needs",
+                desc: "Custom system sizing and site-specific analysis tailored to your energy needs",
                 features: [
                   "Comprehensive energy assessment",
                   "Optimal system sizing",
-                  "ROI and payback analysis",
+                  "Site-specific load analysis",
                   "Shading and orientation analysis",
                 ],
               },
@@ -751,8 +751,8 @@ export default function SolarInstallation() {
               },
               {
                 stat: "3 Years",
-                label: "Performance Guarantee",
-                desc: "Industry-leading support coverage for peace of mind",
+                label: "Standard Support Coverage",
+                desc: "Standard support coverage for installations, with extended plans available",
               },
               // {
               //   stat: "98.5%",

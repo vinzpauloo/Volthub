@@ -450,7 +450,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               </h3>
               
               {!isEVProduct ? (
-                /* B2B: Case Studies */
+                /* B2B: Project References — qualitative only (no fabricated client names, quantities, or performance claims) */
                 <div className="space-y-6">
                   <div className="bg-white rounded-xl border-2 border-slate-200 p-6 hover:border-primary/30 hover:shadow-lg transition-all">
                     <div className="flex items-start gap-4 mb-4">
@@ -459,18 +459,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       </div>
                       <div className="flex-1">
                         <h4 className="text-lg font-bold text-slate-900 mb-1">Highway Infrastructure Project</h4>
-                        <p className="text-sm text-slate-600">Municipality of [City Name] - 500 Units Supplied</p>
+                        <p className="text-sm text-slate-600">Public lighting deployment — contact our team for project references</p>
                       </div>
                     </div>
                     <p className="text-sm text-slate-700 leading-relaxed mb-4">
-                      Successfully supplied and installed 500 units of {displayProductName} for a major highway lighting project. 
-                      The project was completed on schedule with zero defects. All units passed quality inspection and have been 
-                      operational for 2+ years with 99.8% uptime.
+                      Supplied and installed {displayProductName} units for a highway lighting project with custom configuration and full technical documentation. Every project is sized and measured for its own context &mdash; talk to our team about references relevant to your site.
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold">500 Units</span>
-                      <span className="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">On-Time Delivery</span>
-                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">2+ Years Operational</span>
+                      <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold">Custom Configuration</span>
+                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Full Documentation</span>
+                      <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Technical Support</span>
                     </div>
                   </div>
 
@@ -481,17 +479,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                       </div>
                       <div className="flex-1">
                         <h4 className="text-lg font-bold text-slate-900 mb-1">Commercial Complex Installation</h4>
-                        <p className="text-sm text-slate-600">[Company Name] - 200 Units Supplied</p>
+                        <p className="text-sm text-slate-600">Commercial deployment &mdash; contact our team for project references</p>
                       </div>
                     </div>
                     <p className="text-sm text-slate-700 leading-relaxed mb-4">
-                      Delivered 200 units for a large commercial complex. Custom configuration was provided to meet specific 
-                      requirements. Installation was completed by our certified technicians with full documentation and training provided.
+                      Delivered {displayProductName} units for a commercial complex installation with custom configuration and on-site technical support. Project details and references are available on request from our sales team.
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold">200 Units</span>
-                      <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">Custom Configuration</span>
-                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Certified Installation</span>
+                      <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-semibold">Custom Configuration</span>
+                      <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold">Full Documentation</span>
+                      <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold">On-Site Support</span>
                     </div>
                   </div>
 

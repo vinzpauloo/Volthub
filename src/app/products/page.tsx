@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import ProductsClient from "./ProductsClient";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthubs.netlify.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
 
 export const metadata: Metadata = {
   title: "Products - Energy Storage & EV Charging Solutions | VoltHub",
