@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         alt: "VoltHub Energy - Smart Energy Storage & EV Charging Solutions",
       },
       {
-        url: "/green-volthub-logo-transparent.png",
+        url: "/volthub-logo-black-text.png",
         width: 1200,
         height: 630,
         alt: "VoltHub Energy Logo",
