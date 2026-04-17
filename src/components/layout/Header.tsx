@@ -170,7 +170,7 @@ const Header = () => {
       )}
     >
       <LayoutContainer className="py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center group glow-effect">
+        <Link href="/" className="flex items-center group">
           <Image
             src="/volthub-logo-white-text.png"
             alt="VoltHub logo"
