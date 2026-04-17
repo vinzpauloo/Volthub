@@ -171,16 +171,14 @@ const Header = () => {
     >
       <LayoutContainer className="py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center group glow-effect">
-          <span className="bg-green-100 rounded-lg px-3 py-1.5">
-            <Image
-              src="/green-volthub-logo-transparent.png"
-              alt="VoltHub logo"
-              width={180}
-              height={48}
-              className="h-7 w-auto object-contain"
-              priority
-            />
-          </span>
+          <Image
+            src="/volthub-logo-white-text.png"
+            alt="VoltHub logo"
+            width={180}
+            height={48}
+            className="h-7 w-auto object-contain"
+            priority
+          />
         </Link>
 
         <Navigator />
@@ -215,16 +213,14 @@ const Header = () => {
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between p-6 border-b border-white/10">
             <Link href="/" className="flex items-center">
-              <span className="bg-green-100 rounded-lg px-2.5 py-1">
-                <Image
-                  src="/green-volthub-logo-transparent.png"
-                  alt="VoltHub logo"
-                  width={150}
-                  height={40}
-                  className="h-6 w-auto object-contain"
-                  priority
-                />
-              </span>
+              <Image
+                src="/volthub-logo-white-text.png"
+                alt="VoltHub logo"
+                width={150}
+                height={40}
+                className="h-6 w-auto object-contain"
+                priority
+              />
             </Link>
             <button
               className="text-white text-2xl"

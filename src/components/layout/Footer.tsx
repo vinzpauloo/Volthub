@@ -112,15 +112,13 @@ const Footer = () => {
           {/* Brand Section - Always visible */}
           <div className="max-w-xs">
             <div className="flex items-center mb-4 md:mb-6">
-              <span className="bg-green-100 rounded-lg px-3 py-1.5">
-                <Image
-                  src="/green-volthub-logo-transparent.png"
-                  alt="VoltHub logo"
-                  width={160}
-                  height={40}
-                  className="h-6 md:h-7 w-auto object-contain"
-                />
-              </span>
+              <Image
+                src="/volthub-logo-white-text.png"
+                alt="VoltHub logo"
+                width={160}
+                height={40}
+                className="h-6 md:h-7 w-auto object-contain"
+              />
             </div>
             <p className="text-sm md:text-base text-gray-400 mb-4 md:mb-3 leading-relaxed">
               Leading the future of clean energy with innovative solutions for a
