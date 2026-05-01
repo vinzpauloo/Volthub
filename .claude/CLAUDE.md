@@ -80,3 +80,11 @@ pnpm build            # Build — verify production build succeeds
 ## SEO
 - Active SEO optimization across all pages (recent commits)
 - Metadata managed per-page
+
+## Jira Integration
+- **Project**: VoltHub (`VH`) on `fundamental-it.atlassian.net` — cloudId `7c47070c-6963-412e-9fdd-7a9aaba3da33`, projectId `10099`. **Shared with `~/Documents/volthub-app`.**
+- **Rules**: `.claude/rules/jira-integration.md` — full conventions, shared scope clause, status mapping, app labels, MCP tool examples.
+- **Hooks**: `.claude/hooks/jira-branch-guard.sh` blocks branches not matching `^VH-[0-9]+/...`; `.claude/hooks/jira-commit-prefix.sh` reminds to prefix commits with the branch's `VH-N` ID.
+- **Branch format**: `VH-<id>/<type>/<description>` (e.g., `VH-42/feature/seo-meta-fix`)
+- **Commit format**: `VH-<id>: <type>(<scope>): <description>`
+- **Repo scope**: marketing site at https://volthub.ph. Tickets labeled `website` belong here. Tickets labeled `mobile|admin|backend|ocpp|infra|simulator|shared` belong in `~/Documents/volthub-app`. **No-label or mixed-label tickets are ambiguous — STOP and ask.** `BT-` is foreign — never act on it from this repo.
