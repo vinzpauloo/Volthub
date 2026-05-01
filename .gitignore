@@ -49,3 +49,4 @@ next-env.d.ts
 # claude local
 CLAUDE.local.md
 .claude/settings.local.json
+.claude/.save-context-marker
