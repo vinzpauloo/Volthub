@@ -58,7 +58,7 @@ export function SegmentedControl({
         "flex border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden",
         className
       )}
-      role="tablist"
+      role="radiogroup"
     >
       {options.map((opt, i) => {
         const active = opt.value === value;
@@ -66,8 +66,8 @@ export function SegmentedControl({
           <button
             key={opt.value}
             type="button"
-            role="tab"
-            aria-selected={active}
+            role="radio"
+            aria-checked={active}
             onClick={() => onChange(opt.value)}
             className={cn(
               "flex-1 px-4 py-2.5 text-sm font-semibold transition-colors",

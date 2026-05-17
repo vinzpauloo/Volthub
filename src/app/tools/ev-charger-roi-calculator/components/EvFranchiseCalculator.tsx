@@ -127,7 +127,7 @@ export default function EvFranchiseCalculator() {
   const maxBar =
     Math.max(
       outputs.totalInvest,
-      Math.abs(y1 * 3),
+      Math.abs(y1),
       Math.abs(y3),
       Math.abs(y5net + outputs.totalInvest),
       Math.abs(outputs.net10 + outputs.totalInvest)
@@ -641,7 +641,7 @@ export default function EvFranchiseCalculator() {
             />
             <BarRow
               label="Year 1 Profit"
-              value={y1 * 3}
+              value={y1}
               maxBar={maxBar}
               tone={y1 > 0 ? "blue" : "slate"}
               caption="Yr 1"
@@ -687,15 +687,7 @@ export default function EvFranchiseCalculator() {
 
         <div className="text-center mb-6">
           <Link
-            href={
-              {
-                pathname: "/contact",
-                query: {
-                  interest: "ev-charging-quote",
-                  subject: "quote",
-                },
-              } as const
-            }
+            href="/contact?interest=ev-charging-quote&subject=quote"
             className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base px-9 py-3.5 rounded-xl transition-colors"
           >
             Inquire About Franchise Partnership →

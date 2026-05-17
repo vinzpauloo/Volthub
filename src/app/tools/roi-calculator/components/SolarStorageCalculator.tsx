@@ -526,15 +526,7 @@ export default function SolarStorageCalculator() {
 
         <div className="text-center mb-6">
           <Link
-            href={
-              {
-                pathname: "/contact",
-                query: {
-                  interest: "solar-installation-quote",
-                  subject: "quote",
-                },
-              } as const
-            }
+            href="/contact?interest=solar-installation-quote&subject=quote"
             className="inline-block bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base px-9 py-3.5 rounded-xl transition-colors"
           >
             Get a Free Site Survey &amp; Custom Quote →
