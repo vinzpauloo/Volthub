@@ -70,6 +70,18 @@ const navItems: NavItem[] = [
     ],
   },
   {
+    label: "Tools",
+    href: "/tools/roi-calculator",
+    description: "Free interactive ROI calculators",
+    dropdown: [
+      { label: "Solar + Storage ROI", href: "/tools/roi-calculator" },
+      {
+        label: "EV Charging Franchise ROI",
+        href: "/tools/ev-charger-roi-calculator",
+      },
+    ],
+  },
+  {
     label: "About",
     href: "/about",
     description: "Company history and market insights",

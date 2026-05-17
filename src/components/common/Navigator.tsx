@@ -113,6 +113,23 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
     },
   ],
 
+  tools: [
+    {
+      title: "Solar + Storage ROI",
+      href: "/tools/roi-calculator",
+      description:
+        "Estimate solar + battery payback, IRR, and 25-year savings.",
+      image: "/HomeBanner/homebatt.png",
+    },
+    {
+      title: "EV Charging Franchise ROI",
+      href: "/tools/ev-charger-roi-calculator",
+      description:
+        "Plan your EV station: CAPEX, monthly profit, payback, 10-year IRR.",
+      image: "/Product/evpb.jpg",
+    },
+  ],
+
   about: {
     title: "About Us",
     href: "/about",
