@@ -361,6 +361,161 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
     date: "January 28, 2025",
     readingTime: "7 mins",
   },
+  "the-billion-peso-ev-charging-opportunity-in-the-philippines": {
+    content: `
+      <div class="intro-section">
+        <p class="lead-text">Imagine owning a gasoline station before the boom of the automotive industry. That is exactly where the EV charging industry in the Philippines stands today.</p>
+        <p>The country is entering a historic transition toward electric vehicles, renewable energy, and smart infrastructure — and the businesses that move early will become the pioneers of the next generation of transportation and energy.</p>
+        <p>At the center of this transformation is <strong>VoltHub Electronic Power Generation Services Corporation</strong>, a company committed to building the future of EV charging, solar energy, and smart power solutions in the Philippines.</p>
+      </div>
+
+      <h2>A Government-Mandated Industry With Massive Growth Potential</h2>
+      <p>The Philippine government is no longer simply encouraging EV adoption. It is now creating laws, regulations, and infrastructure policies that will make EV charging stations an essential part of future developments.</p>
+      <p>Under the <strong>Electric Vehicle Industry Development Act (EVIDA) — Republic Act No. 11697</strong>, commercial establishments, public buildings, malls, condominiums, office buildings, gas stations, and parking facilities are now expected to allocate EV parking slots and charging infrastructure.</p>
+      <p>Government agencies are likewise being pushed to integrate:</p>
+      <ul>
+        <li>Solar rooftop systems</li>
+        <li>Energy-efficient technologies</li>
+        <li>EV charging stations</li>
+        <li>Battery storage systems</li>
+        <li>Renewable energy solutions</li>
+      </ul>
+      <div class="highlight-box">
+        <p><strong>This means one thing:</strong> Demand for EV charging infrastructure in the Philippines will continue to rise aggressively in the coming years.</p>
+        <p>And the businesses that establish themselves today will own the prime locations tomorrow.</p>
+      </div>
+
+      <h2>The EV Charging Industry Is Still in Its EARLY Stage</h2>
+      <p>The Philippines currently has a rapidly growing EV market. Electric vehicle registrations continue to increase every year. However, the number of EV charging stations nationwide remains limited.</p>
+      <p>This creates a rare first-mover opportunity. Businesses and investors who enter the market early gain:</p>
+      <ul>
+        <li>Strategic locations</li>
+        <li>Brand recognition</li>
+        <li>Long-term recurring revenue</li>
+        <li>Strong customer loyalty</li>
+        <li>Early partnerships with property developers and government agencies</li>
+        <li>Market dominance before large-scale competition arrives</li>
+      </ul>
+      <p>Once EV adoption becomes mainstream, acquiring premium charging locations will become significantly more expensive and competitive. The best time to enter the market is before demand fully explodes.</p>
+      <div class="highlight-box success">
+        <p><strong>That time is NOW.</strong></p>
+      </div>
+
+      <h2>Why EV Charging Stations Are a Powerful Investment Opportunity</h2>
+      <p>EV charging stations are not just utilities. They are <strong>recurring-income assets</strong>.</p>
+      <p>Every electric vehicle owner needs reliable charging access. As EV ownership grows, charging infrastructure becomes a necessity — just like fuel stations became indispensable during the rise of traditional vehicles.</p>
+      <p><strong>Potential Revenue Streams Include:</strong></p>
+      <ul>
+        <li>EV charging fees</li>
+        <li>Parking revenue</li>
+        <li>Increased customer foot traffic</li>
+        <li>Longer customer dwell time</li>
+        <li>Commercial leasing opportunities</li>
+        <li>Advertising and branding placements</li>
+        <li>Fleet charging partnerships</li>
+        <li>Corporate charging contracts</li>
+        <li>Government projects and installations</li>
+      </ul>
+      <p>Businesses with EV charging stations also gain a major competitive advantage. Consumers are increasingly choosing establishments that provide EV charging convenience.</p>
+      <p>For malls, condominiums, hotels, restaurants, office buildings, and commercial properties, EV charging infrastructure can become a major attraction point for customers and tenants.</p>
+
+      <div class="cta-section">
+        <h2>See the Numbers for Your Site</h2>
+        <p>Want to model the recurring-revenue projection for your own property? Run the <a href="/tools/ev-charger-roi-calculator">EV Franchise ROI calculator</a> (or the <a href="/tools/roi-calculator">Solar+Storage calculator</a> for hybrid sites) to size a station to your facility, loads, and goals.</p>
+      </div>
+
+      <h2>Solar + EV Charging = The Future of Smart Energy</h2>
+      <p>The future of EV charging is not dependent solely on the power grid. The most profitable and sustainable charging stations combine:</p>
+      <ul>
+        <li>Solar power systems</li>
+        <li>Battery energy storage systems</li>
+        <li>Smart energy management technology</li>
+        <li>EV charging infrastructure</li>
+      </ul>
+      <p>By integrating solar energy into EV charging stations, businesses can:</p>
+      <ul>
+        <li>Lower operational costs</li>
+        <li>Reduce dependence on fluctuating electricity prices</li>
+        <li>Improve long-term profitability</li>
+        <li>Continue operations during power interruptions</li>
+        <li>Strengthen sustainability initiatives</li>
+        <li>Increase property value and future readiness</li>
+      </ul>
+      <p>This is why many government and commercial projects are now integrating renewable energy and EV infrastructure into one complete ecosystem.</p>
+
+      <div class="cta-section">
+        <h2>The Hardware Behind the Ecosystem</h2>
+        <p>Solar inverters, battery packs, AC and DC fast chargers — <a href="/products">browse the VoltHub catalog</a> to see the units that power these integrated stations.</p>
+      </div>
+
+      <h2>Why Investors and Businesses Choose VoltHub</h2>
+      <p><strong>VoltHub Is More Than an Equipment Supplier.</strong> We are a long-term energy and infrastructure partner.</p>
+      <p>VoltHub helps businesses and investors enter the EV charging industry strategically, professionally, and profitably.</p>
+      <p><strong>Our Services Include:</strong></p>
+      <ul>
+        <li>EV charging station solutions</li>
+        <li>AC and DC fast chargers</li>
+        <li>Solar energy systems</li>
+        <li>Battery storage solutions</li>
+        <li>Site inspection and assessment</li>
+        <li>Engineering and system planning</li>
+        <li>Installation support</li>
+        <li>Commercial EV charging deployment</li>
+        <li>Smart charging systems</li>
+        <li>Partnership opportunities</li>
+      </ul>
+      <p><strong>Whether you are:</strong></p>
+      <ul>
+        <li>A mall owner</li>
+        <li>Condominium developer</li>
+        <li>Hotel operator</li>
+        <li>Commercial property owner</li>
+        <li>Gas station operator</li>
+        <li>Local government unit (LGU)</li>
+        <li>Fleet operator</li>
+        <li>Investor</li>
+        <li>Parking facility owner</li>
+        <li>Government agency</li>
+      </ul>
+      <p>VoltHub can help you become part of the future of mobility and energy.</p>
+
+      <h2>The Businesses That Move First Will Lead the Industry</h2>
+      <p>The transition toward electric vehicles is inevitable. It is being accelerated by:</p>
+      <ul>
+        <li>Government mandates</li>
+        <li>Global automotive trends</li>
+        <li>Rising fuel costs</li>
+        <li>Renewable energy policies</li>
+        <li>Sustainability initiatives</li>
+        <li>Increasing consumer demand</li>
+        <li>Technological advancements</li>
+      </ul>
+      <p>The question is no longer whether the EV industry will grow.</p>
+      <div class="highlight-box">
+        <p><strong>The real question is:</strong> Will your business be one of the pioneers — or will you enter the market after everyone else already has?</p>
+      </div>
+
+      <h2>Invest in the Future With VoltHub</h2>
+      <p>The EV revolution in the Philippines has already begun. The demand for charging infrastructure, renewable energy, and smart power systems will only continue to grow.</p>
+      <p>Businesses that move early today have the opportunity to build long-term recurring revenue while positioning themselves at the forefront of one of the country's fastest-growing industries.</p>
+
+      <div class="cta-section">
+        <h2>Partner With VoltHub Today</h2>
+        <p>Let us help you:</p>
+        <ul>
+          <li>Open your own EV charging station</li>
+          <li>Install solar-powered charging systems</li>
+          <li>Future-proof your commercial property</li>
+          <li>Build sustainable recurring revenue</li>
+          <li>Become part of the next generation of energy infrastructure</li>
+        </ul>
+        <p><strong>VoltHub — One Hub for Future Energy.</strong></p>
+      </div>
+    `,
+    author: "VoltHub Investment Team",
+    date: "May 23, 2026",
+    readingTime: "5 mins",
+  },
 };
 
 export default function BlogDetail({ resource }: BlogDetailProps) {
@@ -524,8 +679,8 @@ export default function BlogDetail({ resource }: BlogDetailProps) {
         dangerouslySetInnerHTML={{ __html: content.content }}
       />
 
-      {/* Key Takeaways Section */}
-      {(
+      {/* Key Takeaways Section — gated to the original solar-energy-storage article whose content these takeaways were authored for */}
+      {resource.slug === "complete-guide-to-solar-energy-storage" && (
         <div className="mt-12 md:mt-16 p-6 md:p-10 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 shadow-sm">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -559,7 +714,39 @@ export default function BlogDetail({ resource }: BlogDetailProps) {
       {/* CTA Section */}
       <div className="mt-12 md:mt-16 p-8 md:p-10 bg-gradient-to-br from-primary via-primary/95 to-accent rounded-2xl shadow-xl text-white">
         <div className="max-w-2xl">
-          {resource.slug === "commercial-energy-solutions-business-guide" ? (
+          {resource.slug === "the-billion-peso-ev-charging-opportunity-in-the-philippines" ? (
+            <>
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">
+                Ready to Build Recurring Revenue in the EV Era?
+              </h3>
+              <p className="text-white/90 mb-6 text-lg leading-relaxed">
+                The EV charging industry in the Philippines is moving from early stage to mass adoption. Position your business at the front of the line — talk to our team, browse the charger and storage catalog, or model the numbers for your own site.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
+                >
+                  Schedule a Consultation
+                  <RiArrowRightLine className="h-5 w-5" />
+                </Link>
+                <Link
+                  href="/products"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-lg font-semibold hover:bg-white/20 transition-all"
+                >
+                  Browse the Catalog
+                  <RiArrowRightLine className="h-5 w-5" />
+                </Link>
+              </div>
+              <Link
+                href="/tools/ev-charger-roi-calculator"
+                className="inline-flex items-center gap-2 mt-5 text-white/90 hover:text-white hover:underline font-medium"
+              >
+                Or calculate the ROI for your own site
+                <RiArrowRightLine className="h-4 w-4" />
+              </Link>
+            </>
+          ) : resource.slug === "commercial-energy-solutions-business-guide" ? (
             <>
               <h3 className="text-2xl md:text-3xl font-bold mb-4">
                 Ready to Manage Peak Demand and Strengthen Your Operations?

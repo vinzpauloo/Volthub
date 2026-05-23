@@ -368,12 +368,21 @@ export const videoItems = [
 // Resources
 export const resources = [
   {
+    slug: "the-billion-peso-ev-charging-opportunity-in-the-philippines",
+    title: "The Next Billion-Peso Industry in the Philippines Is Not Coming — It Has Already Started",
+    description:
+      "And early investors are positioning themselves now. Discover why the EV charging industry in the Philippines is the next major infrastructure opportunity — and how VoltHub helps you build recurring-income assets ahead of mass-market adoption.",
+    type: "Industry Insights",
+    image: "/Blog/blogtitle.png",
+    imageAlt: "VoltHub investment opportunity — EV charging and renewable energy infrastructure in the Philippines",
+  },
+  {
     slug: "complete-guide-to-solar-energy-storage",
     title: "The 2025 EV Charging Landscape: Why Smart Infrastructure is the Next Big Business Opportunity",
     description:
       "Discover the top EV charging trends defining 2025 and why smart infrastructure is essential for forward-thinking businesses.",
     type: "Industry Insights",
-    image: "/Blog/blogtitle.png",
+    image: "/Blog/blog1.png",
     imageAlt: "The 2025 EV Charging Landscape - Smart Infrastructure Business Opportunity",
   },
   {

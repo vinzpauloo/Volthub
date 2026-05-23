@@ -53,6 +53,11 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
       date: "2025-01-28",
       readingTime: "7 mins",
     },
+    "the-billion-peso-ev-charging-opportunity-in-the-philippines": {
+      author: "VoltHub Investment Team",
+      date: "2026-05-23",
+      readingTime: "5 mins",
+    },
   };
 
   const articleMeta = blogContent[slug] || {
