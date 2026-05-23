@@ -679,8 +679,8 @@ export default function BlogDetail({ resource }: BlogDetailProps) {
         dangerouslySetInnerHTML={{ __html: content.content }}
       />
 
-      {/* Key Takeaways Section */}
-      {(
+      {/* Key Takeaways Section — gated to the original solar-energy-storage article whose content these takeaways were authored for */}
+      {resource.slug === "complete-guide-to-solar-energy-storage" && (
         <div className="mt-12 md:mt-16 p-6 md:p-10 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 shadow-sm">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -722,7 +722,7 @@ export default function BlogDetail({ resource }: BlogDetailProps) {
               <p className="text-white/90 mb-6 text-lg leading-relaxed">
                 The EV charging industry in the Philippines is moving from early stage to mass adoption. Position your business at the front of the line — talk to our team, browse the charger and storage catalog, or model the numbers for your own site.
               </p>
-              <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-primary rounded-lg font-semibold hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
@@ -737,14 +737,14 @@ export default function BlogDetail({ resource }: BlogDetailProps) {
                   Browse the Catalog
                   <RiArrowRightLine className="h-5 w-5" />
                 </Link>
-                <Link
-                  href="/tools/ev-charger-roi-calculator"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 rounded-lg font-semibold hover:bg-white/20 transition-all"
-                >
-                  Calculate ROI
-                  <RiArrowRightLine className="h-5 w-5" />
-                </Link>
               </div>
+              <Link
+                href="/tools/ev-charger-roi-calculator"
+                className="inline-flex items-center gap-2 mt-5 text-white/90 hover:text-white hover:underline font-medium"
+              >
+                Or calculate the ROI for your own site
+                <RiArrowRightLine className="h-4 w-4" />
+              </Link>
             </>
           ) : resource.slug === "commercial-energy-solutions-business-guide" ? (
             <>
