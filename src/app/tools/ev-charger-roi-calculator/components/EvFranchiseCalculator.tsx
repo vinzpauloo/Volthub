@@ -700,7 +700,7 @@ export default function EvFranchiseCalculator() {
           efficiency. A site survey and detailed proposal will provide binding
           figures.
           <br />
-          VoltHub Electronic Power Generation Services Corp. • admin@volthub.ph
+          VoltHub Electronic Power Generation Services Corp. • sales@volthub.ph
           • 09682323704
         </p>
       </LayoutContainer>

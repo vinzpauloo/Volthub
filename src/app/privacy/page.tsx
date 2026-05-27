@@ -79,10 +79,10 @@ export default function PrivacyPage() {
             Website: <a href="https://volthub.ph">https://volthub.ph</a>
             <br />
             General Inquiries:{" "}
-            <a href="mailto:admin@volthub.ph">admin@volthub.ph</a>
+            <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a>
             <br />
             Sales Inquiries:{" "}
-            <a href="mailto:judy@volthub.ph">judy@volthub.ph</a>
+            <a href="mailto:sales@volthub.ph">sales@volthub.ph</a>
             <br />
             Phone: <a href="tel:+639682323704">+63 968 232 3704</a>
           </p>
@@ -95,8 +95,8 @@ export default function PrivacyPage() {
             this Privacy Policy and respond to data-subject requests.
             <br />
             DPO Contact:{" "}
-            <a href="mailto:admin@volthub.ph?subject=Data%20Privacy%20Request">
-              admin@volthub.ph
+            <a href="mailto:customerservice@volthub.ph?subject=Data%20Privacy%20Request">
+              customerservice@volthub.ph
             </a>{" "}
             (please use the subject line &ldquo;Data Privacy Request&rdquo; so
             your message is routed to the DPO)
@@ -146,8 +146,8 @@ export default function PrivacyPage() {
             <li>Request a quotation or consultation</li>
             <li>
               Email us directly at{" "}
-              <a href="mailto:admin@volthub.ph">admin@volthub.ph</a> or{" "}
-              <a href="mailto:judy@volthub.ph">judy@volthub.ph</a>
+              <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a> or{" "}
+              <a href="mailto:sales@volthub.ph">sales@volthub.ph</a>
             </li>
             <li>Call us on +63 968 232 3704</li>
           </ul>
@@ -609,7 +609,7 @@ export default function PrivacyPage() {
           </h3>
           <p>
             To exercise any of these rights, please contact us at{" "}
-            <a href="mailto:admin@volthub.ph">admin@volthub.ph</a> with the
+            <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a> with the
             subject line{" "}
             <strong>&ldquo;Data Privacy Request&rdquo;</strong>. We will
             respond within <strong>thirty (30) calendar days</strong> of
@@ -664,7 +664,7 @@ export default function PrivacyPage() {
           do not knowingly collect personal information from children. If you
           are a parent or guardian and believe your child has provided us with
           personal information, please contact us at{" "}
-          <a href="mailto:admin@volthub.ph">admin@volthub.ph</a> and we will
+          <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a> and we will
           take steps to delete the information.
         </p>
       ),
@@ -711,7 +711,7 @@ export default function PrivacyPage() {
             </strong>{" "}
             (VoltHub.PH) &mdash; Privacy Inquiries
             <br />
-            Email: <a href="mailto:admin@volthub.ph">admin@volthub.ph</a>
+            Email: <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a>
             <br />
             Phone: <a href="tel:+639682323704">+63 968 232 3704</a>
             <br />
@@ -723,8 +723,8 @@ export default function PrivacyPage() {
             <strong>Data Protection Officer</strong>
             <br />
             DPO Contact:{" "}
-            <a href="mailto:admin@volthub.ph?subject=Data%20Privacy%20Request">
-              admin@volthub.ph
+            <a href="mailto:customerservice@volthub.ph?subject=Data%20Privacy%20Request">
+              customerservice@volthub.ph
             </a>{" "}
             (subject line: &ldquo;Data Privacy Request&rdquo;)
             <br />

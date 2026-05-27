@@ -120,16 +120,14 @@ export async function POST(request: Request): Promise<NextResponse> {
       details: typeof details === "string" ? details : undefined,
     });
 
-    // Route price/quote inquiries to judy@volthub.ph, everything else to admin
-    const isPriceInquiry =
-      interestKey === "ev-charging-quote" ||
-      interestKey === "solar-installation-quote" ||
-      interestKey === "solar-street-light-quote" ||
-      (typeof details === "string" && details.toLowerCase().includes("quote"));
+    // Route technical support/maintenance to customerservice@volthub.ph, all other sales/quotes to sales@volthub.ph
+    const isSupport =
+      interestKey === "technical-support" ||
+      interestKey === "maintenance-service";
 
-    const recipientEmail = isPriceInquiry
-      ? (process.env.PRICE_INQUIRY_EMAIL || "judy@volthub.ph")
-      : (process.env.CONTACT_EMAIL || "admin@volthub.ph");
+    const recipientEmail = isSupport
+      ? (process.env.CONTACT_EMAIL || "customerservice@volthub.ph")
+      : (process.env.PRICE_INQUIRY_EMAIL || "sales@volthub.ph");
 
     const { error: sendError } = await getResendClient().emails.send({
       from: "VoltHub <noreply@volthub.ph>",

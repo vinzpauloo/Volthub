@@ -539,7 +539,7 @@ export default function SolarStorageCalculator() {
           orientation, shading, and consumption patterns. A site survey is
           required for a binding quotation.
           <br />
-          VoltHub Electronic Power Generation Services Corp. • admin@volthub.ph
+          VoltHub Electronic Power Generation Services Corp. • sales@volthub.ph
           • 09682323704
         </p>
       </LayoutContainer>

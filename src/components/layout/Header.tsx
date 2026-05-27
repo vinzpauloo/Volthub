@@ -196,9 +196,12 @@ const Header = () => {
         <Navigator />
 
         <div className="hidden lg:flex items-center space-x-6 ml-8">
-          <span className="text-sm font-orbitron text-emerald-200 tracking-widest hidden 2xl:block">
-            +63 968 232 3704
-          </span>
+          <a
+            href="mailto:sales@volthub.ph"
+            className="text-sm font-orbitron text-emerald-200 tracking-widest hidden 2xl:block hover:text-secondary transition-colors"
+          >
+            sales@volthub.ph
+          </a>
           <Link
             href="/contact"
             className="bg-linear-to-r from-secondary to-yellow-300 text-black px-6 py-2 rounded-xl font-semibold hover:scale-105 transition-all duration-300 glow-effect whitespace-nowrap"

@@ -82,10 +82,10 @@ export default function TermsPage() {
           Website: <a href="https://volthub.ph">https://volthub.ph</a>
           <br />
           General Inquiries:{" "}
-          <a href="mailto:admin@volthub.ph">admin@volthub.ph</a>
+          <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a>
           <br />
           Sales Inquiries:{" "}
-          <a href="mailto:judy@volthub.ph">judy@volthub.ph</a>
+          <a href="mailto:sales@volthub.ph">sales@volthub.ph</a>
           <br />
           Phone: <a href="tel:+639682323704">+63 968 232 3704</a>
         </p>
@@ -521,7 +521,7 @@ export default function TermsPage() {
           </h3>
           <p>
             Before initiating any legal action, you agree to first contact us
-            at <a href="mailto:admin@volthub.ph">admin@volthub.ph</a> and make
+            at <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a> and make
             a good-faith effort to resolve the dispute informally for at least{" "}
             <strong>thirty (30) days</strong>.
           </p>
@@ -625,9 +625,9 @@ export default function TermsPage() {
             </strong>{" "}
             (VoltHub.PH)
             <br />
-            Email: <a href="mailto:admin@volthub.ph">admin@volthub.ph</a>
+            Email: <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a>
             <br />
-            Sales: <a href="mailto:judy@volthub.ph">judy@volthub.ph</a>
+            Sales: <a href="mailto:sales@volthub.ph">sales@volthub.ph</a>
             <br />
             Phone: <a href="tel:+639682323704">+63 968 232 3704</a>
             <br />

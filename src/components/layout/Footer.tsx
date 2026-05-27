@@ -199,15 +199,15 @@ const Footer = () => {
                 </a>
               </p>
               <p className="text-sm md:text-base leading-relaxed select-text">
-                <span className="font-bold text-white">Email:</span>{" "}
-                <a href="mailto:admin@volthub.ph" className="hover:underline">
-                  admin@volthub.ph
+                <span className="font-bold text-white">Customer service:</span>{" "}
+                <a href="mailto:customerservice@volthub.ph" className="hover:underline">
+                  customerservice@volthub.ph
                 </a>
               </p>
               <p className="text-sm md:text-base leading-relaxed select-text">
                 <span className="font-bold text-white">Inquiries:</span>{" "}
-                <a href="mailto:judy@volthub.ph" className="hover:underline">
-                  judy@volthub.ph
+                <a href="mailto:sales@volthub.ph" className="hover:underline">
+                  sales@volthub.ph
                 </a>
               </p>
               <p className="text-sm md:text-base leading-relaxed select-text">

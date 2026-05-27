@@ -14,7 +14,7 @@ const companyInfo = {
   established: "January 17, 2025",
   address: "High Street South Corporate Plaza Tower 2, 11th Ave, Bonifacio Global City, Taguig, Philippines",
   phone: "+639682323704",
-  email: "admin@volthub.ph",
+  email: "sales@volthub.ph",
   website: "https://volthub.ph",
   description: "A forward-looking energy technology company specializing in EV charging infrastructure, solar power systems, and smart energy solutions.",
   mission: "Building the blueprint for a cleaner energy economy. We provide end-to-end services—from design, engineering, and installation to maintenance and system optimization—tailored for commercial, residential, and industrial clients.",

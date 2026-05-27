@@ -170,8 +170,8 @@ export const contactInfo = [
   {
     icon: RiMailLine,
     title: "Email",
-    detail: "admin@volthub.ph",
-    link: "mailto:admin@volthub.ph",
+    detail: "sales@volthub.ph",
+    link: "mailto:sales@volthub.ph",
   },
   {
     icon: RiMapPinLine,

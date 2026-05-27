@@ -194,7 +194,7 @@ export const PartnerInquiryForm = forwardRef<HTMLElement>(
                 {status === "error" && (
                   <p className="text-red-600 text-sm" role="alert">
                     Something went wrong. Please try again or contact us
-                    directly at admin@volthub.ph.
+                    directly at sales@volthub.ph.
                   </p>
                 )}
 
