@@ -135,18 +135,18 @@ export const stats = [
 // Product Showcases
 export const productShowcases = [
   {
-    badge: "Premium Solution",
+    badge: "High-Turnover Commercial Hubs",
     badgeColor: "text-amber-300",
-    title: "DC EV Charger Dual Gun",
+    title: "60kW - 120kW Dual-Gun Revenue Generation",
     titleParts: [
-      { text: "DC EV", color: "text-amber-200" },
-      { text: "Charger", color: "text-green-600" },
-      { text: "60kW/120kW", color: "text-primary" },
+      { text: "60kW - 120kW", color: "text-green-600" },
+      { text: "Dual-Gun Revenue Generation", color: "text-lime-600" },
     ],
     description:
       "Premium dual-gun DC fast charger for fleets and public sites. Charge two vehicles simultaneously or deliver full power to one. Increase revenue and customer satisfaction with flexible power sharing modes.",
-    image: "/home/greenev.png",
-    imageAlt: "DC EV Charger Dual Gun 60kW/120kW",
+    image: "/home/card1.png",
+    imageAlt: "DC EV Charger Dual Gun 60kW/120kW at commercial charging site",
+    imageHasCopy: false,
     features: [
       { icon: RiBatteryChargeLine, text: "Dual-Gun Design", color: "text-emerald-700" },
       { icon: RiHomeGearLine, text: "Flexible Power Sharing", color: "text-primary" },
@@ -166,19 +166,20 @@ export const productShowcases = [
     bgGradient: "bg-gradient-to-br from-white via-gray-50 to-white",
   },
   {
-    badge: "Ultra-High Power",
-    badgeColor: "text-teal-600",
-    title: "DC EV Charger 400kW",
+    badge: "Expressway & Fleet Infrastructure",
+    badgeColor: "text-amber-300",
+    title: "Ultra-Fast Flagship Network Solutions",
     titleParts: [
-      { text: "DC EV", color: "text-teal-600" },
-      { text: "Charger 400kW", color: "text-green-800" },
+      { text: "Ultra-Fast Flagship", color: "text-green-600" },
+      { text: "Network Solutions", color: "text-lime-600" },
     ],
     description:
       "Ultra-high power DC fast charging solution for commercial sites and fleet depots. Charge heavy-duty vehicles in minutes, not hours. Future-proof your infrastructure with industry-leading power output.",
-    image: "/home/redev.png",
-    imageAlt: "DC EV Charger 400kW",
+    image: "/home/card2.png",
+    imageAlt: "DC EV Charger 480kW at solar canopy charging hub",
+    imageHasCopy: false,
     features: [
-      { icon: RiFlashlightLine, text: "400kW Ultra-High Power", color: "text-accent" },
+      { icon: RiFlashlightLine, text: "480kW Ultra-High Power", color: "text-accent" },
       { icon: RiSpeedUpLine, text: "Rapid Charging", color: "text-primary" },
       { icon: RiHomeGearLine, text: "Smart Management", color: "text-green-600" },
     ],
@@ -196,17 +197,18 @@ export const productShowcases = [
     bgGradient: "bg-gradient-to-br from-gray-50 via-white to-gray-50",
   },
   {
-    badge: "Residential EV Charging",
+    badge: "Scalable Workplace & Amenity Sites",
     badgeColor: "text-amber-300",
-    title: "AC EV Charger 7kW",
+    title: "Smart OCPP Integrated Micro-Grids",
     titleParts: [
-      { text: "AC EV", color: "text-emerald-400" },
-      { text: "Charger 7kW", color: "text-accent" },
+      { text: "Smart OCPP Integrated", color: "text-green-600" },
+      { text: "Micro-Grids", color: "text-lime-600" },
     ],
     description:
       "High-performance AC EV charging system perfect for home use. Charge your EV overnight while you sleep. Smart scheduling optimizes charging during off-peak hours to maximize savings.",
-    image: "/home/residentialev.png",
-    imageAlt: "AC EV Charger 7kW",
+    image: "/home/card3.png",
+    imageAlt: "AC EV Charger 7kW wall-mounted units in parking garage",
+    imageHasCopy: false,
     features: [
       { icon: RiBatteryChargeLine, text: "7kW Charging Power", color: "text-primary" },
       { icon: RiSunLine, text: "Smart Monitoring", color: "text-accent" },
@@ -226,25 +228,26 @@ export const productShowcases = [
     bgGradient: "bg-gradient-to-br from-white via-gray-50 to-white",
   },
   {
-    badge: "Commercial Grade",
-    badgeColor: "text-green-700",
-    title: "DC EV Charger Dual Gun",
+    badge: "Retail & Destination Ecosystems",
+    badgeColor: "text-amber-300",
+    title: "160kW Smart Grid Retail Deployment",
     titleParts: [
-      { text: "DC EV", color: "text-yellow-300" },
-      { text: "Charger", color: "text-lime-700" },
-      { text: "160kW", color: "text-primary" },
+      { text: "160kW Smart Grid", color: "text-green-600" },
+      { text: "Retail Deployment", color: "text-lime-600" },
     ],
     description:
       "High-power dual-gun DC fast charger for premium charging hubs and expressway service areas. Maximize revenue with dual charging capability. Future-proof design supports next-generation EVs.",
-    image: "/home/yellowev.png",
-    imageAlt: "DC EV Charger Dual Gun 160kW/240kW",
+    image: "/home/card4.png",
+    imageAlt: "DC EV Charger 160kW commercial grade dual gun",
+    coverPosition: "center 40%",
+    imageHasCopy: false,
     features: [
       { icon: RiFlashlightLine, text: "160kW/240kW Power", color: "text-secondary" },
       { icon: RiGlobalLine, text: "Commercial Grade", color: "text-primary" },
       { icon: RiSpeedUpLine, text: "Future-Proof Design", color: "text-accent" },
     ],
     ctas: [
-      { text: "View Commercial EV Charger Products", href: "/products/ev-dc-fq-120" as Route, variant: "primary" as const },
+      { text: "View Commercial EV Charger Products", href: "/products/ev-ac-ws-cdz-21kw" as Route, variant: "primary" as const },
       { text: "Get Free Consultation", href: "/contact" as Route, variant: "secondary" as const },
     ],
     trustIndicators: [

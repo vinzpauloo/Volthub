@@ -226,7 +226,7 @@ export default function CarouselBanner({
 
   return (
     <div
-      className="relative w-full  h-[500px] overflow-hidden max-w-full"
+      className="relative w-full h-[560px] md:h-[620px] lg:h-[680px] overflow-hidden max-w-full"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}

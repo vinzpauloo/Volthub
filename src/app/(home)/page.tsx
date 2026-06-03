@@ -63,8 +63,9 @@ export default function Home() {
           description: showcase.description,
           image: showcase.image,
           imageAlt: showcase.imageAlt,
+          imageHasCopy: showcase.imageHasCopy ?? false,
+          coverPosition: showcase.coverPosition,
           ctaLink: showcase.ctas[0].href,
-          ctaText: showcase.ctas[0].text,
           gradientColors: showcase.gradientColors,
         }))}
       />
