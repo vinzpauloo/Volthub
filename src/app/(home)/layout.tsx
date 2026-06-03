@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "VoltHub - Smart Energy Storage & EV Charging Solutions",
   description: "Power your operations with VoltHub's next-generation energy storage and EV charging solutions. Commercial and residential solar, battery storage, and smart grid integration across the Philippines.",
   keywords: [
-    "energy storage",
+    "energy storages",
     "EV charging",
     "solar energy",
     "battery storage",
