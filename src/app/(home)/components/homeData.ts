@@ -586,6 +586,8 @@ export interface ArticleShowcase {
   imageAlt: string;
   /** Override object-fit — defaults to "cover" */
   imageFit?: "cover" | "contain";
+  /** Override image container classes — defaults to "md:w-150" */
+  imageClassName?: string;
   /** How we implement / what the service includes */
   implementationSteps: { step: string; detail: string }[];
   ctaText: string;
@@ -631,6 +633,7 @@ export const articleShowcases: ArticleShowcase[] = [
     image: "/Article/article_2.png",
     imageAlt: "VoltHub smart app integration — complete EV franchise control center dashboard",
     imageFit: "contain",
+    imageClassName: "md:w-200",
     implementationSteps: [
       {
         step: "The Driver Experience: Smooth App Control",

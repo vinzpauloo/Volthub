@@ -65,32 +65,32 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
     // },
   ],
 
-  sectors: [
-    {
-      title: "Residential",
-      href: "/sectors/residential",
-      description: "Solutions designed for households and communities.",
-      image: "/HomeBanner/homebatt.png",
-    },
-    {
-      title: "Commercial",
-      href: "/sectors/commercial",
-      description: "Energy systems tailored for commercial sites.",
-      image: "/HomeBanner/commercial.png",
-    },
-    {
-      title: "Industrial",
-      href: "/sectors/industrial",
-      description: "High-capacity systems for industrial operations.",
-      image: "/HomeBanner/banner3.jpg",
-    },
-    {
-      title: "Rural Projects",
-      href: "/sectors/rural-projects",
-      description: "Off-grid and rural electrification solutions.",
-      image: "/aboutimages/solarpanels.jpg",
-    },
-  ],
+  // sectors: [
+  //   {
+  //     title: "Residential",
+  //     href: "/sectors/residential",
+  //     description: "Solutions designed for households and communities.",
+  //     image: "/HomeBanner/homebatt.png",
+  //   },
+  //   {
+  //     title: "Commercial",
+  //     href: "/sectors/commercial",
+  //     description: "Energy systems tailored for commercial sites.",
+  //     image: "/HomeBanner/commercial.png",
+  //   },
+  //   {
+  //     title: "Industrial",
+  //     href: "/sectors/industrial",
+  //     description: "High-capacity systems for industrial operations.",
+  //     image: "/HomeBanner/banner3.jpg",
+  //   },
+  //   {
+  //     title: "Rural Projects",
+  //     href: "/sectors/rural-projects",
+  //     description: "Off-grid and rural electrification solutions.",
+  //     image: "/aboutimages/solarpanels.jpg",
+  //   },
+  // ],
 
   services: [
     {
@@ -113,22 +113,22 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
     },
   ],
 
-  tools: [
-    {
-      title: "Solar + Storage ROI",
-      href: "/tools/roi-calculator",
-      description:
-        "Estimate solar + battery payback, IRR, and 25-year savings.",
-      image: "/HomeBanner/homebatt.png",
-    },
-    {
-      title: "EV Charging Franchise ROI",
-      href: "/tools/ev-charger-roi-calculator",
-      description:
-        "Plan your EV station: CAPEX, monthly profit, payback, 10-year IRR.",
-      image: "/Product/evpb.jpg",
-    },
-  ],
+  // tools: [
+  //   {
+  //     title: "Solar + Storage ROI",
+  //     href: "/tools/roi-calculator",
+  //     description:
+  //       "Estimate solar + battery payback, IRR, and 25-year savings.",
+  //     image: "/HomeBanner/homebatt.png",
+  //   },
+  //   {
+  //     title: "EV Charging Franchise ROI",
+  //     href: "/tools/ev-charger-roi-calculator",
+  //     description:
+  //       "Plan your EV station: CAPEX, monthly profit, payback, 10-year IRR.",
+  //     image: "/Product/evpb.jpg",
+  //   },
+  // ],
 
   about: {
     title: "About Us",
@@ -136,17 +136,17 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
     description: "Learn about our company history and market insights.",
   },
 
-  insights: {
-    title: "Insights",
-    href: "/insights",
-    description: "Philippines clean energy market data and analysis.",
-  },
+  // insights: {
+  //   title: "Insights",
+  //   href: "/insights",
+  //   description: "Philippines clean energy market data and analysis.",
+  // },
 
-  partners: {
-    title: "Partners",
-    href: "/partners",
-    description: "Become a location partner and host an EV charger.",
-  },
+  // partners: {
+  //   title: "Partners",
+  //   href: "/partners",
+  //   description: "Become a location partner and host an EV charger.",
+  // },
 
   contact: {
     title: "Contact",

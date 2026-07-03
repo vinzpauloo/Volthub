@@ -27,7 +27,7 @@ function ArticleCard({ article, index }: { article: ArticleShowcase; index: numb
       </h3>
 
       {/* ── Floated image — text wraps around it on desktop ── */}
-      <div className={`relative w-full md:w-150 aspect-[4/3] overflow-hidden mb-5 ${floatDir}`}>
+      <div className={`relative w-full ${article.imageClassName || "md:w-150"} aspect-[4/3] overflow-hidden mb-5 ${floatDir}`}>
         <Image
           src={article.image}
           alt={article.imageAlt}
@@ -67,7 +67,7 @@ function ArticleCard({ article, index }: { article: ArticleShowcase; index: numb
 export default function ArticleShowcaseSection({ articles }: ArticleShowcaseSectionProps) {
   return (
     <section className="section-spacing bg-white overflow-x-hidden">
-      <LayoutContainer>
+      <LayoutContainer className="max-w-full md:max-w-[75%]">
      
 
         {/* ── Article cards ── */}
