@@ -7,71 +7,73 @@ import { RiCloseLine, RiCheckLine } from "react-icons/ri";
 
 const packages = [
   {
-    name: "Volthub Charger",
+    name: "Solar Street Lights",
     savings: "One-Time Purchase",
     price: "Hardware Only",
-    detail: "No recurring fees — own your charger outright",
-    subDetail: "Use your own CSMS or management system",
+    detail: "No recurring fees — own your lights outright",
+    subDetail: "5-12m poles · 50W–120W LED",
     features: [
-      "Full range of AC & DC chargers (7kW–400kW)",
+      "Integrated & split street light models",
+      "5m to 12m pole height options",
+      "50W to 120W LED power range",
       "Professional installation included",
       "Standard manufacturer warranty",
       "Basic on-site training for staff",
     ],
     fees: [
       { label: "Commission Fee", value: "None — one-time hardware purchase" },
-      { label: "CSMS Monthly", value: "Not included — use your own system" },
-      { label: "App Transaction Fee", value: "Not applicable — no app provided" },
+      { label: "Monthly Fee", value: "None — own the equipment outright" },
+      { label: "Maintenance", value: "Optional service plans available" },
     ],
     popular: false,
   },
   {
-    name: "Volthub Charger + App",
-    savings: "Save up to 20%",
-    price: "₱1,500",
-    detail: "per station / month",
-    subDetail: "5% commission · 2.5% app transaction fee",
+    name: "Solar + Storage Bundle",
+    savings: "Save up to 25%",
+    price: "₱2,500",
+    detail: "per kWh / month (leasing)",
+    subDetail: "5% monitoring fee · 2% transaction fee",
     features: [
-      "Full range of AC & DC chargers (7kW–400kW)",
-      "Professional installation & commissioning",
+      "Full range of solar panels & inverters",
+      "5kWh to 1800kWh battery storage options",
       "Admin dashboard with real-time monitoring",
-      "Branded mobile app for your end users",
-      "CSMS with OCPP 2.0 protocol support",
+      "Performance alerts & optimization",
+      "Net metering setup & utility coordination",
       "Priority technical support & extended warranty",
     ],
     fees: [
-      { label: "Commission Fee", value: "5% per transaction" },
-      { label: "CSMS Monthly", value: "₱1,500 / station / month (first 3 months waived)" },
-      { label: "App Transaction Fee", value: "2.5% per user payment" },
-      { label: "Payment Gateway", value: "Standard processor rates (~2.9% + ₱15)" },
+      { label: "Commission Fee", value: "5% per energy transaction" },
+      { label: "Monitoring Monthly", value: "₱500 / system / month" },
+      { label: "App Transaction Fee", value: "2% per payment transaction" },
+      { label: "Installation", value: "Included in upfront or lease terms" },
     ],
     popular: true,
   },
   {
-    name: "App Package Only",
-    savings: "Save up to 10%",
-    price: "₱2,000",
-    detail: "per station / month",
-    subDetail: "7% commission · ₱25,000 onboarding fee",
+    name: "Storage Only",
+    savings: "Save up to 15%",
+    price: "₱1,800",
+    detail: "per kWh / month (leasing)",
+    subDetail: "7% monitoring fee · 3% transaction fee",
     features: [
-      "CSMS dashboard with station monitoring",
-      "Branded mobile app for your end users",
-      "OCPP 2.0 integration with existing chargers",
-      "Revenue management & automated billing",
-      "Remote diagnostics & OTA firmware updates",
+      "Compatible with existing solar installations",
+      "5kWh to 1800kWh battery capacity range",
+      "Mobile & fixed storage system options",
+      "Remote monitoring & diagnostics",
+      "Load management & smart scheduling",
       "Standard email & chat support",
     ],
     fees: [
-      { label: "Commission Fee", value: "7% per transaction" },
-      { label: "CSMS Monthly", value: "₱2,000 / station / month" },
-      { label: "App Transaction Fee", value: "3% per user payment" },
-      { label: "Onboarding Fee", value: "₱25,000 one-time setup & integration" },
+      { label: "Commission Fee", value: "7% per energy transaction" },
+      { label: "Monitoring Monthly", value: "₱750 / system / month" },
+      { label: "App Transaction Fee", value: "3% per payment transaction" },
+      { label: "Onboarding Fee", value: "₱15,000 one-time setup & integration" },
     ],
     popular: false,
   },
 ];
 
-export default function EvChargingPackagesSection() {
+export default function SolarPackagesSection() {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
@@ -82,7 +84,7 @@ export default function EvChargingPackagesSection() {
             Discover Pricing
           </h2>
           <p className="text-gray-500">
-            Choose the right plan for your EV charging business
+            Choose the right plan for your solar energy needs
           </p>
         </div>
 
@@ -136,14 +138,12 @@ export default function EvChargingPackagesSection() {
           ))}
         </div>
 
-        {/* Footnote */}
         <p className="text-center text-xs text-gray-400 mt-8 max-w-2xl mx-auto leading-relaxed">
-          *Pricing is determined by your plan, location, and charger model. Specific pricing and full
-          terms are available during consultation. All fees subject to applicable taxes.
+          *Pricing is determined by your plan, location, and system specifications.
+          Specific pricing and full terms are available during consultation. All fees subject to applicable taxes.
         </p>
       </LayoutContainer>
 
-      {/* Modal */}
       {selected !== null && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
@@ -153,7 +153,6 @@ export default function EvChargingPackagesSection() {
             className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Modal Header */}
             <div className="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between rounded-t-2xl">
               <h3 className="text-lg font-bold text-gray-900">
                 {packages[selected].name}
@@ -166,9 +165,7 @@ export default function EvChargingPackagesSection() {
               </button>
             </div>
 
-            {/* Modal Body */}
             <div className="p-6 space-y-6">
-              {/* Features */}
               <div>
                 <h4 className="text-sm font-semibold text-gray-900 mb-3">
                   What&apos;s Included
@@ -176,14 +173,13 @@ export default function EvChargingPackagesSection() {
                 <ul className="space-y-2.5">
                   {packages[selected].features.map((feature, fIdx) => (
                     <li key={fIdx} className="flex items-start gap-3 text-sm">
-                      <RiCheckLine className="text-green-500 mt-0.5 shrink-0" />
+                      <RiCheckLine className="text-gray-400 mt-0.5 shrink-0" />
                       <span className="text-gray-700">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Fees & Terms */}
               <div>
                 <h4 className="text-sm font-semibold text-gray-900 mb-3">
                   Fees & Terms
@@ -200,9 +196,8 @@ export default function EvChargingPackagesSection() {
                 </div>
               </div>
 
-              {/* CTA */}
               <Link
-                href="/contact?interest=ev-charging-quote"
+                href="/contact?interest=solar-installation-quote"
                 className="block w-full bg-gray-900 text-white py-3 rounded-xl font-semibold text-sm text-center hover:bg-gray-800 transition-colors"
               >
                 Get Quote

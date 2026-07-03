@@ -1,5 +1,7 @@
+"use client";
+
+import { useState } from "react";
 import LayoutContainer from "@/components/layout/LayoutContainer";
-import SectionHeading from "@/components/marketing/SectionHeading";
 import {
   RiCheckLine,
   RiMapPinLine,
@@ -9,8 +11,17 @@ import {
   RiCustomerService2Line,
   RiFlashlightLine,
 } from "react-icons/ri";
+import type { IconType } from "react-icons";
 
-const services = [
+interface Service {
+  icon: IconType;
+  title: string;
+  subtitle: string;
+  desc: string;
+  features: string[];
+}
+
+const services: Service[] = [
   {
     icon: RiMapPinLine,
     title: "Site Assessment & Design",
@@ -92,53 +103,59 @@ const services = [
 ];
 
 export default function EvChargingOfferingsSection() {
+  const [active, setActive] = useState(0);
+
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-white">
       <LayoutContainer>
-        <div className="text-center mb-16">
-          <SectionHeading
-            title="Comprehensive EV Charging Services"
-            description="From initial consultation to ongoing maintenance, we handle every aspect of your EV charging infrastructure"
-          />
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+            Comprehensive EV Charging Services
+          </h2>
+          <p className="text-gray-500">
+            From initial consultation to ongoing maintenance, we handle every aspect of your EV charging infrastructure
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {services.map((service, idx) => (
-            <div
-              key={idx}
-              className="bg-white rounded-2xl shadow-md p-6 flex flex-col"
-            >
-              {/* Icon + Title row */}
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-full shrink-0">
-                  <service.icon className="text-xl text-blue-600" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-bold text-gray-900">
-                    {service.title}
-                  </h3>
-                  <p className="text-xs font-medium text-blue-600">
-                    {service.subtitle}
-                  </p>
-                </div>
-              </div>
+        <div className="max-w-5xl mx-auto grid md:grid-cols-[280px_1fr] gap-0 border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
+          {/* Left — Tab List */}
+          <div className="bg-gray-50 border-r border-gray-200">
+            {services.map((service, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActive(idx)}
+                className={`w-full text-left px-6 py-4 transition-colors duration-150 border-b border-gray-200 last:border-b-0 flex items-center gap-3 ${
+                  active === idx
+                    ? "bg-white text-gray-900 font-semibold"
+                    : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                <service.icon className="text-lg shrink-0" />
+                <span className="text-sm">{service.title}</span>
+              </button>
+            ))}
+          </div>
 
-              <p className="text-sm text-gray-600 leading-relaxed mb-4">
-                {service.desc}
-              </p>
-              <ul className="space-y-2 flex-1">
-                {service.features.map((feature, fIdx) => (
-                  <li
-                    key={fIdx}
-                    className="flex items-start gap-2 text-sm"
-                  >
-                    <RiCheckLine className="text-green-500 mt-0.5 shrink-0" />
-                    <span className="text-gray-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Right — Tab Content */}
+          <div className="bg-white p-8 md:p-10">
+            <p className="text-xs font-medium text-gray-400 uppercase tracking-wider mb-2">
+              {services[active].subtitle}
+            </p>
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">
+              {services[active].title}
+            </h3>
+            <p className="text-sm text-gray-500 leading-relaxed mb-8">
+              {services[active].desc}
+            </p>
+            <ul className="space-y-3">
+              {services[active].features.map((feature, fIdx) => (
+                <li key={fIdx} className="flex items-start gap-3 text-sm">
+                  <RiCheckLine className="text-gray-400 mt-0.5 shrink-0" />
+                  <span className="text-gray-700">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </LayoutContainer>
     </section>

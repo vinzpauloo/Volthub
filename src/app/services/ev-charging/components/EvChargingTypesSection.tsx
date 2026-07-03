@@ -1,11 +1,14 @@
+"use client";
+
+import { useState, createElement } from "react";
 import LayoutContainer from "@/components/layout/LayoutContainer";
-import SectionHeading from "@/components/marketing/SectionHeading";
+import Image from "next/image";
 import Link from "next/link";
 import {
   RiHome4Line,
   RiBuilding2Line,
+  RiCloseLine,
   RiCheckLine,
-  RiArrowRightLine,
   RiComputerLine,
   RiSmartphoneLine,
   RiBarChart2Line,
@@ -56,137 +59,212 @@ const businessFeatures = [
   "Commercial-grade durability with extended warranty",
 ];
 
+const chargers = [
+  {
+    icon: RiHome4Line,
+    name: "Home Charger",
+    subtitle: "Simple, reliable, plug-and-charge",
+    description:
+      "Designed for residential use — just plug in and charge. No app, no network, no complexity. Perfect for homeowners who want a straightforward charging experience at the best value.",
+    image: "/Product/EV/59.png",
+    features: homeFeatures,
+    notIncluded: homeNotIncluded,
+    hasPlatform: false,
+    rotate: "-rotate-2",
+    zIndex: "z-10",
+  },
+  {
+    icon: RiBuilding2Line,
+    name: "Business Charger",
+    subtitle: "OCPP-enabled, smart, scalable",
+    description:
+      "Built for commercial and fleet use with full OCPP 2.0 protocol support. Connect to any CSMS platform, manage multiple stations remotely, process payments, and scale your charging network with confidence.",
+    image: "/Product/EV/89.png",
+    features: businessFeatures,
+    notIncluded: [],
+    hasPlatform: true,
+    rotate: "rotate-2",
+    zIndex: "z-0",
+  },
+];
+
 export default function EvChargingTypesSection() {
+  const [selected, setSelected] = useState<number | null>(null);
+
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-20 bg-white">
       <LayoutContainer>
-        <div className="text-center mb-16">
-          <SectionHeading
-            title="Choose Your Charger"
-            description="Two distinct charger types built for different needs — find the right fit for your property"
-          />
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+            Choose Your Charger
+          </h2>
+          <p className="text-gray-500">
+            Two distinct charger types built for different needs — find the right fit for your property
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Home Charger */}
-          <div className="bg-white rounded-3xl border border-gray-200 p-8 flex flex-col">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 flex items-center justify-center bg-green-100 rounded-xl shrink-0">
-                <RiHome4Line className="text-2xl text-green-600" />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900">Home Charger</h3>
-                <p className="text-sm text-green-600 font-medium">Simple, reliable, plug-and-charge</p>
-              </div>
-            </div>
-
-            <p className="text-sm text-gray-600 leading-relaxed mb-6">
-              Designed for residential use — just plug in and charge. No app, no network, no complexity. Perfect for homeowners who want a straightforward charging experience.
-            </p>
-
-            <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">What&apos;s Included</h4>
-            <ul className="space-y-2 mb-6 flex-1">
-              {homeFeatures.map((f, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm">
-                  <RiCheckLine className="text-green-500 mt-0.5 shrink-0" />
-                  <span className="text-gray-700">{f}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="bg-gray-50 rounded-xl p-4 mb-6">
-              <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Not Included</h4>
-              <ul className="space-y-1.5">
-                {homeNotIncluded.map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
-                    <span className="mt-0.5 shrink-0">—</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <Link
-              href="/contact?interest=ev-charging-quote&subject=home-charger"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-green-600 hover:gap-3 transition-all"
+        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-0 md:-space-x-8">
+          {chargers.map((charger, idx) => (
+            <button
+              key={idx}
+              onClick={() => setSelected(idx)}
+              className={`${charger.rotate} ${charger.zIndex} group cursor-pointer bg-white rounded-2xl border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 hover:scale-[1.02] hover:z-20 overflow-hidden flex flex-col text-left`}
             >
-              <span>Get a Quote</span>
-              <RiArrowRightLine />
-            </Link>
-          </div>
-
-          {/* Business Charger */}
-          <div className="bg-white rounded-3xl border border-gray-200 p-8 flex flex-col">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-xl shrink-0">
-                <RiBuilding2Line className="text-2xl text-blue-600" />
+              {/* Image */}
+              <div className="relative h-48 bg-gray-50 overflow-hidden">
+                <Image
+                  src={charger.image}
+                  alt={charger.name}
+                  fill
+                  className="object-contain p-6 group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-900">Business Charger</h3>
-                <p className="text-sm text-blue-600 font-medium">OCPP-enabled, smart, scalable</p>
-              </div>
-            </div>
 
-            <p className="text-sm text-gray-600 leading-relaxed mb-6">
-              Built for commercial and fleet use with full OCPP 2.0 protocol support. Connect to any CSMS platform, manage multiple stations remotely, process payments, and scale your charging network.
-            </p>
-
-            <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Charger Features</h4>
-            <ul className="space-y-2 mb-8">
-              {businessFeatures.map((f, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm">
-                  <RiCheckLine className="text-blue-500 mt-0.5 shrink-0" />
-                  <span className="text-gray-700">{f}</span>
-                </li>
-              ))}
-            </ul>
-
-            <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">
-              Included Software Platform
-            </h4>
-
-            <div className="grid sm:grid-cols-2 gap-4 mb-6">
-              <div className="bg-gray-50 rounded-xl p-4">
-                <div className="flex items-center gap-2 mb-3">
-                  <RiComputerLine className="text-gray-600" />
-                  <h5 className="text-sm font-semibold text-gray-900">Admin Panel</h5>
+              {/* Content */}
+              <div className="p-6 flex flex-col flex-1">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-xl shrink-0">
+                    <charger.icon className="text-xl text-gray-700" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-gray-900">
+                      {charger.name}
+                    </h3>
+                    <p className="text-xs text-gray-500">{charger.subtitle}</p>
+                  </div>
                 </div>
-                <ul className="space-y-2.5">
-                  {adminFeatures.map((f, i) => (
-                    <li key={i} className="flex items-start gap-2 text-xs">
-                      <RiCheckLine className="text-gray-400 mt-0.5 shrink-0" />
-                      <span className="text-gray-600">{f.title}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
 
-              <div className="bg-gray-50 rounded-xl p-4">
-                <div className="flex items-center gap-2 mb-3">
-                  <RiSmartphoneLine className="text-gray-600" />
-                  <h5 className="text-sm font-semibold text-gray-900">Mobile App</h5>
-                </div>
-                <ul className="space-y-2.5">
-                  {appFeatures.map((f, i) => (
-                    <li key={i} className="flex items-start gap-2 text-xs">
-                      <RiCheckLine className="text-gray-400 mt-0.5 shrink-0" />
-                      <span className="text-gray-600">{f.title}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+                <p className="text-sm text-gray-500 leading-relaxed mb-4 flex-1">
+                  {charger.description}
+                </p>
 
-            <Link
-              href="/contact?interest=ev-charging-quote&subject=business-charger"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 hover:gap-3 transition-all"
-            >
-              <span>Get a Quote</span>
-              <RiArrowRightLine />
-            </Link>
-          </div>
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-gray-900 group-hover:gap-2 transition-all">
+                  <span>View Details</span>
+                  <span>→</span>
+                </span>
+              </div>
+            </button>
+          ))}
         </div>
       </LayoutContainer>
+
+      {/* Modal */}
+      {selected !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+          onClick={() => setSelected(null)}
+        >
+          <div
+            className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="sticky top-0 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between rounded-t-2xl">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 flex items-center justify-center bg-gray-100 rounded-xl">
+                  {createElement(chargers[selected].icon, { className: "text-xl text-gray-700" })}
+                </div>
+                <h3 className="text-lg font-bold text-gray-900">
+                  {chargers[selected].name}
+                </h3>
+              </div>
+              <button
+                onClick={() => setSelected(null)}
+                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+              >
+                <RiCloseLine className="text-xl" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-6 space-y-6">
+              <p className="text-sm text-gray-500 leading-relaxed">
+                {chargers[selected].description}
+              </p>
+
+              {/* Features */}
+              <div>
+                <h4 className="text-sm font-semibold text-gray-900 mb-3">
+                  What&apos;s Included
+                </h4>
+                <ul className="space-y-2.5">
+                  {chargers[selected].features.map((f, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm">
+                      <RiCheckLine className="text-gray-400 mt-0.5 shrink-0" />
+                      <span className="text-gray-700">{f}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Not Included */}
+              {chargers[selected].notIncluded.length > 0 && (
+                <div className="bg-gray-50 rounded-xl p-4">
+                  <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                    Not Included
+                  </h4>
+                  <ul className="space-y-1.5">
+                    {chargers[selected].notIncluded.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
+                        <span className="mt-0.5 shrink-0">—</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Platform (Business only) */}
+              {chargers[selected].hasPlatform && (
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-900 mb-4">
+                    Included Software Platform
+                  </h4>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div className="bg-gray-50 rounded-xl p-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <RiComputerLine className="text-gray-500" />
+                        <h5 className="text-sm font-semibold text-gray-900">Admin Panel</h5>
+                      </div>
+                      <ul className="space-y-2.5">
+                        {adminFeatures.map((f, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs">
+                            <RiCheckLine className="text-gray-400 mt-0.5 shrink-0" />
+                            <span className="text-gray-600">{f.title}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="bg-gray-50 rounded-xl p-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <RiSmartphoneLine className="text-gray-500" />
+                        <h5 className="text-sm font-semibold text-gray-900">Mobile App</h5>
+                      </div>
+                      <ul className="space-y-2.5">
+                        {appFeatures.map((f, i) => (
+                          <li key={i} className="flex items-start gap-2 text-xs">
+                            <RiCheckLine className="text-gray-400 mt-0.5 shrink-0" />
+                            <span className="text-gray-600">{f.title}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* CTA */}
+              <Link
+                href="/contact?interest=ev-charging-quote"
+                className="block w-full bg-gray-900 text-white py-3 rounded-xl font-semibold text-sm text-center hover:bg-gray-800 transition-colors"
+              >
+                Get Quote
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
