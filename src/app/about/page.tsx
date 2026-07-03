@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 import OverviewSection from "./components/OverviewSection";
 import MissionVisionSection from "./components/MissionVisionSection";
-import WhoWeAreSection from "./components/WhoWeAreSection";
-import WhatWeDoSection from "./components/WhatWeDoSection";
+// import WhoWeAreSection from "./components/WhoWeAreSection";
+// import WhatWeDoSection from "./components/WhatWeDoSection";
 import HistorySection from "./components/HistorySection";
-import LeadershipStatsSection from "./components/LeadershipStatsSection";
+// import LeadershipStatsSection from "./components/LeadershipStatsSection";
 import CompanyInformationSection from "./components/CompanyInformationSection";
-import MarketInsightsSection from "./components/MarketInsightsSection";
+// import MarketInsightsSection from "./components/MarketInsightsSection";
 import SectionHeading from "@/components/marketing/SectionHeading";
 import BackToTopButton from "@/components/common/BackToTopButton";
 
@@ -68,13 +68,14 @@ export default function About() {
           <OverviewSection />
           <MissionVisionSection />
         </div>
-        <WhoWeAreSection />
-        <WhatWeDoSection />
-        <LeadershipStatsSection />
+             <HistorySection />
+        {/* <WhoWeAreSection />
+        <WhatWeDoSection /> */}
+        {/* <LeadershipStatsSection /> */}
         <CompanyInformationSection />
         {/* <OperationsCarouselSection /> */}
-        <MarketInsightsSection />
-        <HistorySection />
+        {/* <MarketInsightsSection /> */}
+   
         {/* <PartnershipsSection /> */}
       </LayoutContainer>
       <BackToTopButton />

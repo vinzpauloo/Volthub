@@ -1,43 +1,63 @@
+import Image from "next/image";
+
 export default function MissionVisionSection() {
   return (
-    <div className="grid md:grid-cols-2 gap-6">
-      <div className="bg-white rounded-none md:rounded-3xl shadow-lg p-6 md:p-8 border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-        <div className="flex items-center justify-center mb-6">
-          <div className="w-16 h-1 bg-linear-to-r from-primary via-accent to-secondary rounded-full"></div>
-        </div>
-        <h3 className="text-3xl font-bold text-primary mb-6 text-center gradient-text">
-          MISSION
-        </h3>
-        <p className="text-gray-700 leading-relaxed text-lg">
-          <span className="font-bold text-gray-900">
-            Volthub Electric Power Generation Services Corporation
-          </span>{" "}
-          is committed to revolutionizing the energy sector by delivering
-          cutting-edge electronic solutions for power generation. We specialize
-          in sustainable, efficient, and smart energy technologies that empower
-          industries, homes, and communities with reliable, cost-effective
-          electricity. Our mission is to foster a cleaner energy future through
-          the integration of renewable sources, smart grid technology, and
-          energy storage solutions.
-        </p>
-      </div>
+    <section className="py-8 md:py-12">
+    
 
-      <div className="bg-white rounded-none md:rounded-3xl shadow-lg p-6 md:p-8 border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-        <div className="flex items-center justify-center mb-6">
-          <div className="w-16 h-1 bg-linear-to-r from-secondary via-accent to-primary rounded-full"></div>
+      {/* ── Mission (left) + Vision (right) with images ── */}
+      <div className="grid md:grid-cols-2 gap-10 md:gap-16">
+
+        {/* Mission */}
+        <div className="relative w-full aspect-[4/3]  overflow-hidden group">
+          <Image
+            src="/About/Mission.png"
+            alt="VoltHub mission — delivering clean energy today"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-200 mb-2">
+              Our Mission — What We Do Today
+            </p>
+            <p className="text-white text-base md:text-lg leading-relaxed">
+              We deliver turnkey EV charging and solar energy systems to
+              businesses, property developers, and homeowners across the
+              Philippines — handling everything from engineering and
+              installation to ongoing maintenance. Every project we ship
+              today makes one more site energy-independent.
+            </p>
+          </div>
         </div>
-        <h3 className="text-3xl font-bold text-primary mb-6 text-center gradient-text">
-          VISION
-        </h3>
-        <p className="text-gray-700 leading-relaxed text-lg">
-          To be a global leader in electric power generation, pioneering advanced
-          technologies that redefine energy production. We aim to lead the
-          transition to renewable energy, delivering smart, scalable solutions that
-          foster sustainability, enhance grid stability, and contribute to a
-          brighter, cleaner future for all.
-        </p>
+
+        {/* Vision */}
+        <div className="relative w-full aspect-[4/3]  overflow-hidden group">
+          <Image
+            src="/About/Vission.png"
+            alt="VoltHub vision — building the future of clean energy in the Philippines"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+          <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-200 mb-2">
+              Our Vision — The Future We&apos;re Building
+            </p>
+            <p className="text-white text-base md:text-lg leading-relaxed">
+              A Philippines where every major parking lot is a charging hub,
+              every commercial rooftop is a power plant, and no business loses
+              revenue to a blackout. By 2030, we aim to be the country&apos;s most
+              trusted clean-energy infrastructure partner — powering the fleet
+              electrification wave with solar-backed, grid-resilient charging
+              networks from Luzon to Mindanao.
+            </p>
+          </div>
+        </div>
+
       </div>
-    </div>
+    </section>
   );
 }
-
