@@ -575,3 +575,111 @@ export const projectCases = [
   },
 ];
 
+// Article Showcases — simple article layout with real installation photos & implementation details
+export interface ArticleShowcase {
+  badge: string;
+  title: string;
+  titleHighlight: { text: string; color: string };
+  description: string;
+  /** Real installation / project photo */
+  image: string;
+  imageAlt: string;
+  /** Override object-fit — defaults to "cover" */
+  imageFit?: "cover" | "contain";
+  /** How we implement / what the service includes */
+  implementationSteps: { step: string; detail: string }[];
+  ctaText: string;
+  ctaLink: Route;
+}
+
+export const articleShowcases: ArticleShowcase[] = [
+  {
+    badge: "Commercial EV Infrastructure",
+    title: "How We Build Reliable, Revenue-Grade EV Infrastructure for Your Business",
+    titleHighlight: { text: "", color: "text-green-600" },
+    description:
+      "We design, install, and commission high-throughput dual-gun DC fast chargers for commercial hubs, fleet depots, and public charging networks. Each deployment is backed by real-time monitoring and on-site acceptance testing to ensure revenue-grade uptime from day one. Our dual-gun units let you charge two vehicles simultaneously or deliver full power to a single bay, maximising both throughput and flexibility. From the initial walkthrough to the final handover, every step is executed by certified local engineers who understand Philippine grid conditions and site constraints.",
+    image: "/Article/article_1.jpg",
+    imageAlt: "VoltHub EV DC fast charger installed at a commercial charging site in the Philippines",
+    implementationSteps: [
+      {
+        step: "Site Survey & Load Study",
+        detail: "Our engineers conduct a full electrical load assessment and spatial survey to size the charger and plan cable routing before any equipment ships. We also check your existing transformer capacity and recommend upgrades if needed, so you never face surprises at commissioning.",
+      },
+      {
+        step: "Civil Works & Trenching",
+        detail: "We handle concrete pads, cable trenches, and mounting pedestals — all coordinated with your facilities team to minimise disruption to daily operations. Every civil package is pre-approved with engineering drawings before a single shovel hits the ground.",
+      },
+      {
+        step: "Installation & Commissioning",
+        detail: "Certified technicians install the unit, terminate power and data cabling, then run a full acceptance test protocol including OCPP backend registration and load-bank verification. We do not leave site until both guns deliver rated power under real-world test conditions.",
+      },
+      {
+        step: "Handover & Training",
+        detail: "Your operations team receives a comprehensive half-day training session covering daily health checks, the remote monitoring dashboard, common fault diagnosis, and our escalation paths. A laminated quick-reference card stays on site for your shift staff.",
+      },
+    ],
+    ctaText: "Get a Quote for DC Fast Charging",
+    ctaLink: "/contact" as Route,
+  },
+  {
+    badge: "Smart App Integration",
+    title: "Smart App Integration: Your Complete EV Franchise ",
+    titleHighlight: { text: "Control Center", color: "text-green-600" },
+    description:
+      "We don't just deliver premium hardware — we hand you the keys to a fully integrated digital ecosystem. Every smart charging unit links seamlessly with our local mobile application and powerful backend cloud architecture. Whether you are running a single private station at home, offering charging as an amenity for your retail business, or launching a massive multi-location commercial franchise, you retain absolute control over how your infrastructure operates and earns.",
+    image: "/Article/article_2.png",
+    imageAlt: "VoltHub smart app integration — complete EV franchise control center dashboard",
+    imageFit: "contain",
+    implementationSteps: [
+      {
+        step: "The Driver Experience: Smooth App Control",
+        detail: "",
+      },
+      {
+        step: "The Admin Dashboard: Remote 24/7 Monitoring",
+        detail: "",
+      },
+      {
+        step: "Smart Franchise Tools: Dynamic Revenue Creation",
+        detail: "",
+      },
+      {
+        step: "Future-Proof Efficiency: Load Management & Compliance",
+        detail: "",
+      },
+    ],
+    ctaText: "Explore the Smart App Platform",
+    ctaLink: "/contact" as Route,
+  },
+  {
+    badge: "Solar & Energy Storage",
+    title: "Eliminate Soaring Power Bills with Hybrid and Off-Grid ",
+    titleHighlight: { text: "Solar Infrastructure", color: "text-green-600" },
+    description:
+      "Relying entirely on the traditional electrical grid leaves your property or business vulnerable to rising power rates and unexpected blackouts. Our custom-engineered Solar PV and Smart Battery Storage setups are built to give you absolute energy autonomy. From residential roofs and commercial office hubs to entirely self-sustaining, off-grid agricultural farms, we design robust power systems tailored to your unique energy demands and spatial layout.",
+    image: "/aboutimages/solarpanels.jpg",
+    imageAlt: "VoltHub hybrid and off-grid solar infrastructure installation in the Philippines",
+    implementationSteps: [
+      {
+        step: "Residential Homes: Smart Hybrid Savings",
+        detail: "Protect your household budget from fluctuating electricity tariffs. Our residential hybrid solar configurations power your daily appliances directly from the sun while seamlessly shifting to high-capacity battery storage during peak evening hours or sudden grid outages. Save up to 80% on your monthly power bills while ensuring continuous peace of mind for your family.",
+      },
+      {
+        step: "Commercial Hubs: Peak-Demand Management",
+        detail: "For commercial buildings and retail spaces, energy overhead is a massive operating expense. Our large-scale commercial solar setups are engineered to drastically shave down peak-demand charges. By integrating smart energy management software, your facility automatically coordinates when to draw power from the panels, your stored batteries, or the municipal grid to lock in the lowest possible rates.",
+      },
+      {
+        step: "Off-Grid Farms & Rural Projects: Uninterrupted Productivity",
+        detail: "Agriculture and remote rural facilities cannot afford downtime from weak or non-existent grid infrastructure. Our rugged off-grid and hybrid agricultural solar setups reliably pump water, power irrigation systems, run processing equipment, and maintain cold storage without relying on costly diesel generators. Achieve true energy self-sufficiency right where your operations need it most.",
+      },
+      {
+        step: "Advanced Battery Storage: Power When You Need It",
+        detail: "Solar panels are only half the equation. Every installation is backed by scalable lithium battery banks and intelligent smart-grid controllers. Instead of letting excess daytime energy go to waste, our systems efficiently capture and store every single kilowatt, allowing you to use your clean, free solar power 24 hours a day, rain or shine.",
+      },
+    ],
+    ctaText: "Calculate Your Solar Energy ROI →",
+    ctaLink: "/tools/roi-calculator" as Route,
+  },
+];
+

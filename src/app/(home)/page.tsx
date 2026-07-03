@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import CarouselBanner from "@/components/home/CarouselBanner";
 import HoverEffects from "@/components/home/HoverEffects";
-// import ProductShowcase from "./components/ProductShowcase";
-import ProductGridShowcase from "./components/ProductGridShowcase";
+import ArticleShowcaseSection from "./components/ArticleShowcaseSection";
+// import ProductGridShowcase from "./components/ProductGridShowcase";
 import RecommendedProducts from "./components/RecommendedProducts";
 import BlogResourcesSection from "./components/BlogResourcesSection";
 import StatsSection from "./components/StatsSection";
@@ -18,7 +18,7 @@ import ProjectCasesSection from "./components/ProjectCasesSection";
 import {
   carouselSlides,
   stats,
-  productShowcases,
+  articleShowcases,
   // howItWorksSteps,
   // userSegments,
   // testimonials,
@@ -53,22 +53,8 @@ export default function Home() {
       {/* Carousel Banner */}
       <CarouselBanner slides={carouselSlides} autoPlay={true} autoPlayInterval={6000} />
 
-      {/* Product Grid Showcase - Combined Section */}
-      <ProductGridShowcase
-        products={productShowcases.map((showcase) => ({
-          badge: showcase.badge,
-          badgeColor: showcase.badgeColor,
-          title: showcase.title,
-          titleParts: showcase.titleParts,
-          description: showcase.description,
-          image: showcase.image,
-          imageAlt: showcase.imageAlt,
-          imageHasCopy: showcase.imageHasCopy ?? false,
-          coverPosition: showcase.coverPosition,
-          ctaLink: showcase.ctas[0].href,
-          gradientColors: showcase.gradientColors,
-        }))}
-      />
+      {/* Article Showcase — F-Pattern layout with real installation photos & implementation data */}
+      <ArticleShowcaseSection articles={articleShowcases} />
 
       <RecommendedProducts />
 
