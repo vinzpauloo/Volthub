@@ -84,7 +84,7 @@ export default function EvChargingTypesSection() {
               Designed for residential use — just plug in and charge. No app, no network, no complexity. Perfect for homeowners who want a straightforward charging experience.
             </p>
 
-            <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">What's Included</h4>
+            <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">What&apos;s Included</h4>
             <ul className="space-y-2 mb-6 flex-1">
               {homeFeatures.map((f, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm">

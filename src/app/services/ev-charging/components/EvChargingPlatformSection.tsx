@@ -3,7 +3,6 @@ import SectionHeading from "@/components/marketing/SectionHeading";
 import {
   RiComputerLine,
   RiSmartphoneLine,
-  RiCheckLine,
   RiBarChart2Line,
   RiChargingPile2Line,
   RiUserSettingsLine,

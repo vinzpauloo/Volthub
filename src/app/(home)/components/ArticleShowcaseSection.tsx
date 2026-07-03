@@ -78,7 +78,7 @@ export default function ArticleShowcaseSection({ articles }: ArticleShowcaseSect
         </div>
 
         {/* ── Bottom CTA — clean gradient bar ── */}
-        <div className="mt-24 md:mt-32">
+        {/* <div className="mt-24 md:mt-32">
           <div className="rounded-2xl bg-gradient-to-r from-primary to-accent px-8 py-12 md:px-14 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-center md:text-left">
               <h3 className="text-2xl md:text-3xl font-extrabold text-white leading-tight max-w-lg">
@@ -98,7 +98,7 @@ export default function ArticleShowcaseSection({ articles }: ArticleShowcaseSect
               <RiArrowRightLine className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-        </div>
+        </div> */}
       </LayoutContainer>
     </section>
   );
