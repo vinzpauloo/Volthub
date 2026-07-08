@@ -148,17 +148,19 @@ export default function ProductDetailB2B({
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mt-2 mb-2">
                 {displayProductName}
               </h1>
-              <p className="text-base md:text-lg text-slate-600 mb-3">{product.subtitle}</p>
-              
+              {/* [BACKEND-TODO] — Restore subtitle when backend provides it */}
+              {/* <p className="text-base md:text-lg text-slate-600 mb-3">{product.subtitle}</p> */}
+
+              {/* [BACKEND-TODO] — Restore SKU/Model Number when productDetails is available */}
               {/* SKU/Model Number - Critical for B2B */}
-              {details?.specifications?.find(s => s.label.toLowerCase().includes("model") || s.label.toLowerCase().includes("product name")) && (
+              {/* {details?.specifications?.find(s => s.label.toLowerCase().includes("model") || s.label.toLowerCase().includes("product name")) && (
                 <div className="bg-slate-50 rounded-lg p-3 border border-slate-200">
                   <div className="text-xs text-slate-500 font-medium mb-1">Model / SKU</div>
                   <div className="text-base font-mono font-semibold text-slate-900">
                     {details.specifications.find(s => s.label.toLowerCase().includes("model") || s.label.toLowerCase().includes("product name"))?.value || product.id}
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
 
             {/* 2. Certifications - Paramount for Government Buyers */}
@@ -192,8 +194,9 @@ export default function ProductDetailB2B({
               </div>
             </div>
 
+            {/* [BACKEND-TODO] — Restore Configuration & Volume when backend provides product_skus */}
             {/* 4. Configuration & Volume - Technical Dropdowns */}
-            {selectableVariations.length > 0 && (
+            {/* {selectableVariations.length > 0 && (
               <div className="pt-2 border-t border-slate-200">
                 <label className="block text-sm md:text-base font-semibold text-slate-900 mb-3">
                   Technical Configuration
@@ -210,14 +213,14 @@ export default function ProductDetailB2B({
                     const lvxcMatch = variant.name.match(/(LVXC-\d+)/i);
                     const kWhMatch = variant.name.match(/(\d+\s*kWh)/i);
                     const kwMatch = variant.name.match(/(\d+\s*kW?)/i);
-                    
+
                     if (f2Match) label = f2Match[1].toUpperCase();
                     else if (lvq2Match) label = lvq2Match[1].toUpperCase();
                     else if (lvxcMatch) label = lvxcMatch[1].toUpperCase();
                     else if (kWhMatch) label = kWhMatch[1];
                     else if (kwMatch) label = kwMatch[1];
                     else label = variant.name.split("–")[0]?.trim() || variant.name;
-                    
+
                     return (
                       <option key={variant.name} value={idx}>
                         {label}
@@ -226,7 +229,7 @@ export default function ProductDetailB2B({
                   })}
                 </select>
               </div>
-            )}
+            )} */}
 
             {/* Bulk Quantity Input - For RFQ */}
             <div className="pt-2 border-t border-slate-200">
@@ -253,7 +256,7 @@ export default function ProductDetailB2B({
             <div className="pt-2 border-t border-slate-200 space-y-3">
               {/* Primary Action - Request RFQ */}
               <Link
-                href={`/contact?subject=rfq&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(displayProductName)}&quantity=${quantity}&model=${encodeURIComponent(details?.specifications?.find(s => s.label.toLowerCase().includes("model"))?.value || product.id)}`}
+                href={`/contact?subject=rfq&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(displayProductName)}&quantity=${quantity}&model=${encodeURIComponent(product.sku_code || product.id)}`}
                 className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-white font-bold px-6 py-4 md:py-5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-lg md:text-xl group"
               >
                 <span>Request a Quote (RFQ)</span>

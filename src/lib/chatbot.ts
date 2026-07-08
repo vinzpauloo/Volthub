@@ -2,9 +2,21 @@
 // import { products, productDetails, getProductById, type Product } from "@/app/products/components/productData";
 import type { Product } from "@/app/products/components/productData";
 
+// [BACKEND-TODO] — Local type extensions; remove when Product type is enriched
+interface ProductWithExtras extends Product {
+  subtitle?: string;
+  tag?: string;
+}
+interface ProductDetails {
+  description?: string;
+  specifications?: { label: string; value: string }[];
+  features?: string[];
+  variations?: { name: string; value: string; description?: string }[];
+}
+
 // [BACKEND-TODO] — Stubs; remove when hardcoded data is restored
 const products: Product[] = [];
-const productDetails: Record<string, unknown> = {};
+const productDetails: Record<string, ProductDetails> = {};
 function getProductById(_id: string): Product | undefined { return undefined; }
 
 // Company information knowledge base
@@ -58,7 +70,8 @@ function findMatchingProducts(query: string): Product[] {
   
   return products.filter(product => {
     const productName = normalizeText(product.name);
-    const productTag = normalizeText(product.tag || '');
+    // [BACKEND-TODO] — Restore product.tag when Product type is enriched
+    const productTag = normalizeText((product as ProductWithExtras).tag || '');
     const productCategory = normalizeText(product.category);
     
     // Check for exact product name match (highest priority)
@@ -102,7 +115,7 @@ function getProductSpecs(product: Product): string {
   let info = `**${product.name}**\n\n**Specifications:**\n`;
   
   if (details?.specifications && details.specifications.length > 0) {
-    details.specifications.forEach(spec => {
+    details.specifications.forEach((spec: { label: string; value: string }) => {
       info += `• ${spec.label}: ${spec.value}\n`;
     });
   } else {
@@ -118,7 +131,7 @@ function getProductFeatures(product: Product): string {
   let info = `**${product.name}**\n\n**Features:**\n`;
   
   if (details?.features && details.features.length > 0) {
-    details.features.forEach(feature => {
+    details.features.forEach((feature: string) => {
       info += `• ${feature}\n`;
     });
   } else {
@@ -133,8 +146,9 @@ function getProductOverview(product: Product): string {
   const details = productDetails[product.id];
   let info = `**${product.name}**\n`;
   
-  if (product.subtitle) {
-    info += `${product.subtitle}\n\n`;
+  // [BACKEND-TODO] — Restore product.subtitle when Product type is enriched
+  if ((product as ProductWithExtras).subtitle) {
+    info += `${(product as ProductWithExtras).subtitle}\n\n`;
   }
 
   if (details?.description) {
@@ -145,7 +159,7 @@ function getProductOverview(product: Product): string {
 
   if (details?.variations && details.variations.length > 0) {
     info += `**Available Models/Variations:**\n`;
-    details.variations.slice(0, 5).forEach(variation => {
+    details.variations.slice(0, 5).forEach((variation: { name: string; value: string }) => {
       info += `• ${variation.name}: ${variation.value}\n`;
     });
     if (details.variations.length > 5) {
@@ -170,7 +184,7 @@ function getApplicableSpaces(product: Product): string {
   const isContainerProduct = product.id === "container-con1";
   
   // Get use cases from variations if available
-  const useCases = details?.variations?.find(v => v.name.toLowerCase().includes("use case") || v.name.toLowerCase().includes("typical use"));
+  const useCases = details?.variations?.find((v: { name: string; value: string }) => v.name.toLowerCase().includes("use case") || v.name.toLowerCase().includes("typical use"));
   
   if (useCases) {
     info += `**Typical Uses:**\n${useCases.value}\n\n`;
@@ -279,8 +293,9 @@ function getRelatedProducts(product: Product): string {
   
   relatedProducts.slice(0, 8).forEach(related => {
     info += `• **${related.name}**`;
-    if (related.subtitle) {
-      info += ` - ${related.subtitle}`;
+    // [BACKEND-TODO] — Restore related.subtitle when Product type is enriched
+    if ((related as ProductWithExtras).subtitle) {
+      info += ` - ${(related as ProductWithExtras).subtitle}`;
     }
     info += `\n`;
   });
@@ -299,8 +314,9 @@ function getProductInfo(product: Product): string {
   const details = productDetails[product.id];
   let info = `**${product.name}**\n`;
 
-  if (product.subtitle) {
-    info += `${product.subtitle}\n\n`;
+  // [BACKEND-TODO] — Restore product.subtitle when Product type is enriched
+  if ((product as ProductWithExtras).subtitle) {
+    info += `${(product as ProductWithExtras).subtitle}\n\n`;
   }
 
   if (details?.description) {
@@ -311,7 +327,7 @@ function getProductInfo(product: Product): string {
   
   if (details?.specifications && details.specifications.length > 0) {
     info += `**Key Specifications:**\n`;
-    details.specifications.slice(0, 5).forEach(spec => {
+    details.specifications.slice(0, 5).forEach((spec: { label: string; value: string }) => {
       info += `• ${spec.label}: ${spec.value}\n`;
     });
     if (details.specifications.length > 5) {
@@ -322,7 +338,7 @@ function getProductInfo(product: Product): string {
   
   if (details?.features && details.features.length > 0) {
     info += `**Key Features:**\n`;
-    details.features.slice(0, 5).forEach(feature => {
+    details.features.slice(0, 5).forEach((feature: string) => {
       info += `• ${feature}\n`;
     });
     if (details.features.length > 5) {
@@ -432,7 +448,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
     const productNameWords = normalizeText(contextProduct.name).split(/\s+/);
     const queryWords = normalizedMessage.split(/\s+/).filter(w => w.length > 2);
     const productKeywords = normalizeText(
-      `${contextProduct.name} ${contextProduct.subtitle} ${contextProduct.tag || ''}`
+      `${contextProduct.name} ${(contextProduct as ProductWithExtras).subtitle || ''} ${(contextProduct as ProductWithExtras).tag || ''}`
     );
     
     const isAboutCurrentProduct = 
@@ -501,7 +517,7 @@ export function generateAIResponse(userMessage: string, productId?: string | nul
       let response = `I found ${matchingProducts.length} products matching your query:\n\n`;
       matchingProducts.slice(0, 5).forEach(product => {
         response += `**${product.name}**\n`;
-        if (product.subtitle) response += `${product.subtitle}\n`;
+        if ((product as ProductWithExtras).subtitle) response += `${(product as ProductWithExtras).subtitle}\n`;
         response += `\n`;
       });
       if (matchingProducts.length > 5) {

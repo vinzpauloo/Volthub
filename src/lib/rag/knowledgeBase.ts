@@ -7,9 +7,21 @@
 // import { products, productDetails, getProductById, type Product } from "@/app/products/components/productData";
 import type { Product } from "@/app/products/components/productData";
 
+// [BACKEND-TODO] — Local type extensions; remove when Product type is enriched
+interface ProductWithExtras extends Product {
+  subtitle?: string;
+  tag?: string;
+}
+interface ProductDetails {
+  description?: string;
+  specifications?: { label: string; value: string }[];
+  features?: string[];
+  variations?: { name: string; value: string; description?: string }[];
+}
+
 // [BACKEND-TODO] — Stubs; remove when hardcoded data is restored
 const products: Product[] = [];
-const productDetails: Record<string, unknown> = {};
+const productDetails: Record<string, ProductDetails> = {};
 function getProductById(_id: string): Product | undefined { return undefined; }
 
 // Re-export getProductById for use in API route
@@ -95,10 +107,10 @@ For inquiries, support, returns, warranties, or any questions, please contact us
     
     // Product overview chunk
     let productContent = `Product: ${product.name}`;
-    if (product.subtitle) productContent += `\nSubtitle: ${product.subtitle}`;
+    if ((product as ProductWithExtras).subtitle) productContent += `\nSubtitle: ${(product as ProductWithExtras).subtitle}`;
     if (product.description) productContent += `\nDescription: ${product.description}`;
     // Price data intentionally excluded — inquiry-only pricing model
-    if (product.tag) productContent += `\nTag: ${product.tag}`;
+    if ((product as ProductWithExtras).tag) productContent += `\nTag: ${(product as ProductWithExtras).tag}`;
     productContent += `\nCategory: ${product.category}`;
 
     if (details?.description) {
@@ -108,7 +120,7 @@ For inquiries, support, returns, warranties, or any questions, please contact us
     // Specifications
     if (details?.specifications && details.specifications.length > 0) {
       productContent += `\nSpecifications:`;
-      details.specifications.forEach(spec => {
+      details.specifications.forEach((spec: { label: string; value: string }) => {
         productContent += `\n- ${spec.label}: ${spec.value}`;
       });
     }
@@ -121,7 +133,7 @@ For inquiries, support, returns, warranties, or any questions, please contact us
     // Variations
     if (details?.variations && details.variations.length > 0) {
       productContent += `\nAvailable Variations:`;
-      details.variations.forEach(variation => {
+      details.variations.forEach((variation: { name: string; value: string; description?: string }) => {
         productContent += `\n- ${variation.name}: ${variation.value}`;
         if (variation.description) {
           productContent += ` (${variation.description})`;
@@ -137,7 +149,7 @@ For inquiries, support, returns, warranties, or any questions, please contact us
         productId: product.id,
         productName: product.name,
         category: product.category,
-        tags: product.tag ? [product.tag] : []
+        tags: (product as ProductWithExtras).tag ? [(product as ProductWithExtras).tag] : []
       }
     });
 
