@@ -18,6 +18,7 @@ const useMedia = (
   const [value, setValue] = useState<number>(defaultValue);
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- subscribing to matchMedia external store */
     const get = () => {
       if (typeof window === "undefined" || !window.matchMedia) {
         return defaultValue;
@@ -25,7 +26,7 @@ const useMedia = (
       return values[queries.findIndex((q) => window.matchMedia(q).matches)] ?? defaultValue;
     };
 
-    // Set initial value on client side
+    // Set initial value on client side — subscribing to matchMedia external store
     setValue(get());
     
     const handler = () => setValue(get());
@@ -41,6 +42,7 @@ const useMedia = (
         }
       });
     };
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [queries, values, defaultValue]);
 
   return value;

@@ -70,6 +70,7 @@ const SplitText: React.FC<SplitTextProps> = ({
   const textContent = extractTextContent(text);
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- subscribing to document.fonts external API */
     if (document.fonts.status === "loaded") {
       setFontsLoaded(true);
     } else {
@@ -77,9 +78,11 @@ const SplitText: React.FC<SplitTextProps> = ({
         setFontsLoaded(true);
       });
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- derived state gated by fontsLoaded */
     if (!fontsLoaded) return;
     if (appearDelayMs <= 0) {
       setRevealReady(true);
@@ -87,6 +90,7 @@ const SplitText: React.FC<SplitTextProps> = ({
     }
     const id = window.setTimeout(() => setRevealReady(true), appearDelayMs);
     return () => window.clearTimeout(id);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [fontsLoaded, appearDelayMs]);
 
   useGSAP(

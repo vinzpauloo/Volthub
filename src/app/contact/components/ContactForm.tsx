@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import type React from "react";
 import { useSearchParams } from "next/navigation";
@@ -8,11 +8,128 @@ import LayoutContainer from "@/components/layout/LayoutContainer";
 import { philippineRegions, interestOptions, socialIcons } from "./contactData";
 import ContactHeader from "./ContactHeader";
 import ContactInfo from "./ContactInfo";
-// import { Card, CardContent } from "@/components/ui/card";
 
-export default function ContactForm() {
-  const searchParams = useSearchParams();
-  const [formState, setFormState] = useState({
+// Helper: get dropdown position from a ref (called from event handlers, not render)
+function getDropdownPosition(ref: React.RefObject<HTMLDivElement | null>) {
+  if (!ref.current) return null;
+  const rect = ref.current.getBoundingClientRect();
+  return { top: rect.bottom + 8, left: rect.left, width: rect.width };
+}
+
+// Compute initial form state from URL search params (called during render, not effect)
+function computeInitialFormState(
+  searchParams: ReturnType<typeof useSearchParams>
+): {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  region: string;
+  province: string;
+  city: string;
+  interest: string;
+  details: string;
+  isDetailsReadOnly: boolean;
+} {
+  const subject = searchParams.get("subject");
+  const interest = searchParams.get("interest");
+  const product = searchParams.get("product");
+  const model = searchParams.get("model");
+  const productName = searchParams.get("productName");
+  const quantity = searchParams.get("quantity");
+  const details = searchParams.get("details");
+
+  let computedInterest = "";
+  let computedDetails = "";
+  let isDetailsReadOnly = false;
+
+  if (interest) {
+    computedInterest = interest;
+
+    if (subject === "quote") {
+      const interestLabels: Record<string, string> = {
+        "residential-solutions": "Residential Solutions",
+        "commercial-solutions": "Commercial Solutions",
+        "industrial-solutions": "Industrial Solutions",
+        "rural-projects": "Rural Projects",
+        "ev-charging-quote": "EV Charging",
+        "solar-installation-quote": "Solar Installation",
+        "general-inquiry": "General Inquiry",
+      };
+      const interestLabel = interestLabels[interest] || interest.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+      computedDetails = `I would like to request a quote for ${interestLabel}. Please contact me with pricing and availability information.`;
+    } else if (subject === "installation") {
+      const interestLabels: Record<string, string> = {
+        "residential-solutions": "Residential Solutions",
+        "commercial-solutions": "Commercial Solutions",
+        "industrial-solutions": "Industrial Solutions",
+        "rural-projects": "Rural Projects",
+        "ev-charging-installation": "EV Charging Installation",
+        "solar-energy-installation": "Solar Energy Installation",
+      };
+      const interestLabel = interestLabels[interest] || interest.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
+      computedDetails = `I would like to request installation for ${interestLabel}. Please contact me to discuss installation options and scheduling.`;
+    } else if (subject === "consultation") {
+      computedDetails = `I would like to schedule a consultation. Please contact me to arrange a meeting.`;
+    }
+  } else if (subject === "installation" || subject === "quote" || subject === "consultation") {
+    if (product) {
+      if (product.includes("ev") || product.includes("charging")) {
+        computedInterest = subject === "installation" ? "ev-charging-installation" : "ev-charging-station";
+      } else if (product.includes("solar")) {
+        if (productName && productName.toLowerCase().includes("street")) {
+          computedInterest = subject === "installation" ? "street-light-installation" : "solar-street-lights";
+        } else {
+          computedInterest = subject === "installation" ? "solar-energy-installation" : "solar-energy-installation";
+        }
+      } else if (product.includes("storage") || product.includes("battery") || product.includes("smart-home")) {
+        computedInterest = subject === "installation" ? "energy-storage-installation" : "smart-home-ips";
+      } else if (product.includes("cabinet")) {
+        computedInterest = "cabinet-type-power-supply";
+      } else if (product.includes("container")) {
+        computedInterest = "container-type-power-supply";
+      }
+    }
+
+    let detailsText = "";
+    if (subject === "installation") {
+      detailsText = "I would like to request installation for ";
+    } else if (subject === "consultation") {
+      detailsText = "I would like to schedule a consultation";
+    } else {
+      detailsText = "I would like to request a quote for ";
+    }
+
+    if (productName) {
+      detailsText += productName;
+    } else if (product) {
+      detailsText += product;
+    }
+
+    if (model) {
+      detailsText += ` (Model: ${model})`;
+    }
+
+    if (subject === "installation") {
+      detailsText += ". Please contact me to discuss installation options and scheduling.";
+    } else if (subject === "consultation") {
+      detailsText += ". Please contact me to arrange a meeting.";
+    } else {
+      detailsText += ". Please contact me with pricing and availability information.";
+    }
+
+    if (quantity) {
+      detailsText += `\n\nQuantity: ${quantity}`;
+    }
+
+    computedDetails = detailsText;
+    isDetailsReadOnly = true;
+  } else if (details) {
+    computedDetails = details;
+    isDetailsReadOnly = false;
+  }
+
+  return {
     firstName: "",
     lastName: "",
     email: "",
@@ -20,14 +137,88 @@ export default function ContactForm() {
     region: "",
     province: "",
     city: "",
-    interest: "",
-    details: "",
+    interest: computedInterest,
+    details: computedDetails,
+    isDetailsReadOnly,
+  };
+}
+
+function DropdownPortal({
+  isOpen,
+  isMounted,
+  position,
+  children,
+}: {
+  isOpen: boolean;
+  isMounted: boolean;
+  position: { top: number; left: number; width: number } | null;
+  children: React.ReactNode;
+}) {
+  if (!isOpen || !isMounted || !position) return null;
+
+  return createPortal(
+    <div
+      data-dropdown-portal
+      className="fixed z-99999 rounded-xl bg-gray-800/95 backdrop-blur-sm border border-white/30 shadow-2xl overflow-y-auto max-h-[300px]"
+      style={{
+        zIndex: 99999,
+        top: `${position.top}px`,
+        left: `${position.left}px`,
+        width: `${position.width}px`,
+      }}
+    >
+      {children}
+    </div>,
+    document.body
+  );
+}
+
+// A dropdown button that, when clicked, captures position from its ref THEN opens
+function useDropdownToggle(
+  ref: React.RefObject<HTMLDivElement | null>,
+  isOpen: boolean,
+  setOpen: (v: boolean) => void,
+  setPosition: (p: { top: number; left: number; width: number } | null) => void
+) {
+  return () => {
+    const nextOpen = !isOpen;
+    if (nextOpen) {
+      const pos = getDropdownPosition(ref);
+      if (pos) setPosition(pos);
+    } else {
+      setPosition(null);
+    }
+    setOpen(nextOpen);
+  };
+}
+
+export default function ContactForm() {
+  const searchParams = useSearchParams();
+
+  // isMounted: true on client, false on server — replaces the old useState+useEffect pattern
+  const isMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+
+  const initial = computeInitialFormState(searchParams);
+  const [formState, setFormState] = useState({
+    firstName: initial.firstName,
+    lastName: initial.lastName,
+    email: initial.email,
+    phone: initial.phone,
+    region: initial.region,
+    province: initial.province,
+    city: initial.city,
+    interest: initial.interest,
+    details: initial.details,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const [dropdownStyle, setDropdownStyle] = useState<{ top?: number; left?: number; width?: number }>({});
-  const [isDetailsReadOnly, setIsDetailsReadOnly] = useState(false);
+  const [dropdownPosition, setDropdownPosition] = useState<{ top: number; left: number; width: number } | null>(null);
+  const [isDetailsReadOnly, setIsDetailsReadOnly] = useState(initial.isDetailsReadOnly);
   const [isRegionOpen, setIsRegionOpen] = useState(false);
   const [isProvinceOpen, setIsProvinceOpen] = useState(false);
   const [isCityOpen, setIsCityOpen] = useState(false);
@@ -37,137 +228,8 @@ export default function ContactForm() {
   const [regionDropdownPosition, setRegionDropdownPosition] = useState<{ top: number; left: number; width: number } | null>(null);
   const [provinceDropdownPosition, setProvinceDropdownPosition] = useState<{ top: number; left: number; width: number } | null>(null);
   const [cityDropdownPosition, setCityDropdownPosition] = useState<{ top: number; left: number; width: number } | null>(null);
-  const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  // Pre-fill form based on URL parameters
-  useEffect(() => {
-    const subject = searchParams.get("subject");
-    const interest = searchParams.get("interest");
-    const product = searchParams.get("product");
-    const model = searchParams.get("model");
-    const productName = searchParams.get("productName");
-    const quantity = searchParams.get("quantity");
-    const details = searchParams.get("details");
-
-    // If interest is directly provided, use it
-    if (interest) {
-      setFormState((prev) => ({ ...prev, interest }));
-      
-      // Pre-fill details if subject is provided
-      if (subject === "quote") {
-        // Map interest values to readable labels
-        const interestLabels: Record<string, string> = {
-          "residential-solutions": "Residential Solutions",
-          "commercial-solutions": "Commercial Solutions",
-          "industrial-solutions": "Industrial Solutions",
-          "rural-projects": "Rural Projects",
-          "ev-charging-quote": "EV Charging",
-          "solar-installation-quote": "Solar Installation",
-          "general-inquiry": "General Inquiry",
-        };
-        const interestLabel = interestLabels[interest] || interest.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
-        const detailsText = `I would like to request a quote for ${interestLabel}. Please contact me with pricing and availability information.`;
-        setFormState((prev) => ({ ...prev, details: detailsText }));
-      } else if (subject === "installation") {
-        const interestLabels: Record<string, string> = {
-          "residential-solutions": "Residential Solutions",
-          "commercial-solutions": "Commercial Solutions",
-          "industrial-solutions": "Industrial Solutions",
-          "rural-projects": "Rural Projects",
-          "ev-charging-installation": "EV Charging Installation",
-          "solar-energy-installation": "Solar Energy Installation",
-        };
-        const interestLabel = interestLabels[interest] || interest.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
-        const detailsText = `I would like to request installation for ${interestLabel}. Please contact me to discuss installation options and scheduling.`;
-        setFormState((prev) => ({ ...prev, details: detailsText }));
-      } else if (subject === "consultation") {
-        // const interestLabels: Record<string, string> = {
-        //   "general-inquiry": "General Inquiry",
-        //   "residential-solutions": "Residential Solutions",
-        //   "commercial-solutions": "Commercial Solutions",
-        //   "industrial-solutions": "Industrial Solutions",
-        //   "rural-projects": "Rural Projects",
-        //   "ev-charging-installation": "EV Charging Installation",
-        //   "solar-energy-installation": "Solar Energy Installation",
-        // };
-        // const interestLabel = interestLabels[interest] || interest.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase());
-        const detailsText = `I would like to schedule a consultation. Please contact me to arrange a meeting.`;
-        setFormState((prev) => ({ ...prev, details: detailsText }));
-      }
-    } else if (subject === "installation" || subject === "quote" || subject === "consultation") {
-      // Set interest based on product type
-      if (product) {
-        let interestValue = "";
-        if (product.includes("ev") || product.includes("charging")) {
-          interestValue = subject === "installation" ? "ev-charging-installation" : "ev-charging-station";
-        } else if (product.includes("solar")) {
-          if (productName && productName.toLowerCase().includes("street")) {
-            interestValue = subject === "installation" ? "street-light-installation" : "solar-street-lights";
-          } else {
-            interestValue = subject === "installation" ? "solar-energy-installation" : "solar-energy-installation";
-          }
-        } else if (product.includes("storage") || product.includes("battery") || product.includes("smart-home")) {
-          interestValue = subject === "installation" ? "energy-storage-installation" : "smart-home-ips";
-        } else if (product.includes("cabinet")) {
-          interestValue = "cabinet-type-power-supply";
-        } else if (product.includes("container")) {
-          interestValue = "container-type-power-supply";
-        }
-        if (interestValue) {
-          setFormState((prev) => ({ ...prev, interest: interestValue }));
-        }
-      }
-
-      // Pre-fill details based on subject
-      let detailsText = "";
-      if (subject === "installation") {
-        detailsText = "I would like to request installation for ";
-      } else if (subject === "consultation") {
-        detailsText = "I would like to schedule a consultation";
-      } else {
-        detailsText = "I would like to request a quote for ";
-      }
-      
-      if (productName) {
-        detailsText += productName;
-      } else if (product) {
-        detailsText += product;
-      } 
-      
-      if (model) {
-        detailsText += ` (Model: ${model})`;
-      }
-      
-      // Add the details text sentence
-      if (subject === "installation") {
-        detailsText += ". Please contact me to discuss installation options and scheduling.";
-      } else if (subject === "consultation") {
-        detailsText += ". Please contact me to arrange a meeting.";
-      } else {
-        detailsText += ". Please contact me with pricing and availability information.";
-      }
-      
-      // Add quantity below the details text
-      if (quantity) {
-        detailsText += `\n\nQuantity: ${quantity}`;
-      }
-
-      setFormState((prev) => ({ ...prev, details: detailsText }));
-    } else if (details) {
-      // If details parameter is provided directly (e.g., from chat), use it
-      setFormState((prev) => ({ ...prev, details }));
-      setIsDetailsReadOnly(false);
-    } else {
-      // If no product page parameters, allow editing
-      setIsDetailsReadOnly(false);
-    }
-  }, [searchParams]);
-
-  // Clear details when component unmounts or user navigates away
+  // Clear details when component unmounts
   useEffect(() => {
     return () => {
       setFormState((prev) => ({ ...prev, details: "" }));
@@ -175,45 +237,17 @@ export default function ContactForm() {
     };
   }, []);
 
-  // Calculate dropdown position for portal
-  useEffect(() => {
-    if (isDropdownOpen && dropdownRef.current) {
-      const updateDropdownStyle = () => {
-        if (!dropdownRef.current) return;
-        
-        const rect = dropdownRef.current.getBoundingClientRect();
-        setDropdownStyle({
-          top: rect.bottom + 8,
-          left: rect.left,
-          width: rect.width
-        });
-      };
-
-      updateDropdownStyle();
-      window.addEventListener('resize', updateDropdownStyle);
-      window.addEventListener('scroll', updateDropdownStyle, true);
-      
-      return () => {
-        window.removeEventListener('resize', updateDropdownStyle);
-        window.removeEventListener('scroll', updateDropdownStyle, true);
-      };
-    } else {
-      setDropdownStyle({});
-    }
-  }, [isDropdownOpen]);
-
   // Handle click outside dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       const target = event.target as HTMLElement;
-      
+
       // Check if click is inside any portal dropdown
       const portalDropdown = target.closest('[data-dropdown-portal]');
       if (portalDropdown) {
-        return; // Don't close if clicking inside portal dropdown
+        return;
       }
-      
-      // Check if click is inside the dropdown container (button)
+
       if (dropdownRef.current && !dropdownRef.current.contains(target)) {
         setIsDropdownOpen(false);
       }
@@ -236,6 +270,36 @@ export default function ContactForm() {
         document.removeEventListener("touchstart", handleClickOutside as EventListener);
       };
     }
+  }, [isDropdownOpen, isRegionOpen, isProvinceOpen, isCityOpen]);
+
+  // Update dropdown positions on scroll/resize
+  useEffect(() => {
+    const updatePositions = () => {
+      if (isDropdownOpen) {
+        const pos = getDropdownPosition(dropdownRef);
+        if (pos) setDropdownPosition(pos);
+      }
+      if (isRegionOpen) {
+        const pos = getDropdownPosition(regionDropdownRef);
+        if (pos) setRegionDropdownPosition(pos);
+      }
+      if (isProvinceOpen) {
+        const pos = getDropdownPosition(provinceDropdownRef);
+        if (pos) setProvinceDropdownPosition(pos);
+      }
+      if (isCityOpen) {
+        const pos = getDropdownPosition(cityDropdownRef);
+        if (pos) setCityDropdownPosition(pos);
+      }
+    };
+
+    window.addEventListener('scroll', updatePositions, true);
+    window.addEventListener('resize', updatePositions);
+
+    return () => {
+      window.removeEventListener('scroll', updatePositions, true);
+      window.removeEventListener('resize', updatePositions);
+    };
   }, [isDropdownOpen, isRegionOpen, isProvinceOpen, isCityOpen]);
 
   const handleChange = (
@@ -269,52 +333,11 @@ export default function ContactForm() {
     setCityDropdownPosition(null);
   };
 
-  // Update dropdown positions when opened and on scroll/resize
-  useEffect(() => {
-    const updatePositions = () => {
-      if (isDropdownOpen && dropdownRef.current) {
-        const rect = dropdownRef.current.getBoundingClientRect();
-        setDropdownStyle({
-          top: rect.bottom + 8,
-          left: rect.left,
-          width: rect.width
-        });
-      }
-      if (isRegionOpen && regionDropdownRef.current) {
-        const rect = regionDropdownRef.current.getBoundingClientRect();
-        setRegionDropdownPosition({
-          top: rect.bottom + 8,
-          left: rect.left,
-          width: rect.width
-        });
-      }
-      if (isProvinceOpen && provinceDropdownRef.current) {
-        const rect = provinceDropdownRef.current.getBoundingClientRect();
-        setProvinceDropdownPosition({
-          top: rect.bottom + 8,
-          left: rect.left,
-          width: rect.width
-        });
-      }
-      if (isCityOpen && cityDropdownRef.current) {
-        const rect = cityDropdownRef.current.getBoundingClientRect();
-        setCityDropdownPosition({
-          top: rect.bottom + 8,
-          left: rect.left,
-          width: rect.width
-        });
-      }
-    };
-
-    updatePositions();
-    window.addEventListener('scroll', updatePositions, true);
-    window.addEventListener('resize', updatePositions);
-
-    return () => {
-      window.removeEventListener('scroll', updatePositions, true);
-      window.removeEventListener('resize', updatePositions);
-    };
-  }, [isDropdownOpen, isRegionOpen, isProvinceOpen, isCityOpen]);
+  // Dropdown toggle hooks — capture position before opening
+  const toggleRegion = useDropdownToggle(regionDropdownRef, isRegionOpen, setIsRegionOpen, setRegionDropdownPosition);
+  const toggleProvince = useDropdownToggle(provinceDropdownRef, isProvinceOpen, setIsProvinceOpen, setProvinceDropdownPosition);
+  const toggleCity = useDropdownToggle(cityDropdownRef, isCityOpen, setIsCityOpen, setCityDropdownPosition);
+  const toggleInterest = useDropdownToggle(dropdownRef, isDropdownOpen, setIsDropdownOpen, setDropdownPosition);
 
   const getRegionLabel = () => {
     if (!formState.region) return "Select Region";
@@ -335,7 +358,7 @@ export default function ContactForm() {
     return formState.city;
   };
 
-  const availableProvinces = formState.region 
+  const availableProvinces = formState.region
     ? Object.keys(philippineRegions[formState.region] || {})
     : [];
 
@@ -348,6 +371,7 @@ export default function ContactForm() {
     e?.preventDefault();
     setFormState((prev) => ({ ...prev, interest: value }));
     setIsDropdownOpen(false);
+    setDropdownPosition(null);
   };
 
   const selectedOption = interestOptions.find(opt => opt.value === formState.interest) || interestOptions[0];
@@ -374,7 +398,6 @@ export default function ContactForm() {
 
       alert("Your request has been sent to our team. We'll be in touch shortly.");
 
-      // Clear form state
       setFormState({
         firstName: "",
         lastName: "",
@@ -387,20 +410,17 @@ export default function ContactForm() {
         details: "",
       });
 
-      // Reset all dropdown states
       setIsDropdownOpen(false);
       setIsRegionOpen(false);
       setIsProvinceOpen(false);
       setIsCityOpen(false);
       setIsDetailsReadOnly(false);
-      
-      // Reset dropdown positions
-      setDropdownStyle({});
+
+      setDropdownPosition(null);
       setRegionDropdownPosition(null);
       setProvinceDropdownPosition(null);
       setCityDropdownPosition(null);
 
-      // Clear URL parameters to prevent form from being pre-filled on refresh
       if (window.location.search) {
         window.history.replaceState({}, '', window.location.pathname);
       }
@@ -464,7 +484,7 @@ export default function ContactForm() {
                     <div className="relative overflow-visible z-1000 w-full md:w-[calc(44%-8px)] md:shrink-0" ref={regionDropdownRef}>
                       <button
                         type="button"
-                        onClick={() => setIsRegionOpen(!isRegionOpen)}
+                        onClick={toggleRegion}
                         className="w-full h-[48px] px-4 pr-10 rounded-xl bg-white/20 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-secondary text-left text-base touch-manipulation flex items-center justify-between relative z-1000"
                       >
                         <span className="truncate whitespace-nowrap overflow-hidden">{getRegionLabel()}</span>
@@ -477,80 +497,34 @@ export default function ContactForm() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                       </button>
-                      {isRegionOpen && isMounted && regionDropdownRef.current && createPortal(
-                        <div 
-                          data-dropdown-portal
-                          className="fixed z-99999 rounded-xl bg-gray-800/95 backdrop-blur-sm border border-white/30 shadow-2xl overflow-y-auto max-h-[300px]"
-                          style={{ 
-                            zIndex: 99999,
-                            top: regionDropdownPosition ? `${regionDropdownPosition.top}px` : `${regionDropdownRef.current.getBoundingClientRect().bottom + 8}px`,
-                            left: regionDropdownPosition ? `${regionDropdownPosition.left}px` : `${regionDropdownRef.current.getBoundingClientRect().left}px`,
-                            width: regionDropdownPosition ? `${regionDropdownPosition.width}px` : `${regionDropdownRef.current.getBoundingClientRect().width}px`
-                          }}
+                      <DropdownPortal isOpen={isRegionOpen} isMounted={isMounted} position={regionDropdownPosition}>
+                        <button
+                          type="button"
+                          onClick={(e) => handleRegionChange("", e)}
+                          className="w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center text-white hover:bg-white/10"
                         >
+                          Select Region
+                        </button>
+                        {Object.keys(philippineRegions).map((region) => (
                           <button
+                            key={region}
                             type="button"
-                            onClick={(e) => handleRegionChange("", e)}
-                            className="w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center text-white hover:bg-white/10"
+                            onClick={(e) => handleRegionChange(region, e)}
+                            className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
+                              formState.region === region
+                                ? 'bg-primary/30 text-secondary font-semibold'
+                                : 'text-white hover:bg-white/10'
+                            }`}
                           >
-                            Select Region
+                            {formState.region === region && (
+                              <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            )}
+                            <span>{region}</span>
                           </button>
-                          {Object.keys(philippineRegions).map((region) => (
-                            <button
-                              key={region}
-                              type="button"
-                              onClick={(e) => handleRegionChange(region, e)}
-                              className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
-                                formState.region === region
-                                  ? 'bg-primary/30 text-secondary font-semibold'
-                                  : 'text-white hover:bg-white/10'
-                              }`}
-                            >
-                              {formState.region === region && (
-                                <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              )}
-                              <span>{region}</span>
-                            </button>
-                          ))}
-                        </div>,
-                        document.body
-                      )}
-                      {isRegionOpen && (!isMounted || !regionDropdownRef.current) && (
-                        <div 
-                          data-dropdown-portal
-                          className="absolute z-99999 w-full mt-2 rounded-xl bg-gray-800/95 backdrop-blur-sm border border-white/30 shadow-2xl top-full left-0 overflow-y-auto max-h-[300px]"
-                          style={{ zIndex: 99999 }}
-                        >
-                          <button
-                            type="button"
-                            onClick={(e) => handleRegionChange("", e)}
-                            className="w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center text-white hover:bg-white/10"
-                          >
-                            Select Region
-                          </button>
-                          {Object.keys(philippineRegions).map((region) => (
-                            <button
-                              key={region}
-                              type="button"
-                              onClick={(e) => handleRegionChange(region, e)}
-                              className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
-                                formState.region === region
-                                  ? 'bg-primary/30 text-secondary font-semibold'
-                                  : 'text-white hover:bg-white/10'
-                              }`}
-                            >
-                              {formState.region === region && (
-                                <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              )}
-                              <span>{region}</span>
-                            </button>
-                          ))}
-                        </div>
-                      )}
+                        ))}
+                      </DropdownPortal>
                       <input type="hidden" name="region" value={formState.region} required />
                     </div>
 
@@ -558,7 +532,7 @@ export default function ContactForm() {
                     <div className="relative overflow-visible z-1000 w-full md:w-[calc(28%-8px)] md:shrink-0" ref={provinceDropdownRef}>
                       <button
                         type="button"
-                        onClick={() => formState.region && setIsProvinceOpen(!isProvinceOpen)}
+                        onClick={() => formState.region && toggleProvince()}
                         disabled={!formState.region}
                         className={`w-full h-[48px] px-4 pr-10 rounded-xl bg-white/20 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-secondary text-left text-base touch-manipulation flex items-center justify-between relative z-1000 ${
                           !formState.region ? "opacity-50 cursor-not-allowed" : ""
@@ -574,80 +548,34 @@ export default function ContactForm() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                       </button>
-                      {isProvinceOpen && formState.region && isMounted && provinceDropdownRef.current && createPortal(
-                        <div 
-                          data-dropdown-portal
-                          className="fixed z-99999 rounded-xl bg-gray-800/95 backdrop-blur-sm border border-white/30 shadow-2xl overflow-y-auto max-h-[300px]"
-                          style={{ 
-                            zIndex: 99999,
-                            top: provinceDropdownPosition ? `${provinceDropdownPosition.top}px` : `${provinceDropdownRef.current.getBoundingClientRect().bottom + 8}px`,
-                            left: provinceDropdownPosition ? `${provinceDropdownPosition.left}px` : `${provinceDropdownRef.current.getBoundingClientRect().left}px`,
-                            width: provinceDropdownPosition ? `${provinceDropdownPosition.width}px` : `${provinceDropdownRef.current.getBoundingClientRect().width}px`
-                          }}
+                      <DropdownPortal isOpen={isProvinceOpen && !!formState.region} isMounted={isMounted} position={provinceDropdownPosition}>
+                        <button
+                          type="button"
+                          onClick={(e) => handleProvinceChange("", e)}
+                          className="w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center text-white hover:bg-white/10"
                         >
+                          Select Province
+                        </button>
+                        {availableProvinces.map((province) => (
                           <button
+                            key={province}
                             type="button"
-                            onClick={(e) => handleProvinceChange("", e)}
-                            className="w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center text-white hover:bg-white/10"
+                            onClick={(e) => handleProvinceChange(province, e)}
+                            className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
+                              formState.province === province
+                                ? 'bg-primary/30 text-secondary font-semibold'
+                                : 'text-white hover:bg-white/10'
+                            }`}
                           >
-                            Select Province
+                            {formState.province === province && (
+                              <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            )}
+                            <span>{province}</span>
                           </button>
-                          {availableProvinces.map((province) => (
-                            <button
-                              key={province}
-                              type="button"
-                              onClick={(e) => handleProvinceChange(province, e)}
-                              className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
-                                formState.province === province
-                                  ? 'bg-primary/30 text-secondary font-semibold'
-                                  : 'text-white hover:bg-white/10'
-                              }`}
-                            >
-                              {formState.province === province && (
-                                <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              )}
-                              <span>{province}</span>
-                            </button>
-                          ))}
-                        </div>,
-                        document.body
-                      )}
-                      {isProvinceOpen && formState.region && (!isMounted || !provinceDropdownRef.current) && (
-                        <div 
-                          data-dropdown-portal
-                          className="absolute z-99999 w-full mt-2 rounded-xl bg-gray-800/95 backdrop-blur-sm border border-white/30 shadow-2xl top-full left-0 overflow-y-auto max-h-[300px]"
-                          style={{ zIndex: 99999 }}
-                        >
-                          <button
-                            type="button"
-                            onClick={(e) => handleProvinceChange("", e)}
-                            className="w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center text-white hover:bg-white/10"
-                          >
-                            Select Province
-                          </button>
-                          {availableProvinces.map((province) => (
-                            <button
-                              key={province}
-                              type="button"
-                              onClick={(e) => handleProvinceChange(province, e)}
-                              className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
-                                formState.province === province
-                                  ? 'bg-primary/30 text-secondary font-semibold'
-                                  : 'text-white hover:bg-white/10'
-                              }`}
-                            >
-                              {formState.province === province && (
-                                <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              )}
-                              <span>{province}</span>
-                            </button>
-                          ))}
-                        </div>
-                      )}
+                        ))}
+                      </DropdownPortal>
                       <input type="hidden" name="province" value={formState.province} required />
                     </div>
 
@@ -655,7 +583,7 @@ export default function ContactForm() {
                     <div className="relative overflow-visible z-1000 w-full md:w-[calc(28%-8px)] md:shrink-0" ref={cityDropdownRef}>
                       <button
                         type="button"
-                        onClick={() => formState.province && setIsCityOpen(!isCityOpen)}
+                        onClick={() => formState.province && toggleCity()}
                         disabled={!formState.province}
                         className={`w-full h-[48px] px-4 pr-10 rounded-xl bg-white/20 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-secondary text-left text-base touch-manipulation flex items-center justify-between relative z-1000 ${
                           !formState.province ? "opacity-50 cursor-not-allowed" : ""
@@ -671,87 +599,41 @@ export default function ContactForm() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
                       </button>
-                      {isCityOpen && formState.province && isMounted && cityDropdownRef.current && createPortal(
-                        <div 
-                          data-dropdown-portal
-                          className="fixed z-99999 rounded-xl bg-gray-800/95 backdrop-blur-sm border border-white/30 shadow-2xl overflow-y-auto max-h-[300px]"
-                          style={{ 
-                            zIndex: 99999,
-                            top: cityDropdownPosition ? `${cityDropdownPosition.top}px` : `${cityDropdownRef.current.getBoundingClientRect().bottom + 8}px`,
-                            left: cityDropdownPosition ? `${cityDropdownPosition.left}px` : `${cityDropdownRef.current.getBoundingClientRect().left}px`,
-                            width: cityDropdownPosition ? `${cityDropdownPosition.width}px` : `${cityDropdownRef.current.getBoundingClientRect().width}px`
-                          }}
+                      <DropdownPortal isOpen={isCityOpen && !!formState.province} isMounted={isMounted} position={cityDropdownPosition}>
+                        <button
+                          type="button"
+                          onClick={(e) => handleCityChange("", e)}
+                          className="w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center text-white hover:bg-white/10"
                         >
+                          Select City
+                        </button>
+                        {availableCities.map((city) => (
                           <button
+                            key={city}
                             type="button"
-                            onClick={(e) => handleCityChange("", e)}
-                            className="w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center text-white hover:bg-white/10"
+                            onClick={(e) => handleCityChange(city, e)}
+                            className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
+                              formState.city === city
+                                ? 'bg-primary/30 text-secondary font-semibold'
+                                : 'text-white hover:bg-white/10'
+                            }`}
                           >
-                            Select City
+                            {formState.city === city && (
+                              <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            )}
+                            <span>{city}</span>
                           </button>
-                          {availableCities.map((city) => (
-                            <button
-                              key={city}
-                              type="button"
-                              onClick={(e) => handleCityChange(city, e)}
-                              className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
-                                formState.city === city
-                                  ? 'bg-primary/30 text-secondary font-semibold'
-                                  : 'text-white hover:bg-white/10'
-                              }`}
-                            >
-                              {formState.city === city && (
-                                <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              )}
-                              <span>{city}</span>
-                            </button>
-                          ))}
-                        </div>,
-                        document.body
-                      )}
-                      {isCityOpen && formState.province && (!isMounted || !cityDropdownRef.current) && (
-                        <div 
-                          data-dropdown-portal
-                          className="absolute z-99999 w-full mt-2 rounded-xl bg-gray-800/95 backdrop-blur-sm border border-white/30 shadow-2xl top-full left-0 overflow-y-auto max-h-[300px]"
-                          style={{ zIndex: 99999 }}
-                        >
-                          <button
-                            type="button"
-                            onClick={(e) => handleCityChange("", e)}
-                            className="w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center text-white hover:bg-white/10"
-                          >
-                            Select City
-                          </button>
-                          {availableCities.map((city) => (
-                            <button
-                              key={city}
-                              type="button"
-                              onClick={(e) => handleCityChange(city, e)}
-                              className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
-                                formState.city === city
-                                  ? 'bg-primary/30 text-secondary font-semibold'
-                                  : 'text-white hover:bg-white/10'
-                              }`}
-                            >
-                              {formState.city === city && (
-                                <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
-                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                </svg>
-                              )}
-                              <span>{city}</span>
-                            </button>
-                          ))}
-                        </div>
-                      )}
+                        ))}
+                      </DropdownPortal>
                       <input type="hidden" name="city" value={formState.city} required />
                     </div>
                   </div>
                   <div className="relative overflow-visible z-1000" ref={dropdownRef}>
                     <button
                       type="button"
-                      onClick={() => !isDetailsReadOnly && setIsDropdownOpen(!isDropdownOpen)}
+                      onClick={() => !isDetailsReadOnly && toggleInterest()}
                       disabled={isDetailsReadOnly}
                       className={`w-full h-[48px] px-4 pr-10 rounded-xl bg-white/20 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-secondary text-left text-base touch-manipulation flex items-center justify-between relative z-1000 ${
                         isDetailsReadOnly ? "opacity-70 cursor-not-allowed" : ""
@@ -767,68 +649,28 @@ export default function ContactForm() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                       </svg>
                     </button>
-                    {isDropdownOpen && isMounted && dropdownRef.current && createPortal(
-                      <div 
-                        data-dropdown-portal
-                        className="fixed z-99999 rounded-xl bg-gray-800/95 backdrop-blur-sm border border-white/30 shadow-2xl overflow-y-auto max-h-[300px]"
-                        style={{ 
-                          zIndex: 99999,
-                          top: dropdownStyle.top ? `${dropdownStyle.top}px` : `${dropdownRef.current.getBoundingClientRect().bottom + 8}px`,
-                          left: dropdownStyle.left ? `${dropdownStyle.left}px` : `${dropdownRef.current.getBoundingClientRect().left}px`,
-                          width: dropdownStyle.width ? `${dropdownStyle.width}px` : `${dropdownRef.current.getBoundingClientRect().width}px`
-                        }}
-                      >
-                        {interestOptions.map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={(e) => !isDetailsReadOnly && handleInterestChange(option.value, e)}
-                            disabled={isDetailsReadOnly}
-                            className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
-                              formState.interest === option.value
-                                ? 'bg-primary/30 text-secondary font-semibold'
-                                : 'text-white hover:bg-white/10'
-                            } ${isDetailsReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
-                          >
-                            {formState.interest === option.value && (
-                              <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
-                            )}
-                            <span>{option.label}</span>
-                          </button>
-                        ))}
-                      </div>,
-                      document.body
-                    )}
-                    {isDropdownOpen && (!isMounted || !dropdownRef.current) && (
-                      <div 
-                        data-dropdown-portal
-                        className="absolute z-99999 w-full mt-2 rounded-xl bg-gray-800/95 backdrop-blur-sm border border-white/30 shadow-2xl top-full left-0 overflow-y-auto max-h-[300px]"
-                        style={{ zIndex: 99999, ...dropdownStyle }}
-                      >
-                        {interestOptions.map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={(e) => !isDetailsReadOnly && handleInterestChange(option.value, e)}
-                            disabled={isDetailsReadOnly}
-                            className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
-                              formState.interest === option.value
-                                ? 'bg-primary/30 text-secondary font-semibold'
-                                : 'text-white hover:bg-white/10'
-                            } ${isDetailsReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
-                          >
-                            {formState.interest === option.value && (
-                              <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
-                            )}
-                            <span>{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    )}
+                    <DropdownPortal isOpen={isDropdownOpen} isMounted={isMounted} position={dropdownPosition}>
+                      {interestOptions.map((option) => (
+                        <button
+                          key={option.value}
+                          type="button"
+                          onClick={(e) => !isDetailsReadOnly && handleInterestChange(option.value, e)}
+                          disabled={isDetailsReadOnly}
+                          className={`w-full px-5 py-3 text-left text-base transition-colors touch-manipulation flex items-center ${
+                            formState.interest === option.value
+                              ? 'bg-primary/30 text-secondary font-semibold'
+                              : 'text-white hover:bg-white/10'
+                          } ${isDetailsReadOnly ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        >
+                          {formState.interest === option.value && (
+                            <svg className="w-5 h-5 mr-3 text-secondary" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                            </svg>
+                          )}
+                          <span>{option.label}</span>
+                        </button>
+                      ))}
+                    </DropdownPortal>
                     <input type="hidden" name="interest" value={formState.interest} />
                   </div>
                   <textarea

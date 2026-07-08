@@ -125,8 +125,10 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- close mobile menu on route change */
     setMobileOpen(false);
     setOpenDropdown(null);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [pathname]);
 
   useEffect(() => {

@@ -18,7 +18,9 @@ export default function SectorQuickNav() {
   const pathname = usePathname();
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- client-mount detection */
     setMounted(true);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   return (

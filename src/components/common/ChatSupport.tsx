@@ -23,8 +23,9 @@ const ChatSupport = () => {
 
   // Detect current page (product pages and other pages)
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- syncing external router state */
     if (!pathname) return;
-    
+
     // Always set the current page path
     setCurrentPagePath(pathname);
     
@@ -41,6 +42,7 @@ const ChatSupport = () => {
     } else {
       setCurrentProductId(null);
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [pathname]);
 
   useEffect(() => {
@@ -51,6 +53,7 @@ const ChatSupport = () => {
 
   // Add welcome message when chat opens and reset when closed
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- chat open/close drives message lifecycle */
     if (isOpen && messages.length === 0) {
       let welcomeMessage = "Hello! I'm VoltHub's AI customer support assistant. ";
       
@@ -76,6 +79,7 @@ const ChatSupport = () => {
     if (!isOpen) {
       setMessages([]);
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [isOpen, currentProductId, messages.length]);
 
   const handleSend = async () => {

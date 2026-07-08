@@ -94,6 +94,7 @@ function Carousel({
   }, [api, setApi])
 
   React.useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- subscribing to Embla carousel external store */
     if (!api) return
     onSelect(api)
     api.on("reInit", onSelect)
@@ -102,6 +103,7 @@ function Carousel({
     return () => {
       api?.off("select", onSelect)
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [api, onSelect])
 
   return (
@@ -240,6 +242,7 @@ function CarouselDots({
   const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
 
   React.useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- subscribing to Embla carousel external store */
     if (!api) return
 
     setScrollSnaps(api.scrollSnapList())
@@ -261,6 +264,7 @@ function CarouselDots({
       api.off("select", onSelect)
       api.off("reInit", onReInit)
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [api])
 
   const scrollTo = React.useCallback(

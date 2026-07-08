@@ -51,6 +51,7 @@ export default function ProductsClient() {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- syncing URL param to internal state */
     if (
       categoryParam &&
       [
@@ -64,6 +65,7 @@ export default function ProductsClient() {
     ) {
       setActiveCategory(categoryParam);
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [categoryParam]);
 
   // Fetch products from API on mount

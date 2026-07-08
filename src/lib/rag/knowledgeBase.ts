@@ -149,7 +149,7 @@ For inquiries, support, returns, warranties, or any questions, please contact us
         productId: product.id,
         productName: product.name,
         category: product.category,
-        tags: (product as ProductWithExtras).tag ? [(product as ProductWithExtras).tag] : []
+        tags: [(product as ProductWithExtras).tag].filter((t): t is string => !!t)
       }
     });
 
