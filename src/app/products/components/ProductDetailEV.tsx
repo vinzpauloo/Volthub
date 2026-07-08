@@ -8,8 +8,8 @@ import {
   RiStarLine,
   RiAwardLine,
   RiArrowRightSLine,
+  RiCheckLine,
   // [BACKEND-TODO] — Restore when benefits accordion is re-enabled
-  // RiCheckLine,
   // RiArrowDownSLine,
   // RiArrowUpSLine
 } from "react-icons/ri";

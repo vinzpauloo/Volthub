@@ -111,7 +111,7 @@ export default function ProductDetailB2B({
                 Critical Specifications
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-                {/* Extract key specs: Voltage, Capacity, Power, Dimensions */}
+                Extract key specs: Voltage, Capacity, Power, Dimensions
                 {details.specifications
                   .filter((spec) => {
                     const lowerLabel = spec.label.toLowerCase();
@@ -134,7 +134,7 @@ export default function ProductDetailB2B({
                   ))}
               </div>
             </div>
-          )}
+          */}
         </div>
 
         {/* ZONE B: The Procurement Engine (Right Column - 40%) */}
