@@ -1,26 +1,32 @@
 "use client";
 
-import { useState } from "react";
+// [BACKEND-TODO] — Restore useState when benefits accordion is re-enabled
+// import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { 
-  RiCheckLine,
+import {
   RiStarLine,
   RiAwardLine,
   RiArrowRightSLine,
-  RiArrowDownSLine,
-  RiArrowUpSLine
+  // [BACKEND-TODO] — Restore when benefits accordion is re-enabled
+  // RiCheckLine,
+  // RiArrowDownSLine,
+  // RiArrowUpSLine
 } from "react-icons/ri";
-import { Product, productDetails } from "./productData";
+import { Product } from "./productData";
+// [BACKEND-TODO] — Restore productDetails import when available
+// import { productDetails } from "./productData";
 
 interface ProductDetailEVProps {
   product: Product;
-  details: typeof productDetails[string] | undefined;
+  // [BACKEND-TODO] — Restore when productDetails is available
+  // details: typeof productDetails[string] | undefined;
   categoryLabel: string | undefined;
   displayProductName: string;
-  selectedVariantIndex: number;
-  setSelectedVariantIndex: (index: number) => void;
-  selectableVariations: Array<{ name: string; price?: string }>;
+  // [BACKEND-TODO] — Restore variations when backend provides product_skus
+  // selectedVariantIndex: number;
+  // setSelectedVariantIndex: (index: number) => void;
+  // selectableVariations: Array<{ name: string; price?: string }>;
   quantity: number;
   setQuantity: (value: number | ((prev: number) => number)) => void;
   selectedImage: string;
@@ -33,12 +39,14 @@ interface ProductDetailEVProps {
 
 export default function ProductDetailEV({
   product,
-  details,
+  // [BACKEND-TODO] — Restore when productDetails is available
+  // details,
   categoryLabel,
   displayProductName,
-  selectedVariantIndex,
-  setSelectedVariantIndex,
-  selectableVariations,
+  // [BACKEND-TODO] — Restore variations when backend provides product_skus
+  // selectedVariantIndex,
+  // setSelectedVariantIndex,
+  // selectableVariations,
   quantity,
   setQuantity,
   selectedImage,
@@ -48,7 +56,8 @@ export default function ProductDetailEV({
   averageRating,
   totalRatings,
 }: ProductDetailEVProps) {
-  const [isBenefitsExpanded, setIsBenefitsExpanded] = useState(false);
+  // [BACKEND-TODO] — Restore benefits accordion when features are available
+  // const [isBenefitsExpanded, setIsBenefitsExpanded] = useState(false);
 
   return (
     <div className="flex flex-col lg:flex-row gap-4 md:gap-6">
@@ -124,7 +133,11 @@ export default function ProductDetailEV({
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900 mt-1 mb-1">
               {displayProductName}
             </h1>
-            <p className="text-sm md:text-base text-slate-600">{product.subtitle}</p>
+            {/* [BACKEND-TODO] — Restore subtitle when backend provides it */}
+            {/* <p className="text-sm md:text-base text-slate-600">{product.subtitle}</p> */}
+            {product.sku_code && (
+              <p className="text-xs text-slate-500 mt-1">SKU: {product.sku_code}</p>
+            )}
           </div>
 
           {/* 2. Social Proof - Ratings */}
@@ -149,104 +162,34 @@ export default function ProductDetailEV({
             </span>
           </div>
 
+          {/* [BACKEND-TODO] — Restore Key Benefits when backend provides features */}
           {/* 3. Value Proposition - Key Benefits */}
+          {/*
           <div className="pt-1.5 border-t border-slate-200">
-
-            {/* Key Benefits - Accordion/Collapsible */}
             {details && details.features && details.features.length > 0 && (
-              <div className="space-y-1">
-                <button
-                  onClick={() => setIsBenefitsExpanded(!isBenefitsExpanded)}
-                  className="flex items-center justify-between w-full text-left"
-                >
-                  <h3 className="text-xs md:text-sm font-semibold text-slate-900">Key Benefits:</h3>
-                  {isBenefitsExpanded ? (
-                    <RiArrowUpSLine className="h-4 w-4 text-slate-500" />
-                  ) : (
-                    <RiArrowDownSLine className="h-4 w-4 text-slate-500" />
-                  )}
-                </button>
-                {isBenefitsExpanded && (
-                  <ul className="space-y-1.5 mt-2">
-                    {details.features.slice(0, 3).map((feature, index) => (
-                      <li key={index} className="flex items-start gap-1.5 text-[11px] md:text-xs text-slate-700 leading-relaxed">
-                        <RiCheckLine className="h-3 w-3 text-primary mt-0.5 flex-shrink-0" />
-                        <span className="line-clamp-2">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {!isBenefitsExpanded && (
-                  <div className="mt-1">
-                    <p className="text-[11px] md:text-xs text-slate-600 line-clamp-2">
-                      {details.features[0]}
-                    </p>
-                  </div>
-                )}
-              </div>
+              ...
             )}
           </div>
+          */}
 
+          {/* [BACKEND-TODO] — Restore Variations when backend provides product_skus */}
           {/* 4. Customization - Variations */}
+          {/*
           {selectableVariations.length > 0 && (
-            <div className="pt-1.5 border-t border-slate-200">
-              <label className="block text-xs md:text-sm font-semibold text-slate-900 mb-2">
-                Select Capacity
-              </label>
-              <div className="flex flex-wrap gap-1.5 md:gap-2">
-                {selectableVariations.map((variant, idx) => {
-                  let label = variant.name;
-                  const f2Match = variant.name.match(/(F2-\d+)/i);
-                  const lvq2Match = variant.name.match(/(LVQ2-\d+)/i);
-                  const lvxcMatch = variant.name.match(/(LVXC-\d+)/i);
-                  const kWhMatch = variant.name.match(/(\d+\s*kWh)/i);
-                  const kwMatch = variant.name.match(/(\d+\s*kW?)/i);
-                  
-                  if (f2Match) {
-                    label = f2Match[1].toUpperCase();
-                  } else if (lvq2Match) {
-                    label = lvq2Match[1].toUpperCase();
-                  } else if (lvxcMatch) {
-                    label = lvxcMatch[1].toUpperCase();
-                  } else if (kWhMatch) {
-                    label = kWhMatch[1];
-                  } else if (kwMatch) {
-                    label = kwMatch[1];
-                  } else {
-                    label = variant.name.split("–")[0]?.trim() || variant.name;
-                  }
-                  
-                  const isActive = idx === selectedVariantIndex;
-                  const isAvailable = true;
-                  
-                    return (
-                      <button
-                        key={variant.name}
-                        type="button"
-                        onClick={() => setSelectedVariantIndex(idx)}
-                        disabled={!isAvailable}
-                        className={`px-2.5 py-1.5 md:px-3 md:py-2 rounded-md text-xs md:text-sm font-semibold border-2 shadow-sm transition-all ${
-                          !isAvailable
-                            ? "bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed opacity-50"
-                            : isActive
-                            ? "bg-primary text-white border-primary shadow-md scale-[1.02]"
-                            : "bg-white text-slate-700 border-slate-300 hover:border-primary hover:bg-primary/5"
-                        }`}
-                      >
-                        {label}
-                      </button>
-                    );
-                })}
-              </div>
-            </div>
+            ...
           )}
+          */}
 
+          {/* [BACKEND-TODO] — Restore tag badge when tag field is re-added */}
           {/* System Type Tag */}
+          {/*
           {product.tag && (
+            ...
+          )}
+          */}
+          {product.price && (
             <div className="pt-1.5 border-t border-slate-200">
-              <span className="inline-flex items-center rounded-full bg-primary/10 text-primary px-2 py-1 text-[10px] md:text-xs font-semibold">
-                {product.tag}
-              </span>
+              <span className="text-xl md:text-2xl font-bold text-primary">{product.price}</span>
             </div>
           )}
 

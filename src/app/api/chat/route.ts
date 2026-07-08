@@ -201,12 +201,13 @@ export async function POST(request: Request) {
 
     // Get current product info if productId is provided
     let currentProduct: { id: string; name: string } | undefined;
+    // [BACKEND-TODO] — Restore when hardcoded product data is re-enabled
     if (productId) {
-      const { getProductById } = await import("@/app/products/components/productData");
-      const product = getProductById(productId);
-      if (product) {
-        currentProduct = { id: product.id, name: product.name };
-      }
+      // const { getProductById } = await import("@/app/products/components/productData");
+      // const product = getProductById(productId);
+      // if (product) {
+      //   currentProduct = { id: product.id, name: product.name };
+      // }
     }
 
     // Get relevant context from knowledge base (with current page info)

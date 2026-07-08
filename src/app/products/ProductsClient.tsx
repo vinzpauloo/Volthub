@@ -6,8 +6,29 @@ import LayoutContainer from "@/components/layout/LayoutContainer";
 import ProductBanner from "./components/ProductBanner";
 import ProductSidebar from "./components/ProductSidebar";
 import ProductGrid from "./components/ProductGrid";
-import { ProductCategory, products } from "./components/productData";
+import {
+  ProductCategory,
+  Product,
+  type BackendProduct,
+  mapBackendProduct,
+} from "./components/productData";
 import BackToTopButton from "@/components/common/BackToTopButton";
+
+const BACKEND_URL = "https://volthub-admin-one.vercel.app/api/public/products";
+
+async function getProducts(): Promise<Product[]> {
+  try {
+    const res = await fetch(BACKEND_URL, { cache: "no-store" });
+    if (!res.ok) return [];
+    const json = await res.json();
+    const raw: BackendProduct[] = json.data ?? [];
+    return raw
+      .filter((bp) => bp.is_active && !bp.deleted_at)
+      .map(mapBackendProduct);
+  } catch {
+    return [];
+  }
+}
 
 export default function ProductsClient() {
   const searchParams = useSearchParams();
@@ -27,6 +48,7 @@ export default function ProductsClient() {
       : "all",
   );
   const [searchQuery, setSearchQuery] = useState("");
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     if (
@@ -44,16 +66,22 @@ export default function ProductsClient() {
     }
   }, [categoryParam]);
 
+  // Fetch products from API on mount
+  useEffect(() => {
+    getProducts().then(setAllProducts);
+  }, []);
+
   const normalizedQuery = searchQuery.trim().toLowerCase();
 
-  const filteredProducts = products
+  const filteredProducts = allProducts
+    .filter((p) => p.is_active !== false) // respect is_active flag
     .filter((p) => (activeCategory === "all" ? true : p.category === activeCategory))
     .filter((p) => {
       if (!normalizedQuery) return true;
+      // [BACKEND-TODO] — Re-add subtitle, tag when those fields are restored
       const haystack = [
         p.name,
-        p.subtitle,
-        p.tag,
+        p.sku_code,
         p.description,
       ]
         .filter(Boolean)

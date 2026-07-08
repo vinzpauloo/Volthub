@@ -1,4 +1,6 @@
-import { Product, ProductCategory, categories, products as allProducts } from "./productData";
+import { Product, ProductCategory, categories } from "./productData";
+// [BACKEND-TODO] — Restore import of hardcoded products for count
+// import { products as allProducts } from "./productData";
 import ProductCard from "./ProductCard";
 
 interface ProductGridProps {
@@ -40,8 +42,13 @@ export default function ProductGrid({
               🔍
             </span>
           </div>
+          {/* [BACKEND-TODO] — Restore "Showing X of Y" when hardcoded products array is back
           <p className="text-xs md:text-sm text-slate-500 md:text-right">
             Showing {products.length} of {allProducts.length} products
+          </p>
+          */}
+          <p className="text-xs md:text-sm text-slate-500 md:text-right">
+            {products.length} product{products.length !== 1 ? "s" : ""}
           </p>
         </div>
       </div>

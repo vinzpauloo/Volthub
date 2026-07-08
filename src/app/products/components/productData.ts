@@ -7,32 +7,136 @@ export type ProductCategory =
   // | "container"
   ;
 
-export type ProductVariation = {
-  name: string;
-  value: string;
-  description?: string;
-  price?: string; // Optional price for this variation
-  image?: string; // Optional image for this variation
-  specifications?: { label: string; value: string }[]; // Optional specifications for this variation
-};
+// [BACKEND-TODO] — Restore when backend provides product_skus with variant data
+// export type ProductVariation = {
+//   name: string;
+//   value: string;
+//   description?: string;
+//   price?: string; // Optional price for this variation
+//   image?: string; // Optional image for this variation
+//   specifications?: { label: string; value: string }[]; // Optional specifications for this variation
+// };
 
-export type ProductLayout = "ev" | "b2b" | "auto"; // "auto" uses category-based default
+// [BACKEND-TODO] — Restore when backend provides layout metadata
+// export type ProductLayout = "ev" | "b2b" | "auto"; // "auto" uses category-based default
 
 export type Product = {
   id: string;
   name: string;
-  subtitle: string;
   category: ProductCategory;
-  tag?: string;
-  image: string;
-  images?: string[]; // Additional images for gallery
-  price?: string; // Product price
   description?: string;
-  variations?: ProductVariation[];
-  specifications?: { label: string; value: string }[];
-  features?: string[];
-  layout?: ProductLayout; // Optional: specify which layout to use ("ev" or "b2b"), defaults to "auto" (category-based)
+  price?: string;           // formatted from backend unit_price_php
+  image: string;            // from backend image_url (main image)
+  images?: ProductImage[];  // from backend images array
+  // New backend-native fields:
+  sku_code?: string;
+  is_active?: boolean;
+  created_at?: string;
+  // [BACKEND-TODO] — Commented out for future backend enrichment:
+  // subtitle?: string;
+  // tag?: string;
+  // variations?: ProductVariation[]; // Will come from product_skus
+  // specifications?: { label: string; value: string }[];
+  // features?: string[];
+  // layout?: ProductLayout;
 };
+
+// Backend image object shape
+export type ProductImage = {
+  id: string;
+  image_url: string;
+  image_path?: string;
+  is_main: boolean;
+  sort_order: number;
+  file_size?: number;
+  file_type?: string;
+  alt_text: string | null;
+};
+
+// Backend API response shape (raw, before transform)
+export type BackendProduct = {
+  id: string;
+  sku_code: string;
+  name: string;
+  category: string;
+  unit_price_php: number | null;
+  description: string | null;
+  image_url: string | null;
+  is_active: boolean;
+  created_at: string;
+  deleted_at: string | null;
+  images?: BackendProductImage[];
+};
+
+type BackendProductImage = {
+  id: string;
+  image_url: string;
+  image_path?: string;
+  is_main: boolean;
+  sort_order: number;
+  file_size?: number;
+  file_type?: string;
+  alt_text: string | null;
+};
+
+// Map backend category strings → frontend ProductCategory
+export function mapBackendCategory(cat: string): ProductCategory {
+  switch (cat) {
+    case "dc_charger":
+    case "ac_charger":
+      return "ev-charging";
+    case "solar_street":
+    case "solar_street_light":
+      return "solar-street";
+    case "home_battery":
+    case "smart_home":
+      return "smart-home";
+    case "cabinet_bess":
+    case "cabinet":
+      return "cabinet";
+    default:
+      return "all";
+  }
+}
+
+// Transform a single backend product → frontend Product shape
+export function mapBackendProduct(bp: BackendProduct): Product {
+  const images: ProductImage[] = (bp.images ?? [])
+    .sort((a, b) => a.sort_order - b.sort_order)
+    .map((img) => ({
+      id: img.id,
+      image_url: img.image_url,
+      image_path: img.image_path,
+      is_main: img.is_main,
+      sort_order: img.sort_order,
+      file_size: img.file_size,
+      file_type: img.file_type,
+      alt_text: img.alt_text,
+    }));
+
+  // Use the main image URL, or first image, or placeholder
+  const mainImage =
+    images.find((img) => img.is_main)?.image_url ??
+    images[0]?.image_url ??
+    bp.image_url ??
+    "/placeholder.png";
+
+  return {
+    id: bp.id,
+    name: bp.name,
+    category: mapBackendCategory(bp.category),
+    description: bp.description ?? undefined,
+    price:
+      bp.unit_price_php != null
+        ? `₱${bp.unit_price_php.toLocaleString("en-PH")}`
+        : undefined,
+    image: mainImage,
+    images: images.length > 0 ? images : undefined,
+    sku_code: bp.sku_code,
+    is_active: bp.is_active,
+    created_at: bp.created_at,
+  };
+}
 
 export const categories: { id: ProductCategory; label: string }[] = [
   { id: "all", label: "All Products" },
@@ -88,6 +192,8 @@ export const categoryBanner: Record<
   // },
 };
 
+// [BACKEND-TODO] — Hardcoded product list; restore when backend is unavailable or for fallback
+/*
 // Based on Absen Energy products layout, adapted to VoltHub
 // Reference: `https://www.absenenergy.com/en/product/`
 export const products: Product[] = [
@@ -468,7 +574,10 @@ export const products: Product[] = [
     ],
   },
 ];
+*/
 
+// [BACKEND-TODO] — Restore getProductById when hardcoded products array is active
+/*
 // Helper function to get product by ID
 export function getProductById(id: string): Product | undefined {
   return products.find((p) => p.id === id);
@@ -1499,4 +1608,6 @@ export const productDetails: Record<string, {
     ],
   },
 };
+
+*/
 

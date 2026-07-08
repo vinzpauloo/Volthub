@@ -5,7 +5,10 @@ import { usePathname } from "next/navigation";
 import { RiCloseLine, RiImageLine, RiSendPlaneFill, RiCustomerService2Fill, RiMailSendLine } from "react-icons/ri";
 import { cn } from "@/lib/utils";
 import { generateContactLink } from "@/lib/chatbot";
-import { getProductById } from "@/app/products/components/productData";
+// [BACKEND-TODO] — Restore when hardcoded product data is re-enabled
+// import { getProductById } from "@/app/products/components/productData";
+import type { Product } from "@/app/products/components/productData";
+function getProductById(_id: string): Product | undefined { return undefined; }
 
 const ChatSupport = () => {
   const pathname = usePathname();

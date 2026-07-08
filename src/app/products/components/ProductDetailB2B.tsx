@@ -9,16 +9,20 @@ import {
   RiAwardLine,
   RiArrowRightSLine
 } from "react-icons/ri";
-import { Product, productDetails } from "./productData";
+import { Product } from "./productData";
+// [BACKEND-TODO] — Restore productDetails import when available
+// import { productDetails } from "./productData";
 
 interface ProductDetailB2BProps {
   product: Product;
-  details: typeof productDetails[string] | undefined;
+  // [BACKEND-TODO] — Restore when productDetails is available
+  // details: typeof productDetails[string] | undefined;
   categoryLabel: string | undefined;
   displayProductName: string;
-  selectedVariantIndex: number;
-  setSelectedVariantIndex: (index: number) => void;
-  selectableVariations: Array<{ name: string; price?: string }>;
+  // [BACKEND-TODO] — Restore variations when backend provides product_skus
+  // selectedVariantIndex: number;
+  // setSelectedVariantIndex: (index: number) => void;
+  // selectableVariations: Array<{ name: string; price?: string }>;
   quantity: number;
   setQuantity: (value: number | ((prev: number) => number)) => void;
   selectedImage: string;
@@ -29,12 +33,14 @@ interface ProductDetailB2BProps {
 
 export default function ProductDetailB2B({
   product,
-  details,
+  // [BACKEND-TODO] — Restore when productDetails is available
+  // details,
   categoryLabel,
   displayProductName,
-  selectedVariantIndex,
-  setSelectedVariantIndex,
-  selectableVariations,
+  // [BACKEND-TODO] — Restore variations when backend provides product_skus
+  // selectedVariantIndex,
+  // setSelectedVariantIndex,
+  // selectableVariations,
   quantity,
   setQuantity,
   selectedImage,
@@ -96,7 +102,9 @@ export default function ProductDetailB2B({
             </div>
           )}
 
+          {/* [BACKEND-TODO] — Restore Critical Specs when backend provides specifications */}
           {/* ZONE C: Critical Specs at a Glance - Right under images */}
+          {/*
           {details && details.specifications && details.specifications.length > 0 && (
             <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm">
               <h2 className="text-lg md:text-xl font-semibold text-slate-900 mb-4">

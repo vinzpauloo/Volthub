@@ -1,4 +1,11 @@
-import { products, productDetails, getProductById, type Product } from "@/app/products/components/productData";
+// [BACKEND-TODO] — Restore when hardcoded product data is re-enabled
+// import { products, productDetails, getProductById, type Product } from "@/app/products/components/productData";
+import type { Product } from "@/app/products/components/productData";
+
+// [BACKEND-TODO] — Stubs; remove when hardcoded data is restored
+const products: Product[] = [];
+const productDetails: Record<string, unknown> = {};
+function getProductById(_id: string): Product | undefined { return undefined; }
 
 // Company information knowledge base
 const companyInfo = {

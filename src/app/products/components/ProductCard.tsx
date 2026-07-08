@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { RiArrowRightSLine, RiBatteryChargeLine, RiChargingPile2Line, RiHomeGearLine, RiSunLine } from "react-icons/ri";
+import { RiArrowRightSLine } from "react-icons/ri";
+// [BACKEND-TODO] — Restore category icons when tag field is re-added
+// import { RiBatteryChargeLine, RiChargingPile2Line, RiHomeGearLine, RiSunLine } from "react-icons/ri";
 import { Product } from "./productData";
 
 interface ProductCardProps {
@@ -8,23 +10,28 @@ interface ProductCardProps {
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-  // Get icon for product category
-  const getCategoryIcon = () => {
-    switch (product.category) {
-      case "smart-home":
-        return RiHomeGearLine;
-      case "ev-charging":
-        return RiChargingPile2Line;
-      case "solar-street":
-        return RiSunLine;
-      case "cabinet":
-        return RiBatteryChargeLine;
-      default:
-        return null;
-    }
-  };
+  // [BACKEND-TODO] — Restore category icon mapping when tag field is re-added
+  // const getCategoryIcon = () => {
+  //   switch (product.category) {
+  //     case "smart-home":
+  //       return RiHomeGearLine;
+  //     case "ev-charging":
+  //       return RiChargingPile2Line;
+  //     case "solar-street":
+  //       return RiSunLine;
+  //     case "cabinet":
+  //       return RiBatteryChargeLine;
+  //     default:
+  //       return null;
+  //   }
+  // };
+  // const Icon = getCategoryIcon();
 
-  const Icon = getCategoryIcon();
+  // Use description (truncated) or SKU as subtitle fallback
+  const subtitle = product.description
+    ?.slice(0, 100)
+    ?? product.sku_code
+    ?? "";
 
   return (
     <Link href={`/products/${product.id}`}>
@@ -56,10 +63,11 @@ export default function ProductCard({ product }: ProductCardProps) {
           </h3>
           
           <p className="text-sm md:text-base text-slate-600 flex-1 line-clamp-2 leading-relaxed">
-            {product.subtitle}
+            {subtitle}
           </p>
 
           <div className="flex items-center justify-between pt-2 gap-2">
+            {/* [BACKEND-TODO] — Restore tag badge with icon when tag field is re-added
             {product.tag && Icon && (
               <span className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 truncate">
                 <Icon className="h-4 w-4 text-primary flex-shrink-0" />
@@ -69,6 +77,13 @@ export default function ProductCard({ product }: ProductCardProps) {
             {product.tag && !Icon && (
               <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 truncate">
                 {product.tag.trim()}
+              </span>
+            )}
+            */}
+            {/* SKU code badge if available */}
+            {product.sku_code && (
+              <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 truncate">
+                {product.sku_code}
               </span>
             )}
             <div className="ml-auto inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2 transition-all shrink-0">
