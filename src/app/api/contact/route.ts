@@ -2,14 +2,18 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import { buildEmailHtml } from "@/lib/email";
 
-function getResendClient(): Resend {
-  return new Resend(process.env.RESEND_API_KEY);
-}
-
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function sanitizeName(name: string): string {
   return name.replace(/[^\p{L}\p{N}\s'-]/gu, "").trim();
+}
+
+function getResendClient(): Resend {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY environment variable is not set");
+  }
+  return new Resend(apiKey);
 }
 
 const interestLabels: Record<string, string> = {
@@ -74,7 +78,6 @@ export async function POST(request: Request): Promise<NextResponse> {
       details,
     } = body as Record<string, unknown>;
 
-    // Validate required fields
     if (
       typeof rawFirstName !== "string" || rawFirstName.trim() === "" ||
       typeof rawLastName !== "string" || rawLastName.trim() === "" ||
@@ -120,14 +123,14 @@ export async function POST(request: Request): Promise<NextResponse> {
       details: typeof details === "string" ? details : undefined,
     });
 
-    // Route technical support/maintenance to customerservice@volthub.ph, all other sales/quotes to sales@volthub.ph
+    // Support → customerservice@, everything else → sales@
     const isSupport =
       interestKey === "technical-support" ||
       interestKey === "maintenance-service";
 
     const recipientEmail = isSupport
-      ? (process.env.CONTACT_EMAIL || "customerservice@volthub.ph")
-      : (process.env.PRICE_INQUIRY_EMAIL || "sales@volthub.ph");
+      ? "customerservice@volthub.ph"
+      : "sales@volthub.ph";
 
     const { error: sendError } = await getResendClient().emails.send({
       from: "VoltHub <noreply@volthub.ph>",
@@ -140,7 +143,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     if (sendError) {
       console.error("Resend error:", sendError);
       return NextResponse.json(
-        { ok: false, error: "Failed to send email" },
+        { ok: false, error: sendError.message },
         { status: 500 },
       );
     }
@@ -148,8 +151,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("Error in contact route:", error);
+    const message = error instanceof Error ? error.message : "Failed to send email";
     return NextResponse.json(
-      { ok: false, error: "Failed to send email" },
+      { ok: false, error: message },
       { status: 500 },
     );
   }
