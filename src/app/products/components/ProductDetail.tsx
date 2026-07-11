@@ -10,14 +10,67 @@ import {
   RiDownloadLine,
   RiQuestionLine,
   RiArrowLeftSLine,
+  RiCheckLine,
+  RiAddLine,
+  RiSunLine,
+  RiBatteryChargeLine,
 } from "react-icons/ri";
-import { Product, categories } from "./productData";
+import { Product, GroupedProduct, categories } from "./productData";
+
+// ── Solar / Hybrid Add-On Options ──
+
+type AddOn = {
+  id: string;
+  name: string;
+  description: string;
+  price?: string;
+  icon: React.ComponentType<{ className?: string }>;
+};
+
+const solarAddOns: AddOn[] = [
+  {
+    id: "solar-5kw",
+    name: "5kW Solar Panel Kit",
+    description: "12× 415W monocrystalline panels, mounting hardware, inverter — ideal for residential daytime charging",
+    price: "₱180,000",
+    icon: RiSunLine,
+  },
+  {
+    id: "solar-10kw",
+    name: "10kW Solar Panel Kit",
+    description: "24× 415W monocrystalline panels, grid-tie inverter, mounting system — covers daily charging + home loads",
+    price: "₱340,000",
+    icon: RiSunLine,
+  },
+  {
+    id: "solar-20kw",
+    name: "20kW Solar Array",
+    description: "48× 415W panels, hybrid inverter, optimizers — suitable for fleet or multi-charger commercial sites",
+    price: "₱650,000",
+    icon: RiSunLine,
+  },
+  {
+    id: "battery-10kwh",
+    name: "10kWh Battery Storage",
+    description: "LiFePO4 wall-mounted battery — stores excess solar for overnight or backup charging",
+    price: "₱145,000",
+    icon: RiBatteryChargeLine,
+  },
+  {
+    id: "battery-20kwh",
+    name: "20kWh Battery Storage",
+    description: "Stackable LiFePO4 system — extends off-grid capability and peak-shaving for commercial chargers",
+    price: "₱275,000",
+    icon: RiBatteryChargeLine,
+  },
+];
 
 interface ProductDetailProps {
   product: Product;
+  group?: GroupedProduct;
 }
 
-export default function ProductDetail({ product }: ProductDetailProps) {
+export default function ProductDetail({ product, group }: ProductDetailProps) {
   const categoryLabel = categories.find((c) => c.id === product.category)?.label;
 
   // Build image URL array from backend product.images, falling back to product.image
@@ -32,6 +85,32 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
+
+  // Variant selections (when group data is available)
+  const [selectedPower, setSelectedPower] = useState<string>(
+    group?.supply[0] ?? "",
+  );
+  const [selectedType, setSelectedType] = useState<string>(
+    group?.type[0] ?? "",
+  );
+  const [selectedConnector, setSelectedConnector] = useState<string>(
+    group?.connector[0] ?? "",
+  );
+
+  // Add-ons state
+  const [selectedAddOns, setSelectedAddOns] = useState<Set<string>>(new Set());
+
+  const toggleAddOn = (id: string) => {
+    setSelectedAddOns((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
 
   const openImageModal = (index: number) => {
     setModalImageIndex(index);
@@ -59,6 +138,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
   }, [isImageModalOpen]);
+
+  // Derive model prefix from group name
+  const modelPrefix = group?.name.replace(/\s*Series\s*/i, "").trim() ?? "";
 
   return (
     <div className="space-y-4 md:space-y-8 w-full md:w-3/4 md:mx-auto pb-24 lg:pb-8">
@@ -120,7 +202,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
         {/* Product Info */}
         <div className="lg:w-1/2">
-          <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm space-y-4">
+          <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm space-y-5">
             {categoryLabel && (
               <span className="text-xs uppercase tracking-wider text-primary font-semibold">
                 {categoryLabel}
@@ -132,6 +214,121 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             {product.sku_code && (
               <p className="text-xs text-slate-500">SKU: {product.sku_code}</p>
             )}
+
+            {/* ── Variant Selectors (when group data available) ── */}
+            {group && (
+              <div className="space-y-4 pt-2 border-t border-slate-100">
+                {/* Power selector */}
+                {group.supply.length > 0 && (
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">
+                      Power Rating
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {group.supply.map((p) => (
+                        <button
+                          key={p}
+                          onClick={() => setSelectedPower(p)}
+                          className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${
+                            selectedPower === p
+                              ? "bg-primary text-white border-primary shadow-md"
+                              : "bg-slate-50 text-slate-700 border-slate-200 hover:border-primary/40"
+                          }`}
+                        >
+                          {p}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Gun type selector */}
+                {group.type.length > 0 && (
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">
+                      Gun Configuration
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {group.type.map((t) => (
+                        <button
+                          key={t}
+                          onClick={() => setSelectedType(t)}
+                          className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${
+                            selectedType === t
+                              ? "bg-primary text-white border-primary shadow-md"
+                              : "bg-slate-50 text-slate-700 border-slate-200 hover:border-primary/40"
+                          }`}
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Connector selector */}
+                {group.connector.length > 0 && (
+                  <div>
+                    <label className="block text-sm font-semibold text-slate-900 mb-2">
+                      Connector Standard
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {group.connector.map((c) => (
+                        <button
+                          key={c}
+                          onClick={() => setSelectedConnector(c)}
+                          className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${
+                            selectedConnector === c
+                              ? "bg-primary text-white border-primary shadow-md"
+                              : "bg-slate-50 text-slate-700 border-slate-200 hover:border-primary/40"
+                          }`}
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Selected configuration summary */}
+                <div className="bg-slate-50 rounded-xl p-4 space-y-2 border border-slate-200">
+                  <p className="text-xs text-slate-500 uppercase tracking-wide font-medium">
+                    Selected Configuration
+                  </p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-base font-bold text-slate-900">
+                      {modelPrefix}
+                    </span>
+                    {selectedPower && (
+                      <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-0.5 text-sm font-bold text-primary">
+                        [{selectedPower.replace(/kW/i, "").trim()}]
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex flex-wrap gap-3 text-sm text-slate-600">
+                    {selectedPower && (
+                      <span className="flex items-center gap-1">
+                        <RiCheckLine className="w-4 h-4 text-primary" />
+                        {selectedPower}
+                      </span>
+                    )}
+                    {selectedType && (
+                      <span className="flex items-center gap-1">
+                        <RiCheckLine className="w-4 h-4 text-primary" />
+                        {selectedType}
+                      </span>
+                    )}
+                    {selectedConnector && (
+                      <span className="flex items-center gap-1">
+                        <RiCheckLine className="w-4 h-4 text-primary" />
+                        {selectedConnector}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+
             {product.price && (
               <p className="text-2xl md:text-3xl font-bold text-primary">{product.price}</p>
             )}
@@ -168,7 +365,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
             {/* CTA */}
             <Link
-              href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(product.name)}&quantity=${quantity}`}
+              href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(product.name)}&power=${encodeURIComponent(selectedPower)}&type=${encodeURIComponent(selectedType)}&connector=${encodeURIComponent(selectedConnector)}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&quantity=${quantity}`}
               className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-white font-bold px-4 py-3 rounded-lg shadow-lg transition-all text-base group"
             >
               <span>Get Quote</span>
@@ -177,6 +374,74 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </div>
         </div>
       </div>
+
+      {/* ── Solar / Hybrid Add-Ons Section ── */}
+      {group && (
+        <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm">
+          <div className="flex items-center gap-2 mb-4">
+            <RiAddLine className="w-5 h-5 text-primary" />
+            <h2 className="text-lg md:text-xl font-semibold text-slate-900">
+              Hybrid Solar Add-Ons
+            </h2>
+            <span className="text-xs text-slate-400">— bundle & save</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {solarAddOns.map((addon) => {
+              const isSelected = selectedAddOns.has(addon.id);
+              const Icon = addon.icon;
+              return (
+                <button
+                  key={addon.id}
+                  onClick={() => toggleAddOn(addon.id)}
+                  className={`flex items-start gap-3 rounded-xl p-4 text-left border transition-all ${
+                    isSelected
+                      ? "bg-primary/5 border-primary/40 ring-1 ring-primary/20 shadow-sm"
+                      : "bg-slate-50 border-slate-200 hover:border-slate-300 hover:shadow-sm"
+                  }`}
+                >
+                  <div
+                    className={`mt-0.5 flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                      isSelected
+                        ? "bg-primary text-white shadow-sm"
+                        : "bg-white border border-slate-200 text-slate-500"
+                    }`}
+                  >
+                    {isSelected ? (
+                      <RiCheckLine className="w-5 h-5" />
+                    ) : (
+                      <Icon className="w-5 h-5" />
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <span
+                        className={`text-sm font-semibold ${
+                          isSelected ? "text-primary" : "text-slate-800"
+                        }`}
+                      >
+                        {addon.name}
+                      </span>
+                      {addon.price && (
+                        <span className="text-xs font-bold text-slate-600 flex-shrink-0">
+                          {addon.price}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-slate-500 mt-1 line-clamp-2">
+                      {addon.description}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+          {selectedAddOns.size > 0 && (
+            <p className="text-xs text-primary font-medium mt-3">
+              {selectedAddOns.size} add-on{selectedAddOns.size > 1 ? "s" : ""} selected — included in your quote
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Description */}
       {product.description && (
@@ -238,7 +503,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         <p className="text-sm text-blue-100 mb-4">Contact us for pricing, availability, and custom configurations</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
-            href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(product.name)}&quantity=${quantity}`}
+            href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(product.name)}&power=${encodeURIComponent(selectedPower)}&type=${encodeURIComponent(selectedType)}&connector=${encodeURIComponent(selectedConnector)}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&quantity=${quantity}`}
             className="inline-flex items-center gap-2 bg-white text-primary px-6 py-2.5 rounded-xl font-semibold hover:bg-slate-100 transition-colors text-sm"
           >
             Get Quote

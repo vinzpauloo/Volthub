@@ -4,29 +4,94 @@ import LayoutContainer from "@/components/layout/LayoutContainer";
 import ProductDetail from "../components/ProductDetail";
 import {
   type Product,
+  type GroupedProduct,
   type BackendProduct,
+  isGroupedProduct,
   mapBackendProduct,
 } from "../components/productData";
 import BackToTopButton from "@/components/common/BackToTopButton";
 
-const BACKEND_URL = "https://volthub-admin-one.vercel.app/api/public/products";
+const BACKEND_URL = "https://volthub-admin-one.vercel.app/";
 
 type ProductPageProps = {
   params: Promise<{
-    id: string;
+    id: string; // This is actually the groupBy value (e.g. "TA-DC-FX")
   }>;
 };
 
-async function getProductById(id: string): Promise<Product | undefined> {
+type ProductPageData = {
+  product: Product;
+  variants?: BackendProduct[];
+  group?: GroupedProduct;
+};
+
+async function getProductData(
+  groupBy: string,
+): Promise<ProductPageData | undefined> {
   try {
-    const res = await fetch(BACKEND_URL, { cache: "no-store" });
+    // 1. Try the groupBy-specific endpoint first
+    const detailRes = await fetch(
+      `${BACKEND_URL}api/public/products/${groupBy}`,
+      { cache: "no-store" },
+    );
+
+    if (detailRes.ok) {
+      const json = await detailRes.json();
+      const variants: BackendProduct[] = json.data ?? [];
+      if (variants.length > 0) {
+        // Use the first variant as the main product, pass all for options
+        const main = mapBackendProduct(variants[0]);
+        // Also look up the group info from the main listing
+        const group = await findGroup(groupBy);
+        return { product: main, variants, group };
+      }
+    }
+  } catch {
+    // Fall through to listing-based lookup
+  }
+
+  // 2. Fallback: search the main product listing
+  const group = await findGroup(groupBy);
+  if (group) {
+    // Build a representative product from the group
+    const product: Product = {
+      id: group.groupBy,
+      name: group.name,
+      category: mapGroupedCategory(group.category),
+      description: group.description,
+      image: group.image_url,
+      sku_code: group.groupBy,
+    };
+    return { product, group };
+  }
+
+  return undefined;
+}
+
+async function findGroup(groupBy: string): Promise<GroupedProduct | undefined> {
+  try {
+    const res = await fetch(`${BACKEND_URL}api/public/products`, {
+      cache: "no-store",
+    });
     if (!res.ok) return undefined;
     const json = await res.json();
-    const raw: BackendProduct[] = json.data ?? [];
-    const match = raw.find((bp) => bp.id === id);
-    return match ? mapBackendProduct(match) : undefined;
+    const raw = json.data ?? [];
+    return raw.find(
+      (entry: GroupedProduct | BackendProduct) =>
+        isGroupedProduct(entry) && entry.groupBy === groupBy,
+    ) as GroupedProduct | undefined;
   } catch {
     return undefined;
+  }
+}
+
+function mapGroupedCategory(cat: string) {
+  switch (cat) {
+    case "dc_charger":
+    case "ac_charger":
+      return "ev-charging" as const;
+    default:
+      return "all" as const;
   }
 }
 
@@ -34,32 +99,28 @@ export async function generateMetadata({
   params,
 }: ProductPageProps): Promise<Metadata> {
   const { id } = await params;
-  const product = await getProductById(id);
+  const data = await getProductData(id);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
   const productUrl = `${siteUrl}/products/${id}`;
 
-  if (!product) {
+  if (!data) {
     return {
       title: "Product Not Found - VoltHub",
       description: "The requested product could not be found.",
     };
   }
 
+  const { product } = data;
   const productImage = product.image?.startsWith("http")
     ? product.image
     : product.image?.startsWith("/")
-    ? `${siteUrl}${product.image}`
-    : `${siteUrl}/HomeBanner/banner1.png`;
+      ? `${siteUrl}${product.image}`
+      : `${siteUrl}/HomeBanner/banner1.png`;
 
-  // [BACKEND-TODO] — Restore product.images gallery fallback logic
-  // : product.images?.[0]?.startsWith("http")
-  // ? product.images[0]
-  // : product.images?.[0]?.startsWith("/")
-  // ? `${siteUrl}${product.images[0]}`
-
-  const description = product.description ||
-    `Learn more about ${product.name} from VoltHub. ${product.category} energy solution with specifications and pricing.`;
+  const description =
+    product.description ||
+    `Learn more about ${product.name} from VoltHub.`;
 
   return {
     title: `${product.name} - VoltHub`,
@@ -69,8 +130,6 @@ export async function generateMetadata({
       product.category,
       "energy solutions",
       "VoltHub products",
-      // [BACKEND-TODO] — Restore product.tag keyword when tag field is re-added
-      // ...(product.tag ? [product.tag.toLowerCase()] : []),
     ],
     openGraph: {
       type: "website",
@@ -79,14 +138,7 @@ export async function generateMetadata({
       siteName: "VoltHub Energy",
       title: `${product.name} - VoltHub`,
       description,
-      images: [
-        {
-          url: productImage,
-          width: 1200,
-          height: 630,
-          alt: product.name,
-        },
-      ],
+      images: [{ url: productImage, width: 1200, height: 630, alt: product.name }],
     },
     twitter: {
       card: "summary_large_image",
@@ -95,28 +147,26 @@ export async function generateMetadata({
       images: [productImage],
       creator: "@VoltHubEnergy",
     },
-    alternates: {
-      canonical: productUrl,
-    },
+    alternates: { canonical: productUrl },
   };
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const { id } = await params;
-  const product = await getProductById(id);
+  const data = await getProductData(id);
 
-  if (!product) {
+  if (!data) {
     notFound();
   }
 
+  const { product } = data;
+
   return (
-    <main className="bg-slate-50 min-h-screen pt-20 md:pt-28 pb-12 md:pb-20 flex  items-center justify-center">
+    <main className="bg-slate-50 min-h-screen pt-20 md:pt-28 pb-12 md:pb-20 flex items-center justify-center">
       <LayoutContainer>
-        <ProductDetail product={product} />
+        <ProductDetail product={product} group={data.group} />
         <BackToTopButton />
       </LayoutContainer>
     </main>
   );
 }
-
-

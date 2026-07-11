@@ -1,23 +1,34 @@
-import { Product, ProductCategory, categories } from "./productData";
-// [BACKEND-TODO] — Restore import of hardcoded products for count
-// import { products as allProducts } from "./productData";
+import {
+  Product,
+  ProductCategory,
+  GroupedProduct,
+  categories,
+} from "./productData";
 import ProductCard from "./ProductCard";
+import ProductShowcaseBanner from "./ProductShowcaseBanner";
 
 interface ProductGridProps {
-  products: Product[];
+  groupedProducts: GroupedProduct[];
+  flatProducts: Product[];
   activeCategory: ProductCategory;
   searchQuery: string;
   onSearchQueryChange: (value: string) => void;
 }
 
 export default function ProductGrid({
-  products,
+  groupedProducts,
+  flatProducts,
   activeCategory,
   searchQuery,
   onSearchQueryChange,
 }: ProductGridProps) {
+  const totalCount = groupedProducts.length + flatProducts.length;
+  const showBanners = groupedProducts.length > 0;
+  const showCards = flatProducts.length > 0;
+
   return (
-    <div className="space-y-4 md:space-y-6 flex-1 w-full md:w-auto">
+    <div className="space-y-6 md:space-y-8 flex-1 w-full md:w-auto">
+      {/* Header row */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 md:gap-4">
         <div className="space-y-1">
           <p className="text-xs md:text-sm uppercase tracking-[0.16em] text-primary font-semibold">
@@ -42,31 +53,50 @@ export default function ProductGrid({
               🔍
             </span>
           </div>
-          {/* [BACKEND-TODO] — Restore "Showing X of Y" when hardcoded products array is back
           <p className="text-xs md:text-sm text-slate-500 md:text-right">
-            Showing {products.length} of {allProducts.length} products
-          </p>
-          */}
-          <p className="text-xs md:text-sm text-slate-500 md:text-right">
-            {products.length} product{products.length !== 1 ? "s" : ""}
+            {totalCount} product{totalCount !== 1 ? "s" : ""}
           </p>
         </div>
       </div>
 
-      {products.length === 0 ? (
+      {/* Empty state */}
+      {totalCount === 0 && (
         <div className="text-center py-12 md:py-16">
-          <p className="text-slate-500 text-sm md:text-base">No products found in this category.</p>
+          <p className="text-slate-500 text-sm md:text-base">
+            No products found in this category.
+          </p>
         </div>
-      ) : (
-        <div className="flex flex-wrap gap-4 md:gap-5 xl:gap-6">
-          {products.map((product) => (
-            <div key={product.id} className="w-full md:w-[calc(50%-0.625rem)] xl:w-[calc(33.333%-1rem)]">
-              <ProductCard product={product} />
-            </div>
+      )}
+
+      {/* Grouped product banners (EV chargers) */}
+      {showBanners && (
+        <div className="space-y-6 md:space-y-8">
+          {groupedProducts.map((gp) => (
+            <ProductShowcaseBanner key={gp.groupBy} product={gp} />
           ))}
         </div>
+      )}
+
+      {/* Flat product cards (non-EV categories) */}
+      {showCards && (
+        <>
+          {showBanners && (
+            <p className="text-sm text-slate-500 font-medium uppercase tracking-wide pt-2">
+              More Products
+            </p>
+          )}
+          <div className="flex flex-wrap gap-4 md:gap-5 xl:gap-6">
+            {flatProducts.map((product) => (
+              <div
+                key={product.id}
+                className="w-full md:w-[calc(50%-0.625rem)] xl:w-[calc(33.333%-1rem)]"
+              >
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
 }
-

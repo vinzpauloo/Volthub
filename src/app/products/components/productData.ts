@@ -138,6 +138,49 @@ export function mapBackendProduct(bp: BackendProduct): Product {
   };
 }
 
+// ── Grouped API Response Types (localhost:3003) ──
+
+/** A product series returned by the grouped-products API (EV chargers). */
+export type GroupedProduct = {
+  groupBy: string; // e.g. "TA-DC-FX" (also used as the detail-page slug)
+  name: string; // e.g. "ULTRA Series"
+  description: string; // e.g. "240-400kW DC Fast Charger — Floor Cabinet"
+  category: string; // e.g. "dc_charger", "ac_charger"
+  image_url: string;
+  supply: string[]; // e.g. ["240kW","300kW","360kW","400kW"]
+  type: string[]; // e.g. ["Dual Gun","Single | Dual Gun"]
+  connector: string[]; // e.g. ["EU","GBT","GBT+EU"]
+};
+
+/** Union of grouped and flat backend shapes returned by the products API. */
+export type ProductListEntry = GroupedProduct | BackendProduct;
+
+/** Type guard: returns true when the entry is a grouped product series. */
+export function isGroupedProduct(
+  item: ProductListEntry,
+): item is GroupedProduct {
+  return "groupBy" in item && Array.isArray((item as GroupedProduct).supply);
+}
+
+/** Extract display labels from a grouped product for the banner layout. */
+export function getGroupedProductInfo(gp: GroupedProduct) {
+  const modelPrefix = gp.name.replace(/\s*Series\s*/i, "").trim(); // "ULTRA"
+  const lowestPower = gp.supply[0] || ""; // "240kW"
+  const powerNum = lowestPower.replace(/kW/i, "").trim(); // "240"
+  const installationType = gp.description.includes("Floor Cabinet")
+    ? "Floor Cabinet"
+    : gp.description.includes("Wall")
+      ? "Wall-Mounted"
+      : "Floor Standing";
+  const categoryLabel =
+    gp.category === "dc_charger"
+      ? "Ultra-Fast DC Chargers"
+      : gp.category === "ac_charger"
+        ? "AC Charging Stations"
+        : gp.category;
+  return { modelPrefix, lowestPower, powerNum, installationType, categoryLabel };
+}
+
 export const categories: { id: ProductCategory; label: string }[] = [
   { id: "all", label: "All Products" },
   { id: "ev-charging", label: "EV Charging Station" },
