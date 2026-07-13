@@ -28,44 +28,51 @@ type ProductPageData = {
 async function getProductData(
   groupBy: string,
 ): Promise<ProductPageData | undefined> {
+  // 1. Fetch the detail endpoint which returns both group + variants
+  //    Response: { ok, data: { groupBy, supply, type, connector, variants: [...] } }
   try {
-    // 1. Try the groupBy-specific endpoint first
     const detailRes = await fetch(
       `${BACKEND_URL}api/public/products/${groupBy}`,
       { cache: "no-store" },
     );
-
     if (detailRes.ok) {
       const json = await detailRes.json();
-      const variants: BackendProduct[] = json.data ?? [];
-      if (variants.length > 0) {
-        // Use the first variant as the main product, pass all for options
-        const main = mapBackendProduct(variants[0]);
-        // Also look up the group info from the main listing
-        const group = await findGroup(groupBy);
-        return { product: main, variants, group };
+      // Response shape: { ok: true, data: { groupBy, variants: [...], ... } }
+      const body = json.data ?? json;
+      const rawVariants: BackendProduct[] = body?.variants ?? [];
+      if (rawVariants.length > 0) {
+        // Use the API group data directly (has supply/type/connector)
+        const group: GroupedProduct = {
+          groupBy: body.groupBy ?? groupBy,
+          name: body.name ?? groupBy,
+          description: body.description ?? "",
+          category: body.category ?? "",
+          image_url: body.image_url ?? "",
+          supply: body.supply ?? [],
+          type: body.type ?? [],
+          connector: body.connector ?? [],
+        };
+        const product = mapBackendProduct(rawVariants[0]);
+        return { product, variants: rawVariants, group };
       }
     }
   } catch {
     // Fall through to listing-based lookup
   }
 
-  // 2. Fallback: search the main product listing
+  // 2. Fallback: search the main product listing for group info
   const group = await findGroup(groupBy);
-  if (group) {
-    // Build a representative product from the group
-    const product: Product = {
-      id: group.groupBy,
-      name: group.name,
-      category: mapGroupedCategory(group.category),
-      description: group.description,
-      image: group.image_url,
-      sku_code: group.groupBy,
-    };
-    return { product, group };
-  }
+  if (!group) return undefined;
 
-  return undefined;
+  const product: Product = {
+    id: group.groupBy,
+    name: group.name,
+    category: mapGroupedCategory(group.category),
+    description: group.description,
+    image: group.image_url,
+    sku_code: group.groupBy,
+  };
+  return { product, group };
 }
 
 async function findGroup(groupBy: string): Promise<GroupedProduct | undefined> {
@@ -159,12 +166,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  const { product } = data;
+  const { product, variants } = data;
 
   return (
     <main className="bg-slate-50 min-h-screen pt-20 md:pt-28 pb-12 md:pb-20 flex items-center justify-center">
       <LayoutContainer>
-        <ProductDetail product={product} group={data.group} />
+        <ProductDetail product={product} group={data.group} variants={variants} />
         <BackToTopButton />
       </LayoutContainer>
     </main>

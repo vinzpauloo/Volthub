@@ -15,7 +15,7 @@ import {
   RiSunLine,
   RiBatteryChargeLine,
 } from "react-icons/ri";
-import { Product, GroupedProduct, categories } from "./productData";
+import { Product, GroupedProduct, BackendProduct, categories } from "./productData";
 
 // ── Solar / Hybrid Add-On Options ──
 
@@ -68,34 +68,62 @@ const solarAddOns: AddOn[] = [
 interface ProductDetailProps {
   product: Product;
   group?: GroupedProduct;
+  variants?: BackendProduct[];
 }
 
-export default function ProductDetail({ product, group }: ProductDetailProps) {
+export default function ProductDetail({ product, group, variants: serverVariants }: ProductDetailProps) {
   const categoryLabel = categories.find((c) => c.id === product.category)?.label;
 
-  // Build image URL array from backend product.images, falling back to product.image
-  const allImages: string[] = (() => {
-    if (product.images && product.images.length > 0) {
-      return product.images.map((img) => img.image_url);
+  // ── Client-side variant fetching ──
+  const [clientVariants, setClientVariants] = useState<BackendProduct[] | null>(null);
+  const [variantsLoading, setVariantsLoading] = useState(false);
+  const [variantsError, setVariantsError] = useState<string | null>(null);
+
+  // Use client-fetched variants if available, otherwise server-passed variants
+  const variants = clientVariants ?? serverVariants;
+
+  // ── Selected variant (click a card to pick) ──
+  const [selectedVariant, setSelectedVariant] = useState<BackendProduct | null>(null);
+
+  async function fetchVariants() {
+    if (!group) return;
+    setVariantsLoading(true);
+    setVariantsError(null);
+    try {
+      const res = await fetch(`/api/products/${group.groupBy}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      const body = json.data ?? json;
+      const data: BackendProduct[] = body?.variants ?? [];
+      if (!Array.isArray(data) || data.length === 0) {
+        throw new Error("No variants returned");
+      }
+      setClientVariants(data);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to fetch";
+      setVariantsError(msg);
+    } finally {
+      setVariantsLoading(false);
     }
-    return [product.image];
+  }
+
+  // Build image URL array. Variant image first when selected.
+  const allImages: string[] = (() => {
+    const images: string[] = [];
+    if (selectedVariant?.image_url) images.push(selectedVariant.image_url);
+    if (product.images?.length) {
+      for (const img of product.images) {
+        if (!images.includes(img.image_url)) images.push(img.image_url);
+      }
+    }
+    if (images.length === 0) images.push(product.image);
+    return images;
   })();
 
   const [selectedImage, setSelectedImage] = useState(() => allImages[0] || product.image);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
-
-  // Variant selections (when group data is available)
-  const [selectedPower, setSelectedPower] = useState<string>(
-    group?.supply[0] ?? "",
-  );
-  const [selectedType, setSelectedType] = useState<string>(
-    group?.type[0] ?? "",
-  );
-  const [selectedConnector, setSelectedConnector] = useState<string>(
-    group?.connector[0] ?? "",
-  );
 
   // Add-ons state
   const [selectedAddOns, setSelectedAddOns] = useState<Set<string>>(new Set());
@@ -138,9 +166,6 @@ export default function ProductDetail({ product, group }: ProductDetailProps) {
     window.addEventListener("keydown", handleEscape);
     return () => window.removeEventListener("keydown", handleEscape);
   }, [isImageModalOpen]);
-
-  // Derive model prefix from group name
-  const modelPrefix = group?.name.replace(/\s*Series\s*/i, "").trim() ?? "";
 
   return (
     <div className="space-y-4 md:space-y-8 w-full md:w-3/4 md:mx-auto pb-24 lg:pb-8">
@@ -209,129 +234,128 @@ export default function ProductDetail({ product, group }: ProductDetailProps) {
               </span>
             )}
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-slate-900">
-              {product.name}
+              {selectedVariant?.name || product.name}
             </h1>
-            {product.sku_code && (
-              <p className="text-xs text-slate-500">SKU: {product.sku_code}</p>
+            {(selectedVariant?.sku_code || product.sku_code) && (
+              <p className="text-xs text-slate-500">
+                SKU: {selectedVariant?.sku_code || product.sku_code}
+                {selectedVariant && (
+                  <span className="ml-1.5 text-primary font-medium">(matched)</span>
+                )}
+              </p>
+            )}
+             {/* ── Compact Variants Grid ── */}
+            {!variants && (
+              <button
+                onClick={fetchVariants}
+                disabled={variantsLoading}
+                className="w-full bg-primary/10 hover:bg-primary/20 disabled:opacity-50 text-primary font-semibold px-4 py-2 rounded-lg text-sm transition-colors"
+              >
+                {variantsLoading ? "Loading variants…" : "Load Variants"}
+              </button>
+            )}
+            {variantsError && (
+              <p className="text-xs text-red-500">Error: {variantsError}{" "}
+                <button onClick={fetchVariants} className="underline">Retry</button>
+              </p>
+            )}
+            {variants && variants.length > 0 && (
+              <div className="grid grid-cols-2 gap-2 max-h-[320px] overflow-y-auto pr-1">
+                {variants.map((v) => {
+                  const isSelected = selectedVariant?.id === v.id;
+                  return (
+                    <button
+                      type="button"
+                      key={v.id}
+                      onClick={() => setSelectedVariant(isSelected ? null : v)}
+                      className={`flex items-start gap-2 rounded-lg border-2 p-2 transition-all text-left ${
+                        isSelected
+                          ? "border-primary bg-primary/5 ring-1 ring-primary/20"
+                          : "border-slate-200 bg-white hover:border-primary/40 cursor-pointer"
+                      }`}
+                    >
+                      {v.image_url && (
+                        <div className="relative w-12 h-12 flex-shrink-0 rounded-md overflow-hidden bg-slate-100">
+                          <Image src={v.image_url} alt={v.name} fill className="object-contain p-0.5" />
+                        </div>
+                      )}
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-semibold text-slate-900 line-clamp-2 leading-tight">
+                          {v.name}
+                        </p>
+                        <p className="text-[10px] text-slate-400 font-mono mt-0.5 truncate">
+                          {v.sku_code}
+                        </p>
+                        {v.unit_price_php != null && (
+                          <p className="text-xs font-bold text-primary mt-0.5">
+                            ₱{v.unit_price_php.toLocaleString("en-PH")}
+                          </p>
+                        )}
+                      </div>
+                      {isSelected && (
+                        <RiCheckLine className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
             )}
 
-            {/* ── Variant Selectors (when group data available) ── */}
-            {group && (
-              <div className="space-y-4 pt-2 border-t border-slate-100">
-                {/* Power selector */}
-                {group.supply.length > 0 && (
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-900 mb-2">
-                      Power Rating
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {group.supply.map((p) => (
-                        <button
-                          key={p}
-                          onClick={() => setSelectedPower(p)}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${
-                            selectedPower === p
-                              ? "bg-primary text-white border-primary shadow-md"
-                              : "bg-slate-50 text-slate-700 border-slate-200 hover:border-primary/40"
-                          }`}
-                        >
-                          {p}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Gun type selector */}
-                {group.type.length > 0 && (
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-900 mb-2">
-                      Gun Configuration
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {group.type.map((t) => (
-                        <button
-                          key={t}
-                          onClick={() => setSelectedType(t)}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${
-                            selectedType === t
-                              ? "bg-primary text-white border-primary shadow-md"
-                              : "bg-slate-50 text-slate-700 border-slate-200 hover:border-primary/40"
-                          }`}
-                        >
-                          {t}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Connector selector */}
-                {group.connector.length > 0 && (
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-900 mb-2">
-                      Connector Standard
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {group.connector.map((c) => (
-                        <button
-                          key={c}
-                          onClick={() => setSelectedConnector(c)}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold border transition-all ${
-                            selectedConnector === c
-                              ? "bg-primary text-white border-primary shadow-md"
-                              : "bg-slate-50 text-slate-700 border-slate-200 hover:border-primary/40"
-                          }`}
-                        >
-                          {c}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {/* Selected configuration summary */}
-                <div className="bg-slate-50 rounded-xl p-4 space-y-2 border border-slate-200">
-                  <p className="text-xs text-slate-500 uppercase tracking-wide font-medium">
-                    Selected Configuration
-                  </p>
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="text-base font-bold text-slate-900">
-                      {modelPrefix}
-                    </span>
-                    {selectedPower && (
-                      <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-0.5 text-sm font-bold text-primary">
-                        [{selectedPower.replace(/kW/i, "").trim()}]
-                      </span>
-                    )}
-                  </div>
-                  <div className="flex flex-wrap gap-3 text-sm text-slate-600">
-                    {selectedPower && (
-                      <span className="flex items-center gap-1">
-                        <RiCheckLine className="w-4 h-4 text-primary" />
-                        {selectedPower}
-                      </span>
-                    )}
-                    {selectedType && (
-                      <span className="flex items-center gap-1">
-                        <RiCheckLine className="w-4 h-4 text-primary" />
-                        {selectedType}
-                      </span>
-                    )}
-                    {selectedConnector && (
-                      <span className="flex items-center gap-1">
-                        <RiCheckLine className="w-4 h-4 text-primary" />
-                        {selectedConnector}
-                      </span>
-                    )}
-                  </div>
+            {/* ── Selected Variant Info ── */}
+            {selectedVariant && (
+              <div className="bg-primary/5 rounded-xl p-4 space-y-2 border border-primary/20">
+                <p className="text-xs text-primary uppercase tracking-wide font-medium">
+                  Selected Variant
+                </p>
+                <p className="text-base font-bold text-slate-900">
+                  {selectedVariant.name}
+                </p>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-slate-500">SKU:</span>
+                  <code className="text-xs font-bold text-primary bg-white px-2 py-0.5 rounded">
+                    {selectedVariant.sku_code}
+                  </code>
                 </div>
               </div>
             )}
 
-            {product.price && (
-              <p className="text-2xl md:text-3xl font-bold text-primary">{product.price}</p>
+            {/* Prompt to select when nothing is picked */}
+            {!selectedVariant && variants && variants.length > 0 && (
+              <p className="text-sm text-amber-600 font-medium">
+                Select a variant below to see pricing
+              </p>
             )}
+
+            {/* Price — unit + total with quantity (always shown) */}
+            <div className="space-y-2 pt-1 border-t border-slate-200">
+              {/* Unit Price */}
+              <div className="flex items-baseline justify-between">
+                <span className="text-sm text-slate-500">Unit Price</span>
+                <span className="text-lg font-semibold text-slate-900">
+                  {selectedVariant?.unit_price_php != null
+                    ? `₱${selectedVariant.unit_price_php.toLocaleString("en-PH")}`
+                    : product.price ||
+                  selectedVariant?.category
+                  
+                  
+                  }
+                </span>
+              </div>
+              {/* Quantity row */}
+              <div className="flex items-baseline justify-between">
+                <span className="text-sm text-slate-500">Quantity</span>
+                <span className="text-sm font-medium text-slate-700">× {quantity}</span>
+              </div>
+              {/* Total Price */}
+              <div className="flex items-baseline justify-between border-t border-slate-100 pt-2">
+                <span className="text-sm font-semibold text-slate-900">Total Price</span>
+                <span className="text-2xl md:text-3xl font-bold text-primary">
+                  {selectedVariant?.unit_price_php != null
+                    ? `₱${(selectedVariant.unit_price_php * quantity).toLocaleString("en-PH")}`
+                    : product.price || "—"}
+                </span>
+              </div>
+            </div>
 
             {/* Quantity */}
             <div className="pt-2 border-t border-slate-200">
@@ -365,12 +389,14 @@ export default function ProductDetail({ product, group }: ProductDetailProps) {
 
             {/* CTA */}
             <Link
-              href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(product.name)}&power=${encodeURIComponent(selectedPower)}&type=${encodeURIComponent(selectedType)}&connector=${encodeURIComponent(selectedConnector)}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&quantity=${quantity}`}
+              href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(selectedVariant?.name || product.name)}&sku=${encodeURIComponent(selectedVariant?.sku_code || "")}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&quantity=${quantity}`}
               className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-white font-bold px-4 py-3 rounded-lg shadow-lg transition-all text-base group"
             >
               <span>Get Quote</span>
               <RiArrowRightSLine className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
+
+           
           </div>
         </div>
       </div>
@@ -453,7 +479,7 @@ export default function ProductDetail({ product, group }: ProductDetailProps) {
         </div>
       )}
 
-      {/* Product Images Gallery */}
+      {/* ── Product Images Gallery ── */}
       {product.images && product.images.length > 1 && (
         <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm">
           <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-3 md:mb-4">Product Images</h2>
@@ -503,7 +529,7 @@ export default function ProductDetail({ product, group }: ProductDetailProps) {
         <p className="text-sm text-blue-100 mb-4">Contact us for pricing, availability, and custom configurations</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
-            href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(product.name)}&power=${encodeURIComponent(selectedPower)}&type=${encodeURIComponent(selectedType)}&connector=${encodeURIComponent(selectedConnector)}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&quantity=${quantity}`}
+            href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(selectedVariant?.name || product.name)}&sku=${encodeURIComponent(selectedVariant?.sku_code || "")}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&quantity=${quantity}`}
             className="inline-flex items-center gap-2 bg-white text-primary px-6 py-2.5 rounded-xl font-semibold hover:bg-slate-100 transition-colors text-sm"
           >
             Get Quote
