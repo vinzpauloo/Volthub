@@ -190,7 +190,7 @@ export default function ProductDetail({ product, group, variants: serverVariants
     const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
     const base = (selectedVariant?.unit_price_php ?? 0) * quantity;
     const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
-    const installCost = includeInstallation ? 15000 : 0;
+    const installCost = includeInstallation ? 18000 : 0;
     const total = base + accSubtotal + installCost;
     const fmt = (p: number) => `₱${p.toLocaleString("en-PH")}`;
     const timestamp = new Date().toLocaleString("en-PH", { dateStyle: "long", timeStyle: "short" });
@@ -284,7 +284,7 @@ ${includeInstallation || solarSetup ? `
     const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
     const base = (selectedVariant?.unit_price_php ?? 0) * quantity;
     const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
-    const installCost = includeInstallation ? 15000 : 0;
+    const installCost = includeInstallation ? 18000 : 0;
     const total = base + accSubtotal + installCost;
 
     try {
@@ -728,7 +728,7 @@ ${includeInstallation || solarSetup ? `
                       const base = selectedVariant?.unit_price_php != null ? selectedVariant.unit_price_php * quantity : 0;
                       const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
                       const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
-                      const installCost = includeInstallation ? 15000 : 0;
+                      const installCost = includeInstallation ? 18000 : 0;
                       return (base + accSubtotal + installCost).toLocaleString("en-PH");
                     })()}
                   </td>
@@ -940,7 +940,7 @@ ${includeInstallation || solarSetup ? `
                       const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
                       const base = (selectedVariant?.unit_price_php ?? 0) * quantity;
                       const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
-                      const installCost = includeInstallation ? 15000 : 0;
+                      const installCost = includeInstallation ? 18000 : 0;
                       const t = base + accSubtotal + installCost;
                       return (
                         <div className="flex justify-between border-t border-slate-200 pt-1.5 mt-1.5">

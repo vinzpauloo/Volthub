@@ -272,7 +272,7 @@ export function buildQuoteEmailHtml(data: QuoteEmailData): string {
             <span style="font-size:13px;font-weight:600;color:#166534;">✓ Installation &amp; Commissioning Service</span>
             <span style="font-size:12px;color:#64748b;display:block;">Professional on-site installation by certified technicians</span>
           </td>
-          <td align="right" style="padding:12px 20px;background:#f0fdf4;"><span style="font-size:14px;font-weight:700;color:#16a34a;">₱15,000</span></td>
+          <td align="right" style="padding:12px 20px;background:#f0fdf4;"><span style="font-size:14px;font-weight:700;color:#16a34a;">₱18,000</span></td>
         </tr>` : ""}
         ${data.solarSetup ? `
         <tr>
