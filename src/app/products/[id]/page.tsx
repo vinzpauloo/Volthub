@@ -6,6 +6,7 @@ import {
   type Product,
   type GroupedProduct,
   type BackendProduct,
+  type Accessory,
   isGroupedProduct,
   mapBackendProduct,
 } from "../components/productData";
@@ -51,6 +52,7 @@ async function getProductData(
           supply: body.supply ?? [],
           type: body.type ?? [],
           connector: body.connector ?? [],
+          accessories: (body.accessories as Accessory[]) ?? [],
         };
         const product = mapBackendProduct(rawVariants[0]);
         return { product, variants: rawVariants, group };

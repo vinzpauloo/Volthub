@@ -140,6 +140,17 @@ export function mapBackendProduct(bp: BackendProduct): Product {
 
 // ── Grouped API Response Types (localhost:3003) ──
 
+/** An accessory item returned by the grouped-products detail API. */
+export type Accessory = {
+  id: string;
+  sku_code: string;
+  name: string;
+  category: string;
+  description: string;
+  image_url: string;
+  unit_price_php?: number | null;
+};
+
 /** A product series returned by the grouped-products API (EV chargers). */
 export type GroupedProduct = {
   groupBy: string; // e.g. "TA-DC-FX" (also used as the detail-page slug)
@@ -150,6 +161,7 @@ export type GroupedProduct = {
   supply: string[]; // e.g. ["240kW","300kW","360kW","400kW"]
   type: string[]; // e.g. ["Dual Gun","Single | Dual Gun"]
   connector: string[]; // e.g. ["EU","GBT","GBT+EU"]
+  accessories?: Accessory[]; // optional accessories from API
 };
 
 /** Union of grouped and flat backend shapes returned by the products API. */

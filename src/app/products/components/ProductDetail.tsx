@@ -85,6 +85,22 @@ export default function ProductDetail({ product, group, variants: serverVariants
   // ── Selected variant (click a card to pick) ──
   const [selectedVariant, setSelectedVariant] = useState<BackendProduct | null>(null);
 
+  // ── Supply filter (from group.supply) ──
+  const [selectedSupply, setSelectedSupply] = useState<string | null>(null);
+
+  // Filter variants by selected supply value
+  const filteredVariants = variants
+    ? selectedSupply
+      ? variants.filter((v) => {
+          const needle = selectedSupply.toLowerCase();
+          return (
+            v.name?.toLowerCase().includes(needle) ||
+            v.sku_code?.toLowerCase().includes(needle)
+          );
+        })
+      : variants
+    : undefined;
+
   async function fetchVariants() {
     if (!group) return;
     setVariantsLoading(true);
@@ -139,6 +155,27 @@ export default function ProductDetail({ product, group, variants: serverVariants
       return next;
     });
   };
+
+  // Accessories state
+  const [selectedAccessories, setSelectedAccessories] = useState<Set<string>>(new Set());
+
+  const toggleAccessory = (id: string) => {
+    setSelectedAccessories((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
+
+  // Installation service state
+  const [includeInstallation, setIncludeInstallation] = useState(false);
+
+  // Solar setup type
+  const [solarSetup, setSolarSetup] = useState<string | null>(null);
 
   const openImageModal = (index: number) => {
     setModalImageIndex(index);
@@ -244,7 +281,22 @@ export default function ProductDetail({ product, group, variants: serverVariants
                 )}
               </p>
             )}
-             {/* ── Compact Variants Grid ── */}
+            {product.description && (
+              <p className="text-sm md:text-base text-slate-600 leading-relaxed whitespace-pre-line">
+                {product.description}
+              </p>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Product Variations (full width, 3 columns) ── */}
+      <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+
+          {/* ── Column 1: Variants + Accessories ── */}
+          <div className="space-y-5">
+            {/* Load Variants button */}
             {!variants && (
               <button
                 onClick={fetchVariants}
@@ -259,14 +311,51 @@ export default function ProductDetail({ product, group, variants: serverVariants
                 <button onClick={fetchVariants} className="underline">Retry</button>
               </p>
             )}
-            {variants && variants.length > 0 && (
+
+            {/* Supply selector */}
+            {group?.supply && group.supply.length > 0 && variants && variants.length > 0 && (
+              <div className="space-y-2">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+                  Filter by Power
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => { setSelectedSupply(null); setSelectedVariant(null); }}
+                    className={`rounded-lg px-3 py-1.5 text-xs font-medium transition border ${
+                      selectedSupply === null
+                        ? "bg-primary text-white border-primary shadow-sm"
+                        : "bg-white text-slate-600 border-slate-200 hover:border-primary/40 hover:text-primary"
+                    }`}
+                  >
+                    All
+                  </button>
+                  {group.supply.map((supply) => (
+                    <button
+                      key={supply}
+                      type="button"
+                      onClick={() => { setSelectedSupply(supply); setSelectedVariant(null); }}
+                      className={`rounded-lg px-3 py-1.5 text-xs font-medium transition border ${
+                        selectedSupply === supply
+                          ? "bg-primary text-white border-primary shadow-sm"
+                          : "bg-white text-slate-600 border-slate-200 hover:border-primary/40 hover:text-primary"
+                      }`}
+                    >
+                      {supply}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Variants grid */}
+            {filteredVariants && filteredVariants.length > 0 && (
               <div className="grid grid-cols-2 gap-2 max-h-[320px] overflow-y-auto pr-1">
-                {variants.map((v) => {
+                {filteredVariants.map((v) => {
                   const isSelected = selectedVariant?.id === v.id;
                   return (
                     <button
-                      type="button"
-                      key={v.id}
+                      type="button" key={v.id}
                       onClick={() => setSelectedVariant(isSelected ? null : v)}
                       className={`flex items-start gap-2 rounded-lg border-2 p-2 transition-all text-left ${
                         isSelected
@@ -280,124 +369,233 @@ export default function ProductDetail({ product, group, variants: serverVariants
                         </div>
                       )}
                       <div className="min-w-0 flex-1">
-                        <p className="text-xs font-semibold text-slate-900 line-clamp-2 leading-tight">
-                          {v.name}
-                        </p>
-                        <p className="text-[10px] text-slate-400 font-mono mt-0.5 truncate">
-                          {v.sku_code}
-                        </p>
+                        <p className="text-xs font-semibold text-slate-900 line-clamp-2 leading-tight">{v.name}</p>
+                        <p className="text-[10px] text-slate-400 font-mono mt-0.5 truncate">{v.sku_code}</p>
                         {v.unit_price_php != null && (
-                          <p className="text-xs font-bold text-primary mt-0.5">
-                            ₱{v.unit_price_php.toLocaleString("en-PH")}
-                          </p>
+                          <p className="text-xs font-bold text-primary mt-0.5">₱{v.unit_price_php.toLocaleString("en-PH")}</p>
                         )}
                       </div>
-                      {isSelected && (
-                        <RiCheckLine className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
-                      )}
+                      {isSelected && <RiCheckLine className="w-4 h-4 text-primary flex-shrink-0 mt-1" />}
                     </button>
                   );
                 })}
+                {!selectedVariant && (
+                  <p className="col-span-2 text-sm text-amber-600 font-medium text-center py-2">
+                    Select a variant above to see pricing
+                  </p>
+                )}
               </div>
             )}
 
-            {/* ── Selected Variant Info ── */}
+            {/* Selected Variant Info */}
             {selectedVariant && (
-              <div className="bg-primary/5 rounded-xl p-4 space-y-2 border border-primary/20">
-                <p className="text-xs text-primary uppercase tracking-wide font-medium">
-                  Selected Variant
-                </p>
-                <p className="text-base font-bold text-slate-900">
-                  {selectedVariant.name}
-                </p>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-500">SKU:</span>
-                  <code className="text-xs font-bold text-primary bg-white px-2 py-0.5 rounded">
-                    {selectedVariant.sku_code}
-                  </code>
+              <div className="bg-primary/5 rounded-xl p-3 space-y-2 border border-primary/20">
+                <p className="text-xs text-primary uppercase tracking-wide font-medium">Selected Variant</p>
+                <p className="text-sm font-bold text-slate-900">{selectedVariant.name}</p>
+                <code className="text-xs font-bold text-primary bg-white px-2 py-0.5 rounded inline-block">{selectedVariant.sku_code}</code>
+                <div className="flex items-center justify-between gap-3 pt-1 border-t border-primary/15">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-slate-500">Qty:</span>
+                    <button type="button" onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                      className="w-7 h-7 rounded-md border border-slate-300 hover:border-primary text-slate-700 font-bold text-xs">−</button>
+                    <input type="number" min="1" value={quantity}
+                      onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                      className="w-14 h-7 text-center text-xs font-semibold border border-slate-300 rounded-md focus:border-primary outline-none" />
+                    <button type="button" onClick={() => setQuantity((prev) => prev + 1)}
+                      className="w-7 h-7 rounded-md border border-slate-300 hover:border-primary text-slate-700 font-bold text-xs">+</button>
+                  </div>
+                  <span className="text-sm font-bold text-primary whitespace-nowrap">
+                    {selectedVariant?.unit_price_php != null
+                      ? `₱${(selectedVariant.unit_price_php * quantity).toLocaleString("en-PH")}`
+                      : "—"}
+                  </span>
                 </div>
               </div>
             )}
 
-            {/* Prompt to select when nothing is picked */}
-            {!selectedVariant && variants && variants.length > 0 && (
-              <p className="text-sm text-amber-600 font-medium">
-                Select a variant below to see pricing
+            {/* No matches */}
+            {selectedSupply && filteredVariants && filteredVariants.length === 0 && (
+              <p className="text-sm text-slate-500">
+                No variants match &quot;{selectedSupply}&quot;.{" "}
+                <button onClick={() => { setSelectedSupply(null); setSelectedVariant(null); }} className="text-primary underline font-medium">Show all</button>
               </p>
             )}
-
-            {/* Price — unit + total with quantity (always shown) */}
-            <div className="space-y-2 pt-1 border-t border-slate-200">
-              {/* Unit Price */}
-              <div className="flex items-baseline justify-between">
-                <span className="text-sm text-slate-500">Unit Price</span>
-                <span className="text-lg font-semibold text-slate-900">
-                  {selectedVariant?.unit_price_php != null
-                    ? `₱${selectedVariant.unit_price_php.toLocaleString("en-PH")}`
-                    : product.price ||
-                  selectedVariant?.category
-                  
-                  
-                  }
-                </span>
-              </div>
-              {/* Quantity row */}
-              <div className="flex items-baseline justify-between">
-                <span className="text-sm text-slate-500">Quantity</span>
-                <span className="text-sm font-medium text-slate-700">× {quantity}</span>
-              </div>
-              {/* Total Price */}
-              <div className="flex items-baseline justify-between border-t border-slate-100 pt-2">
-                <span className="text-sm font-semibold text-slate-900">Total Price</span>
-                <span className="text-2xl md:text-3xl font-bold text-primary">
-                  {selectedVariant?.unit_price_php != null
-                    ? `₱${(selectedVariant.unit_price_php * quantity).toLocaleString("en-PH")}`
-                    : product.price || "—"}
-                </span>
-              </div>
-            </div>
-
-            {/* Quantity */}
-            <div className="pt-2 border-t border-slate-200">
-              <label className="block text-sm font-semibold text-slate-900 mb-1.5">Quantity</label>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-                  className="w-8 h-8 md:w-10 md:h-10 rounded-lg border-2 border-slate-300 hover:border-primary text-slate-700 font-bold"
-                  aria-label="Decrease quantity"
-                >
-                  −
-                </button>
-                <input
-                  type="number"
-                  min="1"
-                  value={quantity}
-                  onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                  className="w-16 md:w-20 h-8 md:h-10 text-center text-sm font-semibold border-2 border-slate-300 rounded-lg focus:border-primary outline-none"
-                />
-                <button
-                  type="button"
-                  onClick={() => setQuantity((prev) => prev + 1)}
-                  className="w-8 h-8 md:w-10 md:h-10 rounded-lg border-2 border-slate-300 hover:border-primary text-slate-700 font-bold"
-                  aria-label="Increase quantity"
-                >
-                  +
-                </button>
-              </div>
-            </div>
-
-            {/* CTA */}
-            <Link
-              href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(selectedVariant?.name || product.name)}&sku=${encodeURIComponent(selectedVariant?.sku_code || "")}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&quantity=${quantity}`}
-              className="flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-white font-bold px-4 py-3 rounded-lg shadow-lg transition-all text-base group"
-            >
-              <span>Get Quote</span>
-              <RiArrowRightSLine className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-
-           
+  {/* Installation Service */}
+            {group?.accessories && group.accessories.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setIncludeInstallation((prev) => !prev)}
+                className={`w-full flex items-start gap-3 rounded-xl p-4 text-left border transition-all ${
+                  includeInstallation ? "bg-primary/5 border-primary/40 ring-1 ring-primary/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"
+                }`}
+              >
+                <div className={`flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
+                  includeInstallation ? "bg-primary text-white" : "bg-white border border-slate-200 text-slate-400"
+                }`}>
+                  {includeInstallation ? <RiCheckLine className="w-5 h-5" /> : <RiAddLine className="w-5 h-5" />}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className={`text-sm font-semibold block ${includeInstallation ? "text-primary" : "text-slate-800"}`}>
+                    Installation &amp; Commissioning
+                  </span>
+                  <p className="text-xs text-slate-500 mt-1">Professional on-site installation, setup, and commissioning by certified technicians</p>
+                  <p className="text-xs font-bold text-primary mt-1.5">Est. ₱15,000</p>
+                </div>
+              </button>
+            )}
+          
           </div>
+
+          {/* ── Column 2: Installation + Solar Setup ── */}
+          <div className="space-y-5">
+          
+  {/* Accessories */}
+            {group?.accessories && group.accessories.length > 0 && (
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <RiAddLine className="w-4 h-4 text-primary" />
+                  <h3 className="text-sm font-semibold text-slate-900">Accessories</h3>
+                  <span className="text-[10px] text-slate-400">— add to quote</span>
+                </div>
+                <div className="grid grid-cols-1 gap-2">
+                  {group.accessories.map((acc) => {
+                    const isSelected = selectedAccessories.has(acc.id);
+                    return (
+                      <button
+                        key={acc.id}
+                        onClick={() => toggleAccessory(acc.id)}
+                        className={`flex items-start gap-3 rounded-lg p-3 text-left border transition-all ${
+                          isSelected ? "bg-primary/5 border-primary/40 ring-1 ring-primary/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"
+                        }`}
+                      >
+                        <div className="relative w-12 h-12 flex-shrink-0 rounded-md overflow-hidden bg-white border border-slate-200">
+                          {acc.image_url ? (
+                            <Image src={acc.image_url} alt={acc.name} fill className="object-contain p-1" />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center text-slate-300"><RiAddLine className="w-4 h-4" /></div>
+                          )}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-1">
+                            <span className={`text-xs font-semibold ${isSelected ? "text-primary" : "text-slate-800"}`}>{acc.name}</span>
+                            {isSelected && <RiCheckLine className="w-3.5 h-3.5 text-primary flex-shrink-0" />}
+                          </div>
+                          <p className="text-[10px] text-slate-400 font-mono mt-0.5">{acc.sku_code}</p>
+                          {acc.description && <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2 whitespace-pre-line">{acc.description}</p>}
+                          {acc.unit_price_php != null && (
+                            <p className="text-xs font-bold text-primary mt-0.5">Est. ₱{acc.unit_price_php.toLocaleString("en-PH")}</p>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+                {selectedAccessories.size > 0 && (
+                  <p className="text-[11px] text-primary font-medium">{selectedAccessories.size} selected</p>
+                )}
+              </div>
+            )}
+            {/* Solar Setup Type */}
+            {group?.accessories && group.accessories.length > 0 && (
+              <div className="space-y-2">
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Solar Setup</p>
+                <div className="grid grid-cols-1 gap-2">
+                  {[
+                    { id: "hybrid", label: "Hybrid", desc: "Grid + Battery — maximum flexibility and energy independence" },
+                    { id: "off-grid", label: "Off-Grid", desc: "Battery only — complete independence from the grid" },
+                    { id: "on-grid", label: "On-Grid", desc: "Grid-tied only — reduce bills, no battery backup" },
+                  ].map((opt) => {
+                    const isSelected = solarSetup === opt.id;
+                    return (
+                      <button
+                        key={opt.id} type="button"
+                        onClick={() => setSolarSetup(isSelected ? null : opt.id)}
+                        className={`rounded-xl p-3 text-left border transition-all ${
+                          isSelected ? "bg-primary/5 border-primary/40 ring-1 ring-primary/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"
+                        }`}
+                      >
+                        <span className={`text-sm font-semibold block ${isSelected ? "text-primary" : "text-slate-700"}`}>{opt.label}</span>
+                        <span className="text-[10px] text-slate-400 block mt-0.5">{opt.desc}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+
+        </div>
+
+        {/* ── Price Summary (full width below) ── */}
+        <div className="mt-6 md:mt-8 border-t border-slate-200 pt-6 md:pt-8">
+          <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide mb-4">Quote Summary</h3>
+
+          {/* Table-style price breakdown */}
+          <div className="overflow-hidden rounded-xl border border-slate-200">
+            <table className="w-full text-sm">
+              <tbody className="divide-y divide-slate-100">
+                <tr>
+                  <td className="px-4 py-3 text-slate-500">Unit Price</td>
+                  <td className="px-4 py-3 text-right font-semibold text-slate-900">
+                    {selectedVariant?.unit_price_php != null
+                      ? `₱${selectedVariant.unit_price_php.toLocaleString("en-PH")}`
+                      : product.price || "—"}
+                  </td>
+                </tr>
+                <tr>
+                  <td className="px-4 py-3 text-slate-500">Quantity</td>
+                  <td className="px-4 py-3 text-right font-semibold text-slate-900">× {quantity}</td>
+                </tr>
+                <tr className="bg-slate-50">
+                  <td className="px-4 py-3 font-semibold text-slate-900">Subtotal</td>
+                  <td className="px-4 py-3 text-right font-bold text-slate-900">
+                    {selectedVariant?.unit_price_php != null
+                      ? `₱${(selectedVariant.unit_price_php * quantity).toLocaleString("en-PH")}`
+                      : product.price || "—"}
+                  </td>
+                </tr>
+                {(selectedAccessories.size > 0 || includeInstallation) && (
+                  <>
+                    {group?.accessories?.filter((a) => selectedAccessories.has(a.id)).map((acc) => (
+                      <tr key={acc.id}>
+                        <td className="px-4 py-2 text-xs text-slate-500 pl-8">{acc.name}</td>
+                        <td className="px-4 py-2 text-right text-xs text-slate-600">
+                          {acc.unit_price_php != null ? `₱${acc.unit_price_php.toLocaleString("en-PH")}` : "—"}
+                        </td>
+                      </tr>
+                    ))}
+                    {includeInstallation && (
+                      <tr>
+                        <td className="px-4 py-2 text-xs text-slate-500 pl-8">Installation Service</td>
+                        <td className="px-4 py-2 text-right text-xs text-slate-600">₱15,000</td>
+                      </tr>
+                    )}
+                  </>
+                )}
+                <tr className="bg-primary/5 border-t-2 border-primary/20">
+                  <td className="px-4 py-3 font-bold text-slate-900">Estimated Total</td>
+                  <td className="px-4 py-3 text-right text-xl font-bold text-primary">
+                    ₱{(() => {
+                      const base = selectedVariant?.unit_price_php != null ? selectedVariant.unit_price_php * quantity : 0;
+                      const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
+                      const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
+                      const installCost = includeInstallation ? 15000 : 0;
+                      return (base + accSubtotal + installCost).toLocaleString("en-PH");
+                    })()}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* CTA */}
+          <Link
+            href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(selectedVariant?.name || product.name)}&sku=${encodeURIComponent(selectedVariant?.sku_code || "")}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&accessories=${encodeURIComponent([...selectedAccessories].join(","))}&installation=${includeInstallation ? "1" : "0"}&solarSetup=${encodeURIComponent(solarSetup ?? "")}&quantity=${quantity}`}
+            className="mt-4 flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-white font-bold px-4 py-3 rounded-xl shadow-lg transition-all text-base group"
+          >
+            <span>Get Quote</span>
+            <RiArrowRightSLine className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </div>
 
@@ -469,16 +667,6 @@ export default function ProductDetail({ product, group, variants: serverVariants
         </div>
       )}
 
-      {/* Description */}
-      {product.description && (
-        <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm">
-          <h2 className="text-xl md:text-2xl font-semibold text-slate-900 mb-3 md:mb-4">Description</h2>
-          <p className="text-sm md:text-base text-slate-600 leading-relaxed whitespace-pre-line">
-            {product.description}
-          </p>
-        </div>
-      )}
-
       {/* ── Product Images Gallery ── */}
       {product.images && product.images.length > 1 && (
         <div className="bg-white rounded-xl md:rounded-2xl p-4 md:p-6 border border-slate-200 shadow-sm">
@@ -529,7 +717,7 @@ export default function ProductDetail({ product, group, variants: serverVariants
         <p className="text-sm text-blue-100 mb-4">Contact us for pricing, availability, and custom configurations</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link
-            href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(selectedVariant?.name || product.name)}&sku=${encodeURIComponent(selectedVariant?.sku_code || "")}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&quantity=${quantity}`}
+            href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(selectedVariant?.name || product.name)}&sku=${encodeURIComponent(selectedVariant?.sku_code || "")}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&accessories=${encodeURIComponent([...selectedAccessories].join(","))}&installation=${includeInstallation ? "1" : "0"}&solarSetup=${encodeURIComponent(solarSetup ?? "")}&quantity=${quantity}`}
             className="inline-flex items-center gap-2 bg-white text-primary px-6 py-2.5 rounded-xl font-semibold hover:bg-slate-100 transition-colors text-sm"
           >
             Get Quote

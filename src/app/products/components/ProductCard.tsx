@@ -7,9 +7,10 @@ import { Product } from "./productData";
 
 interface ProductCardProps {
   product: Product;
+  compact?: boolean;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, compact = false }: ProductCardProps) {
   // [BACKEND-TODO] — Restore category icon mapping when tag field is re-added
   // const getCategoryIcon = () => {
   //   switch (product.category) {
@@ -32,6 +33,38 @@ export default function ProductCard({ product }: ProductCardProps) {
     ?.slice(0, 100)
     ?? product.sku_code
     ?? "";
+
+  // Compact grid view: image, title, subtitle, and Learn More button only
+  if (compact) {
+    return (
+      <Link href={`/products/${product.id}`}>
+        <article className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col border border-slate-100 cursor-pointer h-full">
+          <div className="relative overflow-hidden bg-slate-100 aspect-[4/3]">
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={480}
+              height={360}
+              className="w-full h-full object-contain group-hover:scale-[1.04] transition-transform duration-500"
+            />
+            <div className="absolute inset-0 pointer-events-none bg-linear-to-t from-black/10 via-transparent to-transparent opacity-60" />
+          </div>
+          <div className="p-4 flex flex-col gap-2 flex-1">
+            <h3 className="text-base md:text-lg font-semibold text-slate-900 line-clamp-2 leading-tight">
+              {product.name}
+            </h3>
+            <p className="text-sm text-slate-500 line-clamp-2 leading-relaxed flex-1">
+              {subtitle}
+            </p>
+            <div className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2 transition-all pt-1">
+              <span>Learn More</span>
+              <RiArrowRightSLine className="h-4 w-4" />
+            </div>
+          </div>
+        </article>
+      </Link>
+    );
+  }
 
   return (
     <Link href={`/products/${product.id}`}>
