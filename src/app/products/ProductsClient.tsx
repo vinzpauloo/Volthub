@@ -18,10 +18,20 @@ import BackToTopButton from "@/components/common/BackToTopButton";
 
 const BACKEND_URL = "https://volthub-admin-one.vercel.app/";
 
+// ── Client-side cache (TTL 5 minutes) ──
+let productsCache: { grouped: GroupedProduct[]; flat: Product[] } | null = null;
+let cacheTimestamp = 0;
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
 async function getProducts(): Promise<{
   grouped: GroupedProduct[];
   flat: Product[];
 }> {
+  // Return cached data if still fresh
+  if (productsCache && Date.now() - cacheTimestamp < CACHE_TTL) {
+    return productsCache;
+  }
+
   try {
     const res = await fetch(`${BACKEND_URL}api/public/products`, {
       cache: "no-store",
@@ -45,9 +55,14 @@ async function getProducts(): Promise<{
       }
     }
 
-    return { grouped, flat };
+    // Store in cache
+    const result = { grouped, flat };
+    productsCache = result;
+    cacheTimestamp = Date.now();
+    return result;
   } catch {
-    return { grouped: [], flat: [] };
+    // Return stale cache if available, otherwise empty
+    return productsCache ?? { grouped: [], flat: [] };
   }
 }
 

@@ -177,6 +177,154 @@ export default function ProductDetail({ product, group, variants: serverVariants
   // Solar setup type
   const [solarSetup, setSolarSetup] = useState<string | null>(null);
 
+  // Quote modal state
+  const [showQuoteModal, setShowQuoteModal] = useState(false);
+  const [quoteName, setQuoteName] = useState("");
+  const [quoteEmail, setQuoteEmail] = useState("");
+  const [quotePhone, setQuotePhone] = useState("");
+  const [quoteSubmitting, setQuoteSubmitting] = useState(false);
+  const [quoteSubmitted, setQuoteSubmitted] = useState(false);
+  const [quoteError, setQuoteError] = useState<string | null>(null);
+
+  function downloadPdfQuotation() {
+    const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
+    const base = (selectedVariant?.unit_price_php ?? 0) * quantity;
+    const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
+    const installCost = includeInstallation ? 15000 : 0;
+    const total = base + accSubtotal + installCost;
+    const fmt = (p: number) => `₱${p.toLocaleString("en-PH")}`;
+    const timestamp = new Date().toLocaleString("en-PH", { dateStyle: "long", timeStyle: "short" });
+
+    const html = `<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>VoltHub Quotation</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#0f172a;padding:40px;max-width:800px;margin:0 auto}
+  .header{display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #16a34a;padding-bottom:20px;margin-bottom:24px}
+  .header h1{font-size:28px;color:#0f172a}.header .brand{color:#16a34a}
+  .header .badge{background:#16a34a;color:#fff;padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600}
+  .meta{color:#64748b;font-size:12px;margin-bottom:20px}
+  .section{margin-bottom:24px}
+  .section h2{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:8px}
+  .card{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px}
+  .card p{margin:4px 0;font-size:14px}
+  .product-row{display:flex;gap:16px;align-items:start;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden}
+  .product-row img{width:120px;height:auto;object-fit:contain;padding:8px;background:#f8fafc}
+  .product-row .info{padding:12px 16px}
+  table{width:100%;border-collapse:collapse}
+  table.summary{border:2px solid #e2e8f0;border-radius:10px;overflow:hidden}
+  table.summary td{padding:10px 16px;font-size:14px;border-bottom:1px solid #e2e8f0}
+  table.summary tr.total-row td{background:#f0fdf4;font-size:18px;font-weight:800;color:#16a34a;border-top:2px solid #16a34a}
+  .acc-row{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #e2e8f0}
+  .acc-row img{width:48px;height:48px;object-fit:contain;border-radius:6px;border:1px solid #e2e8f0}
+  .footer{text-align:center;color:#94a3b8;font-size:11px;margin-top:40px;padding-top:16px;border-top:1px solid #e2e8f0}
+  @media print{body{padding:20px}}
+</style></head><body>
+<div class="header">
+  <div><h1>Volt<span class="brand">Hub</span></h1><p style="font-size:12px;color:#64748b">EV Charging & Energy Solutions</p></div>
+  <div class="badge">Quotation</div>
+</div>
+<p class="meta">Date: ${timestamp} &nbsp;|&nbsp; Ref: ${selectedVariant?.sku_code || product.sku_code || product.name}</p>
+
+<div class="section"><h2>Product</h2>
+  <div class="product-row">
+    ${product.image ? `<img src="${product.image}" alt="${product.name}">` : ""}
+    <div class="info">
+      <p style="font-size:18px;font-weight:700">${selectedVariant?.name || product.name}</p>
+      ${(selectedVariant?.sku_code || product.sku_code) ? `<p style="font-size:11px;color:#64748b;font-family:monospace">SKU: ${selectedVariant?.sku_code || product.sku_code}</p>` : ""}
+      ${selectedVariant?.unit_price_php != null ? `<p style="font-size:18px;font-weight:700;color:#16a34a;margin-top:4px">${fmt(selectedVariant.unit_price_php)}</p>` : ""}
+      <p style="font-size:13px;color:#64748b">Quantity: <strong>× ${quantity}</strong></p>
+    </div>
+  </div>
+</div>
+
+${selectedAccs.length > 0 ? `
+<div class="section"><h2>Accessories</h2>
+  ${selectedAccs.map((acc) => `
+  <div class="acc-row" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:6px">
+    ${acc.image_url ? `<img src="${acc.image_url}" alt="${acc.name}">` : ""}
+    <div style="flex:1"><p style="font-weight:600;font-size:13px">${acc.name}</p><p style="font-size:10px;color:#94a3b8;font-family:monospace">${acc.sku_code}</p></div>
+    <p style="font-weight:700;color:#16a34a;font-size:14px">${acc.unit_price_php != null ? fmt(acc.unit_price_php) : "—"}</p>
+  </div>`).join("")}
+</div>` : ""}
+
+${includeInstallation || solarSetup ? `
+<div class="section"><h2>Services</h2>
+  <div class="card">
+    ${includeInstallation ? `<p style="font-weight:600;color:#166534">✓ Installation & Commissioning Service — <span style="color:#16a34a">₱15,000</span></p>` : ""}
+    ${solarSetup ? `<p style="font-weight:600;color:#1e40af;margin-top:4px">☀ Solar Consultation: ${solarSetup === "hybrid" ? "Hybrid Setup (Grid + Battery)" : solarSetup === "off-grid" ? "Off-Grid Setup (Battery only)" : "On-Grid Setup (Grid-tied only)"}</p><p style="font-size:11px;color:#94a3b8;margin-top:2px">Requires product purchase — assessment & equipment quote to follow</p>` : ""}
+  </div>
+</div>` : ""}
+
+<div class="section"><h2>Quote Summary</h2>
+  <table class="summary">
+    <tr><td style="color:#64748b">Unit Price</td><td align="right" style="font-weight:600">${selectedVariant?.unit_price_php != null ? fmt(selectedVariant.unit_price_php) : "—"}</td></tr>
+    <tr><td style="color:#64748b">Quantity</td><td align="right" style="font-weight:600">× ${quantity}</td></tr>
+    <tr style="background:#f8fafc"><td style="font-weight:700">Subtotal</td><td align="right" style="font-weight:700;font-size:16px">${base > 0 ? fmt(base) : "—"}</td></tr>
+    <tr class="total-row"><td>Estimated Total</td><td align="right">${total > 0 ? fmt(total) : "—"}</td></tr>
+  </table>
+</div>
+
+<div class="footer"><p>Generated from volthub.ph — For inquiries contact sales@volthub.ph</p></div>
+<script>window.onload=function(){window.print()}</script>
+</body></html>`;
+
+    const w = window.open("", "_blank");
+    if (w) {
+      w.document.write(html);
+      w.document.close();
+    }
+  }
+
+  async function submitQuote() {
+    if (!quoteName.trim() || !quoteEmail.trim()) return;
+    setQuoteSubmitting(true);
+    setQuoteError(null);
+
+    const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
+    const base = (selectedVariant?.unit_price_php ?? 0) * quantity;
+    const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
+    const installCost = includeInstallation ? 15000 : 0;
+    const total = base + accSubtotal + installCost;
+
+    try {
+      const res = await fetch("/api/quote", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customerName: quoteName.trim(),
+          customerEmail: quoteEmail.trim(),
+          customerPhone: quotePhone.trim() || undefined,
+          productName: product.name,
+          productImage: product.image,
+          productSku: product.sku_code,
+          variantName: selectedVariant?.name,
+          variantSku: selectedVariant?.sku_code,
+          variantPrice: selectedVariant?.unit_price_php ?? undefined,
+          quantity,
+          accessories: selectedAccs.length > 0
+            ? selectedAccs.map((a) => ({ name: a.name, sku: a.sku_code, price: a.unit_price_php, image: a.image_url }))
+            : undefined,
+          includeInstallation,
+          solarSetup,
+          subtotal: base || (selectedVariant?.unit_price_php ?? 0),
+          total: total || 0,
+        }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({ error: "Failed to send" }));
+        throw new Error(err.error || "Failed to send quote");
+      }
+
+      setQuoteSubmitted(true);
+    } catch (err: unknown) {
+      setQuoteError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setQuoteSubmitting(false);
+    }
+  }
+
   const openImageModal = (index: number) => {
     setModalImageIndex(index);
     setIsImageModalOpen(true);
@@ -450,7 +598,7 @@ export default function ProductDetail({ product, group, variants: serverVariants
           <div className="space-y-5">
           
   {/* Accessories */}
-            {group?.accessories && group.accessories.length > 0 && (
+            {group?.accessories && group?.groupBy === "AC-WS-CDZ"  &&group.accessories.length > 0 && (
               <div className="space-y-3">
                 <div className="flex items-center gap-2">
                   <RiAddLine className="w-4 h-4 text-primary" />
@@ -495,15 +643,16 @@ export default function ProductDetail({ product, group, variants: serverVariants
                 )}
               </div>
             )}
-            {/* Solar Setup Type */}
+            {/* Solar Consultation */}
             {group?.accessories && group.accessories.length > 0 && (
               <div className="space-y-2">
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Solar Setup</p>
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">Solar Consultation</p>
+                <p className="text-[10px] text-slate-400 -mt-1">Requires product purchase — our team will assess your solar needs</p>
                 <div className="grid grid-cols-1 gap-2">
                   {[
-                    { id: "hybrid", label: "Hybrid", desc: "Grid + Battery — maximum flexibility and energy independence" },
-                    { id: "off-grid", label: "Off-Grid", desc: "Battery only — complete independence from the grid" },
-                    { id: "on-grid", label: "On-Grid", desc: "Grid-tied only — reduce bills, no battery backup" },
+                    { id: "hybrid", label: "Hybrid Setup", desc: "Grid + Battery — solar panels with battery backup for maximum savings" },
+                    { id: "off-grid", label: "Off-Grid Setup", desc: "Battery only — fully independent from the grid, ideal for remote areas" },
+                    { id: "on-grid", label: "On-Grid Setup", desc: "Grid-tied only — reduce electricity bills, no battery needed" },
                   ].map((opt) => {
                     const isSelected = solarSetup === opt.id;
                     return (
@@ -589,13 +738,24 @@ export default function ProductDetail({ product, group, variants: serverVariants
           </div>
 
           {/* CTA */}
-          <Link
-            href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(selectedVariant?.name || product.name)}&sku=${encodeURIComponent(selectedVariant?.sku_code || "")}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&accessories=${encodeURIComponent([...selectedAccessories].join(","))}&installation=${includeInstallation ? "1" : "0"}&solarSetup=${encodeURIComponent(solarSetup ?? "")}&quantity=${quantity}`}
-            className="mt-4 flex items-center justify-center gap-2 w-full bg-primary hover:bg-primary/90 text-white font-bold px-4 py-3 rounded-xl shadow-lg transition-all text-base group"
-          >
-            <span>Get Quote</span>
-            <RiArrowRightSLine className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          <div className="mt-4 flex flex-col sm:flex-row gap-2">
+            <button
+              type="button"
+              onClick={() => { setQuoteSubmitted(false); setQuoteError(null); setShowQuoteModal(true); }}
+              className="flex-1 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold px-4 py-3 rounded-xl shadow-lg transition-all text-base group"
+            >
+              <span>Get Quote</span>
+              <RiArrowRightSLine className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <button
+              type="button"
+              onClick={downloadPdfQuotation}
+              className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 font-semibold px-4 py-3 rounded-xl border-2 border-slate-300 hover:border-slate-400 shadow-sm transition-all text-sm"
+            >
+              <RiDownloadLine className="h-4 w-4" />
+              <span>Download PDF</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -716,12 +876,13 @@ export default function ProductDetail({ product, group, variants: serverVariants
         <h3 className="text-xl md:text-2xl font-bold mb-2">Interested in this product?</h3>
         <p className="text-sm text-blue-100 mb-4">Contact us for pricing, availability, and custom configurations</p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <Link
-            href={`/contact?subject=quote&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(selectedVariant?.name || product.name)}&sku=${encodeURIComponent(selectedVariant?.sku_code || "")}&addons=${encodeURIComponent([...selectedAddOns].join(","))}&accessories=${encodeURIComponent([...selectedAccessories].join(","))}&installation=${includeInstallation ? "1" : "0"}&solarSetup=${encodeURIComponent(solarSetup ?? "")}&quantity=${quantity}`}
+          <button
+            type="button"
+            onClick={() => { setQuoteSubmitted(false); setQuoteError(null); setShowQuoteModal(true); }}
             className="inline-flex items-center gap-2 bg-white text-primary px-6 py-2.5 rounded-xl font-semibold hover:bg-slate-100 transition-colors text-sm"
           >
             Get Quote
-          </Link>
+          </button>
           <Link
             href={`/contact?subject=brouchure&product=${encodeURIComponent(product.category)}&productName=${encodeURIComponent(product.name)}`}
             className="inline-flex items-center gap-2 bg-white/10 text-white border-2 border-white/30 px-6 py-2.5 rounded-xl font-semibold hover:bg-white/20 transition-colors text-sm"
@@ -731,6 +892,95 @@ export default function ProductDetail({ product, group, variants: serverVariants
           </Link>
         </div>
       </div>
+
+      {/* ── Quote Request Modal ── */}
+      {showQuoteModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4" onClick={() => setShowQuoteModal(false)}>
+          <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-5 border-b border-slate-200">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900">
+                  {quoteSubmitted ? "Quote Sent!" : "Request a Quote"}
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {quoteSubmitted ? "Our team will contact you shortly." : "Fill in your details and we'll get back to you."}
+                </p>
+              </div>
+              <button onClick={() => setShowQuoteModal(false)} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-400">
+                <RiCloseLine className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-5 space-y-4">
+              {!quoteSubmitted ? (
+                <>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name <span className="text-red-500">*</span></label>
+                    <input type="text" value={quoteName} onChange={(e) => setQuoteName(e.target.value)}
+                      placeholder="Juan Dela Cruz" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Email <span className="text-red-500">*</span></label>
+                    <input type="email" value={quoteEmail} onChange={(e) => setQuoteEmail(e.target.value)}
+                      placeholder="juan@example.com" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Phone</label>
+                    <input type="tel" value={quotePhone} onChange={(e) => setQuotePhone(e.target.value)}
+                      placeholder="+63 9XX XXX XXXX" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+                  </div>
+
+                  {/* Mini summary */}
+                  <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 space-y-1.5 text-xs">
+                    <div className="flex justify-between"><span className="text-slate-500">Product</span><span className="font-medium text-slate-900 truncate ml-2 max-w-[60%]">{selectedVariant?.name || product.name}</span></div>
+                    <div className="flex justify-between"><span className="text-slate-500">Quantity</span><span className="font-medium">× {quantity}</span></div>
+                    {(() => {
+                      const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
+                      const base = (selectedVariant?.unit_price_php ?? 0) * quantity;
+                      const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
+                      const installCost = includeInstallation ? 15000 : 0;
+                      const t = base + accSubtotal + installCost;
+                      return (
+                        <div className="flex justify-between border-t border-slate-200 pt-1.5 mt-1.5">
+                          <span className="font-semibold text-slate-900">Estimated Total</span>
+                          <span className="font-bold text-primary text-sm">
+                            {t > 0 ? `₱${t.toLocaleString("en-PH")}` : "—"}
+                          </span>
+                        </div>
+                      );
+                    })()}
+                  </div>
+
+                  {quoteError && <p className="text-sm text-red-500 text-center">{quoteError}</p>}
+
+                  <button
+                    type="button"
+                    onClick={submitQuote}
+                    disabled={quoteSubmitting || !quoteName.trim() || !quoteEmail.trim()}
+                    className="w-full bg-primary hover:bg-primary/90 disabled:opacity-50 text-white font-bold px-4 py-3 rounded-xl shadow-lg transition-all text-base"
+                  >
+                    {quoteSubmitting ? "Sending…" : "Send Quote Request"}
+                  </button>
+                </>
+              ) : (
+                <div className="text-center py-6 space-y-3">
+                  <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center">
+                    <RiCheckLine className="w-8 h-8 text-green-600" />
+                  </div>
+                  <p className="text-sm text-slate-600">Your quote request has been sent to our sales team at <strong>sales@volthub.ph</strong>. We'll get back to you within 24 hours.</p>
+                  <button type="button" onClick={downloadPdfQuotation}
+                    className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-primary/90 transition-all text-sm">
+                    <RiDownloadLine className="h-4 w-4" /> Download PDF Copy
+                  </button>
+                  <button onClick={() => setShowQuoteModal(false)} className="block text-sm text-primary font-semibold hover:underline">Close</button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Image Modal */}
       {isImageModalOpen && (

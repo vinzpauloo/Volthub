@@ -34,7 +34,7 @@ async function getProductData(
   try {
     const detailRes = await fetch(
       `${BACKEND_URL}api/public/products/${groupBy}`,
-      { cache: "no-store" },
+      { next: { revalidate: 300 } },
     );
     if (detailRes.ok) {
       const json = await detailRes.json();
