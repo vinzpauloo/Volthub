@@ -160,8 +160,6 @@ export function buildQuoteEmailHtml(data: QuoteEmailData): string {
     timeZone: "Asia/Manila", dateStyle: "long", timeStyle: "short",
   });
 
-  const logoUrl = "https://volthub.ph/volthub-logo-black-text.png";
-
   const formatPrice = (p: number) => `₱${p.toLocaleString("en-PH")}`;
 
   return `

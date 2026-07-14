@@ -969,7 +969,7 @@ ${includeInstallation || solarSetup ? `
                   <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center">
                     <RiCheckLine className="w-8 h-8 text-green-600" />
                   </div>
-                  <p className="text-sm text-slate-600">Your quote request has been sent to our sales team at <strong>sales@volthub.ph</strong>. We'll get back to you within 24 hours.</p>
+                  <p className="text-sm text-slate-600">Your quote request has been sent to our sales team at <strong>sales@volthub.ph</strong>. We&apos;ll get back to you within 24 hours.</p>
                   <button type="button" onClick={downloadPdfQuotation}
                     className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-primary/90 transition-all text-sm">
                     <RiDownloadLine className="h-4 w-4" /> Download PDF Copy
