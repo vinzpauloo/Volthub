@@ -130,6 +130,9 @@ export interface QuoteEmailData {
   customerName: string;
   customerEmail: string;
   customerPhone?: string;
+  customerCompany?: string;
+  customerAddress?: string;
+  customerNotes?: string;
   // Product
   productName: string;
   productImage: string;
@@ -147,6 +150,8 @@ export interface QuoteEmailData {
   // Price summary
   subtotal: number;
   total: number;
+  // Backend reference
+  referenceNo?: string | null;
 }
 
 const SOLAR_SETUP_LABELS: Record<string, string> = {
@@ -196,7 +201,7 @@ export function buildQuoteEmailHtml(data: QuoteEmailData): string {
       <table width="100%" cellpadding="0" cellspacing="0">
         <tr>
           <td style="font-size:12px;color:#64748b;">Date: <strong>${escapeHtml(timestamp)}</strong></td>
-          <td align="right" style="font-size:12px;color:#64748b;">Ref: <strong>${escapeHtml(data.productSku || data.productName)}</strong></td>
+          <td align="right" style="font-size:12px;color:#64748b;">${data.referenceNo ? `RFQ: <strong style="color:#16a34a;">${escapeHtml(data.referenceNo)}</strong>` : `Ref: <strong>${escapeHtml(data.productSku || data.productName)}</strong>`}</td>
         </tr>
       </table>
     </td>
@@ -210,7 +215,10 @@ export function buildQuoteEmailHtml(data: QuoteEmailData): string {
         <tr>
           <td style="padding:16px 20px;">
             <p style="margin:0;font-size:16px;font-weight:700;color:#0f172a;">${escapeHtml(data.customerName)}</p>
+            ${data.customerCompany ? `<p style="margin:4px 0 0;font-size:13px;color:#475569;">🏢 ${escapeHtml(data.customerCompany)}</p>` : ""}
             <p style="margin:4px 0 0;font-size:13px;color:#475569;">✉ ${escapeHtml(data.customerEmail)}${data.customerPhone ? ` &nbsp;|&nbsp; 📞 ${escapeHtml(data.customerPhone)}` : ""}</p>
+            ${data.customerAddress ? `<p style="margin:4px 0 0;font-size:13px;color:#475569;">📍 ${escapeHtml(data.customerAddress)}</p>` : ""}
+            ${data.customerNotes ? `<p style="margin:8px 0 0;font-size:12px;color:#64748b;font-style:italic;">"${escapeHtml(data.customerNotes)}"</p>` : ""}
           </td>
         </tr>
       </table>

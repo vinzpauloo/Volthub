@@ -194,9 +194,13 @@ export default function ProductDetail({ product, group, variants: serverVariants
   const [quoteName, setQuoteName] = useState("");
   const [quoteEmail, setQuoteEmail] = useState("");
   const [quotePhone, setQuotePhone] = useState("");
+  const [quoteCompany, setQuoteCompany] = useState("");
+  const [quoteAddress, setQuoteAddress] = useState("");
+  const [quoteNotes, setQuoteNotes] = useState("");
   const [quoteSubmitting, setQuoteSubmitting] = useState(false);
   const [quoteSubmitted, setQuoteSubmitted] = useState(false);
   const [quoteError, setQuoteError] = useState<string | null>(null);
+  const [quoteRef, setQuoteRef] = useState<string | null>(null);
 
   function downloadPdfQuotation() {
     const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
@@ -236,7 +240,16 @@ export default function ProductDetail({ product, group, variants: serverVariants
   <div><h1>Volt<span class="brand">Hub</span></h1><p style="font-size:12px;color:#64748b">EV Charging & Energy Solutions</p></div>
   <div class="badge">Quotation</div>
 </div>
-<p class="meta">Date: ${timestamp} &nbsp;|&nbsp; Ref: ${selectedVariant?.sku_code || product.sku_code || product.name}</p>
+<p class="meta">Date: ${timestamp} &nbsp;|&nbsp; Ref: ${quoteRef || selectedVariant?.sku_code || product.sku_code || product.name}</p>
+
+<div class="section"><h2>Customer Information</h2>
+  <div class="card">
+    <p><strong>${quoteName || "—"}</strong>${quoteCompany ? ` &mdash; ${quoteCompany}` : ""}</p>
+    <p>✉ ${quoteEmail || "—"}${quotePhone ? ` &nbsp;|&nbsp; 📞 ${quotePhone}` : ""}</p>
+    ${quoteAddress ? `<p>📍 ${quoteAddress}</p>` : ""}
+    ${quoteNotes ? `<p style="margin-top:8px;font-style:italic;color:#64748b">"${quoteNotes}"</p>` : ""}
+  </div>
+</div>
 
 <div class="section"><h2>Product</h2>
   <div class="product-row">
@@ -292,6 +305,7 @@ ${includeInstallation || solarSetup ? `
     if (!quoteName.trim() || !quoteEmail.trim()) return;
     setQuoteSubmitting(true);
     setQuoteError(null);
+    setQuoteRef(null);
 
     const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
     const base = (selectedVariant?.unit_price_php ?? 0) * quantity;
@@ -299,7 +313,60 @@ ${includeInstallation || solarSetup ? `
     const installCost = includeInstallation ? 18000 : 0;
     const total = base + accSubtotal + installCost;
 
+    // Build items array for backend
+    const items: Record<string, unknown>[] = [];
+    if (selectedVariant) {
+      items.push({
+        product_sku_id: selectedVariant.id,
+        description: selectedVariant.name,
+        quantity,
+        unit_price: selectedVariant.unit_price_php ?? 0,
+      });
+    }
+    for (const acc of selectedAccs) {
+      items.push({
+        product_sku_id: acc.id,
+        description: `${acc.name} (${acc.sku_code})`,
+        quantity: 1,
+        unit_price: acc.unit_price_php ?? 0,
+      });
+    }
+
+    // Build notes combining selections + user notes
+    const notesParts: string[] = [];
+    if (includeInstallation) notesParts.push("Installation & Commissioning Service (+₱18,000)");
+    if (solarSetup) {
+      const labels: Record<string, string> = { hybrid: "Hybrid Setup", "off-grid": "Off-Grid Setup", "on-grid": "On-Grid Setup" };
+      notesParts.push(`Solar Consultation: ${labels[solarSetup] || solarSetup}`);
+    }
+    if (quoteNotes.trim()) notesParts.push(`Customer note: ${quoteNotes.trim()}`);
+    const notes = notesParts.join(" | ") || undefined;
+
     try {
+      // 1. Save to backend quotation system
+      const backendRes = await fetch("https://volthub-admin-one.vercel.app/api/public/quotation-requests", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: quoteName.trim(),
+          email: quoteEmail.trim(),
+          phone: quotePhone.trim() || undefined,
+          company_name: quoteCompany.trim() || undefined,
+          address: quoteAddress.trim() || undefined,
+          site_address: quoteAddress.trim() || undefined,
+          project_type: "ev_charger",
+          notes,
+          items,
+        }),
+      });
+
+      let refNo: string | null = null;
+      if (backendRes.ok) {
+        const backendJson = await backendRes.json();
+        refNo = backendJson?.data?.reference_no ?? null;
+      }
+
+      // 2. Send formatted email via our API
       const res = await fetch("/api/quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -307,6 +374,9 @@ ${includeInstallation || solarSetup ? `
           customerName: quoteName.trim(),
           customerEmail: quoteEmail.trim(),
           customerPhone: quotePhone.trim() || undefined,
+          customerCompany: quoteCompany.trim() || undefined,
+          customerAddress: quoteAddress.trim() || undefined,
+          customerNotes: quoteNotes.trim() || undefined,
           productName: product.name,
           productImage: product.image,
           productSku: product.sku_code,
@@ -321,6 +391,7 @@ ${includeInstallation || solarSetup ? `
           solarSetup,
           subtotal: base || (selectedVariant?.unit_price_php ?? 0),
           total: total || 0,
+          referenceNo: refNo,
         }),
       });
 
@@ -329,6 +400,7 @@ ${includeInstallation || solarSetup ? `
         throw new Error(err.error || "Failed to send quote");
       }
 
+      setQuoteRef(refNo);
       setQuoteSubmitted(true);
     } catch (err: unknown) {
       setQuoteError(err instanceof Error ? err.message : "Something went wrong");
@@ -963,6 +1035,22 @@ ${includeInstallation || solarSetup ? `
                     <input type="tel" value={quotePhone} onChange={(e) => setQuotePhone(e.target.value)}
                       placeholder="+63 9XX XXX XXXX" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
                   </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Company Name</label>
+                    <input type="text" value={quoteCompany} onChange={(e) => setQuoteCompany(e.target.value)}
+                      placeholder="ABC Corp (optional)" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Site Address</label>
+                    <input type="text" value={quoteAddress} onChange={(e) => setQuoteAddress(e.target.value)}
+                      placeholder="BGC, Taguig (optional)" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">Notes</label>
+                    <textarea value={quoteNotes} onChange={(e) => setQuoteNotes(e.target.value)}
+                      placeholder="Any special requirements or questions..." rows={2}
+                      className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none resize-none" />
+                  </div>
 
                   {/* Mini summary */}
                   <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 space-y-1.5 text-xs">
@@ -1001,7 +1089,11 @@ ${includeInstallation || solarSetup ? `
                   <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center">
                     <RiCheckLine className="w-8 h-8 text-green-600" />
                   </div>
-                  <p className="text-sm text-slate-600">Your quote request has been sent to our sales team at <strong>sales@volthub.ph</strong>. We&apos;ll get back to you within 24 hours.</p>
+                  <p className="text-sm text-slate-600">
+                    Your quote request has been sent to our sales team at <strong>sales@volthub.ph</strong>.
+                    {quoteRef && <span className="block mt-2 text-xs font-mono bg-slate-100 rounded-lg px-3 py-1.5 text-slate-700">Ref: <strong>{quoteRef}</strong></span>}
+                    We&apos;ll get back to you within 24 hours.
+                  </p>
                   <button type="button" onClick={downloadPdfQuotation}
                     className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-primary/90 transition-all text-sm">
                     <RiDownloadLine className="h-4 w-4" /> Download PDF Copy

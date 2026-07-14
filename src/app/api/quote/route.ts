@@ -38,6 +38,9 @@ export async function POST(request: Request): Promise<NextResponse> {
       customerName,
       customerEmail,
       customerPhone,
+      customerCompany: typeof body.customerCompany === "string" ? body.customerCompany : undefined,
+      customerAddress: typeof body.customerAddress === "string" ? body.customerAddress : undefined,
+      customerNotes: typeof body.customerNotes === "string" ? body.customerNotes : undefined,
       productName,
       productImage: typeof body.productImage === "string" ? body.productImage : "",
       productSku: typeof body.productSku === "string" ? body.productSku : undefined,
@@ -50,6 +53,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       solarSetup: typeof body.solarSetup === "string" ? body.solarSetup : null,
       subtotal: typeof body.subtotal === "number" ? body.subtotal : 0,
       total: typeof body.total === "number" ? body.total : 0,
+      referenceNo: typeof body.referenceNo === "string" ? body.referenceNo : null,
     };
 
     const productRef = quoteData.variantSku || quoteData.productSku || "quote";
