@@ -126,13 +126,22 @@ export default function ProductDetail({ product, group, variants: serverVariants
   // Build image URL array. Variant image first when selected.
   const allImages: string[] = (() => {
     const images: string[] = [];
-    if (selectedVariant?.image_url) images.push(selectedVariant.image_url);
-    if (product.images?.length) {
-      for (const img of product.images) {
-        if (!images.includes(img.image_url)) images.push(img.image_url);
+    // Selected variant's gallery only
+    if (selectedVariant?.gallery?.length) {
+      for (const img of selectedVariant.gallery) {
+        images.push(img.image_url);
       }
     }
-    if (images.length === 0) images.push(product.image);
+    // Product-level images as fallback
+    if (images.length === 0 && product.images?.length) {
+      for (const img of product.images) {
+        images.push(img.image_url);
+      }
+    }
+    // Single main image fallback
+    if (images.length === 0) {
+      images.push(selectedVariant?.image_url || product.image);
+    }
     return images;
   })();
 
@@ -176,6 +185,9 @@ export default function ProductDetail({ product, group, variants: serverVariants
 
   // Solar setup type
   const [solarSetup, setSolarSetup] = useState<string | null>(null);
+
+  // Accessory gallery modal
+  const [accessoryModal, setAccessoryModal] = useState<{ name: string; images: string[]; index: number } | null>(null);
 
   // Quote modal state
   const [showQuoteModal, setShowQuoteModal] = useState(false);
@@ -251,7 +263,7 @@ ${selectedAccs.length > 0 ? `
 ${includeInstallation || solarSetup ? `
 <div class="section"><h2>Services</h2>
   <div class="card">
-    ${includeInstallation ? `<p style="font-weight:600;color:#166534">✓ Installation & Commissioning Service — <span style="color:#16a34a">₱15,000</span></p>` : ""}
+    ${includeInstallation ? `<p style="font-weight:600;color:#166534">✓ Installation & Commissioning Service — <span style="color:#16a34a">₱18,000</span></p>` : ""}
     ${solarSetup ? `<p style="font-weight:600;color:#1e40af;margin-top:4px">☀ Solar Consultation: ${solarSetup === "hybrid" ? "Hybrid Setup (Grid + Battery)" : solarSetup === "off-grid" ? "Off-Grid Setup (Battery only)" : "On-Grid Setup (Grid-tied only)"}</p><p style="font-size:11px;color:#94a3b8;margin-top:2px">Requires product purchase — assessment & equipment quote to follow</p>` : ""}
   </div>
 </div>` : ""}
@@ -366,36 +378,38 @@ ${includeInstallation || solarSetup ? `
       {/* Product Hero — Image Gallery + Info */}
       <div className="flex flex-col lg:flex-row gap-6 md:gap-8">
         {/* Image Gallery */}
-        <div className="lg:w-1/2 space-y-4">
-          <button
-            onClick={() => openImageModal(allImages.findIndex((img) => img === selectedImage))}
-            className="relative aspect-square bg-white w-full rounded-xl md:rounded-2xl overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-200 shadow-lg cursor-zoom-in hover:shadow-xl transition-all group"
-            aria-label="Click to view larger image"
-          >
-            <Image
-              src={selectedImage}
-              alt={product.name}
-              fill
-              className="object-contain transition-transform duration-300 p-4 md:p-6 lg:p-8 group-hover:scale-105"
-              priority
-            />
+        <div className="lg:w-1/2 space-y-3">
+          <div className="relative aspect-square bg-white w-full rounded-xl md:rounded-2xl overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-slate-200 shadow-lg group">
+            <button
+              onClick={() => openImageModal(allImages.findIndex((img) => img === selectedImage))}
+              className="absolute inset-0 cursor-zoom-in"
+              aria-label="Click to view larger image"
+            >
+              <Image
+                src={selectedImage}
+                alt={product.name}
+                fill
+                className="object-contain transition-transform duration-300 p-4 md:p-6 lg:p-8 group-hover:scale-105"
+                priority
+              />
+            </button>
             {allImages.length > 1 && (
-              <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 shadow-md">
+              <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 shadow-md z-10 pointer-events-none">
                 {allImages.findIndex((img) => img === selectedImage) + 1} / {allImages.length}
               </div>
             )}
-          </button>
+          </div>
 
-          {/* Thumbnails */}
+          {/* Thumbnail strip below main image */}
           {allImages.length > 1 && (
-            <div className="flex gap-2 overflow-x-auto pb-2">
+            <div className="flex gap-2 overflow-x-auto pb-1">
               {allImages.map((img, index) => {
                 const isSelected = selectedImage === img;
                 return (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(img)}
-                    className={`relative flex-shrink-0 w-20 h-20 md:w-24 md:h-24 rounded-lg overflow-hidden border-2 transition-all bg-white shadow-sm ${
+                    className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all bg-white shadow-sm ${
                       isSelected
                         ? "border-primary ring-2 ring-primary/20 scale-105"
                         : "border-slate-200 hover:border-slate-300"
@@ -504,7 +518,10 @@ ${includeInstallation || solarSetup ? `
                   return (
                     <button
                       type="button" key={v.id}
-                      onClick={() => setSelectedVariant(isSelected ? null : v)}
+                      onClick={() => {
+                        setSelectedVariant(isSelected ? null : v);
+                        if (!isSelected && v.image_url) setSelectedImage(v.image_url);
+                      }}
                       className={`flex items-start gap-2 rounded-lg border-2 p-2 transition-all text-left ${
                         isSelected
                           ? "border-primary bg-primary/5 ring-1 ring-primary/20"
@@ -587,7 +604,7 @@ ${includeInstallation || solarSetup ? `
                     Installation &amp; Commissioning
                   </span>
                   <p className="text-xs text-slate-500 mt-1">Professional on-site installation, setup, and commissioning by certified technicians</p>
-                  <p className="text-xs font-bold text-primary mt-1.5">Est. ₱15,000</p>
+                  <p className="text-xs font-bold text-primary mt-1.5">Est. ₱18,000</p>
                 </div>
               </button>
             )}
@@ -616,13 +633,28 @@ ${includeInstallation || solarSetup ? `
                           isSelected ? "bg-primary/5 border-primary/40 ring-1 ring-primary/20" : "bg-slate-50 border-slate-200 hover:border-slate-300"
                         }`}
                       >
-                        <div className="relative w-12 h-12 flex-shrink-0 rounded-md overflow-hidden bg-white border border-slate-200">
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            // Use gallery images if available, otherwise just the main image
+                            const galleryUrls = acc.gallery?.map((g) => g.image_url) ?? [];
+                            const allImages = galleryUrls.length > 0 ? galleryUrls : [acc.image_url];
+                            const unique = [...new Set(allImages)];
+                            if (unique.length > 0) setAccessoryModal({ name: acc.name, images: unique, index: 0 });
+                          }}
+                          className="relative w-12 h-12 flex-shrink-0 rounded-md overflow-hidden bg-white border border-slate-200 cursor-zoom-in hover:border-primary/50 transition-colors"
+                          title="View images"
+                        >
                           {acc.image_url ? (
                             <Image src={acc.image_url} alt={acc.name} fill className="object-contain p-1" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center text-slate-300"><RiAddLine className="w-4 h-4" /></div>
                           )}
-                        </div>
+                          {acc.gallery && acc.gallery.length > 0 && (
+                            <span className="absolute bottom-0.5 right-0.5 bg-black/60 text-white text-[8px] px-1 rounded">+{acc.gallery.length}</span>
+                          )}
+                        </button>
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center justify-between gap-1">
                             <span className={`text-xs font-semibold ${isSelected ? "text-primary" : "text-slate-800"}`}>{acc.name}</span>
@@ -716,7 +748,7 @@ ${includeInstallation || solarSetup ? `
                     {includeInstallation && (
                       <tr>
                         <td className="px-4 py-2 text-xs text-slate-500 pl-8">Installation Service</td>
-                        <td className="px-4 py-2 text-right text-xs text-slate-600">₱15,000</td>
+                        <td className="px-4 py-2 text-right text-xs text-slate-600">₱18,000</td>
                       </tr>
                     )}
                   </>
@@ -977,6 +1009,55 @@ ${includeInstallation || solarSetup ? `
                   <button onClick={() => setShowQuoteModal(false)} className="block text-sm text-primary font-semibold hover:underline">Close</button>
                 </div>
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Accessory Gallery Modal ── */}
+      {accessoryModal && (
+        <div className="fixed inset-0 z-50 flex flex-col bg-black/95" onClick={() => setAccessoryModal(null)}>
+          {/* Top bar */}
+          <div className="flex items-center justify-between px-4 py-3 z-10">
+            <span className="text-white/80 text-sm font-medium truncate mr-4">{accessoryModal.name}</span>
+            <div className="flex items-center gap-3">
+              <span className="text-white/50 text-xs">{accessoryModal.index + 1} / {accessoryModal.images.length}</span>
+              <button onClick={() => setAccessoryModal(null)} className="p-1.5 hover:bg-white/10 rounded-full text-white">
+                <RiCloseLine className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Main image — fills available space */}
+          <div className="flex-1 flex items-center justify-center min-h-0 px-4" onClick={(e) => e.stopPropagation()}>
+            <div className="relative w-full h-full max-w-4xl flex items-center justify-center">
+              <Image
+                src={accessoryModal.images[accessoryModal.index]}
+                alt={`${accessoryModal.name} - ${accessoryModal.index + 1}`}
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 80vw"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Thumbnail strip at bottom */}
+          <div className="flex-shrink-0 px-4 py-4" onClick={(e) => e.stopPropagation()}>
+            <div className="flex gap-2 justify-center overflow-x-auto">
+              {accessoryModal.images.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setAccessoryModal((prev) => prev ? { ...prev, index: i } : null)}
+                  className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                    i === accessoryModal.index
+                      ? "border-primary ring-2 ring-primary/30 scale-105"
+                      : "border-white/20 hover:border-white/50"
+                  }`}
+                >
+                  <Image src={img} alt={`Thumb ${i + 1}`} fill className="object-contain p-1" />
+                </button>
+              ))}
             </div>
           </div>
         </div>

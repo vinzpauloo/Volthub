@@ -66,6 +66,7 @@ export type BackendProduct = {
   created_at: string;
   deleted_at: string | null;
   images?: BackendProductImage[];
+  gallery?: BackendProductImage[];
 };
 
 type BackendProductImage = {
@@ -140,6 +141,13 @@ export function mapBackendProduct(bp: BackendProduct): Product {
 
 // ── Grouped API Response Types (localhost:3003) ──
 
+/** An accessory image from the gallery. */
+export type AccessoryImage = {
+  id?: string;
+  image_url: string;
+  alt_text?: string | null;
+};
+
 /** An accessory item returned by the grouped-products detail API. */
 export type Accessory = {
   id: string;
@@ -149,6 +157,7 @@ export type Accessory = {
   description: string;
   image_url: string;
   unit_price_php?: number | null;
+  gallery?: AccessoryImage[];
 };
 
 /** A product series returned by the grouped-products API (EV chargers). */
