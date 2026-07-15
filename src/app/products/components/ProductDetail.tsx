@@ -221,11 +221,6 @@ export default function ProductDetail({ product, group, variants: serverVariants
 
   function downloadPdfQuotation() {
     const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
-    const base = (selectedVariant?.unit_price_php ?? 0) * quantity;
-    const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
-    const installCost = includeInstallation ? 18000 : 0;
-    const total = base + accSubtotal + installCost;
-    const fmt = (p: number) => `₱${p.toLocaleString("en-PH")}`;
     const timestamp = new Date().toLocaleString("en-PH", { dateStyle: "long", timeStyle: "short" });
 
     const html = `<!DOCTYPE html>
@@ -247,7 +242,6 @@ export default function ProductDetail({ product, group, variants: serverVariants
   table{width:100%;border-collapse:collapse}
   table.summary{border:2px solid #e2e8f0;border-radius:10px;overflow:hidden}
   table.summary td{padding:10px 16px;font-size:14px;border-bottom:1px solid #e2e8f0}
-  table.summary tr.total-row td{background:#f0fdf4;font-size:18px;font-weight:800;color:#16a34a;border-top:2px solid #16a34a}
   .acc-row{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid #e2e8f0}
   .acc-row img{width:48px;height:48px;object-fit:contain;border-radius:6px;border:1px solid #e2e8f0}
   .footer{text-align:center;color:#94a3b8;font-size:11px;margin-top:40px;padding-top:16px;border-top:1px solid #e2e8f0}
@@ -274,7 +268,6 @@ export default function ProductDetail({ product, group, variants: serverVariants
     <div class="info">
       <p style="font-size:18px;font-weight:700">${selectedVariant?.name || product.name}</p>
       ${(selectedVariant?.sku_code || product.sku_code) ? `<p style="font-size:11px;color:#64748b;font-family:monospace">SKU: ${selectedVariant?.sku_code || product.sku_code}</p>` : ""}
-      ${selectedVariant?.unit_price_php != null ? `<p style="font-size:18px;font-weight:700;color:#16a34a;margin-top:4px">${fmt(selectedVariant.unit_price_php)}</p>` : ""}
       <p style="font-size:13px;color:#64748b">Quantity: <strong>× ${quantity}</strong></p>
     </div>
   </div>
@@ -286,24 +279,24 @@ ${selectedAccs.length > 0 ? `
   <div class="acc-row" style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;margin-bottom:6px">
     ${acc.image_url ? `<img src="${acc.image_url}" alt="${acc.name}">` : ""}
     <div style="flex:1"><p style="font-weight:600;font-size:13px">${acc.name}</p><p style="font-size:10px;color:#94a3b8;font-family:monospace">${acc.sku_code}</p></div>
-    <p style="font-weight:700;color:#16a34a;font-size:14px">${acc.unit_price_php != null ? fmt(acc.unit_price_php) : "—"}</p>
   </div>`).join("")}
 </div>` : ""}
 
 ${includeInstallation || solarSetup ? `
 <div class="section"><h2>Services</h2>
   <div class="card">
-    ${includeInstallation ? `<p style="font-weight:600;color:#166534">✓ Installation & Commissioning Service — <span style="color:#16a34a">₱18,000</span></p>` : ""}
+    ${includeInstallation ? `<p style="font-weight:600;color:#166534">✓ Installation & Commissioning Service</p><p style="font-size:11px;color:#94a3b8;margin-top:2px">Professional on-site installation by certified technicians</p>` : ""}
     ${solarSetup ? `<p style="font-weight:600;color:#1e40af;margin-top:4px">☀ Solar Consultation: ${solarSetup === "hybrid" ? "Hybrid Setup (Grid + Battery)" : solarSetup === "off-grid" ? "Off-Grid Setup (Battery only)" : "On-Grid Setup (Grid-tied only)"}</p><p style="font-size:11px;color:#94a3b8;margin-top:2px">Requires product purchase — assessment & equipment quote to follow</p>` : ""}
   </div>
 </div>` : ""}
 
 <div class="section"><h2>Quote Summary</h2>
   <table class="summary">
-    <tr><td style="color:#64748b">Unit Price</td><td align="right" style="font-weight:600">${selectedVariant?.unit_price_php != null ? fmt(selectedVariant.unit_price_php) : "—"}</td></tr>
+    <tr><td style="color:#64748b">Product</td><td align="right" style="font-weight:600">${selectedVariant?.name || product.name}</td></tr>
     <tr><td style="color:#64748b">Quantity</td><td align="right" style="font-weight:600">× ${quantity}</td></tr>
-    <tr style="background:#f8fafc"><td style="font-weight:700">Subtotal</td><td align="right" style="font-weight:700;font-size:16px">${base > 0 ? fmt(base) : "—"}</td></tr>
-    <tr class="total-row"><td>Estimated Total</td><td align="right">${total > 0 ? fmt(total) : "—"}</td></tr>
+    ${selectedAccs.length > 0 ? `<tr style="border-top:1px solid #e2e8f0"><td style="color:#64748b">Accessories</td><td align="right" style="font-weight:600">${selectedAccs.length} item${selectedAccs.length > 1 ? "s" : ""}</td></tr>` : ""}
+    ${includeInstallation ? `<tr style="border-top:1px solid #e2e8f0"><td style="color:#64748b">Installation</td><td align="right" style="font-weight:600;color:#166534">Included</td></tr>` : ""}
+    ${solarSetup ? `<tr style="border-top:1px solid #e2e8f0"><td style="color:#64748b">Solar Consultation</td><td align="right" style="font-weight:600;color:#1e40af">${solarSetup === "hybrid" ? "Hybrid Setup (Grid + Battery)" : solarSetup === "off-grid" ? "Off-Grid Setup (Battery only)" : "On-Grid Setup (Grid-tied only)"}</td></tr>` : ""}
   </table>
 </div>
 

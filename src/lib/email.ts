@@ -165,8 +165,6 @@ export function buildQuoteEmailHtml(data: QuoteEmailData): string {
     timeZone: "Asia/Manila", dateStyle: "long", timeStyle: "short",
   });
 
-  const formatPrice = (p: number) => `₱${p.toLocaleString("en-PH")}`;
-
   return `
 <!DOCTYPE html>
 <html>
@@ -237,7 +235,6 @@ export function buildQuoteEmailHtml(data: QuoteEmailData): string {
           <td style="padding:16px;vertical-align:top;">
             <p style="margin:0;font-size:16px;font-weight:700;color:#0f172a;">${escapeHtml(data.variantName || data.productName)}</p>
             ${(data.variantSku || data.productSku) ? `<p style="margin:4px 0 0;font-size:11px;color:#64748b;font-family:monospace;">SKU: ${escapeHtml(data.variantSku || data.productSku || "")}</p>` : ""}
-            ${data.variantPrice != null ? `<p style="margin:8px 0 0;font-size:18px;font-weight:700;color:#16a34a;">${formatPrice(data.variantPrice)}</p>` : ""}
             <p style="margin:4px 0 0;font-size:12px;color:#64748b;">Quantity: <strong>× ${data.quantity}</strong></p>
           </td>
         </tr>
@@ -256,12 +253,9 @@ export function buildQuoteEmailHtml(data: QuoteEmailData): string {
           <td width="60" style="padding:12px 0 12px 16px;background:${i % 2 === 0 ? '#ffffff' : '#f8fafc'};border-bottom:1px solid #e2e8f0;">
             ${acc.image ? `<img src="${escapeHtml(acc.image)}" alt="${escapeHtml(acc.name)}" style="width:48px;height:48px;object-fit:contain;border-radius:6px;border:1px solid #e2e8f0;" />` : ""}
           </td>
-          <td style="padding:12px 16px;background:${i % 2 === 0 ? '#ffffff' : '#f8fafc'};border-bottom:1px solid #e2e8f0;vertical-align:middle;">
+          <td style="padding:12px 16px;background:${i % 2 === 0 ? '#ffffff' : '#f8fafc'};border-bottom:1px solid #e2e8f0;vertical-align:middle;" colspan="2">
             <span style="font-size:13px;font-weight:600;color:#0f172a;">${escapeHtml(acc.name)}</span>
             <span style="font-size:11px;color:#94a3b8;font-family:monospace;display:block;">${escapeHtml(acc.sku)}</span>
-          </td>
-          <td align="right" style="padding:12px 20px 12px 0;background:${i % 2 === 0 ? '#ffffff' : '#f8fafc'};border-bottom:1px solid #e2e8f0;vertical-align:middle;">
-            <span style="font-size:14px;font-weight:700;color:#16a34a;">${acc.price != null ? formatPrice(acc.price) : "—"}</span>
           </td>
         </tr>`).join("")}
       </table>
@@ -276,11 +270,10 @@ export function buildQuoteEmailHtml(data: QuoteEmailData): string {
       <table width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;">
         ${data.includeInstallation ? `
         <tr>
-          <td style="padding:12px 20px;background:#f0fdf4;">
+          <td style="padding:12px 20px;background:#f0fdf4;" colspan="2">
             <span style="font-size:13px;font-weight:600;color:#166534;">✓ Installation &amp; Commissioning Service</span>
             <span style="font-size:12px;color:#64748b;display:block;">Professional on-site installation by certified technicians</span>
           </td>
-          <td align="right" style="padding:12px 20px;background:#f0fdf4;"><span style="font-size:14px;font-weight:700;color:#16a34a;">₱18,000</span></td>
         </tr>` : ""}
         ${data.solarSetup ? `
         <tr>
@@ -299,21 +292,28 @@ export function buildQuoteEmailHtml(data: QuoteEmailData): string {
       <p style="margin:0 0 12px;font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;">Quote Summary</p>
       <table width="100%" cellpadding="0" cellspacing="0" style="border:2px solid #e2e8f0;border-radius:10px;overflow:hidden;">
         <tr>
-          <td style="padding:12px 20px;font-size:14px;color:#475569;border-bottom:1px solid #e2e8f0;">Unit Price</td>
-          <td align="right" style="padding:12px 20px;font-size:14px;color:#0f172a;font-weight:600;border-bottom:1px solid #e2e8f0;">${data.variantPrice != null ? formatPrice(data.variantPrice) : "—"}</td>
+          <td style="padding:12px 20px;font-size:14px;color:#475569;border-bottom:1px solid #e2e8f0;">Product</td>
+          <td align="right" style="padding:12px 20px;font-size:14px;color:#0f172a;font-weight:600;border-bottom:1px solid #e2e8f0;">${escapeHtml(data.variantName || data.productName)}</td>
         </tr>
         <tr>
-          <td style="padding:12px 20px;font-size:14px;color:#475569;border-bottom:2px solid #e2e8f0;">Quantity</td>
-          <td align="right" style="padding:12px 20px;font-size:14px;color:#0f172a;font-weight:600;border-bottom:2px solid #e2e8f0;">× ${data.quantity}</td>
+          <td style="padding:12px 20px;font-size:14px;color:#475569;">Quantity</td>
+          <td align="right" style="padding:12px 20px;font-size:14px;color:#0f172a;font-weight:600;">× ${data.quantity}</td>
         </tr>
-        <tr style="background:#f8fafc;">
-          <td style="padding:12px 20px;font-size:14px;font-weight:700;color:#0f172a;">Subtotal</td>
-          <td align="right" style="padding:12px 20px;font-size:16px;font-weight:700;color:#0f172a;">${formatPrice(data.subtotal)}</td>
-        </tr>
-        <tr style="background:#f0fdf4;">
-          <td style="padding:14px 20px;font-size:16px;font-weight:700;color:#166534;">Estimated Total</td>
-          <td align="right" style="padding:14px 20px;font-size:22px;font-weight:800;color:#16a34a;">${formatPrice(data.total)}</td>
-        </tr>
+        ${data.accessories && data.accessories.length > 0 ? `
+        <tr>
+          <td style="padding:12px 20px;font-size:14px;color:#475569;border-top:1px solid #e2e8f0;">Accessories</td>
+          <td align="right" style="padding:12px 20px;font-size:14px;color:#0f172a;font-weight:600;border-top:1px solid #e2e8f0;">${data.accessories.length} item${data.accessories.length > 1 ? 's' : ''}</td>
+        </tr>` : ""}
+        ${data.includeInstallation ? `
+        <tr>
+          <td style="padding:12px 20px;font-size:14px;color:#475569;border-top:1px solid #e2e8f0;">Installation</td>
+          <td align="right" style="padding:12px 20px;font-size:14px;color:#166534;font-weight:600;border-top:1px solid #e2e8f0;">Included</td>
+        </tr>` : ""}
+        ${data.solarSetup ? `
+        <tr>
+          <td style="padding:12px 20px;font-size:14px;color:#475569;border-top:1px solid #e2e8f0;">Solar Consultation</td>
+          <td align="right" style="padding:12px 20px;font-size:14px;color:#1e40af;font-weight:600;border-top:1px solid #e2e8f0;">${escapeHtml(SOLAR_SETUP_LABELS[data.solarSetup] || data.solarSetup)}</td>
+        </tr>` : ""}
       </table>
     </td>
   </tr>
