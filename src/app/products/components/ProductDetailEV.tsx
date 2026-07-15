@@ -148,7 +148,7 @@ export default function ProductDetailEV({
                   key={star}
                   className={`h-3.5 w-3.5 md:h-4 md:w-4 ${
                     star <= Math.floor(averageRating)
-                      ? "text-yellow-400 fill-current"
+                      ? "text-blue-800 fill-current"
                       : "text-slate-300"
                   }`}
                 />

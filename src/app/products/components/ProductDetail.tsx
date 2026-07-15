@@ -27,6 +27,23 @@ type AddOn = {
   icon: React.ComponentType<{ className?: string }>;
 };
 
+// ── Helper: extract distinguishing features from variant SKU + name ──
+
+function parseVariantSku(sku: string, name: string) {
+  // Extract connector suffix: everything after the power segment (e.g. "180kW-")
+  const powerMatch = sku.match(/-(\d+kW)-/i);
+  const connectorSuffix = powerMatch
+    ? sku.slice(sku.indexOf(powerMatch[0]) + powerMatch[0].length)
+    : sku.slice(sku.lastIndexOf("-") + 1);
+
+  // Gun type from name
+  const isDual = /dual/i.test(name);
+  const isSingle = /single/i.test(name);
+  const gunLabel = isDual ? "Dual Gun" : isSingle ? "Single Gun" : null;
+
+  return { connectorSuffix, gunLabel };
+}
+
 const solarAddOns: AddOn[] = [
   {
     id: "solar-5kw",
@@ -587,6 +604,7 @@ ${includeInstallation || solarSetup ? `
               <div className="grid grid-cols-2 gap-2 max-h-[320px] overflow-y-auto pr-1">
                 {filteredVariants.map((v) => {
                   const isSelected = selectedVariant?.id === v.id;
+                  const variantInfo = parseVariantSku(v.sku_code, v.name);
                   return (
                     <button
                       type="button" key={v.id}
@@ -606,19 +624,29 @@ ${includeInstallation || solarSetup ? `
                         </div>
                       )}
                       <div className="min-w-0 flex-1">
-                        <p className="text-xs font-semibold text-slate-900 line-clamp-2 leading-tight">{v.name}</p>
-                        <p className="text-[10px] text-slate-400 font-mono mt-0.5 truncate">{v.sku_code}</p>
-                        {v.unit_price_php != null && (
-                          <p className="text-xs font-bold text-primary mt-0.5">₱{v.unit_price_php.toLocaleString("en-PH")}</p>
-                        )}
+                        {/* Connector + Gun badges — most prominent */}
+                        <div className="flex items-center gap-1.5 mb-0.5">
+                          <span className="text-[11px] font-bold text-primary font-mono tracking-tight">
+                            {variantInfo.connectorSuffix}
+                          </span>
+                          {variantInfo.gunLabel && (
+                            <span className="text-[9px] font-medium text-slate-500 bg-slate-100 px-1 py-px rounded">
+                              {variantInfo.gunLabel}
+                            </span>
+                          )}
+                        </div>
+                        {/* Full SKU — subtle reference */}
+                        <p className="text-[9px] text-slate-400 font-mono truncate">{v.sku_code}</p>
+                        {/* Product name — less prominent */}
+                        <p className="text-[10px] text-slate-500 truncate mt-px">{v.name}</p>
                       </div>
                       {isSelected && <RiCheckLine className="w-4 h-4 text-primary flex-shrink-0 mt-1" />}
                     </button>
                   );
                 })}
                 {!selectedVariant && (
-                  <p className="col-span-2 text-sm text-amber-600 font-medium text-center py-2">
-                    Select a variant above to see pricing
+                  <p className="col-span-2 text-sm text-slate-600 font-medium text-center py-2">
+                    Select a variant above to view details
                   </p>
                 )}
               </div>
@@ -641,11 +669,6 @@ ${includeInstallation || solarSetup ? `
                     <button type="button" onClick={() => setQuantity((prev) => prev + 1)}
                       className="w-7 h-7 rounded-md border border-slate-300 hover:border-primary text-slate-700 font-bold text-xs">+</button>
                   </div>
-                  <span className="text-sm font-bold text-primary whitespace-nowrap">
-                    {selectedVariant?.unit_price_php != null
-                      ? `₱${(selectedVariant.unit_price_php * quantity).toLocaleString("en-PH")}`
-                      : "—"}
-                  </span>
                 </div>
               </div>
             )}
@@ -676,7 +699,6 @@ ${includeInstallation || solarSetup ? `
                     Installation &amp; Commissioning
                   </span>
                   <p className="text-xs text-slate-500 mt-1">Professional on-site installation, setup, and commissioning by certified technicians</p>
-                  <p className="text-xs font-bold text-primary mt-1.5">Est. ₱18,000</p>
                 </div>
               </button>
             )}
@@ -734,9 +756,6 @@ ${includeInstallation || solarSetup ? `
                           </div>
                           <p className="text-[10px] text-slate-400 font-mono mt-0.5">{acc.sku_code}</p>
                           {acc.description && <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2 whitespace-pre-line">{acc.description}</p>}
-                          {acc.unit_price_php != null && (
-                            <p className="text-xs font-bold text-primary mt-0.5">Est. ₱{acc.unit_price_php.toLocaleString("en-PH")}</p>
-                          )}
                         </div>
                       </button>
                     );
@@ -779,66 +798,98 @@ ${includeInstallation || solarSetup ? `
 
         </div>
 
-        {/* ── Price Summary (full width below) ── */}
+        {/* ── Quote Summary (selected items checklist) ── */}
         <div className="mt-6 md:mt-8 border-t border-slate-200 pt-6 md:pt-8">
           <h3 className="text-sm font-semibold text-slate-900 uppercase tracking-wide mb-4">Quote Summary</h3>
 
-          {/* Table-style price breakdown */}
           <div className="overflow-hidden rounded-xl border border-slate-200">
-            <table className="w-full text-sm">
-              <tbody className="divide-y divide-slate-100">
-                <tr>
-                  <td className="px-4 py-3 text-slate-500">Unit Price</td>
-                  <td className="px-4 py-3 text-right font-semibold text-slate-900">
-                    {selectedVariant?.unit_price_php != null
-                      ? `₱${selectedVariant.unit_price_php.toLocaleString("en-PH")}`
-                      : product.price || "—"}
-                  </td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-3 text-slate-500">Quantity</td>
-                  <td className="px-4 py-3 text-right font-semibold text-slate-900">× {quantity}</td>
-                </tr>
-                <tr className="bg-slate-50">
-                  <td className="px-4 py-3 font-semibold text-slate-900">Subtotal</td>
-                  <td className="px-4 py-3 text-right font-bold text-slate-900">
-                    {selectedVariant?.unit_price_php != null
-                      ? `₱${(selectedVariant.unit_price_php * quantity).toLocaleString("en-PH")}`
-                      : product.price || "—"}
-                  </td>
-                </tr>
-                {(selectedAccessories.size > 0 || includeInstallation) && (
-                  <>
-                    {group?.accessories?.filter((a) => selectedAccessories.has(a.id)).map((acc) => (
-                      <tr key={acc.id}>
-                        <td className="px-4 py-2 text-xs text-slate-500 pl-8">{acc.name}</td>
-                        <td className="px-4 py-2 text-right text-xs text-slate-600">
-                          {acc.unit_price_php != null ? `₱${acc.unit_price_php.toLocaleString("en-PH")}` : "—"}
-                        </td>
-                      </tr>
-                    ))}
-                    {includeInstallation && (
-                      <tr>
-                        <td className="px-4 py-2 text-xs text-slate-500 pl-8">Installation Service</td>
-                        <td className="px-4 py-2 text-right text-xs text-slate-600">₱18,000</td>
-                      </tr>
-                    )}
-                  </>
-                )}
-                <tr className="bg-primary/5 border-t-2 border-primary/20">
-                  <td className="px-4 py-3 font-bold text-slate-900">Estimated Total</td>
-                  <td className="px-4 py-3 text-right text-xl font-bold text-primary">
-                    ₱{(() => {
-                      const base = selectedVariant?.unit_price_php != null ? selectedVariant.unit_price_php * quantity : 0;
-                      const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
-                      const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
-                      const installCost = includeInstallation ? 18000 : 0;
-                      return (base + accSubtotal + installCost).toLocaleString("en-PH");
-                    })()}
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div className="divide-y divide-slate-100">
+              {/* Selected variant */}
+              <div className="px-4 py-3 flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  {selectedVariant ? (
+                    <RiCheckLine className="w-3.5 h-3.5 text-primary" />
+                  ) : (
+                    <span className="w-2 h-2 rounded-full bg-slate-300" />
+                  )}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className={`text-sm font-medium ${selectedVariant ? "text-slate-900" : "text-slate-400"}`}>
+                    {selectedVariant?.name || product.name}
+                  </p>
+                  {(selectedVariant?.sku_code || product.sku_code) && (
+                    <p className="text-[10px] text-slate-400 font-mono">{selectedVariant?.sku_code || product.sku_code}</p>
+                  )}
+                </div>
+                <span className="text-xs text-slate-400 font-medium">× {quantity}</span>
+              </div>
+
+              {/* Selected accessories */}
+              {group?.accessories?.filter((a) => selectedAccessories.has(a.id)).map((acc) => (
+                <div key={acc.id} className="px-4 py-3 flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <RiCheckLine className="w-3.5 h-3.5 text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-slate-900">{acc.name}</p>
+                    <p className="text-[10px] text-slate-400 font-mono">{acc.sku_code}</p>
+                  </div>
+                </div>
+              ))}
+
+              {/* Installation service */}
+              {includeInstallation && (
+                <div className="px-4 py-3 flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <RiCheckLine className="w-3.5 h-3.5 text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-slate-900">Installation &amp; Commissioning</p>
+                    <p className="text-[10px] text-slate-400">Professional on-site installation and setup</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Solar consultation */}
+              {solarSetup && (
+                <div className="px-4 py-3 flex items-center gap-3">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <RiCheckLine className="w-3.5 h-3.5 text-primary" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-slate-900">Solar Consultation</p>
+                    <p className="text-[10px] text-slate-400">
+                      {solarSetup === "hybrid" ? "Hybrid Setup (Grid + Battery)" : solarSetup === "off-grid" ? "Off-Grid Setup (Battery only)" : "On-Grid Setup (Grid-tied only)"}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Selected solar add-ons */}
+              {[...selectedAddOns].map((addonId) => {
+                const addon = solarAddOns.find((a) => a.id === addonId);
+                if (!addon) return null;
+                return (
+                  <div key={addon.id} className="px-4 py-3 flex items-center gap-3">
+                    <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <RiCheckLine className="w-3.5 h-3.5 text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-slate-900">{addon.name}</p>
+                      <p className="text-[10px] text-slate-400 line-clamp-1">{addon.description}</p>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* Empty state */}
+              {!selectedVariant && selectedAccessories.size === 0 && !includeInstallation && !solarSetup && selectedAddOns.size === 0 && (
+                <div className="px-4 py-6 text-center">
+                  <p className="text-sm text-slate-400">No items selected yet</p>
+                  <p className="text-xs text-slate-300 mt-1">Select a variant and add accessories or services above</p>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* CTA */}
@@ -846,7 +897,8 @@ ${includeInstallation || solarSetup ? `
             <button
               type="button"
               onClick={() => { setQuoteSubmitted(false); setQuoteError(null); setShowQuoteModal(true); }}
-              className="flex-1 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-bold px-4 py-3 rounded-xl shadow-lg transition-all text-base group"
+              disabled={!selectedVariant}
+              className="flex-1 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-4 py-3 rounded-xl shadow-lg transition-all text-base group"
             >
               <span>Get Quote</span>
               <RiArrowRightSLine className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
@@ -854,7 +906,8 @@ ${includeInstallation || solarSetup ? `
             <button
               type="button"
               onClick={downloadPdfQuotation}
-              className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 font-semibold px-4 py-3 rounded-xl border-2 border-slate-300 hover:border-slate-400 shadow-sm transition-all text-sm"
+              disabled={!selectedVariant}
+              className="flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-slate-700 font-semibold px-4 py-3 rounded-xl border-2 border-slate-300 hover:border-slate-400 disabled:opacity-50 disabled:cursor-not-allowed shadow-sm transition-all text-sm"
             >
               <RiDownloadLine className="h-4 w-4" />
               <span>Download PDF</span>
@@ -909,11 +962,6 @@ ${includeInstallation || solarSetup ? `
                       >
                         {addon.name}
                       </span>
-                      {addon.price && (
-                        <span className="text-xs font-bold text-slate-600 flex-shrink-0">
-                          {addon.price}
-                        </span>
-                      )}
                     </div>
                     <p className="text-xs text-slate-500 mt-1 line-clamp-2">
                       {addon.description}
@@ -983,7 +1031,8 @@ ${includeInstallation || solarSetup ? `
           <button
             type="button"
             onClick={() => { setQuoteSubmitted(false); setQuoteError(null); setShowQuoteModal(true); }}
-            className="inline-flex items-center gap-2 bg-white text-primary px-6 py-2.5 rounded-xl font-semibold hover:bg-slate-100 transition-colors text-sm"
+            disabled={!selectedVariant}
+            className="inline-flex items-center gap-2 bg-white text-primary px-6 py-2.5 rounded-xl font-semibold hover:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm"
           >
             Get Quote
           </button>
@@ -1023,54 +1072,67 @@ ${includeInstallation || solarSetup ? `
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">Full Name <span className="text-red-500">*</span></label>
                     <input type="text" value={quoteName} onChange={(e) => setQuoteName(e.target.value)}
-                      placeholder="Juan Dela Cruz" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+                      placeholder="Juan Dela Cruz" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">Email <span className="text-red-500">*</span></label>
                     <input type="email" value={quoteEmail} onChange={(e) => setQuoteEmail(e.target.value)}
-                      placeholder="juan@example.com" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+                      placeholder="juan@example.com" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">Phone</label>
                     <input type="tel" value={quotePhone} onChange={(e) => setQuotePhone(e.target.value)}
-                      placeholder="+63 9XX XXX XXXX" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+                      placeholder="+63 9XX XXX XXXX" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">Company Name</label>
                     <input type="text" value={quoteCompany} onChange={(e) => setQuoteCompany(e.target.value)}
-                      placeholder="ABC Corp (optional)" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+                      placeholder="ABC Corp (optional)" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">Site Address</label>
                     <input type="text" value={quoteAddress} onChange={(e) => setQuoteAddress(e.target.value)}
-                      placeholder="BGC, Taguig (optional)" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
+                      placeholder="BGC, Taguig (optional)" className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 mb-1">Notes</label>
                     <textarea value={quoteNotes} onChange={(e) => setQuoteNotes(e.target.value)}
                       placeholder="Any special requirements or questions..." rows={2}
-                      className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none resize-none" />
+                      className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none resize-none" />
                   </div>
 
-                  {/* Mini summary */}
+                  {/* Mini summary — selected items */}
                   <div className="bg-slate-50 rounded-xl p-3 border border-slate-200 space-y-1.5 text-xs">
-                    <div className="flex justify-between"><span className="text-slate-500">Product</span><span className="font-medium text-slate-900 truncate ml-2 max-w-[60%]">{selectedVariant?.name || product.name}</span></div>
-                    <div className="flex justify-between"><span className="text-slate-500">Quantity</span><span className="font-medium">× {quantity}</span></div>
-                    {(() => {
-                      const selectedAccs = group?.accessories?.filter((a) => selectedAccessories.has(a.id)) ?? [];
-                      const base = (selectedVariant?.unit_price_php ?? 0) * quantity;
-                      const accSubtotal = selectedAccs.reduce((sum, a) => sum + (a.unit_price_php ?? 0), 0);
-                      const installCost = includeInstallation ? 18000 : 0;
-                      const t = base + accSubtotal + installCost;
-                      return (
-                        <div className="flex justify-between border-t border-slate-200 pt-1.5 mt-1.5">
-                          <span className="font-semibold text-slate-900">Estimated Total</span>
-                          <span className="font-bold text-primary text-sm">
-                            {t > 0 ? `₱${t.toLocaleString("en-PH")}` : "—"}
-                          </span>
-                        </div>
-                      );
-                    })()}
+                    <p className="text-xs font-semibold text-slate-700 mb-1">Selected Items:</p>
+                    <div className="flex justify-between"><span className="text-slate-600">Product</span><span className="font-medium text-slate-900 truncate ml-2 max-w-[60%]">{selectedVariant?.name || product.name}</span></div>
+                    <div className="flex justify-between"><span className="text-slate-600">Quantity</span><span className="font-medium text-slate-900">× {quantity}</span></div>
+                    {group?.accessories?.filter((a) => selectedAccessories.has(a.id)).map((acc) => (
+                      <div key={acc.id} className="flex justify-between"><span className="text-slate-600 text-[10px] truncate max-w-[60%]">{acc.name}</span><span className="text-slate-700 text-[10px]">✓</span></div>
+                    ))}
+                    {includeInstallation && (
+                      <div className="flex justify-between"><span className="text-slate-600 text-[10px]">Installation &amp; Commissioning</span><span className="text-slate-700 text-[10px]">✓</span></div>
+                    )}
+                    {solarSetup && (
+                      <div className="flex justify-between"><span className="text-slate-600 text-[10px]">Solar Consultation ({solarSetup === "hybrid" ? "Hybrid" : solarSetup === "off-grid" ? "Off-Grid" : "On-Grid"})</span><span className="text-slate-700 text-[10px]">✓</span></div>
+                    )}
+                    {selectedAddOns.size > 0 && (
+                      <div className="flex justify-between"><span className="text-slate-600 text-[10px]">{selectedAddOns.size} solar add-on{selectedAddOns.size > 1 ? "s" : ""}</span><span className="text-slate-700 text-[10px]">✓</span></div>
+                    )}
+                    {(selectedAccessories.size > 0 || includeInstallation || solarSetup || selectedAddOns.size > 0) && (
+                      <div className="flex justify-between border-t border-slate-200 pt-1.5 mt-1.5">
+                        <span className="font-semibold text-slate-700">Total Items</span>
+                        <span className="font-bold text-blue-800 text-sm">
+                          {(() => {
+                            let count = selectedVariant ? 1 : 0;
+                            count += selectedAccessories.size;
+                            if (includeInstallation) count++;
+                            if (solarSetup) count++;
+                            count += selectedAddOns.size;
+                            return count;
+                          })()}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   {quoteError && <p className="text-sm text-red-500 text-center">{quoteError}</p>}
@@ -1079,7 +1141,7 @@ ${includeInstallation || solarSetup ? `
                     type="button"
                     onClick={submitQuote}
                     disabled={quoteSubmitting || !quoteName.trim() || !quoteEmail.trim()}
-                    className="w-full bg-primary hover:bg-primary/90 disabled:opacity-50 text-white font-bold px-4 py-3 rounded-xl shadow-lg transition-all text-base"
+                    className="w-full bg-blue-800 hover:bg-blue-900 disabled:opacity-50 text-white font-bold px-4 py-3 rounded-xl shadow-lg transition-all text-base"
                   >
                     {quoteSubmitting ? "Sending…" : "Send Quote Request"}
                   </button>
@@ -1095,10 +1157,10 @@ ${includeInstallation || solarSetup ? `
                     We&apos;ll get back to you within 24 hours.
                   </p>
                   <button type="button" onClick={downloadPdfQuotation}
-                    className="inline-flex items-center gap-2 bg-primary text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-primary/90 transition-all text-sm">
+                    className="inline-flex items-center gap-2 bg-blue-800 text-white font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-900 transition-all text-sm">
                     <RiDownloadLine className="h-4 w-4" /> Download PDF Copy
                   </button>
-                  <button onClick={() => setShowQuoteModal(false)} className="block text-sm text-primary font-semibold hover:underline">Close</button>
+                  <button onClick={() => setShowQuoteModal(false)} className="block text-sm text-blue-800 font-semibold hover:underline">Close</button>
                 </div>
               )}
             </div>
