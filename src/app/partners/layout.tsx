@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Become a Location Partner | VoltHub",
+  title: "EV Charging | VoltHub",
   description:
-    "Host an EV charging station at your location. Earn passive income, attract more customers, and support sustainable transportation with VoltHub.",
+    "Download the VoltHub app, learn how to charge your EV, find fast chargers near you, and explore our EV charging learning hub.",
   keywords: [
-    "EV charging partner",
-    "location partner",
-    "host EV charger",
-    "VoltHub partner program",
+    "EV charging",
+    "electric vehicle charging",
+    "fast charger",
+    "EV charging guide",
+    "VoltHub app",
+    "find EV charger",
   ],
 };
 

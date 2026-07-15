@@ -113,6 +113,12 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
     },
   ],
 
+  Solar: {
+    title: "Solar",
+    href: "/solutions",
+    description: "Solar energy solutions and smart energy systems.",
+  },
+
   // tools: [
   //   {
   //     title: "Solar + Storage ROI",
@@ -129,6 +135,12 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
   //     image: "/Product/evpb.jpg",
   //   },
   // ],
+
+  "EV Charging": {
+    title: "EV Charging",
+    href: "/partners",
+    description: "Become an EV charging location partner.",
+  },
 
   about: {
     title: "About Us",
@@ -323,7 +335,9 @@ function ListItem({
     <li {...props} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="relative overflow-hidden rounded-sm min-w-0 max-w-full">
       <NavigationMenuLink asChild className="block overflow-hidden rounded-sm h-full w-[93%] ">
         <Link href={href as Route} className="group/link relative flex flex-col gap-1  rounded-sm h-full w-[93%]  mx-1 hover:bg-[#959aa2]">
-          <div className="text-sm font-bold leading-none">{title}</div>
+          <div className="text-sm font-bold leading-none text-black group-hover/link:text-gray-800 transition-colors duration-200">
+            {title}
+          </div>
           <p className="text-muted-foreground text-sm leading-snug line-clamp-2">
             {children}
           </p>

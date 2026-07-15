@@ -6,7 +6,7 @@ import { useEffect, useState, useRef } from "react";
 import Navigator from "../common/Navigator";
 import { usePathname } from "next/navigation";
 import type { Route } from "next";
-import { RiMenuLine, RiCloseLine } from "react-icons/ri";
+import { RiMenuLine, RiCloseLine, RiArrowDownSLine } from "react-icons/ri";
 import LayoutContainer from "./LayoutContainer";
 import { cn } from "@/lib/utils";
 
@@ -44,18 +44,18 @@ const navItems: NavItem[] = [
       // },
     ],
   },
-  {
-    label: "Sectors",
-    href: "/sectors",
-    description: "Target customers and sector-specific solutions",
-    dropdown: [
-      { label: "Residential", href: "/sectors/residential" },
-      { label: "Commercial", href: "/sectors/commercial" },
-      { label: "Industrial", href: "/sectors/industrial" },
-      // { label: "Smart Cities", href: "/sectors/smart-cities" },
-      { label: "Rural Projects", href: "/sectors/rural-projects" },
-    ],
-  },
+  // {
+  //   label: "Sectors",
+  //   href: "/sectors",
+  //   description: "Target customers and sector-specific solutions",
+  //   dropdown: [
+  //     { label: "Residential", href: "/sectors/residential" },
+  //     { label: "Commercial", href: "/sectors/commercial" },
+  //     { label: "Industrial", href: "/sectors/industrial" },
+  //     // { label: "Smart Cities", href: "/sectors/smart-cities" },
+  //     { label: "Rural Projects", href: "/sectors/rural-projects" },
+  //   ],
+  // },
   {
     label: "Services",
     href: "/services",
@@ -70,37 +70,47 @@ const navItems: NavItem[] = [
     ],
   },
   {
-    label: "Tools",
-    href: "/tools/roi-calculator",
-    description: "Free interactive ROI calculators",
-    dropdown: [
-      { label: "Solar + Storage ROI", href: "/tools/roi-calculator" },
-      {
-        label: "EV Charging Franchise ROI",
-        href: "/tools/ev-charger-roi-calculator",
-      },
-    ],
+    label: "Solar",
+    href: "/solutions",
+    description: "Solar energy solutions and smart energy systems",
+  },
+  // {
+  //   label: "Tools",
+  //   href: "/tools/roi-calculator",
+  //   description: "Free interactive ROI calculators",
+  //   dropdown: [
+  //     { label: "Solar + Storage ROI", href: "/tools/roi-calculator" },
+  //     {
+  //       label: "EV Charging Franchise ROI",
+  //       href: "/tools/ev-charger-roi-calculator",
+  //     },
+  //   ],
+  // },
+  {
+    label: "EV Charging",
+    href: "/partners",
+    description: "Become an EV charging location partner",
   },
   {
     label: "About",
     href: "/about",
     description: "Company history and market insights",
   },
-  {
-    label: "Insights",
-    href: "/insights",
-    description: "Philippines clean energy market data and analysis",
-  },
-  {
-    label: "Partners",
-    href: "/partners",
-    description: "Become a location partner",
-  },
-  {
-    label: "Contact",
-    href: "/contact",
-    description: "Quote requests and support channels",
-  },
+  // {
+  //   label: "Insights",
+  //   href: "/insights",
+  //   description: "Philippines clean energy market data and analysis",
+  // },
+  // {
+  //   label: "Partners",
+  //   href: "/partners",
+  //   description: "Become a location partner",
+  // },
+  // {
+  //   label: "Contact",
+  //   href: "/contact",
+  //   description: "Quote requests and support channels",
+  // },
 ];
 
 const getHrefKey = (href: NavHref) =>
@@ -113,6 +123,7 @@ const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const navItemRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
@@ -128,6 +139,7 @@ const Header = () => {
     /* eslint-disable react-hooks/set-state-in-effect -- close mobile menu on route change */
     setMobileOpen(false);
     setOpenDropdown(null);
+    setOpenAccordion(null);
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [pathname]);
 
@@ -223,15 +235,15 @@ const Header = () => {
 
       <div
         className={cn(
-          "mobile-menu lg:hidden fixed top-0 left-0 h-screen w-full bg-primary z-40 transition-transform duration-300",
+          "mobile-menu lg:hidden fixed top-0 left-0 w-full bg-white z-40 rounded-b-2xl shadow-xl",
           mobileOpen ? "active" : ""
         )}
       >
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between p-6 border-b border-white/10">
+        <div className="flex flex-col">
+          <div className="flex items-center justify-between p-6 border-b border-gray-200">
             <Link href="/" className="flex items-center">
               <Image
-                src="/volthub-logo-white-text.png"
+                src="/volthub-logo-black-text.png"
                 alt="VoltHub logo"
                 width={150}
                 height={40}
@@ -240,7 +252,7 @@ const Header = () => {
               />
             </Link>
             <button
-              className="text-white text-2xl"
+              className="text-gray-800 text-2xl"
               onClick={() => setMobileOpen(false)}
               aria-label="Close navigation"
             >
@@ -248,45 +260,75 @@ const Header = () => {
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
-            {navItems.map((item) => (
-              <div key={item.label}>
-                <Link
-                  onClick={() => setMobileOpen(false)}
-                  href={item.href}
-                  className="block text-white text-lg font-semibold mb-3"
-                >
-                  {item.label}
-                </Link>
-                {item.dropdown ? (
-                  <div className="pl-4 space-y-2">
-                    {(item.label === "Services"
-                      ? item.dropdown.filter((link) => link.label !== "Overview")
-                      : item.dropdown
-                    ).map((link) => (
-                      <Link
-                        onClick={() => setMobileOpen(false)}
-                        key={getHrefKey(link.href)}
-                        href={link.href}
-                        className="block text-white/80 hover:text-secondary transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            ))}
-          </div>
+          <div className="overflow-y-auto p-6 space-y-6">
+            {navItems.map((item) => {
+              const isOpen = openAccordion === item.label;
+              const hasDropdown = !!item.dropdown;
 
-          <div className="p-6 border-t border-white/10">
+              return (
+                <div key={item.label}>
+                  {hasDropdown ? (
+                    <button
+                      onClick={() =>
+                        setOpenAccordion(isOpen ? null : item.label)
+                      }
+                      className="flex items-center justify-between w-full text-gray-900 text-lg font-semibold mb-3 text-left"
+                    >
+                      <span>{item.label}</span>
+                      <RiArrowDownSLine
+                        className={cn(
+                          "text-xl transition-transform duration-300",
+                          isOpen && "rotate-180"
+                        )}
+                      />
+                    </button>
+                  ) : (
+                    <Link
+                      onClick={() => setMobileOpen(false)}
+                      href={item.href}
+                      className="block text-gray-900 text-lg font-semibold mb-3"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
+                  {hasDropdown && (
+                    <div
+                      className={cn(
+                        "pl-4 space-y-2 overflow-hidden transition-all duration-300",
+                        isOpen ? "max-h-96 opacity-100 mb-3" : "max-h-0 opacity-0"
+                      )}
+                    >
+                      {(item.label === "Services"
+                        ? item.dropdown!.filter(
+                            (link) => link.label !== "Overview"
+                          )
+                        : item.dropdown!
+                      ).map((link) => (
+                        <Link
+                          onClick={() => setMobileOpen(false)}
+                          key={getHrefKey(link.href)}
+                          href={link.href}
+                          className="block text-gray-600 hover:text-secondary transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+            <div className="p-6 border-t border-gray-200">
             <Link
               href="/contact"
               className="block w-full text-center bg-linear-to-r from-secondary to-yellow-300 text-black px-6 py-3 rounded-xl font-semibold"
             >
-              Get Quote
+             Contact Us
             </Link>
           </div>
+          </div>
+
+          
         </div>
       </div>
     </header>
