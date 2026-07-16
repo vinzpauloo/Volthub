@@ -13,12 +13,11 @@ export default function SolarHeroSection() {
       <div className="relative max-w-7xl mx-auto px-6 py-20 w-full">
         <LayoutContainer className="text-center space-y-8">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight font-orbitron">
-            <span className="gradient-text">Solar Energy Installation</span>
+            <span className="gradient-text">Solar Panel Installation in the Philippines</span>
           </h1>
           <p className="text-xl md:text-2xl text-green-100 mb-8 leading-relaxed max-w-4xl mx-auto">
-            Turn-key solar solutions from consultation to connection. We deliver
-            professional solar installations with industry-leading warranties
-            and support.
+            Turn-key solar systems for homes and businesses, including site
+            surveys, system sizing, battery storage, off-grid design, and support.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link

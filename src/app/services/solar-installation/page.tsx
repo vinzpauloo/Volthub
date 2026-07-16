@@ -1,5 +1,4 @@
 import BackToTopButton from "@/components/common/BackToTopButton";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import SolarHeroSection from "./components/SolarHeroSection";
 import SolarOfferingsSection from "./components/SolarOfferingsSection";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -15,7 +14,7 @@ import SolarSystemTypesSection from "./components/SolarSystemTypesSection";
 export default function SolarInstallation() {
   return (
     <main className="pt-10">
-      {/* <SolarHeroSection /> */}
+      <SolarHeroSection />
       <SolarOfferingsSection />
       <SolarSystemTypesSection />
       <SolarPackagesSection />
