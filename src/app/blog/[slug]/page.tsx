@@ -3,6 +3,43 @@ import { Metadata } from "next";
 import { getResourceBySlug, resources } from "@/app/(home)/components/homeData";
 import BlogDetail from "./components/BlogDetail";
 import LayoutContainer from "@/components/layout/LayoutContainer";
+import { jsonLd, seo } from "@/lib/seo";
+
+const blogContent: Record<string, { author?: string; date?: string; readingTime?: string }> = {
+  "complete-guide-to-solar-energy-storage": {
+    author: "VoltHub Energy Team",
+    date: "2025-01-28",
+    readingTime: "5 mins",
+  },
+  "ev-charging-infrastructure-future-of-transportation": {
+    author: "VoltHub Mobility Team",
+    date: "2025-01-28",
+    readingTime: "8 mins",
+  },
+  "smart-grid-integration-powering-the-future": {
+    author: "VoltHub Technology Team",
+    date: "2025-01-28",
+    readingTime: "6 mins",
+  },
+  "commercial-energy-solutions-business-guide": {
+    author: "VoltHub Commercial Team",
+    date: "2025-01-28",
+    readingTime: "7 mins",
+  },
+  "the-billion-peso-ev-charging-opportunity-in-the-philippines": {
+    author: "VoltHub Investment Team",
+    date: "2026-05-23",
+    readingTime: "5 mins",
+  },
+};
+
+function getArticleMeta(slug: string) {
+  return blogContent[slug] || {
+    author: "VoltHub Team",
+    date: new Date().toISOString().split("T")[0],
+    readingTime: "5 mins",
+  };
+}
 
 export async function generateStaticParams() {
   return resources
@@ -31,40 +68,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
   const articleUrl = `${siteUrl}/blog/${slug}`;
   const imageUrl = resource.image.startsWith("http") ? resource.image : `${siteUrl}${resource.image}`;
 
-  // Get article metadata from blogContent if available
-  const blogContent: Record<string, { author?: string; date?: string; readingTime?: string }> = {
-    "complete-guide-to-solar-energy-storage": {
-      author: "VoltHub Energy Team",
-      date: "2025-01-28",
-      readingTime: "5 mins",
-    },
-    "ev-charging-infrastructure-future-of-transportation": {
-      author: "VoltHub Mobility Team",
-      date: "2025-01-28",
-      readingTime: "8 mins",
-    },
-    "smart-grid-integration-powering-the-future": {
-      author: "VoltHub Technology Team",
-      date: "2025-01-28",
-      readingTime: "6 mins",
-    },
-    "commercial-energy-solutions-business-guide": {
-      author: "VoltHub Commercial Team",
-      date: "2025-01-28",
-      readingTime: "7 mins",
-    },
-    "the-billion-peso-ev-charging-opportunity-in-the-philippines": {
-      author: "VoltHub Investment Team",
-      date: "2026-05-23",
-      readingTime: "5 mins",
-    },
-  };
-
-  const articleMeta = blogContent[slug] || {
-    author: "VoltHub Team",
-    date: new Date().toISOString().split("T")[0],
-    readingTime: "5 mins",
-  };
+  const articleMeta = getArticleMeta(slug);
 
   return {
     title: `${resource.title} | VoltHub Blog`,
@@ -124,12 +128,41 @@ export default async function BlogPage({ params }: BlogPageProps) {
     notFound();
   }
 
+  const articleMeta = getArticleMeta(slug);
+  const articleUrl = `${seo.siteUrl}/blog/${slug}`;
+  const imageUrl = resource.image.startsWith("http")
+    ? resource.image
+    : `${seo.siteUrl}${resource.image}`;
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: resource.title,
+    description: resource.description,
+    image: imageUrl,
+    url: articleUrl,
+    datePublished: articleMeta.date,
+    dateModified: articleMeta.date,
+    author: {
+      "@type": "Organization",
+      name: articleMeta.author || "VoltHub Team",
+    },
+    publisher: {
+      "@id": `${seo.siteUrl}/#organization`,
+    },
+    mainEntityOfPage: articleUrl,
+  };
+
   return (
     <main className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-50">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: jsonLd(articleJsonLd) }}
+      />
       <LayoutContainer className="py-8 md:py-12 lg:py-16">
         <BlogDetail resource={resource} />
       </LayoutContainer>
     </main>
   );
 }
-

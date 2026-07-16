@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import { breadcrumbJsonLd, jsonLd, serviceJsonLd } from "@/lib/seo";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const pageUrl = `${siteUrl}/services/solar-installation`;
+const description =
+  "Turn-key solar panel installation in the Philippines for homes and businesses. Site-specific sizing, storage and off-grid systems. Book a free site survey.";
 
 export const metadata: Metadata = {
-  title: "Solar Installation Services - VoltHub",
-  description: "Turn-key solar solutions from consultation to connection. Professional installation of solar street lights, energy storage systems, and off-grid power generation with site-specific system sizing.",
+  title: "Solar Panel Installation Philippines",
+  description,
   keywords: [
     "solar installation",
     "solar panel installation",
@@ -18,28 +22,28 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: `${siteUrl}/services/solar-installation`,
+    url: pageUrl,
     siteName: "VoltHub Energy",
-    title: "Solar Installation Services - VoltHub",
-    description: "Turn-key solar solutions from consultation to connection. Professional installation of solar street lights, energy storage systems, and off-grid power generation with site-specific system sizing.",
+    title: "Solar Panel Installation Philippines | VoltHub",
+    description,
     images: [
       {
         url: "/Sector/solarbg1.jpg",
         width: 1200,
         height: 630,
-        alt: "VoltHub Solar Installation Services - Turn-key Solar Solutions",
+        alt: "VoltHub solar panel installation services in the Philippines",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solar Installation Services - VoltHub",
-    description: "Turn-key solar solutions from consultation to connection. Professional installation of solar street lights, energy storage systems, and off-grid power generation.",
+    title: "Solar Panel Installation Philippines | VoltHub",
+    description,
     images: ["/Sector/solarbg1.jpg"],
     creator: "@VoltHubEnergy",
   },
   alternates: {
-    canonical: `${siteUrl}/services/solar-installation`,
+    canonical: pageUrl,
   },
 };
 
@@ -48,6 +52,32 @@ export default function SolarInstallationLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
-}
+  const serviceSchema = serviceJsonLd({
+    name: "Solar Panel Installation Philippines",
+    description,
+    url: pageUrl,
+    image: `${siteUrl}/Sector/solarbg1.jpg`,
+  });
 
+  const breadcrumbSchema = breadcrumbJsonLd([
+    { name: "Home", url: siteUrl },
+    { name: "Services", url: `${siteUrl}/services` },
+    { name: "Solar Installation", url: pageUrl },
+  ]);
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: jsonLd(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: jsonLd(breadcrumbSchema) }}
+      />
+      {children}
+    </>
+  );
+}

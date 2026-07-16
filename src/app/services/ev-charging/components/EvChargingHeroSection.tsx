@@ -15,11 +15,11 @@ export default function EvChargingHeroSection() {
       <div className="relative max-w-7xl mx-auto px-6 py-20 w-full">
         <LayoutContainer className="text-center space-y-8">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight font-orbitron">
-            <span className="gradient-text">EV Charging Solutions</span>
+            <span className="gradient-text">EV Charger Installation in the Philippines</span>
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 mb-8 leading-relaxed max-w-4xl mx-auto">
-            Complete charging infrastructure from design to deployment. We
-            provide end-to-end EV charging solutions tailored to your needs.
+            AC chargers, DC fast charging stations, network integration, and
+            support for homes, fleets, commercial sites, and public charging hubs.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link

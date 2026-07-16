@@ -1,5 +1,4 @@
 import BackToTopButton from "@/components/common/BackToTopButton";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import EvChargingHeroSection from "./components/EvChargingHeroSection";
 import EvChargingOfferingsSection from "./components/EvChargingOfferingsSection";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -13,7 +12,7 @@ import EvChargingTypesSection from "./components/EvChargingTypesSection";
 export default function EVChargingSolutions() {
   return (
     <main className="pt-10">
-      {/* <EvChargingHeroSection /> */}
+      <EvChargingHeroSection />
       <EvChargingOfferingsSection />
       {/* <EvChargingProductsSection /> */}
    

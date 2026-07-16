@@ -48,6 +48,9 @@ export default function Home() {
 
   return (
     <main className="flex flex-col w-full overflow-x-hidden">
+      <h1 className="sr-only">
+        Solar, Battery Storage and EV Charging Solutions in the Philippines
+      </h1>
       <HoverEffects />
 
       {/* Carousel Banner */}
