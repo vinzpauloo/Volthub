@@ -26,8 +26,8 @@ export const carouselSlides = [
     description:
       "Take control of your energy with VoltHub's next-generation energy storage and EV charging solutions. Power your home or business with clean, reliable energy built for the Philippines.",
     image: "/HomeBanner/89.png",
-    backgroundImage: "/HomeBanner/banner1.png",
-    mobileBackgroundImage: "/HomeBanner/banner1m.png",
+    backgroundImage: "/HomeBanner/volthub-ev-charger-main.jpg",
+    mobileBackgroundImage: "/HomeBanner/volthub-ev-charger-main.jpg",
     mobileBackgroundPosition: "right center",
     showimg: false,
     descriptionClassName: "w-full md:w-1/2 md:ml-auto md:max-w-2xl",
@@ -685,4 +685,3 @@ export const articleShowcases: ArticleShowcase[] = [
     ctaLink: "/tools/roi-calculator" as Route,
   },
 ];
-
