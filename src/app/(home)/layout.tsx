@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
+import { faqs } from "./components/homeData";
+import { jsonLd, seo } from "@/lib/seo";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
 
 export const metadata: Metadata = {
-  title: "VoltHub - Smart Energy Storage & EV Charging Solutions",
-  description: "Power your operations with VoltHub's next-generation energy storage and EV charging solutions. Commercial and residential solar, battery storage, and smart grid integration across the Philippines.",
+  title: "Solar, Battery & EV Charging Philippines",
+  description: "Cut power bills with solar, battery storage and EV charging across the Philippines. Custom systems for homes, businesses and off-grid sites.",
   keywords: [
-    "energy storages",
+    "energy storage",
     "EV charging",
+    "EV charger installation Philippines",
     "solar energy",
+    "solar panel installation Philippines",
     "battery storage",
     "renewable energy",
     "commercial energy solutions",
@@ -22,14 +26,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "VoltHub Energy",
-    title: "VoltHub - Smart Energy Storage & EV Charging Solutions",
-    description: "Power your operations with VoltHub's next-generation energy storage and EV charging solutions. Commercial and residential solar, battery storage, and smart grid integration.",
+    title: "Solar, Battery & EV Charging Philippines | VoltHub",
+    description: "Cut power bills with solar, battery storage and EV charging across the Philippines. Custom systems for homes, businesses and off-grid sites.",
     images: [
       {
         url: "/HomeBanner/banner1.png",
         width: 1200,
         height: 630,
-        alt: "VoltHub Energy - Smart Energy Storage & EV Charging Solutions",
+        alt: "VoltHub solar, battery storage and EV charging solutions in the Philippines",
       },
       {
         url: "/volthub-logo-black-text.png",
@@ -41,8 +45,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "VoltHub - Smart Energy Storage & EV Charging Solutions",
-    description: "Power your operations with VoltHub's next-generation energy storage and EV charging solutions.",
+    title: "Solar, Battery & EV Charging Philippines | VoltHub",
+    description: "Cut power bills with solar, battery storage and EV charging across the Philippines.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",
   },
@@ -56,6 +60,43 @@ export default function HomeLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
-}
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
 
+  const websiteJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${seo.siteUrl}/#website`,
+    url: seo.siteUrl,
+    name: "VoltHub",
+    publisher: {
+      "@id": `${seo.siteUrl}/#organization`,
+    },
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: jsonLd(websiteJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: jsonLd(faqJsonLd) }}
+      />
+      {children}
+    </>
+  );
+}
