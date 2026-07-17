@@ -1,187 +1,414 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 import SectionHeading from "@/components/marketing/SectionHeading";
 import {
-  RiSpeedLine,
-  RiShieldCheckLine,
-  RiPlugLine,
-  RiMoneyDollarCircleLine,
-  RiArrowDownSLine,
-  RiFlashlightLine,
+  RiPlayCircleLine,
+  RiTimeLine,
+  RiCloseLine,
+  RiArrowRightLine,
+  RiPauseCircleLine,
+  RiVolumeUpLine,
+  RiVolumeMuteLine,
+  RiFullscreenLine,
+  RiSkipBackLine,
+  RiSkipForwardLine,
 } from "react-icons/ri";
 
-interface FaqItem {
-  question: string;
-  answer: string;
+/* ──────────────────────────────────────────────
+   Types
+   ────────────────────────────────────────────── */
+
+interface VideoEntry {
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  src: string;
+  poster?: string;
 }
 
-const FAQS: FaqItem[] = [
+/* ──────────────────────────────────────────────
+   Video Data
+   ────────────────────────────────────────────── */
+
+const VIDEOS: VideoEntry[] = [
   {
-    question: "What are the different types of EV chargers?",
-    answer:
-      "EV chargers come in three levels. Level 1 uses a standard 120V household outlet (slowest, 3-8 km range per hour). Level 2 uses a 240V connection found in homes and public stations (30-40 km range per hour). Level 3 (DC Fast Charging) delivers direct current at 50-350 kW for rapid charging — typically reaching 80% in 20-40 minutes.",
-  },
-  {
-    question: "Which connector type does my EV use?",
-    answer:
-      "Most modern EVs in the Philippines use CCS2 (Combined Charging System Type 2) for DC fast charging. Japanese models (Nissan Leaf, older Mitsubishi) may use CHAdeMO. For AC charging, Type 2 (Mennekes) is the standard. VoltHub stations support both CCS2 and CHAdeMO connectors.",
-  },
-  {
-    question: "How long does it take to charge an EV?",
-    answer:
-      "Charging time depends on your vehicle's battery capacity and the charger's power output. A 60 kW fast charger can add about 200-250 km of range in 30 minutes. A full charge on a Level 2 charger typically takes 4-8 hours. Fast charging from 20% to 80% usually takes 20-40 minutes on a DC fast charger.",
-  },
-  {
-    question: "How much does it cost to charge?",
-    answer:
-      "VoltHub offers competitive pay-per-use pricing. DC fast charging typically costs ₱15-25 per kWh depending on location and time. A typical 30-minute fast charge session (adding ~25 kWh) costs approximately ₱375-625. Monthly subscription plans are also available for frequent users, offering discounted rates.",
-  },
-  {
-    question: "Is fast charging bad for my EV battery?",
-    answer:
-      "Modern EVs are engineered to handle DC fast charging safely. While frequent fast charging may slightly accelerate battery degradation over many years, the impact is minimal with proper battery thermal management. Most manufacturers recommend using fast charging for road trips and relying on Level 2 charging for daily use to maximize battery longevity.",
-  },
-  {
-    question: "Can any EV use a fast charger?",
-    answer:
-      "Most modern EVs support DC fast charging, but check your vehicle specifications. Some entry-level EVs and older plug-in hybrids may only support Level 1 or Level 2 AC charging. Your vehicle's maximum charging rate also matters — a car rated for 50 kW won't charge faster on a 150 kW station, but it is fully safe to use.",
+    id: "1",
+    title: "VoltHub EV Charging Solutions",
+    description:
+      "Discover how VoltHub is powering the future of electric mobility in the Philippines with reliable, fast, and accessible EV charging stations nationwide.",
+    duration: "2:15",
+    src: "/Product/CBMB.mp4",
   },
 ];
 
-const CHARGING_LEVELS = [
-  {
-    level: "Level 1",
-    icon: RiPlugLine,
-    power: "1.4 – 1.9 kW",
-    connector: "Standard 120V outlet",
-    speed: "3–8 km range / hour",
-    bestFor: "Overnight home charging",
-  },
-  {
-    level: "Level 2",
-    icon: RiSpeedLine,
-    power: "3.3 – 22 kW",
-    connector: "Type 2 (Mennekes)",
-    speed: "30–40 km range / hour",
-    bestFor: "Home, workplace, destination",
-  },
-  {
-    level: "DC Fast",
-    icon: RiFlashlightLine,
-    power: "50 – 350 kW",
-    connector: "CCS2 / CHAdeMO",
-    speed: "200–300 km range / 30 min",
-    bestFor: "Highway stops, quick top-ups",
-  },
-];
+/* ──────────────────────────────────────────────
+   Format time helper
+   ────────────────────────────────────────────── */
+
+function formatTime(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = Math.floor(seconds % 60);
+  return `${m}:${s.toString().padStart(2, "0")}`;
+}
+
+/* ──────────────────────────────────────────────
+   Video Modal with custom HTML5 player
+   ────────────────────────────────────────────── */
+
+function VideoModal({
+  video,
+  onClose,
+}: {
+  video: VideoEntry;
+  onClose: () => void;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [showControls, setShowControls] = useState(true);
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Auto-hide controls after inactivity
+  const resetHideTimer = () => {
+    setShowControls(true);
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    hideTimer.current = setTimeout(() => {
+      if (playing) setShowControls(false);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (hideTimer.current) clearTimeout(hideTimer.current);
+    };
+  }, []);
+
+  const togglePlay = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play();
+      setPlaying(true);
+    } else {
+      v.pause();
+      setPlaying(false);
+    }
+  };
+
+  const toggleMute = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setMuted(v.muted);
+  };
+
+  const handleTimeUpdate = () => {
+    if (videoRef.current) setCurrentTime(videoRef.current.currentTime);
+  };
+
+  const handleLoadedMetadata = () => {
+    if (videoRef.current) setDuration(videoRef.current.duration);
+  };
+
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement>) => {
+    const v = videoRef.current;
+    if (!v || !duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    v.currentTime = pct * duration;
+  };
+
+  const skip = (sec: number) => {
+    if (videoRef.current) videoRef.current.currentTime += sec;
+  };
+
+  const handleFullscreen = () => {
+    videoRef.current?.requestFullscreen();
+  };
+
+  const handleEnded = () => {
+    setPlaying(false);
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 md:p-8 animate-fade-in"
+      onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Playing: ${video.title}`}
+    >
+      {/* Close button */}
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute top-4 right-4 md:top-6 md:right-6 text-white/70 hover:text-white transition-colors z-20"
+        aria-label="Close video"
+      >
+        <RiCloseLine size={32} />
+      </button>
+
+      {/* Video container */}
+      <div
+        className="relative w-full max-w-5xl bg-black rounded-2xl overflow-hidden shadow-2xl group"
+        onClick={(e) => e.stopPropagation()}
+        onMouseMove={resetHideTimer}
+        onMouseLeave={() => playing && setShowControls(false)}
+      >
+        {/* Video element */}
+        <video
+          ref={videoRef}
+          src={video.src}
+          poster={video.poster}
+          className="w-full max-h-[85vh] cursor-pointer"
+          onClick={togglePlay}
+          onTimeUpdate={handleTimeUpdate}
+          onLoadedMetadata={handleLoadedMetadata}
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+          onEnded={handleEnded}
+          playsInline
+          preload="metadata"
+        />
+
+        {/* Big play button when paused */}
+        {!playing && (
+          <button
+            type="button"
+            onClick={togglePlay}
+            className="absolute inset-0 flex items-center justify-center bg-black/30 transition-opacity"
+            aria-label="Play"
+          >
+            <span className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-white/95 shadow-2xl hover:scale-105 transition-transform">
+              <RiPlayCircleLine className="text-primary" size={52} />
+            </span>
+          </button>
+        )}
+
+        {/* Bottom control bar */}
+        <div
+          className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-12 pb-3 px-4 md:px-6 transition-opacity duration-300 ${
+            showControls || !playing ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {/* Progress bar */}
+          <div
+            className="h-1 bg-white/25 rounded-full cursor-pointer mb-3 group/progress hover:h-1.5 transition-all"
+            onClick={handleSeek}
+          >
+            <div
+              className="h-full bg-primary rounded-full relative"
+              style={{ width: duration ? `${(currentTime / duration) * 100}%` : "0%" }}
+            >
+              <span className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 bg-primary rounded-full opacity-0 group-hover/progress:opacity-100 transition-opacity" />
+            </div>
+          </div>
+
+          {/* Controls row */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              {/* Skip back */}
+              <button
+                type="button"
+                onClick={() => skip(-10)}
+                className="text-white/80 hover:text-white transition-colors p-1"
+                aria-label="Skip back 10 seconds"
+              >
+                <RiSkipBackLine size={20} />
+              </button>
+
+              {/* Play/Pause */}
+              <button
+                type="button"
+                onClick={togglePlay}
+                className="text-white hover:text-primary transition-colors p-1"
+                aria-label={playing ? "Pause" : "Play"}
+              >
+                {playing ? (
+                  <RiPauseCircleLine size={28} />
+                ) : (
+                  <RiPlayCircleLine size={28} />
+                )}
+              </button>
+
+              {/* Skip forward */}
+              <button
+                type="button"
+                onClick={() => skip(10)}
+                className="text-white/80 hover:text-white transition-colors p-1"
+                aria-label="Skip forward 10 seconds"
+              >
+                <RiSkipForwardLine size={20} />
+              </button>
+
+              {/* Volume */}
+              <button
+                type="button"
+                onClick={toggleMute}
+                className="text-white/80 hover:text-white transition-colors p-1 ml-1"
+                aria-label={muted ? "Unmute" : "Mute"}
+              >
+                {muted ? (
+                  <RiVolumeMuteLine size={20} />
+                ) : (
+                  <RiVolumeUpLine size={20} />
+                )}
+              </button>
+
+              {/* Time display */}
+              <span className="text-white/70 text-xs ml-2 tabular-nums">
+                {formatTime(currentTime)} / {formatTime(duration)}
+              </span>
+            </div>
+
+            {/* Fullscreen */}
+            <button
+              type="button"
+              onClick={handleFullscreen}
+              className="text-white/80 hover:text-white transition-colors p-1"
+              aria-label="Fullscreen"
+            >
+              <RiFullscreenLine size={18} />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Video title below */}
+      <div
+        className="absolute bottom-2 left-1/2 -translate-x-1/2 text-white text-center hidden md:block"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h3 className="font-bold">{video.title}</h3>
+      </div>
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   Video Card
+   ────────────────────────────────────────────── */
+
+function VideoCard({
+  video,
+  onPlay,
+}: {
+  video: VideoEntry;
+  onPlay: (v: VideoEntry) => void;
+}) {
+  return (
+    <article className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group hover:-translate-y-1">
+      {/* Thumbnail + play overlay */}
+      <button
+        type="button"
+        onClick={() => onPlay(video)}
+        className="relative w-full aspect-video overflow-hidden bg-gray-900 cursor-pointer"
+        aria-label={`Play: ${video.title}`}
+      >
+        {/* Show poster image if available, otherwise dark gradient */}
+        {video.poster ? (
+          <Image
+            src={video.poster}
+            alt={video.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-900 to-black flex items-center justify-center">
+            <RiPlayCircleLine className="text-white/30" size={64} />
+          </div>
+        )}
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/30 group-hover:bg-black/45 transition-colors duration-300" />
+
+        {/* Play button */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="w-16 h-16 flex items-center justify-center rounded-full bg-white/95 shadow-xl group-hover:scale-110 transition-transform duration-300">
+            <RiPlayCircleLine className="text-primary" size={36} />
+          </span>
+        </div>
+
+        {/* Duration badge */}
+        <span className="absolute bottom-3 right-3 bg-black/75 backdrop-blur text-white text-xs font-medium px-2 py-1 rounded-md flex items-center gap-1">
+          <RiTimeLine size={12} />
+          {video.duration}
+        </span>
+      </button>
+
+      {/* Card body */}
+      <div className="p-5">
+        <h3 className="font-bold text-gray-900 mb-2 leading-snug group-hover:text-primary transition-colors line-clamp-2">
+          {video.title}
+        </h3>
+        <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 mb-4">
+          {video.description}
+        </p>
+
+        {/* Watch button */}
+        <button
+          type="button"
+          onClick={() => onPlay(video)}
+          className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
+        >
+          <RiPlayCircleLine size={16} />
+          Watch Now
+          <RiArrowRightLine size={14} />
+        </button>
+      </div>
+    </article>
+  );
+}
+
+/* ──────────────────────────────────────────────
+   Main Component
+   ────────────────────────────────────────────── */
 
 export function EVChargingLearning(): React.ReactElement {
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [activeVideo, setActiveVideo] = useState<VideoEntry | null>(null);
 
   return (
     <section className="section-spacing bg-gray-50">
-      <LayoutContainer className="flex-col space-y-16">
-        {/* Charging Levels Overview */}
-        <div className="space-y-10">
-          <SectionHeading
-            eyebrow="Learn"
-            title="EV Charging Learning Hub"
-            description="Everything you need to know about EV charging — from charger types to costs and best practices."
-          />
+      <LayoutContainer className="flex-col space-y-12">
+        <SectionHeading
+          eyebrow="Video Blog"
+          title="EV Charging Video Guides"
+          description="Watch our video presentations to learn everything about EV charging — from the basics to expert tips for getting the most out of your electric vehicle."
+        />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {CHARGING_LEVELS.map((level) => {
-              const Icon = level.icon;
-              return (
-                <div
-                  key={level.level}
-                  className="bg-white rounded-2xl p-6 shadow-md border border-gray-100 hover-lift"
-                >
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                    <Icon className="text-3xl text-primary" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {level.level}
-                  </h3>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex justify-between">
-                      <span className="text-gray-500">Power</span>
-                      <span className="font-semibold text-gray-800">
-                        {level.power}
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-500">Connector</span>
-                      <span className="font-semibold text-gray-800">
-                        {level.connector}
-                      </span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-500">Speed</span>
-                      <span className="font-semibold text-gray-800">
-                        {level.speed}
-                      </span>
-                    </div>
-                    <div className="flex justify-between border-t border-gray-100 pt-2 mt-2">
-                      <span className="text-gray-500">Best For</span>
-                      <span className="font-semibold text-secondary">
-                        {level.bestFor}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+        {/* Video grid — centered for when there are fewer items */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+          {VIDEOS.map((video) => (
+            <VideoCard
+              key={video.id}
+              video={video}
+              onPlay={setActiveVideo}
+            />
+          ))}
         </div>
 
-        {/* FAQ Section */}
-        <div className="max-w-3xl mx-auto w-full space-y-8">
-          <div className="text-center space-y-2">
-            <h3 className="text-2xl font-bold text-gray-900">
-              Frequently Asked Questions
-            </h3>
-            <p className="text-gray-500">
-              Common questions about EV charging answered.
-            </p>
-          </div>
-
-          <div className="space-y-3">
-            {FAQS.map((faq, index) => (
-              <div
-                key={faq.question}
-                className="bg-white rounded-xl border border-gray-200 overflow-hidden"
-              >
-                <button
-                  type="button"
-                  onClick={() =>
-                    setOpenFaq(openFaq === index ? null : index)
-                  }
-                  className="w-full flex items-center justify-between px-6 py-4 text-left hover:bg-gray-50 transition-colors"
-                >
-                  <span className="font-semibold text-gray-900 pr-4">
-                    {faq.question}
-                  </span>
-                  <RiArrowDownSLine
-                    className={`text-xl text-gray-400 flex-shrink-0 transition-transform duration-300 ${
-                      openFaq === index ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                <div
-                  className={`px-6 overflow-hidden transition-all duration-300 ${
-                    openFaq === index ? "pb-4 opacity-100" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* CTA for more videos */}
+        <div className="text-center">
+          <p className="text-gray-500 text-sm">
+            More video guides coming soon. Subscribe to stay updated on the latest
+            EV charging tutorials and product walkthroughs.
+          </p>
         </div>
       </LayoutContainer>
+
+      {/* Video modal */}
+      {activeVideo && (
+        <VideoModal
+          video={activeVideo}
+          onClose={() => setActiveVideo(null)}
+        />
+      )}
     </section>
   );
 }
