@@ -4,11 +4,11 @@ import { useState } from "react";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 import SectionHeading from "@/components/marketing/SectionHeading";
 import {
-  RiArrowDownSLine,
   RiLightbulbLine,
   RiAlertLine,
   RiSettingsLine,
   RiBarChartLine,
+  RiArrowRightLine,
 } from "react-icons/ri";
 
 interface Topic {
@@ -38,6 +38,7 @@ const TOPICS: Topic[] = [
     title: "Common Mistakes to Avoid",
     summary:
       "Steer clear of these frequent pitfalls that reduce solar system performance and savings.",
+    image: "/aboutimages/safety.jpg",
     points: [
       "Undersizing: installing too few panels now costs more to expand later — size for future needs (EV, AC, etc.)",
       "Ignoring roof condition: install on a roof with <10 years life left and you'll pay twice for panel removal/reinstall",
@@ -52,6 +53,7 @@ const TOPICS: Topic[] = [
     title: "Maintenance & Care",
     summary:
       "Keep your solar system running at peak efficiency with simple routine maintenance.",
+    image: "/aboutimages/inverter.png",
     points: [
       "Visual inspection every 3 months: check for cracked panels, loose wiring, corrosion, or pest nesting under arrays",
       "Inverter check: ensure the display shows normal operation (green light / no error codes) — photograph it monthly",
@@ -66,6 +68,7 @@ const TOPICS: Topic[] = [
     title: "Maximizing Your Savings",
     summary:
       "Strategic habits and smart energy use that amplify your solar return on investment.",
+    image: "/aboutimages/solarpanels2.jpg",
     points: [
       "Shift heavy loads to solar hours (10 AM – 3 PM): run washing machines, dishwashers, water pumps, and EV charging during peak production",
       "Use timer plugs for water heaters and pool pumps to align consumption with generation, avoiding battery drain or grid import",
@@ -78,7 +81,10 @@ const TOPICS: Topic[] = [
 ];
 
 export function SolarSetupLearnings(): React.ReactElement {
-  const [openTopic, setOpenTopic] = useState<number | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<number>(0);
+
+  const active = TOPICS[selectedTopic];
+  const ActiveIcon = active.icon;
 
   return (
     <section className="section-spacing bg-gray-50">
@@ -89,59 +95,88 @@ export function SolarSetupLearnings(): React.ReactElement {
           description="Expert tips, common pitfalls, and proven strategies to get the most out of your solar investment."
         />
 
-        <div className="max-w-4xl mx-auto w-full space-y-4">
-          {TOPICS.map((topic, index) => {
-            const Icon = topic.icon;
-            const isOpen = openTopic === index;
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+          {/* Left side — horizontally scrollable cards */}
+          <div className="lg:col-span-2">
+            <div className="flex lg:flex-col gap-4 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 snap-x snap-mandatory scrollbar-thin">
+              {TOPICS.map((topic, index) => {
+                const Icon = topic.icon;
+                const isActive = selectedTopic === index;
 
-            return (
-              <div
-                key={topic.title}
-                className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm"
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenTopic(isOpen ? null : index)}
-                  className="w-full flex items-center gap-4 px-6 py-5 text-left hover:bg-gray-50 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Icon className="text-xl text-primary" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-bold text-gray-900">{topic.title}</h3>
-                    <p className="text-sm text-gray-500 truncate">
-                      {topic.summary}
-                    </p>
-                  </div>
-                  <RiArrowDownSLine
-                    className={`text-xl text-gray-400 flex-shrink-0 transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
+                return (
+                  <button
+                    key={topic.title}
+                    type="button"
+                    onClick={() => setSelectedTopic(index)}
+                    className={`flex-shrink-0 w-[280px] lg:w-full snap-start text-left rounded-2xl border-2 p-5 transition-all duration-300 hover:shadow-md ${
+                      isActive
+                        ? "border-primary bg-primary/5 shadow-md"
+                        : "border-gray-200 bg-white hover:border-gray-300"
                     }`}
-                  />
-                </button>
+                  >
+                    <div className="flex items-center gap-4">
+                      <div
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors ${
+                          isActive
+                            ? "bg-primary text-white"
+                            : "bg-primary/10 text-primary"
+                        }`}
+                      >
+                        <Icon className="text-xl" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-bold text-gray-900 text-sm leading-tight">
+                          {topic.title}
+                        </h3>
+                        <p className="text-xs text-gray-500 mt-1 line-clamp-2">
+                          {topic.summary}
+                        </p>
+                      </div>
+                      <RiArrowRightLine
+                        className={`flex-shrink-0 text-lg transition-all duration-300 ${
+                          isActive
+                            ? "text-primary translate-x-1"
+                            : "text-gray-300"
+                        }`}
+                      />
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
-                <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    isOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="px-6 pb-6">
-                    <ul className="space-y-3">
-                      {topic.points.map((point) => (
-                        <li
-                          key={point}
-                          className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed"
-                        >
-                          <div className="w-1.5 h-1.5 rounded-full bg-secondary flex-shrink-0 mt-2" />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
+          {/* Right side — detail panel */}
+          <div className="lg:col-span-3">
+            <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm h-full">
+              {/* Content */}
+              <div className="p-6 lg:p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center flex-shrink-0">
+                    <ActiveIcon className="text-xl" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 text-lg">
+                      {active.title}
+                    </h3>
+                    <p className="text-sm text-gray-500">{active.summary}</p>
                   </div>
                 </div>
+
+                <ul className="space-y-3">
+                  {active.points.map((point) => (
+                    <li
+                      key={point}
+                      className="flex items-start gap-3 text-sm text-gray-600 leading-relaxed"
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-secondary flex-shrink-0 mt-2" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            );
-          })}
+            </div>
+          </div>
         </div>
       </LayoutContainer>
     </section>
