@@ -38,7 +38,6 @@ const TOPICS: Topic[] = [
     title: "Common Mistakes to Avoid",
     summary:
       "Steer clear of these frequent pitfalls that reduce solar system performance and savings.",
-    image: "/aboutimages/safety.jpg",
     points: [
       "Undersizing: installing too few panels now costs more to expand later — size for future needs (EV, AC, etc.)",
       "Ignoring roof condition: install on a roof with <10 years life left and you'll pay twice for panel removal/reinstall",
@@ -53,7 +52,6 @@ const TOPICS: Topic[] = [
     title: "Maintenance & Care",
     summary:
       "Keep your solar system running at peak efficiency with simple routine maintenance.",
-    image: "/aboutimages/inverter.png",
     points: [
       "Visual inspection every 3 months: check for cracked panels, loose wiring, corrosion, or pest nesting under arrays",
       "Inverter check: ensure the display shows normal operation (green light / no error codes) — photograph it monthly",
@@ -68,7 +66,6 @@ const TOPICS: Topic[] = [
     title: "Maximizing Your Savings",
     summary:
       "Strategic habits and smart energy use that amplify your solar return on investment.",
-    image: "/aboutimages/solarpanels2.jpg",
     points: [
       "Shift heavy loads to solar hours (10 AM – 3 PM): run washing machines, dishwashers, water pumps, and EV charging during peak production",
       "Use timer plugs for water heaters and pool pumps to align consumption with generation, avoiding battery drain or grid import",
