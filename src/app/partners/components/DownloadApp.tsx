@@ -5,9 +5,11 @@ import Image from "next/image";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 import SectionHeading from "@/components/marketing/SectionHeading";
 import { RiAppleLine, RiGooglePlayLine, RiQrCodeLine } from "react-icons/ri";
+import { IoHome, IoHomeOutline, IoMapSharp, IoPerson, IoQrCode, IoTimer } from "react-icons/io5";
 
 interface SubScreen {
   id: string;
+  icon: React.ComponentType<{ className?: string }>;
   label: string;
   image: string;
 }
@@ -15,6 +17,7 @@ interface SubScreen {
 interface AppGroup {
   id: string;
   label: string;
+  icon: React.ComponentType<{ className?: string }>;
   description: string;
   screens: SubScreen[];
 }
@@ -22,41 +25,57 @@ interface AppGroup {
 const APP_GROUPS: AppGroup[] = [
   {
     id: "home",
-    label: "Home & Account",
+    icon: IoHome,
+    label: "Home",
     description: "Your personalized dashboard and account management.",
     screens: [
-      { id: "home", label: "Dashboard", image: "/EVpage/home.png" },
-      { id: "account", label: "Account", image: "/EVpage/account.png" },
+      { id: "home",icon: IoHomeOutline, label: "Dashboard", image: "/EVpage/home.png" },
+      { id: "account", icon: IoPerson, label: "Account", image: "/EVpage/account.png" },
     ],
   },
   {
-    id: "stations",
+    id: "map",
+    icon: IoMapSharp  ,
     label: "Find Stations",
     description: "Browse, filter, and view details of nearby charging stations.",
     screens: [
-      { id: "station", label: "Station List", image: "/EVpage/station.png" },
-      { id: "stationconnector", label: "Connectors", image: "/EVpage/stationconnector.png" },
-      { id: "filter", label: "Filters", image: "/EVpage/filter.png" },
+      { id: "station", icon: IoMapSharp, label: "Station List", image: "/EVpage/station.png" },
+      { id: "stationconnector", icon: IoQrCode, label: "Connectors", image: "/EVpage/stationconnector.png" },
+      { id: "filter", icon: IoTimer,   label: "Filters", image: "/EVpage/filter.png" },
     ],
   },
   {
     id: "charging",
     label: "Charging",
+    icon: IoQrCode,
     description: "Start and monitor your charging sessions in real time.",
     screens: [
-      { id: "starcharging", label: "Start Charging", image: "/EVpage/starcharging.png" },
-      { id: "summary", label: "Summary", image: "/EVpage/summary.png" },
+      { id: "starcharging", icon: IoQrCode, label: "Start Charging", image: "/EVpage/starcharging.png" },
+      { id: "summary", icon: IoTimer, label: "Summary", image: "/EVpage/summary.png" },
     ],
   },
   {
-    id: "wallet",
-    label: "Wallet & Payments",
+    id: "activity",
+    label: "Activity Sessions",
+    icon: IoTimer   ,
     description: "Manage your wallet balance and payment methods.",
     screens: [
-      { id: "wallet", label: "Wallet", image: "/EVpage/wallet.png" },
-      { id: "topup", label: "Top Up", image: "/EVpage/topup.png" },
+      { id: "walle1t", icon: IoHome, label: "Wallet", image: "/EVpage/wallet.png" },
+      { id: "topup", icon: IoPerson, label: "Top Up", image: "/EVpage/topup.png" },
     ],
   },
+
+{
+    id: "account",
+    label: "Account Management",
+    icon: IoPerson   ,
+    description: "Manage your wallet balance and payment methods.",
+    screens: [
+      { id: "walle1t", icon: IoHome, label: "Wallet", image: "/EVpage/wallet.png" },
+      { id: "topup", icon: IoPerson, label: "Top Up", image: "/EVpage/topup.png" },
+    ],
+  },
+
 ];
 
 export function DownloadApp(): React.ReactElement {
@@ -134,25 +153,15 @@ export function DownloadApp(): React.ReactElement {
                 >
                   <div className="flex items-start gap-3">
                     <div
-                      className={`w-6 h-6 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5 transition-colors ${
-                        isActive ? "bg-secondary/30" : "bg-gray-100"
+                      className={`w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5 transition-colors ${
+                        isActive ? "transparent" : "transparent"
                       }`}
                     >
-                      <svg
-                        className={`w-4 h-4 ${
-                          isActive ? "text-secondary" : "text-gray-400"
+                      <group.icon
+                        className={`w-12 h-12 ${
+                          isActive ? "text-green-800" : "text-gray-400"
                         }`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2.5}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
+                      />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p
@@ -185,13 +194,14 @@ export function DownloadApp(): React.ReactElement {
                                   setActiveSub(sub.id);
                                 }
                               }}
-                              className={`inline-block px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer transition-colors ${
+                              className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium cursor-pointer transition-colors ${
                                 activeSub === sub.id
-                                  ? "bg-primary text-white"
+                                  ? "bg-green-900 text-white"
                                   : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                               }`}
                             >
-                              {sub.label}
+                              <group.icon className="w-3.5 h-3.5" />
+                              <span>{sub.label}</span>
                             </span>
                           ))}
                         </div>

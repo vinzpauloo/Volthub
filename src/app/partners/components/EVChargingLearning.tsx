@@ -343,8 +343,8 @@ function VideoCard({
       </button>
 
       {/* Card body */}
-      <div className="p-5">
-        <h3 className="font-bold text-gray-900 mb-2 leading-snug group-hover:text-primary transition-colors line-clamp-2">
+      <div className="p-5 w-full">
+        <h3 className="font-bold text-gray-900 mb-2 leading-snug group-hover:text-primary transition-colors line-clamp-2 w-full">
           {video.title}
         </h3>
         <p className="text-sm text-gray-500 leading-relaxed line-clamp-3 mb-4">
@@ -352,7 +352,7 @@ function VideoCard({
         </p>
 
         {/* Watch button */}
-        <button
+        {/* <button
           type="button"
           onClick={() => onPlay(video)}
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
@@ -360,7 +360,7 @@ function VideoCard({
           <RiPlayCircleLine size={16} />
           Watch Now
           <RiArrowRightLine size={14} />
-        </button>
+        </button> */}
       </div>
     </article>
   );
@@ -383,7 +383,7 @@ export function EVChargingLearning(): React.ReactElement {
         />
 
         {/* Video grid — centered for when there are fewer items */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
+        <div className="w-full flex justify-center">
           {VIDEOS.map((video) => (
             <VideoCard
               key={video.id}

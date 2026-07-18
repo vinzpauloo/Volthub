@@ -42,22 +42,22 @@ const STEPS = [
 
 function FlowIndicator() {
   return (
-    <div className="hidden lg:flex items-center justify-center gap-0 mb-2">
+    <div className="hidden lg:flex items-center justify-center gap-10 mb-8">
       {STEPS.map((step, index) => (
         <div key={step.title} className="flex items-center">
           {/* Step label */}
           <div className="flex items-center gap-2 px-3 py-1.5">
-            <span className="w-7 h-7 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
+            <span className="w-10 h-10 rounded-full bg-primary text-white text-xl font-bold flex items-center justify-center flex-shrink-0">
               {index + 1}
             </span>
-            <span className="text-sm font-semibold text-gray-700 whitespace-nowrap">
+            <span className="text-xl font-semibold text-gray-700 whitespace-nowrap">
               {step.title}
             </span>
           </div>
           {/* Arrow between labels */}
           {index < STEPS.length - 1 && (
             <svg
-              className="w-5 h-5 text-primary/60 flex-shrink-0"
+              className=" w-8 h-8 text-primary/60 flex-shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -94,7 +94,7 @@ export function HowToCharge(): React.ReactElement {
           {STEPS.map((step, index) => (
             <div
               key={step.title}
-              className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col"
+              className="bg-white rounded-lg  overflow-hidden flex flex-col"
             >
               {/* Step image */}
               <div className="relative w-full aspect-[4/3] overflow-hidden bg-gray-100">
@@ -129,17 +129,17 @@ export function HowToCharge(): React.ReactElement {
                 </p>
 
                 {/* Tip — yellow-toned box */}
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-3.5 flex items-start gap-2">
+                <div className=" border border-green-500 rounded-lg p-3.5 flex items-start gap-2">
                   <div className="flex-shrink-0 mt-0.5">
                     <svg
-                      className="w-4 h-4 text-amber-500"
+                      className="w-4 h-4 text-green-900"
                       fill="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" />
                     </svg>
                   </div>
-                  <p className="text-xs text-amber-800 font-medium leading-relaxed">
+                  <p className="text-xs text-green-800 font-medium leading-relaxed">
                     {step.tip}
                   </p>
                 </div>
