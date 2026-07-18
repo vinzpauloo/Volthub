@@ -113,8 +113,8 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
     },
   ],
 
-  Solar: {
-    title: "Solar",
+   "Solar Solutions": {
+    title: "Solar Solutions",
     href: "/solutions",
     description: "Solar energy solutions and smart energy systems.",
   },
