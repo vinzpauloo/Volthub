@@ -27,14 +27,14 @@ tracking platform should be enabled:
 
 ```env
 NEXT_PUBLIC_GTM_ID=GTM-MHLCDHH4
-NEXT_PUBLIC_GOOGLE_ADS_ID=AW-XXXXXXXXX
+NEXT_PUBLIC_GOOGLE_ADS_ID=AW-18143858726
 NEXT_PUBLIC_UET_ID=187244204
 NEXT_PUBLIC_META_PIXEL_ID=1668104927560679
 ```
 
 `NEXT_PUBLIC_GOOGLE_ADS_ID` installs the Google tag across all pages. Google Ads
 conversion events also require a conversion action label from Google Ads, such
-as `AW-XXXXXXXXX/abc123_label`.
+as `AW-18143858726/abc123_label`.
 
 ## AI Chatbot
 
