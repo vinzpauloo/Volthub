@@ -8,6 +8,9 @@ import LayoutContainer from "@/components/layout/LayoutContainer";
 import { philippineRegions, interestOptions, socialIcons } from "./contactData";
 import ContactHeader from "./ContactHeader";
 import ContactInfo from "./ContactInfo";
+import { trackGoogleAdsConversion } from "@/lib/google-ads";
+
+const CONTACT_FORM_CONVERSION_ID = "AW-18143858726/AHm_CLHR9tMcEKag1ctD";
 
 // Helper: get dropdown position from a ref (called from event handlers, not render)
 function getDropdownPosition(ref: React.RefObject<HTMLDivElement | null>) {
@@ -395,6 +398,10 @@ export default function ContactForm() {
       if (!response.ok || !result.ok) {
         throw new Error("Failed to send message");
       }
+
+      trackGoogleAdsConversion({
+        sendTo: CONTACT_FORM_CONVERSION_ID,
+      });
 
       alert("Your request has been sent to our team. We'll be in touch shortly.");
 
