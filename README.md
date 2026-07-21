@@ -20,6 +20,22 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Marketing Tags
+
+Set these public environment variables in Vercel when the corresponding
+tracking platform should be enabled:
+
+```env
+NEXT_PUBLIC_GTM_ID=GTM-MHLCDHH4
+NEXT_PUBLIC_GOOGLE_ADS_ID=AW-XXXXXXXXX
+NEXT_PUBLIC_UET_ID=187244204
+NEXT_PUBLIC_META_PIXEL_ID=1668104927560679
+```
+
+`NEXT_PUBLIC_GOOGLE_ADS_ID` installs the Google tag across all pages. Google Ads
+conversion events also require a conversion action label from Google Ads, such
+as `AW-XXXXXXXXX/abc123_label`.
+
 ## AI Chatbot
 
 This project includes an **AI-powered customer support chatbot** that uses **Ollama** (open-source LLM) with **RAG (Retrieval Augmented Generation)** to provide intelligent, context-aware responses about products, services, and company information.

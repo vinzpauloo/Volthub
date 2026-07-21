@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Orbitron } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ChatSupport from "@/components/common/ChatSupport";
+import GoogleAdsTag from "@/components/marketing/GoogleAdsTag";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -129,6 +130,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${gtmId}');`,
           }}
         />
+        <GoogleAdsTag />
         <Script
           id="bing-uet-script"
           strategy="afterInteractive"
