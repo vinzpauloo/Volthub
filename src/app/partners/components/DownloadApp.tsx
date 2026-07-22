@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import Image from "next/image";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 import SectionHeading from "@/components/marketing/SectionHeading";
@@ -318,18 +318,8 @@ function useImageSlideshow(images: string[]) {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const reset = useCallback(() => {
-    setIndex(0);
-  }, []);
-
-  useEffect(() => {
-    // Reset whenever the image array identity changes
-    reset();
-  }, [images, reset]);
-
   useEffect(() => {
     if (images.length <= 1) {
-      setIndex(0);
       return;
     }
 
@@ -342,6 +332,10 @@ function useImageSlideshow(images: string[]) {
     };
   }, [images]);
 
+  // Guard against stale index when the image array shrinks or changes
+  if (index >= images.length) {
+    return images[0] ?? images[0];
+  }
   return images[index] ?? images[0];
 }
 

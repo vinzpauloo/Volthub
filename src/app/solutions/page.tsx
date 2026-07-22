@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { HomeGuideSolar } from "./components/HomeGuideSolar";
 import { SolarInvestment } from "./components/SolarInvestment";
-import { SolarTypes } from "./components/SolarTypes";
-import { SolarInstallation } from "./components/SolarInstallation";
 import { SolarSetupLearnings } from "./components/SolarSetupLearnings";
 import { SolarPackagePricing } from "./components/SolarPackagePricing";
 import { RiSunLine, RiArrowRightLine } from "react-icons/ri";

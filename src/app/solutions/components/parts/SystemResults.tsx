@@ -39,12 +39,8 @@ import {
   RiWifiLine,
   RiFundsLine,
   RiFlashlightLine,
-  RiMoneyDollarCircleLine,
   RiShieldCheckLine,
   RiCustomerService2Line,
-  RiFileTextLine,
-  RiHomeLine,
-  RiToolsFill,
   RiLightbulbLine,
   RiFridgeLine,
   RiWindyLine,
@@ -115,32 +111,6 @@ function getBackupRuntimeText(installedBatteryKwh: number): string | null {
   if (hours < 1) return "Under 1 hour of backup for essentials";
   return `Keeps your fridge, WiFi & lights running for ~${hours} hours during a blackout`;
 }
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Process timeline steps
-// ─────────────────────────────────────────────────────────────────────────────
-
-const PROCESS_STEPS: {
-  icon: React.ElementType;
-  title: string;
-  duration: string;
-}[] = [
-  {
-    icon: RiFileTextLine,
-    title: "Apply Online",
-    duration: "1 min",
-  },
-  {
-    icon: RiHomeLine,
-    title: "Free Home Assessment",
-    duration: "Free",
-  },
-  {
-    icon: RiToolsFill,
-    title: "Professional Installation",
-    duration: "1–2 Days",
-  },
-];
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Component

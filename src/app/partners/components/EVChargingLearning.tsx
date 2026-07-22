@@ -8,7 +8,6 @@ import {
   RiPlayCircleLine,
   RiTimeLine,
   RiCloseLine,
-  RiArrowRightLine,
   RiPauseCircleLine,
   RiVolumeUpLine,
   RiVolumeMuteLine,

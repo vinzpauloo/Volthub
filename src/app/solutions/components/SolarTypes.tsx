@@ -6,9 +6,7 @@ import {
   RiSunLine,
   RiBatteryChargeLine,
   RiPlugLine,
-  RiHomeLine,
   RiBuildingLine,
-  RiPlantLine,
 } from "react-icons/ri";
 
 const SOLAR_TYPES = [
