@@ -84,6 +84,35 @@ export function breadcrumbJsonLd(items: Array<{ name: string; url: string }>) {
   };
 }
 
+export const softwareApplicationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": `${siteUrl}/#app`,
+  name: "VoltHub",
+  applicationCategory: "NavigationApplication",
+  operatingSystem: "Android",
+  description:
+    "Take control of your EV charging experience with the VoltHub mobile app. Find fast chargers near you, start charging sessions, track your wallet, and manage your vehicles — all from one app.",
+  url: "https://play.google.com/store/apps/details?id=ph.volthub.app&hl=en",
+  downloadUrl: "https://play.google.com/store/apps/details?id=ph.volthub.app&hl=en",
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "PHP",
+  },
+  author: {
+    "@id": `${siteUrl}/#organization`,
+  },
+  publisher: {
+    "@id": `${siteUrl}/#organization`,
+  },
+  screenshot: [
+    `${siteUrl}/EVpage/AppScreen/Home.png`,
+    `${siteUrl}/EVpage/AppScreen/Vehicle.png`,
+    `${siteUrl}/EVpage/AppScreen/Wallet.png`,
+  ],
+};
+
 export function serviceJsonLd({
   name,
   description,

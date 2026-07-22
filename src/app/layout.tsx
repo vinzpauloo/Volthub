@@ -8,7 +8,7 @@ import GoogleAdsTag from "@/components/marketing/GoogleAdsTag";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { jsonLd, organizationJsonLd } from "@/lib/seo";
+import { jsonLd, organizationJsonLd, softwareApplicationJsonLd } from "@/lib/seo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -189,6 +189,11 @@ fbq('track', 'PageView');`,
             type="application/ld+json"
             suppressHydrationWarning
             dangerouslySetInnerHTML={{ __html: jsonLd(organizationJsonLd) }}
+          />
+          <script
+            type="application/ld+json"
+            suppressHydrationWarning
+            dangerouslySetInnerHTML={{ __html: jsonLd(softwareApplicationJsonLd) }}
           />
           <Header />
           {children}
