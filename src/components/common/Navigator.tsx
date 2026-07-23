@@ -142,6 +142,12 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
     description: "Become an EV charging location partner.",
   },
 
+  Packages: {
+    title: "Packages",
+    href: "/packages",
+    description: "Explore our featured packages and bundled offerings.",
+  },
+
   about: {
     title: "About Us",
     href: "/about",

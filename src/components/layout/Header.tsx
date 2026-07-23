@@ -70,6 +70,11 @@ const navItems: NavItem[] = [
     ],
   },
   {
+    label: "Packages",
+    href: "/packages",
+    description: "Featured packages and bundled offerings",
+  },
+  {
     label: "Solar",
     href: "/solutions",
     description: "Solar energy solutions and smart energy systems",
