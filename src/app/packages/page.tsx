@@ -177,6 +177,8 @@ export default function PackagesPage() {
               description: `${selectedPackage.name} — Installation Package`,
               quantity: 1,
               unit_price: 0,
+              package_id: selectedPackage._id ?? null,
+              product_sku_id: null,
             },
           ],
         }),
