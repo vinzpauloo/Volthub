@@ -170,7 +170,7 @@ export default function PackagesPage() {
           company_name: quoteCompany.trim() || undefined,
           address: quoteAddress.trim() || undefined,
           site_address: quoteAddress.trim() || undefined,
-          project_type: "installation_package",
+          project_type: "ev_charger",
           notes: quoteNotes.trim() || `Package: ${selectedPackage.name} — ${selectedPackage.price}`,
           items: [
             {
