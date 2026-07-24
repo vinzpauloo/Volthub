@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ph.volthub.app",
+      "sha256_cert_fingerprints": [
+        "D8:BC:22:D0:8A:42:6E:AF:69:8F:E9:63:A2:E4:F1:13:DA:DA:F6:98:4E:86:D4:3E:0B:D7:20:1E:7A:C0:D1:9B"
+      ]
+    }
+  }
+]

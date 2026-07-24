@@ -5,7 +5,7 @@ import EvChargingTabbedFeaturesSection from "./EvChargingTabbedFeaturesSection";
 export default function EvChargingHeroSection() {
   return (
     <>
-    <section className="relative min-h-[50vh] pt-9 pb-40 flex items-center overflow-hidden">
+    <section className="relative min-h-[50vh] pt-9 pb-0 flex items-center overflow-hidden">
        <EvChargingTabbedFeaturesSection />
 
     </section>
