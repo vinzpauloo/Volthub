@@ -9,7 +9,7 @@ import {
 } from "react-icons/ri";
 
 interface PackageItem {
-  _id?: string;
+  id?: string;
   name: string;
   price: string;
   description: string;
@@ -177,7 +177,7 @@ export default function PackagesPage() {
               description: `${selectedPackage.name} — Installation Package`,
               quantity: 1,
               unit_price: 0,
-              package_id: selectedPackage._id ?? null,
+              package_id: selectedPackage.id ?? null,
               product_sku_id: null,
             },
           ],
@@ -203,7 +203,7 @@ export default function PackagesPage() {
           customerNotes: quoteNotes.trim() || undefined,
           productName: selectedPackage.name,
           productImage: selectedPackage.thumbnails?.[0] ?? "",
-          productSku: selectedPackage._id,
+          productSku: selectedPackage.id,
           quantity: 1,
           includeInstallation: false,
           solarSetup: null,
