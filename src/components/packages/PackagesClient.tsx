@@ -3,85 +3,21 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const packages = [
-  {
-    name: "Basic Installation Only",
-    price: "₱18,999",
-    description: "Installation Only (No Charger, No Enclosure)",
-    packageOverview: "Ideal for customers who need professional mounting and circuit setup without a charger or enclosure.",
-    badge: "Installation",
-    badgeSecondary: "Service Only",
-    includes: [
-      { label: "Professional mounting labor", icon: "🔧" },
-      { label: "Standard circuit & conduit", icon: "⚡" },
-      { label: "Basic safety testing", icon: "🛡️" },
-    ],
-    accent: "from-emerald-500 to-teal-600",
-    featured: false,
-    image: "/Packages/package1.png",
-  },
-  {
-    name: "Enclosure Installation Only",
-    price: "₱27,799",
-    description: "Installation Only (No Charger + Enclosure Included)",
-    packageOverview: "A practical choice for properties that need enclosure hardware and installation support while keeping the charger separate.",
-    badge: "Installation",
-    badgeSecondary: "Includes Hardware",
-    includes: [
-      { label: "Connector set", icon: "🔌" },
-      { label: "Wiring", icon: "🧵" },
-      { label: "Mounting hardware", icon: "🔩" },
-      { label: "Enclosure box", icon: "📦" },
-      { label: "Safety protection", icon: "🛡️" },
-    ],
+type PackageItem = {
+  name: string;
+  price: string;
+  description: string;
+  packageOverview: string;
+  badge: string;
+  badgeSecondary: string;
+  includes: Array<{ label: string; icon: string }>;
+  thumbnails?: string[];
+  accent: string;
+  featured: boolean;
+  image: string;
+};
 
-    thumbnails: ["/product/EV/ac/ws-cdz-21kw-box-protector.png"],
-    accent: "from-sky-500 to-cyan-600",
-    featured: false,
-    image: "/Packages/package2.png",
-  },
-  {
-    name: "7kW Charger Bundle",
-    price: "₱38,999",
-    description: "Complete Package: 7kW Charger + Install",
-    packageOverview: "A complete installation package for homes and businesses that want a fast, efficient 7kW charger setup with essential hardware.",
-    badge: "Popular",
-    badgeSecondary: "Best Value",
-    includes: [
-      { label: "7kW AC charger", icon: "⚡" },
-      { label: "Connector set", icon: "🔌" },
-      { label: "Wiring", icon: "🧵" },
-      { label: "Mounting hardware", icon: "🔩" },
-      { label: "Safety protection", icon: "🛡️" },
-    ],
-    thumbnails: [" /Product/EV/ac/ws-cdz-21kw-without-screen-specs.png"],
-    accent: "from-violet-500 to-fuchsia-600",
-    featured: true,
-    image: "/Packages/package3.png",
-  },
-  {
-    name: "7kW Charger Premium Bundle",
-    price: "₱47,799",
-    description: "Complete Package: 7kW Charger + Install + Enclosure",
-    packageOverview: "Our most complete option for customers who want a charger, enclosure, and professional installation in one bundled solution.",
-    badge: "Installation",
-    badgeSecondary: "Includes Hardware",
-    includes: [
-      { label: "7kW AC charger", icon: "⚡" },
-      { label: "Connector set", icon: "🔌" },
-      { label: "Wiring", icon: "🧵" },
-      { label: "Mounting hardware", icon: "🔩" },
-      { label: "Enclosure box", icon: "📦" },
-      { label: "Safety protection", icon: "🛡️" },
-    ],
-    thumbnails: ["/product/EV/ac/ws-cdz-21kw-without-screen-specs.png", "/Product/EV/ac/ws-cdz-21kw-box-protector.png"],
-    accent: "from-amber-500 to-orange-600",
-    featured: false,
-    image: "/Packages/package4.png",
-  },
-];
-
-export default function PackagesPage() {
+export default function PackagesClient({ packages }: { packages: PackageItem[] }) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
@@ -109,14 +45,19 @@ export default function PackagesPage() {
             >
               <div
                 className="relative min-h-[180px] overflow-hidden p-4 sm:min-h-[200px]"
-                style={{ backgroundImage: `linear-gradient(180deg, rgba(10,10,10,0.12) 0%, rgba(10,10,10,0.8) 100%), url(${item.image})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
+                style={{
+                  backgroundImage: `linear-gradient(180deg, rgba(10,10,10,0.12) 0%, rgba(10,10,10,0.8) 100%), url(${item.image})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
               >
                 <div className="flex h-full flex-col justify-between">
                   <div className="flex items-start justify-between">
                     <span className="rounded-full bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-sm">
                       {item.badge}
                     </span>
-                    <span className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white ${item.featured ? 'bg-emerald-500/80' : 'bg-black/30'}`}>
+                    <span className={`rounded-full px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white ${item.featured ? "bg-emerald-500/80" : "bg-black/30"}`}>
                       {item.badgeSecondary}
                     </span>
                   </div>
@@ -132,26 +73,21 @@ export default function PackagesPage() {
                 </div>
 
                 {item.thumbnails && item.thumbnails.length > 0 && (
-                  <div className="mt-4">
-                    <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-                      Product purchase
-                    </p>
-                    <div className="flex gap-2">
-                      {item.thumbnails.map((thumb, index) => (
-                        <button
-                          key={`${item.name}-${index}`}
-                          type="button"
-                          onClick={() => setSelectedImage(thumb)}
-                          className="h-14 w-14 overflow-hidden rounded-xl border border-border/70 bg-muted/40 p-0 transition hover:scale-[1.02] hover:border-emerald-500/40"
-                        >
-                          <img
-                            src={thumb}
-                            alt={`${item.name} thumbnail ${index + 1}`}
-                            className="h-full w-full object-contain"
-                          />
-                        </button>
-                      ))}
-                    </div>
+                  <div className="mt-4 flex gap-2">
+                    {item.thumbnails.map((thumb, index) => (
+                      <button
+                        key={`${item.name}-${index}`}
+                        type="button"
+                        onClick={() => setSelectedImage(thumb)}
+                        className="h-14 w-14 overflow-hidden rounded-xl border border-border/70 bg-muted/40 p-0 transition hover:scale-[1.02] hover:border-emerald-500/40"
+                      >
+                        <img
+                          src={thumb}
+                          alt={`${item.name} thumbnail ${index + 1}`}
+                          className="h-full w-full object-cover"
+                        />
+                      </button>
+                    ))}
                   </div>
                 )}
 
@@ -171,12 +107,9 @@ export default function PackagesPage() {
                       ))}
                     </ul>
 
-
                     <div className="text-sm text-muted-foreground">
                       <p className="font-semibold text-slate-900 dark:text-white">Package overview</p>
-                      <p className="mt-2 leading-6">
-                        {item.packageOverview}
-                      </p>
+                      <p className="mt-2 leading-6">{item.packageOverview}</p>
                       <p className="mt-2 text-[11px] leading-5 text-emerald-700 dark:text-emerald-400">
                         Note: Additional charges may apply for remote locations or site conditions that require extra travel or setup work.
                       </p>
@@ -198,8 +131,6 @@ export default function PackagesPage() {
                     </Link>
                   </div>
                 </div>
-
-             
               </div>
             </article>
           ))}
@@ -230,12 +161,11 @@ export default function PackagesPage() {
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <div className="relative max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-3xl border border-white/10 bg-black/90 shadow-2xl" onClick={(e) => e.stopPropagation()}>
-            <img
-              src={selectedImage}
-              alt="Selected package preview"
-              className="h-full w-full object-stretch"
-            />
+          <div
+            className="relative max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-3xl border border-white/10 bg-black/90 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img src={selectedImage} alt="Selected package preview" className="h-full w-full object-contain" />
             <button
               type="button"
               onClick={() => setSelectedImage(null)}
