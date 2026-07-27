@@ -43,8 +43,8 @@ export const carouselSlides = [
     description:
       "Smart home battery systems help you store solar energy for round-the-clock power, protect against outages, and take a meaningful step toward energy independence.",
     image: "/HomeBanner/LVXC.png",
-    backgroundImage: "/HomeBanner/banner2.png",
-    mobileBackgroundImage: "/HomeBanner/banner2m.png",
+    backgroundImage: "/HomeBanner/install-showcase-ev-charger-20260726.jpg",
+    mobileBackgroundImage: "/HomeBanner/install-showcase-ev-charger-20260726.jpg",
     showimg: false,
     imageClassName: "absolute bottom-0 right-0 h-full w-1/2 mb-[-170px]",
     descriptionClassName: "space-y-6 text-white z-[100]",
@@ -78,8 +78,8 @@ export const carouselSlides = [
       "Build comprehensive EV charging networks with ultra-fast 50-150kW DC chargers. Future-proof your business with smart grid integration and reliable, enterprise-grade infrastructure.",
     image:
       "https://readdy.ai/api/search-image?query=electric%20vehicle%20charging%20station%20network%2C%20modern%20EV%20charging%20infrastructure%2C%20smart%20grid%20technology%2C%20sustainable%20transportation%2C%20clean%20mobility%20future&width=1920&height=1080&seq=hero004&orientation=landscape",
-    backgroundImage: "/HomeBanner/banner4.png",
-    mobileBackgroundImage: "/HomeBanner/banner4m.png",
+    backgroundImage: "/HomeBanner/solar-installation-rooftop-20260414.jpg",
+    mobileBackgroundImage: "/HomeBanner/solar-installation-rooftop-20260414.jpg",
     showimg: false,
     imageClassName: "absolute bottom-0 right-0 h-full w-1/2 mb-[-170px]",
     descriptionClassName: "space-y-6 text-white z-[100]",
