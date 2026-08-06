@@ -102,7 +102,7 @@ export function mapBackendCategory(cat: string): ProductCategory {
 
 // Transform a single backend product → frontend Product shape
 export function mapBackendProduct(bp: BackendProduct): Product {
-  const images: ProductImage[] = (bp.images ?? [])
+  const images: ProductImage[] = (bp.images ?? bp.gallery ?? [])
     .sort((a, b) => a.sort_order - b.sort_order)
     .map((img) => ({
       id: img.id,

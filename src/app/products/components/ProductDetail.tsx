@@ -525,9 +525,9 @@ ${includeInstallation || solarSetup ? `
                 )}
               </p>
             )}
-            {product.description && (
+            {(selectedVariant?.description || product.description) && (
               <p className="text-sm md:text-base text-slate-600 leading-relaxed whitespace-pre-line">
-                {product.description}
+                {selectedVariant?.description || product.description}
               </p>
             )}
           </div>
