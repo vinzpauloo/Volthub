@@ -380,12 +380,12 @@ export function DownloadApp(): React.ReactElement {
   const [activeGroup, setActiveGroup] = useState(APP_GROUPS[0].id);
   const [activeSub, setActiveSub] = useState(APP_GROUPS[0].screens[0].id);
   const [adminModalOpen, setAdminModalOpen] = useState(false);
-  const [pwaModalOpen, setPwaModalOpen] = useState(false);
   const [selectedAdminImg, setSelectedAdminImg] = useState(0);
 
   const playStoreUrl =
     "https://play.google.com/store/apps/details?id=ph.volthub.app&hl=en";
-  const pwaUrl = "https://app.volthub.ph";
+  const appStoreUrl =
+    "https://apps.apple.com/ph/app/volthub-ph/id6795752536";
 
   const currentGroup = useMemo(
     () => APP_GROUPS.find((g) => g.id === activeGroup) ?? APP_GROUPS[0],
@@ -574,17 +574,18 @@ export function DownloadApp(): React.ReactElement {
               device and start charging smarter today.
             </p>
             <div className="flex flex-row gap-3">
-              <button
-                type="button"
-                onClick={() => setPwaModalOpen(true)}
-                className="flex items-center gap-3 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors cursor-pointer"
+              <a
+                href={appStoreUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors"
               >
                 <RiAppleLine className="text-2xl" />
                 <div className="text-left">
                   <p className="text-xs text-white/70">Download on the</p>
                   <p className="font-semibold">App Store</p>
                 </div>
-              </button>
+              </a>
               <a
                 href={playStoreUrl}
                 target="_blank"
@@ -600,89 +601,6 @@ export function DownloadApp(): React.ReactElement {
             </div>
           </div>
         </div>
-
-        {/* ── PWA Install Modal ──────────────────────────────────────── */}
-        {pwaModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-            <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative">
-              <button
-                type="button"
-                onClick={() => setPwaModalOpen(false)}
-                className="absolute top-4 right-4 p-2 rounded-lg text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
-                aria-label="Close"
-              >
-                <IoClose className="w-5 h-5" />
-              </button>
-
-              <div className="flex flex-col items-center text-center gap-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                  <RiAppleLine className="w-8 h-8 text-gray-800" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900">
-                  Install VoltHub on iOS
-                </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  The VoltHub iOS app is coming soon. In the meantime, install
-                  our PWA (Progressive Web App) for the full app experience
-                  right from your home screen.
-                </p>
-
-                <div className="w-full bg-gray-50 rounded-xl p-5 space-y-4 text-left">
-                  <p className="text-sm font-semibold text-gray-700 text-center">
-                    How to install:
-                  </p>
-                  <ol className="space-y-3">
-                    <li className="flex items-start gap-3 text-sm text-gray-600">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-xs flex items-center justify-center">
-                        1
-                      </span>
-                      Open{" "}
-                      <span className="font-mono font-semibold text-gray-800 break-all">
-                        {pwaUrl}
-                      </span>{" "}
-                      in <span className="font-semibold text-gray-800">Safari</span>
-                    </li>
-                    <li className="flex items-start gap-3 text-sm text-gray-600">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-xs flex items-center justify-center">
-                        2
-                      </span>
-                      Tap the{" "}
-                      <span className="font-semibold text-gray-800">Share</span>{" "}
-                      button at the bottom of the screen
-                    </li>
-                    <li className="flex items-start gap-3 text-sm text-gray-600">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-xs flex items-center justify-center">
-                        3
-                      </span>
-                      Scroll down and tap{" "}
-                      <span className="font-semibold text-gray-800">
-                        &ldquo;Add to Home Screen&rdquo;
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-3 text-sm text-gray-600">
-                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary font-bold text-xs flex items-center justify-center">
-                        4
-                      </span>
-                      Tap{" "}
-                      <span className="font-semibold text-gray-800">&ldquo;Add&rdquo;</span>{" "}
-                      to finish installing
-                    </li>
-                  </ol>
-                </div>
-
-                <a
-                  href={pwaUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-colors"
-                >
-                  Open VoltHub PWA
-                  <IoNavigateOutline className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* ── View Admin Panel Button ─────────────────────────────────── */}
         <div className="flex justify-center pt-4">
