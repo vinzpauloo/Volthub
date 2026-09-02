@@ -13,6 +13,7 @@ import {
   type BackendProduct,
   isGroupedProduct,
   mapBackendProduct,
+  fallbackProducts,
 } from "./components/productData";
 import BackToTopButton from "@/components/common/BackToTopButton";
 
@@ -55,14 +56,21 @@ async function getProducts(): Promise<{
       }
     }
 
+    // Merge fallback products (API results take precedence by id)
+    const apiIds = new Set(flat.map((p) => p.id));
+    for (const fp of fallbackProducts) {
+      if (!apiIds.has(fp.id)) flat.push(fp);
+    }
+
     // Store in cache
     const result = { grouped, flat };
     productsCache = result;
     cacheTimestamp = Date.now();
     return result;
   } catch {
-    // Return stale cache if available, otherwise empty
-    return productsCache ?? { grouped: [], flat: [] };
+    // Return stale cache if available, otherwise fall back to fallbackProducts
+    if (productsCache) return productsCache;
+    return { grouped: [], flat: [...fallbackProducts] };
   }
 }
 

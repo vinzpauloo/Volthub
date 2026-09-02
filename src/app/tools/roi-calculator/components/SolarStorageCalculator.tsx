@@ -540,7 +540,7 @@ export default function SolarStorageCalculator() {
           required for a binding quotation.
           <br />
           VoltHub Electronic Power Generation Services Corp. • sales@volthub.ph
-          • 09682323704
+          • 09682197035
         </p>
       </LayoutContainer>
     </main>

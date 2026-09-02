@@ -164,8 +164,8 @@ export const contactInfo = [
   {
     icon: RiPhoneLine,
     title: "Phone",
-    detail: "+63 968 232 3704",
-    link: "tel:+639682323704",
+    detail: "+63 968 219 7035",
+    link: "tel:+639682197035",
   },
   {
     icon: RiMailLine,

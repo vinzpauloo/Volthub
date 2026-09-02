@@ -4,7 +4,7 @@ export const seo = {
   siteUrl,
   companyName: "VoltHub Electric Power Generation Services Corporation",
   brandName: "VoltHub",
-  phone: "+63 968 232 3704",
+  phone: "+63 968 219 7035",
   email: "sales@volthub.ph",
   streetAddress: "High Street South Corporate Plaza Tower 2, 11th Ave",
   addressLocality: "Bonifacio Global City, Taguig",

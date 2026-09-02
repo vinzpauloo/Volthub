@@ -84,7 +84,7 @@ export default function PrivacyPage() {
             Sales Inquiries:{" "}
             <a href="mailto:sales@volthub.ph">sales@volthub.ph</a>
             <br />
-            Phone: <a href="tel:+639682323704">+63 968 232 3704</a>
+            Phone: <a href="tel:+639682197035">+63 968 219 7035</a>
           </p>
           <p>
             <strong>Data Protection Officer (RA 10173)</strong>
@@ -149,7 +149,7 @@ export default function PrivacyPage() {
               <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a> or{" "}
               <a href="mailto:sales@volthub.ph">sales@volthub.ph</a>
             </li>
-            <li>Call us on +63 968 232 3704</li>
+            <li>Call us on +63 968 219 7035</li>
           </ul>
           <h3 className="text-lg font-semibold text-slate-900 mt-6">
             3.2 Information Collected Automatically
@@ -713,7 +713,7 @@ export default function PrivacyPage() {
             <br />
             Email: <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a>
             <br />
-            Phone: <a href="tel:+639682323704">+63 968 232 3704</a>
+            Phone: <a href="tel:+639682197035">+63 968 219 7035</a>
             <br />
             Address: Unit 2503, High Street South Corporate Plaza Tower 2,
             11th Street corner 26th Avenue, Fort Bonifacio, Bonifacio Global

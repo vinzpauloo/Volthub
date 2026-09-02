@@ -30,7 +30,9 @@ async function getProductData(
   groupBy: string,
 ): Promise<ProductPageData | undefined> {
   // 1. Fetch the detail endpoint which returns both group + variants
-  //    Response: { ok, data: { groupBy, supply, type, connector, variants: [...] } }
+  //    Response shapes supported:
+  //    a) { ok, data: { groupBy, supply, type, connector, variants: [...] } } — grouped
+  //    b) { ok, data: { id, name, gallery: [...], ... } } — single product (with thumbnail images)
   try {
     const detailRes = await fetch(
       `${BACKEND_URL}api/public/products/${groupBy}`,
@@ -38,11 +40,11 @@ async function getProductData(
     );
     if (detailRes.ok) {
       const json = await detailRes.json();
-      // Response shape: { ok: true, data: { groupBy, variants: [...], ... } }
       const body = json.data ?? json;
       const rawVariants: BackendProduct[] = body?.variants ?? [];
+
       if (rawVariants.length > 0) {
-        // Use the API group data directly (has supply/type/connector)
+        // Grouped product (EV chargers, etc.)
         const group: GroupedProduct = {
           groupBy: body.groupBy ?? groupBy,
           name: body.name ?? groupBy,
@@ -56,6 +58,24 @@ async function getProductData(
         };
         const product = mapBackendProduct(rawVariants[0]);
         return { product, variants: rawVariants, group };
+      }
+
+      // Single-product response: the body itself is a BackendProduct (with gallery)
+      // Treat the product as a single self-variant so ProductDetail renders normally.
+      if (body?.id && (body.gallery || body.images || body.image_url)) {
+        const product = mapBackendProduct(body as BackendProduct);
+        const selfVariant: BackendProduct = {
+          ...(body as BackendProduct),
+          id: product.id,
+          sku_code: product.sku_code ?? product.id,
+          name: product.name,
+          category: product.category,
+          description: product.description ?? null,
+          image_url: product.image,
+          is_active: product.is_active ?? true,
+          created_at: product.created_at ?? new Date().toISOString(),
+        };
+        return { product, variants: [selfVariant] };
       }
     }
   } catch {

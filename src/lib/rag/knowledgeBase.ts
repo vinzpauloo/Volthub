@@ -32,7 +32,7 @@ const companyInfo = {
   name: "VoltHub Electric Power Generation Services Corporation",
   established: "January 17, 2025",
   address: "High Street South Corporate Plaza Tower 2, 11th Ave, Bonifacio Global City, Taguig, Philippines",
-  phone: "+639682323704",
+  phone: "+639682197035",
   email: "sales@volthub.ph",
   website: "https://volthub.ph",
   description: "A forward-looking energy technology company specializing in EV charging infrastructure, solar power systems, and smart energy solutions.",

@@ -88,6 +88,7 @@ export function mapBackendCategory(cat: string): ProductCategory {
       return "ev-charging";
     case "solar_street":
     case "solar_street_light":
+    case "street_light":
       return "solar-street";
     case "home_battery":
     case "smart_home":
@@ -102,7 +103,9 @@ export function mapBackendCategory(cat: string): ProductCategory {
 
 // Transform a single backend product → frontend Product shape
 export function mapBackendProduct(bp: BackendProduct): Product {
-  const images: ProductImage[] = (bp.images ?? bp.gallery ?? [])
+  const gallery = bp.images ?? bp.gallery ?? [];
+  const images: ProductImage[] = gallery
+    .slice()
     .sort((a, b) => a.sort_order - b.sort_order)
     .map((img) => ({
       id: img.id,
@@ -138,6 +141,18 @@ export function mapBackendProduct(bp: BackendProduct): Product {
     created_at: bp.created_at,
   };
 }
+
+export const fallbackProducts: Product[] = [
+  {
+    id: "solar-street-f1l",
+    name: "F1L Solar Street Light",
+    description:
+      "Compact all-in-one solar street light with high-efficiency monocrystalline solar panel, integrated LiFePO4 battery, and intelligent LED module with PIR motion sensor. Designed for streets, pathways, residential compounds, and small parking areas.",
+    category: "solar-street",
+    image: "/Product/StreetLamp/F1L.png",
+    is_active: true,
+  },
+];
 
 // ── Grouped API Response Types (localhost:3003) ──
 

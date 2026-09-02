@@ -1,0 +1,20 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "snapshot": true,
+  "share": "manual",
+  "instructions": ["AGENTS.md", "README.md"],
+  "permission": {
+    "bash": "allow",
+    "edit": {
+      "src/**": "allow",
+      ".next/**": "deny",
+      "node_modules/**": "deny",
+      "*.lock": "deny",
+      "*": "ask"
+    },
+    "read": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "external_directory": "deny"
+  }
+}
