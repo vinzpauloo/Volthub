@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { breadcrumbJsonLd, jsonLd, serviceJsonLd } from "@/lib/seo";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 const pageUrl = `${siteUrl}/services/solar-installation`;
 const description =
   "Turn-key solar panel installation in the Philippines for homes and businesses. Site-specific sizing, storage and off-grid systems. Book a free site survey.";
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: pageUrl,
     siteName: "VoltHub Energy",
-    title: "Solar Panel Installation Philippines | VoltHub",
+    title: "Solar Panel Installation Philippines",
     description,
     images: [
       {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solar Panel Installation Philippines | VoltHub",
+    title: "Solar Panel Installation Philippines",
     description,
     images: ["/Sector/solarbg1.jpg"],
     creator: "@VoltHubEnergy",

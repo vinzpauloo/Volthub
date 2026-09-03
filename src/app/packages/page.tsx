@@ -230,6 +230,7 @@ export default function PackagesPage() {
   if (loading) {
     return (
       <main className="min-h-screen bg-background flex items-center justify-center pt-32 pb-20">
+        <h1 className="sr-only">Solar and EV Charging Packages</h1>
         <p className="text-muted-foreground">Loading packages...</p>
       </main>
     );

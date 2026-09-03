@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   // This will be overridden by generateMetadata in page.tsx
-  title: "Blog Article | VoltHub",
+  title: { default: "Blog Article", template: "%s | VoltHub" },
   description: "Read the latest insights on energy storage, EV charging, and renewable energy solutions.",
 };
 

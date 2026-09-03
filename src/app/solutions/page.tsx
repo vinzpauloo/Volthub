@@ -7,7 +7,8 @@ import { SolarPackagePricing } from "./components/SolarPackagePricing";
 import { RiSunLine, RiArrowRightLine } from "react-icons/ri";
 
 export const metadata: Metadata = {
-  title: "Solar Energy Solutions - VoltHub",
+  title: "Solar Energy Solutions Philippines",
+  alternates: { canonical: "/solutions" },
   description:
     "Complete solar energy solutions — estimate your savings, explore system types, learn about installation, and discover investment options for your home or business.",
 };

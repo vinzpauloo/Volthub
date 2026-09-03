@@ -6,7 +6,7 @@ import LayoutContainer from "@/components/layout/LayoutContainer";
 import { jsonLd, seo } from "@/lib/seo";
 
 const blogContent: Record<string, { author?: string; date?: string; readingTime?: string }> = {
-  "complete-guide-to-solar-energy-storage": {
+  "ev-charging-trends-philippines-2025": {
     author: "VoltHub Energy Team",
     date: "2025-01-28",
     readingTime: "5 mins",
@@ -32,6 +32,12 @@ const blogContent: Record<string, { author?: string; date?: string; readingTime?
     readingTime: "5 mins",
   },
 };
+
+function truncateDescription(text: string, max = 155) {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max);
+  return `${cut.slice(0, cut.lastIndexOf(" "))}…`;
+}
 
 function getArticleMeta(slug: string) {
   return blogContent[slug] || {
@@ -59,20 +65,21 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 
   if (!resource) {
     return {
-      title: "Blog Post Not Found | VoltHub",
+      title: "Blog Post Not Found",
       description: "The requested blog post could not be found.",
     };
   }
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
   const articleUrl = `${siteUrl}/blog/${slug}`;
   const imageUrl = resource.image.startsWith("http") ? resource.image : `${siteUrl}${resource.image}`;
 
   const articleMeta = getArticleMeta(slug);
+  const metaDescription = truncateDescription(resource.description);
 
   return {
-    title: `${resource.title} | VoltHub Blog`,
-    description: resource.description,
+    title: resource.seoTitle ?? resource.title,
+    description: metaDescription,
     keywords: [
       resource.type.toLowerCase(),
       "energy storage",

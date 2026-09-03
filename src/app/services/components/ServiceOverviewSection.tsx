@@ -31,8 +31,9 @@ export default function ServiceOverviewSection() {
       <LayoutContainer>
         <div className="text-center mb-16">
           <SectionHeading
-            title="Our Core Services"
-            description="Comprehensive energy solutions backed by certified professionals and cutting-edge technology."
+            as="h1"
+            title="EV Charging and Solar Services"
+            description="Charger installation, charging station operation, solar installation and energy storage, delivered by certified professionals."
           />
         </div>
 

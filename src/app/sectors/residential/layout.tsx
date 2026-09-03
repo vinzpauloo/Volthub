@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "Residential Energy Solutions - VoltHub",
-  description: "Power your home with reliable solar energy storage and backup systems. From small backup kits to complete home energy independence. EV charging, solar street lights, and energy storage for Filipino homes.",
+  title: "Residential Energy Solutions",
+  description: "Rooftop solar, backup batteries and home EV chargers for Filipino homes. Cut your Meralco bill and charge overnight.",
   keywords: [
     "residential energy solutions",
     "home energy storage",
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: `${siteUrl}/sectors/residential`,
     siteName: "VoltHub Energy",
-    title: "Residential Energy Solutions - VoltHub",
-    description: "Power your home with reliable solar energy storage and backup systems. From small backup kits to complete home energy independence. EV charging, solar street lights, and energy storage for Filipino homes.",
+    title: "Residential Energy Solutions",
+    description: "Rooftop solar, backup batteries and home EV chargers for Filipino homes. Cut your Meralco bill and charge overnight.",
     images: [
       {
         url: "/HomeBanner/homebatt.png",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Residential Energy Solutions - VoltHub",
+    title: "Residential Energy Solutions",
     description: "Power your home with reliable solar energy storage and backup systems. From small backup kits to complete home energy independence.",
     images: ["/HomeBanner/homebatt.png"],
     creator: "@VoltHubEnergy",

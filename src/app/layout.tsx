@@ -25,7 +25,7 @@ const orbitron = Orbitron({
   subsets: ["latin"],
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-MHLCDHH4";
 const uetId = process.env.NEXT_PUBLIC_UET_ID || "187244204";
 const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID || "1668104927560679";
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "VoltHub Energy",
-    title: "Solar, Battery & EV Charging Philippines | VoltHub",
+    title: "Solar, Battery & EV Charging Philippines",
     description: "Cut power bills with solar, battery storage and EV charging across the Philippines. Custom systems for homes, businesses and off-grid sites.",
     images: [
       {
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solar, Battery & EV Charging Philippines | VoltHub",
+    title: "Solar, Battery & EV Charging Philippines",
     description: "Cut power bills with solar, battery storage and EV charging across the Philippines.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",

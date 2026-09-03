@@ -11,10 +11,10 @@ import CompanyInformationSection from "./components/CompanyInformationSection";
 import SectionHeading from "@/components/marketing/SectionHeading";
 import BackToTopButton from "@/components/common/BackToTopButton";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "About Us - VoltHub",
+  title: "About VoltHub",
   description: "Learn about VoltHub's mission to build a cleaner energy economy. Discover our history, values, leadership, and commitment to sustainable energy solutions.",
   keywords: [
     "about VoltHub",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: `${siteUrl}/about`,
     siteName: "VoltHub Energy",
-    title: "About Us - VoltHub",
+    title: "About VoltHub",
     description: "Learn about VoltHub's mission to build a cleaner energy economy. Discover our history, values, leadership, and commitment to sustainable energy solutions.",
     images: [
       {
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Us - VoltHub",
+    title: "About VoltHub",
     description: "Learn about VoltHub's mission to build a cleaner energy economy. Discover our history, values, leadership, and commitment to sustainable energy solutions.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",

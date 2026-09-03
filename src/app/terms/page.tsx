@@ -5,11 +5,11 @@ import LegalPageLayout, {
 } from "@/components/common/LegalPageLayout";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 const LAST_UPDATED = "April 8, 2026";
 
 export const metadata: Metadata = {
-  title: "Terms of Service - VoltHub",
+  title: "Terms of Service",
   description:
     "Terms and conditions for using the VoltHub website and inquiring about our EV charging and clean energy solutions.",
   robots: { index: true, follow: true },
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: "website",
     url: `${siteUrl}/terms`,
     siteName: "VoltHub Energy",
-    title: "Terms of Service - VoltHub",
+    title: "Terms of Service",
     description:
       "Terms and conditions for the VoltHub website and inquiry services.",
   },
@@ -79,7 +79,7 @@ export default function TermsPage() {
           PSIC: 35100 – Electric Power Generation, Transmission and
           Distribution
           <br />
-          Website: <a href="https://volthub.ph">https://volthub.ph</a>
+          Website: <a href="https://www.volthub.ph">https://www.volthub.ph</a>
           <br />
           General Inquiries:{" "}
           <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a>

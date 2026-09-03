@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { breadcrumbJsonLd, jsonLd, serviceJsonLd } from "@/lib/seo";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 const pageUrl = `${siteUrl}/services/ev-charging`;
 const description =
-  "AC and ultra-fast DC EV charging stations in the Philippines. Professional installation, network integration and 24/7 support. Request pricing today.";
+  "AC 7 kW and 21 kW home and workplace chargers, DC fast chargers up to 400 kW. Fixed installation quotes, licensed electricians, optional VoltHub operation.";
 
 export const metadata: Metadata = {
   title: "EV Charger Installation Philippines",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: pageUrl,
     siteName: "VoltHub Energy",
-    title: "EV Charger Installation Philippines | VoltHub",
+    title: "EV Charger Installation Philippines",
     description,
     images: [
       {
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "EV Charger Installation Philippines | VoltHub",
+    title: "EV Charger Installation Philippines",
     description,
     images: ["/Sector/evcharging.jpeg"],
     creator: "@VoltHubEnergy",

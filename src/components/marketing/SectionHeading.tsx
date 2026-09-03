@@ -6,6 +6,7 @@ interface SectionHeadingProps {
   title: string;
   description?: string | ReactNode;
   align?: "left" | "center";
+  as?: "h1" | "h2";
   taglineClassName?: string;
   titleClassName?: string;
   descriptionClassName?: string;
@@ -16,6 +17,7 @@ const SectionHeading = ({
   title,
   description,
   align = "center",
+  as: Heading = "h2",
   taglineClassName,
   titleClassName,
   descriptionClassName,
@@ -37,14 +39,14 @@ const SectionHeading = ({
           {eyebrow}
         </p>
       ) : null}
-      <h2
+      <Heading
         className={cn(
           "text-4xl font-bold gradient-text leading-tight",
           titleClassName
         )}
       >
         {title}
-      </h2>
+      </Heading>
       {description ? (
         <div className={cn("text-lg text-gray-600", descriptionClassName)}>
           {description}
@@ -55,4 +57,3 @@ const SectionHeading = ({
 };
 
 export default SectionHeading;
-

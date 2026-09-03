@@ -24,15 +24,15 @@ export const carouselSlides = [
     title: "Powering Tomorrow, Today",
     subtitle: "Smart Power. Clean Future.",
     description:
-      "Take control of your energy with VoltHub's next-generation energy storage and EV charging solutions. Power your home or business with clean, reliable energy built for the Philippines.",
+      "We install EV chargers and rooftop solar, and we run charging stations for site owners on the VoltHub app: payments, monitoring, support and monthly settlement.",
     image: "/HomeBanner/89.png",
     backgroundImage: "/HomeBanner/volthub-ev-charger-main.jpg",
     mobileBackgroundImage: "/HomeBanner/volthub-ev-charger-main.jpg",
     mobileBackgroundPosition: "right center",
     showimg: false,
     descriptionClassName: "w-full md:w-1/2 md:ml-auto md:max-w-2xl",
-    buttonText: "Request a Quote",
-    buttonLink: "/contact",
+    buttonText: "Operate a Charging Station",
+    buttonLink: "/services/charging-operation",
     gradient: "bg-gradient-to-br from-primary/90 via-primary/70 to-transparent",
     layout: "side-by-side" as const,
   },
@@ -372,6 +372,7 @@ export const videoItems = [
 export const resources = [
   {
     slug: "the-billion-peso-ev-charging-opportunity-in-the-philippines",
+    seoTitle: "EV Charging: The Philippines' Next Billion-Peso Industry",
     title: "The Next Billion-Peso Industry in the Philippines Is Not Coming — It Has Already Started",
     description:
       "And early investors are positioning themselves now. Discover why the EV charging industry in the Philippines is the next major infrastructure opportunity — and how VoltHub helps you build recurring-income assets ahead of mass-market adoption.",
@@ -380,7 +381,8 @@ export const resources = [
     imageAlt: "VoltHub investment opportunity — EV charging and renewable energy infrastructure in the Philippines",
   },
   {
-    slug: "complete-guide-to-solar-energy-storage",
+    slug: "ev-charging-trends-philippines-2025",
+    seoTitle: "EV Charging Trends 2025: What Philippine Businesses Should Know",
     title: "The 2025 EV Charging Landscape: Why Smart Infrastructure is the Next Big Business Opportunity",
     description:
       "Discover the top EV charging trends defining 2025 and why smart infrastructure is essential for forward-thinking businesses.",
@@ -398,6 +400,7 @@ export const resources = [
   },
   {
     slug: "smart-grid-integration-powering-the-future",
+    seoTitle: "How Smart Grid Technology Powers Your Home",
     title: "Upgrade Your Energy: How Smart Grid Technology Powers the Future",
     description: "Discover how smart grid technology transforms your home into an intelligent energy ecosystem. Learn about two-way energy flow, automated savings, and future-proof solutions.",
     type: "Article",
@@ -406,6 +409,7 @@ export const resources = [
   },
   {
     slug: "commercial-energy-solutions-business-guide",
+    seoTitle: "Managing Peak Demand with Commercial Energy Storage",
     title: "Managing Peak Demand: How VoltHub Energy Storage Strengthens Your Business",
     description: "Learn how commercial energy storage systems help businesses manage peak demand, improve operational resilience, and protect critical operations from costly outages.",
     type: "Guide",
@@ -422,24 +426,34 @@ export function getResourceBySlug(slug: string) {
 // FAQs
 export const faqs = [
   {
-    question: "How long does installation take?",
+    question: "Can VoltHub run my charging station for me?",
     answer:
-      "Residential installations typically take 1-3 days, while commercial projects can take 1-2 weeks depending on the scale. Our team will provide a detailed timeline during the consultation phase.",
+      "Yes. Our charging operation service lists your station in the VoltHub app, handles payments, monitoring and driver support, and settles revenue to you monthly. Plans start at ₱1,500 per station per month, or connect an OCPP charger you already own.",
   },
   {
-    question: "Do you offer financing options?",
+    question: "How long does installation take?",
     answer:
-      "Yes, we offer flexible financing options including low-interest loans and lease-to-own programs. We can also help you take advantage of available tax credits and incentives.",
+      "A 7 kW home EV charger is installed in one visit, usually 3 to 5 hours. Residential solar takes 1 to 3 days on site plus Meralco net metering processing. Commercial charging or solar projects take 1 to 4 weeks depending on scale.",
+  },
+  {
+    question: "Do you offer financing or payment plans?",
+    answer:
+      "Yes. Residential solar and chargers can be paid in installments through partner banks and credit cards. Commercial sites can choose the Charger + App plan with no upfront charger cost, where VoltHub earns from charging revenue instead.",
+  },
+  {
+    question: "Is there a government incentive for solar or EV charging in the Philippines?",
+    answer:
+      "Solar owners can export excess power to Meralco under the Net Metering program (RA 9513) and receive bill credits. EV chargers and EVs enjoy import duty and tax incentives under the EVIDA law (RA 11697). VoltHub handles the net metering paperwork.",
   },
   {
     question: "What maintenance is required?",
     answer:
-      "Our systems require minimal maintenance. We offer monitoring services and annual maintenance packages to ensure optimal performance. Most systems are self-monitoring and require little to no regular maintenance.",
+      "Solar panels need cleaning two to four times a year; inverters and batteries are monitored remotely. Chargers on the VoltHub platform are monitored 24/7 and we dispatch a technician when a fault is detected.",
   },
   {
     question: "Can I expand my system later?",
     answer:
-      "Absolutely! Our systems are designed to be scalable. You can add more solar panels or battery capacity as your needs grow. We'll help you plan for future expansion during the initial design phase.",
+      "Yes. Solar arrays, batteries and charger counts are designed to scale. Operation plans are per station, so adding chargers is a matter of adding stations.",
   },
 ];
 

@@ -32,7 +32,7 @@ interface BlogDetailProps {
 }
 
 const blogContent: Record<string, { content: string; author?: string; date?: string; readingTime?: string }> = {
-  "complete-guide-to-solar-energy-storage": {
+  "ev-charging-trends-philippines-2025": {
     content: `
       <div class="intro-section">
         <p class="lead-text">The electric vehicle (EV) revolution has shifted gears. We are no longer just talking about "early adoption"—we are entering the era of mass infrastructure.</p>
@@ -680,7 +680,7 @@ export default function BlogDetail({ resource }: BlogDetailProps) {
       />
 
       {/* Key Takeaways Section — gated to the original solar-energy-storage article whose content these takeaways were authored for */}
-      {resource.slug === "complete-guide-to-solar-energy-storage" && (
+      {resource.slug === "ev-charging-trends-philippines-2025" && (
         <div className="mt-12 md:mt-16 p-6 md:p-10 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 shadow-sm">
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">

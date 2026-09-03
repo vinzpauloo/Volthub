@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "Energy Solutions by Sector - VoltHub",
+  title: { default: "Energy Solutions by Sector", template: "%s | VoltHub" },
   description:
-    "Discover tailored energy solutions for every sector. From residential homes to industrial level projects, we provide comprehensive energy infrastructure including energy storage, EV charging, and solar solutions.",
+    "Solar, storage and EV charging for residential, commercial, industrial, rural and smart-city projects in the Philippines.",
   keywords: [
     "residential energy solutions",
     "commercial energy solutions",
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: `${siteUrl}/sectors`,
     siteName: "VoltHub Energy",
-    title: "Energy Solutions by Sector - VoltHub",
+    title: "Energy Solutions by Sector",
     description:
-      "Discover tailored energy solutions for every sector. From residential homes to industrial level projects, we provide comprehensive energy infrastructure including energy storage, EV charging, and solar solutions.",
+      "Solar, storage and EV charging for residential, commercial, industrial, rural and smart-city projects in the Philippines.",
     images: [
       {
         url: "/HomeBanner/banner1.png",
@@ -36,9 +36,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Energy Solutions by Sector - VoltHub",
+    title: "Energy Solutions by Sector",
     description:
-      "Discover tailored energy solutions for every sector. From residential homes to industrial level projects, we provide comprehensive energy infrastructure.",
+      "Solar, storage and EV charging for residential, commercial, industrial, rural and smart-city projects in the Philippines.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",
   },

@@ -4,11 +4,11 @@ import LegalPageLayout, {
 } from "@/components/common/LegalPageLayout";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 const LAST_UPDATED = "April 8, 2026";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - VoltHub",
+  title: "Privacy Policy",
   description:
     "How VoltHub collects, uses, and protects personal information. Compliant with the Philippines Data Privacy Act (RA 10173) and GDPR principles.",
   robots: { index: true, follow: true },
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     url: `${siteUrl}/privacy`,
     siteName: "VoltHub Energy",
-    title: "Privacy Policy - VoltHub",
+    title: "Privacy Policy",
     description:
       "How VoltHub collects, uses, and protects personal information.",
   },
@@ -76,7 +76,7 @@ export default function PrivacyPage() {
             <br />
             BIR TIN: 667-401-960-000 (RDO 044 – Taguig-Pateros East)
             <br />
-            Website: <a href="https://volthub.ph">https://volthub.ph</a>
+            Website: <a href="https://www.volthub.ph">https://www.volthub.ph</a>
             <br />
             General Inquiries:{" "}
             <a href="mailto:customerservice@volthub.ph">customerservice@volthub.ph</a>

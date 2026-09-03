@@ -8,6 +8,7 @@ import EvChargingWhyChooseUsSection from "./components/EvChargingWhyChooseUsSect
 import EvChargingCtaSection from "./components/EvChargingCtaSection";
 import EvChargingPackagesSection from "./components/EvChargingPackagesSection";
 import EvChargingTypesSection from "./components/EvChargingTypesSection";
+import EvChargingPathsSection from "./components/EvChargingPathsSection";
 import EvChargingTabbedFeaturesSection from "./components/EvChargingTabbedFeaturesSection";
 
 export default function EVChargingSolutions() {
@@ -15,6 +16,7 @@ export default function EVChargingSolutions() {
     <main className="pt-10">
       <EvChargingHeroSection />
        
+      <EvChargingPathsSection />
       <EvChargingOfferingsSection />
       {/* <EvChargingProductsSection /> */}
     

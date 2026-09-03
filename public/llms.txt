@@ -1,0 +1,30 @@
+# VoltHub
+
+> VoltHub (VoltHub Electronic Power Generation Services Corporation) is a Philippine energy-technology company based in Bonifacio Global City, Taguig. We supply and install EV chargers, run EV charging stations for site owners through our own app and operator platform, and install rooftop solar and battery storage for homes and businesses across Metro Manila and the Philippines.
+
+Incorporated 17 January 2025. DOE-registered EV charging station provider. Contact: sales@volthub.ph, +63 968 219 7035.
+
+## What we do
+
+- EV charging operation service (CPO): we run your charging station end to end on the VoltHub app: driver payments (GCash, cards, wallet), OCPP 1.6J charger monitoring, pricing, revenue dashboard, settlement, and 24/7 support. Plans start at PHP 1,500 per station per month.
+- EV charger installation: 7 kW and 21 kW AC wallboxes for homes, offices and hotels; 30 kW to 400 kW DC fast chargers for public and fleet sites. Flat, quoted-upfront installation pricing.
+- Solar panel installation: grid-tied, hybrid and off-grid systems with net metering assistance (Meralco).
+- Battery energy storage: LiFePO4 systems for homes and commercial peak-shaving.
+- Solar panel wholesale for installers and resellers.
+
+## Key pages
+
+- [EV charging operation & app platform](https://www.volthub.ph/services/charging-operation): plans, platform features, how revenue share works
+- [EV charger installation](https://www.volthub.ph/services/ev-charging): chargers for homes and businesses
+- [Solar panel installation](https://www.volthub.ph/services/solar-installation): residential and commercial solar
+- [VoltHub app for drivers](https://www.volthub.ph/app): find stations, start charging, pay
+- [EV charging station ROI calculator](https://www.volthub.ph/tools/ev-charger-roi-calculator): CAPEX, monthly profit, payback, 10-year IRR
+- [Solar + storage ROI calculator](https://www.volthub.ph/tools/roi-calculator): payback and 25-year savings
+- [Market insights](https://www.volthub.ph/insights): Philippines EV charging and solar market data
+- [Blog](https://www.volthub.ph/blog)
+- [Contact](https://www.volthub.ph/contact)
+
+## Apps
+
+- Android: https://play.google.com/store/apps/details?id=ph.volthub.app
+- iOS: https://apps.apple.com/ph/app/volthub-ph/id6795752536

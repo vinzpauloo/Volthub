@@ -130,12 +130,12 @@ export async function generateMetadata({
   const { id } = await params;
   const data = await getProductData(id);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
   const productUrl = `${siteUrl}/products/${id}`;
 
   if (!data) {
     return {
-      title: "Product Not Found - VoltHub",
+      title: "Product Not Found",
       description: "The requested product could not be found.",
     };
   }

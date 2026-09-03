@@ -138,7 +138,7 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
 
   "EV Charging": {
     title: "EV Charging",
-    href: "/partners",
+    href: "/app",
     description: "Become an EV charging location partner.",
   },
 
@@ -162,7 +162,7 @@ const menu: Record<string, MenuItem[] | MenuItem> = {
 
   // partners: {
   //   title: "Partners",
-  //   href: "/partners",
+  //   href: "/app",
   //   description: "Become a location partner and host an EV charger.",
   // },
 

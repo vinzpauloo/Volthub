@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "Smart Cities Energy Solutions - VoltHub",
+  title: "Smart Cities Energy Solutions",
   description: "Integrated energy infrastructure for modern cities. Street lighting, EV charging networks, and microgrid systems for sustainable urban development.",
   keywords: [
     "smart cities energy",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: `${siteUrl}/sectors/smart-cities`,
     siteName: "VoltHub Energy",
-    title: "Smart Cities Energy Solutions - VoltHub",
+    title: "Smart Cities Energy Solutions",
     description: "Integrated energy infrastructure for modern cities. Street lighting, EV charging networks, and microgrid systems for sustainable urban development.",
     images: [
       {
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Smart Cities Energy Solutions - VoltHub",
+    title: "Smart Cities Energy Solutions",
     description: "Integrated energy infrastructure for modern cities. Street lighting, EV charging networks, and microgrid systems for sustainable urban development.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",
