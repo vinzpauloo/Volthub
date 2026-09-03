@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog | Latest Insights on Energy Storage & EV Charging - VoltHub",
-  description: "Stay updated with the latest blogs, guides, and insights on commercial energy storage, EV charging infrastructure, solar energy, and smart grid technology. Expert articles from VoltHub Energy.",
+  title: { default: "Solar & EV Charging Blog Philippines", template: "%s | VoltHub" },
+  description: "Guides on EV charging, solar and energy storage in the Philippines from the VoltHub team.",
   keywords: [
     "energy storage blog",
     "EV charging news",
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     "VoltHub blog",
   ],
   openGraph: {
-    title: "Blog | Latest Insights on Energy Storage & EV Charging - VoltHub",
-    description: "Stay updated with the latest blogs, guides, and insights on commercial energy storage, EV charging infrastructure, solar energy, and smart grid technology.",
+    title: "Solar & EV Charging Blog Philippines",
+    description: "Guides on EV charging, solar and energy storage in the Philippines from the VoltHub team.",
     type: "website",
     url: "/blog",
     siteName: "VoltHub Energy",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Blog | Latest Insights on Energy Storage & EV Charging - VoltHub",
-    description: "Stay updated with the latest blogs, guides, and insights on commercial energy storage, EV charging infrastructure, solar energy, and smart grid technology.",
+    title: "Solar & EV Charging Blog Philippines",
+    description: "Guides on EV charging, solar and energy storage in the Philippines from the VoltHub team.",
     images: ["/Blog/blogtitle.png"],
   },
   alternates: {

@@ -11,10 +11,10 @@ import WhyPhilippinesSection from "./components/why-philippines-section";
 import NewsletterCtaSection from "./components/newsletter-cta-section";
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "Market Insights | Philippines Clean Energy & EV Charging - VoltHub",
+  title: "Philippines EV Charging & Solar Market Insights",
   description:
     "Explore Philippines clean energy market data: EV charging (29.3% CAGR), solar energy, and energy storage insights. Data-driven analysis for investors and businesses.",
   keywords: [
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     url: `${siteUrl}/insights`,
     siteName: "VoltHub Energy",
     title:
-      "Market Insights | Philippines Clean Energy & EV Charging - VoltHub",
+      "Philippines EV Charging & Solar Market Insights",
     description:
       "Explore Philippines clean energy market data: EV charging (29.3% CAGR), solar energy, and energy storage insights.",
     images: [
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Market Insights | Philippines Clean Energy & EV Charging - VoltHub",
+      "Philippines EV Charging & Solar Market Insights",
     description:
       "Explore Philippines clean energy market data: EV charging (29.3% CAGR), solar energy, and energy storage insights.",
     images: ["/HomeBanner/banner1.png"],

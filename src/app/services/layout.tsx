@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "Professional Energy Services - VoltHub",
-  description: "Expert installation and maintenance of EV charging infrastructure and solar energy systems. From consultation to commissioning, we deliver comprehensive energy solutions tailored to your needs.",
+  title: { default: "EV Charging & Solar Services Philippines", template: "%s | VoltHub" },
+  description: "Charger installation, charging station operation, solar installation, energy storage and maintenance. One team from site survey to monthly settlement.",
   keywords: [
     "energy services",
     "EV charging installation",
@@ -20,8 +20,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: `${siteUrl}/services`,
     siteName: "VoltHub Energy",
-    title: "Professional Energy Services - VoltHub",
-    description: "Expert installation and maintenance of EV charging infrastructure and solar energy systems. From consultation to commissioning, we deliver comprehensive energy solutions tailored to your needs.",
+    title: "EV Charging & Solar Services Philippines",
+    description: "Charger installation, charging station operation, solar installation, energy storage and maintenance. One team from site survey to monthly settlement.",
     images: [
       {
         url: "/HomeBanner/banner1.png",
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Professional Energy Services - VoltHub",
-    description: "Expert installation and maintenance of EV charging infrastructure and solar energy systems. From consultation to commissioning, we deliver comprehensive energy solutions.",
+    title: "EV Charging & Solar Services Philippines",
+    description: "Charger installation, charging station operation, solar installation and energy storage in the Philippines.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",
   },

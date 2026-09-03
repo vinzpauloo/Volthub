@@ -67,7 +67,8 @@ const footerColumns = [
     heading: "Services",
     links: [
       // { label: "Overview", href: "/services" },
-      { label: "EV Charging Solutions", href: "/services/ev-charging" },
+      { label: "Charging Operation (App)", href: "/services/charging-operation" },
+      { label: "EV Charger Installation", href: "/services/ev-charging" },
       {
         label: "Solar Energy Installation",
         href: "/services/solar-installation",
@@ -79,7 +80,10 @@ const footerColumns = [
     links: [
       { label: "About Us", href: "/about" },
       { label: "Market Insights", href: "/insights" },
-      { label: "Become a Partner", href: "/partners" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Driver App", href: "/app" },
+      { label: "Operate a Station", href: "/services/charging-operation" },
       { label: "Contact", href: "/contact" },
     ],
   },
@@ -126,14 +130,20 @@ const Footer = () => {
             </p>
             <div className="flex space-x-3 md:space-x-4">
               {[
-                { Icon: RiLinkedinFill, label: "Visit VoltHub on LinkedIn" },
-                { Icon: RiTwitterFill, label: "Visit VoltHub on Twitter" },
-                { Icon: RiFacebookFill, label: "Visit VoltHub on Facebook" },
-                { Icon: RiInstagramLine, label: "Visit VoltHub on Instagram" },
-              ].map(({ Icon, label }) => (
+                { Icon: RiLinkedinFill, label: "Visit VoltHub on LinkedIn", href: "#" },
+                { Icon: RiTwitterFill, label: "Visit VoltHub on Twitter", href: "#" },
+                { Icon: RiFacebookFill, label: "Visit VoltHub on Facebook", href: "#" },
+                {
+                  Icon: RiInstagramLine,
+                  label: "Visit VoltHub on Instagram",
+                  href: "https://www.instagram.com/volthubph/",
+                },
+              ].map(({ Icon, label, href }) => (
                 <a
                   key={Icon.name}
-                  href="#"
+                  href={href}
+                  target={href === "#" ? undefined : "_blank"}
+                  rel={href === "#" ? undefined : "noopener noreferrer"}
                   className="hover:text-secondary transition-colors p-2 -m-2"
                   aria-label={label}
                 >

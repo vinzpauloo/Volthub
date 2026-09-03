@@ -1,16 +1,16 @@
 export default function OverviewSection() {
   return (
     <section className="py-6 md:py-8">
-      <h3 className="text-3xl font-bold text-primary mb-6 text-center gradient-text">
-        OVERVIEW
-      </h3>
+      <h1 className="text-3xl font-bold text-primary mb-6 text-center gradient-text">
+        About VoltHub
+      </h1>
 
      
 
       {/* ── The detail — how we do it ── */}
       <p className="text-gray-700 leading-relaxed text-lg">
         <span className="font-bold text-gray-900">
-          Volthub Electric Power Generation Services Corporation
+          VoltHub Electronic Power Generation Services Corporation
         </span>{" "}
         is a forward-looking energy technology company specializing in EV charging
         infrastructure, solar power systems, and smart energy solutions. We

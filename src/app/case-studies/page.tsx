@@ -5,8 +5,9 @@ import SectionHeading from "@/components/marketing/SectionHeading";
 import BackToTopButton from "@/components/common/BackToTopButton";
 
 export const metadata: Metadata = {
-  title: "Case Studies - VoltHub",
-  description: "Explore real-world success stories of VoltHub's energy solutions. See how our products and services have transformed homes, businesses, and communities with clean, reliable power.",
+  title: "Case Studies",
+  description: "Real VoltHub solar, storage and EV charging projects in the Philippines with capacity, location and results.",
+  alternates: { canonical: "/case-studies" },
 };
 
 const caseStudies = [
@@ -49,6 +50,7 @@ export default function CaseStudies() {
       <section className="pt-12">
         <LayoutContainer className="space-y-12">
           <SectionHeading
+            as="h1"
             title="Case Studies"
             description="Real-world implementations driving sustainable change."
           />

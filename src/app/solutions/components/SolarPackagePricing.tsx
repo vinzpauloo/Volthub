@@ -56,6 +56,7 @@ export function SolarPackagePricing(): React.ReactElement {
     <section className="section-spacing bg-gray-50">
       <LayoutContainer className="flex-col space-y-12">
         <SectionHeading
+          as="h1"
           eyebrow="Package Pricing"
           title="Custom-Made Solar Packages"
           description="Transparent pricing for our most popular solar setups. Every package is tailored to your roof, energy needs, and budget — these are guide prices for typical installations."

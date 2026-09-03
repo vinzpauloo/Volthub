@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "Industrial Energy Solutions - VoltHub",
-  description: "Large-scale power generation systems for factories, industrial parks, and utility-scale projects. From 40kWh to 2.7MWh capacity. Three-phase power for industrial equipment.",
+  title: "Industrial Energy Solutions",
+  description: "40 kWh to 2.7 MWh storage and three-phase power systems for factories and industrial parks, plus fleet DC charging.",
   keywords: [
     "industrial energy solutions",
     "factory power systems",
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: `${siteUrl}/sectors/industrial`,
     siteName: "VoltHub Energy",
-    title: "Industrial Energy Solutions - VoltHub",
-    description: "Large-scale power generation systems for factories, industrial parks, and utility-scale projects. From 40kWh to 2.7MWh capacity. Three-phase power for industrial equipment.",
+    title: "Industrial Energy Solutions",
+    description: "40 kWh to 2.7 MWh storage and three-phase power systems for factories and industrial parks, plus fleet DC charging.",
     images: [
       {
         url: "/HomeBanner/banner1.png",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Industrial Energy Solutions - VoltHub",
+    title: "Industrial Energy Solutions",
     description: "Large-scale power generation systems for factories, industrial parks, and utility-scale projects. From 40kWh to 2.7MWh capacity.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",

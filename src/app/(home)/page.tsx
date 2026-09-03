@@ -5,6 +5,7 @@ import { ArrowUp } from "lucide-react";
 import CarouselBanner from "@/components/home/CarouselBanner";
 import HoverEffects from "@/components/home/HoverEffects";
 import ArticleShowcaseSection from "./components/ArticleShowcaseSection";
+import OperationServiceSection from "./components/OperationServiceSection";
 // import ProductGridShowcase from "./components/ProductGridShowcase";
 import RecommendedProducts from "./components/RecommendedProducts";
 import BlogResourcesSection from "./components/BlogResourcesSection";
@@ -58,6 +59,8 @@ export default function Home() {
 
       {/* Article Showcase — F-Pattern layout with real installation photos & implementation data */}
       <ArticleShowcaseSection articles={articleShowcases} />
+
+      <OperationServiceSection />
 
       <RecommendedProducts />
 

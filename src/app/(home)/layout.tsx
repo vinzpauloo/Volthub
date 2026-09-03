@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { faqs } from "./components/homeData";
 import { jsonLd, seo } from "@/lib/seo";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
   title: "Solar, Battery & EV Charging Philippines",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteUrl,
     siteName: "VoltHub Energy",
-    title: "Solar, Battery & EV Charging Philippines | VoltHub",
+    title: "Solar, Battery & EV Charging Philippines",
     description: "Cut power bills with solar, battery storage and EV charging across the Philippines. Custom systems for homes, businesses and off-grid sites.",
     images: [
       {
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solar, Battery & EV Charging Philippines | VoltHub",
+    title: "Solar, Battery & EV Charging Philippines",
     description: "Cut power bills with solar, battery storage and EV charging across the Philippines.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",

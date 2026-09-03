@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/tools/roi-calculator",
-    title: "Solar + Storage ROI Calculator | VoltHub",
+    title: "Solar + Storage ROI Calculator",
     description:
       "Estimate your solar + battery payback, IRR, and 25-year savings with VoltHub's interactive ROI calculator. Based on official Philippine quotation prices.",
     images: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Solar + Storage ROI Calculator | VoltHub",
+    title: "Solar + Storage ROI Calculator",
     description:
       "Estimate your solar + battery payback, IRR, and 25-year savings with VoltHub's interactive ROI calculator.",
     images: ["/HomeBanner/homebatt.png"],

@@ -138,6 +138,7 @@ export const interestOptions = [
   { value: "cabinet-type-power-supply", label: "Power Supplies" },
   { value: "container-type-power-supply", label: "Container Type Power Supply" },
   // Services - EV Charging
+  { value: "charging-operation", label: "EV Charging Operation (VoltHub App)" },
   { value: "ev-charging-installation", label: "EV Charging Installation" },
   { value: "ev-charging-quote", label: "EV Charging Quote" },
   { value: "ac-charger-installation", label: "AC Charger Installation (7kW)" },

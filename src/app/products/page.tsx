@@ -2,10 +2,10 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import ProductsClient from "./ProductsClient";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "Products - Energy Storage & EV Charging Solutions | VoltHub",
+  title: "EV Chargers, Solar & Energy Storage Products",
   description: "Explore VoltHub's complete range of energy solutions including EV charging stations, solar street lights, smart home IPS, cabinet and container power systems.",
   keywords: [
     "EV charging stations",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: `${siteUrl}/products`,
     siteName: "VoltHub Energy",
-    title: "Products - Energy Storage & EV Charging Solutions | VoltHub",
+    title: "EV Chargers, Solar & Energy Storage Products",
     description: "Explore VoltHub's complete range of energy solutions including EV charging stations, solar street lights, smart home IPS, cabinet and container power systems.",
     images: [
       {
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Products - Energy Storage & EV Charging Solutions | VoltHub",
+    title: "EV Chargers, Solar & Energy Storage Products",
     description: "Explore VoltHub's complete range of energy solutions including EV charging stations, solar street lights, smart home IPS, cabinet and container power systems.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",
@@ -48,6 +48,8 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   return (
+    <>
+    <h1 className="sr-only">EV Chargers, Solar and Energy Storage Products</h1>
     <Suspense
       fallback={
         <main className="bg-slate-50 min-h-screen flex items-center justify-center">
@@ -57,5 +59,6 @@ export default function ProductsPage() {
     >
       <ProductsClient />
     </Suspense>
+    </>
   );
 }

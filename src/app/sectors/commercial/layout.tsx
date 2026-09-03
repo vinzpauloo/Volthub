@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "Commercial Energy Solutions - VoltHub",
-  description: "Power your business with reliable solar energy storage and EV charging infrastructure. From small offices to large commercial establishments. Reduce operating costs and ensure reliable power.",
+  title: "Commercial Energy Solutions",
+  description: "Solar, peak-shaving storage and EV charging for offices, malls, hotels and retail. Reduce operating costs and add charging revenue.",
   keywords: [
     "commercial energy solutions",
     "business energy storage",
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: `${siteUrl}/sectors/commercial`,
     siteName: "VoltHub Energy",
-    title: "Commercial Energy Solutions - VoltHub",
-    description: "Power your business with reliable solar energy storage and EV charging infrastructure. From small offices to large commercial establishments. Reduce operating costs and ensure reliable power.",
+    title: "Commercial Energy Solutions",
+    description: "Solar, peak-shaving storage and EV charging for offices, malls, hotels and retail. Reduce operating costs and add charging revenue.",
     images: [
       {
         url: "/HomeBanner/banner1.png",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Commercial Energy Solutions - VoltHub",
+    title: "Commercial Energy Solutions",
     description: "Power your business with reliable solar energy storage and EV charging infrastructure. From small offices to large commercial establishments.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",

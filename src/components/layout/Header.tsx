@@ -62,7 +62,8 @@ const navItems: NavItem[] = [
     description: "Professional installation and maintenance services",
     dropdown: [
       { label: "Overview", href: "/services" },
-      { label: "EV Charging Solutions", href: "/services/ev-charging" },
+      { label: "Charging Operation (App)", href: "/services/charging-operation" },
+      { label: "EV Charger Installation", href: "/services/ev-charging" },
       {
         label: "Solar Energy Installation",
         href: "/services/solar-installation",
@@ -92,9 +93,9 @@ const navItems: NavItem[] = [
   //   ],
   // },
   {
-    label: "EV Charging",
-    href: "/partners",
-    description: "Become an EV charging location partner",
+    label: "EV App",
+    href: "/app",
+    description: "Find chargers, start charging and pay in the VoltHub app",
   },
   {
     label: "About",

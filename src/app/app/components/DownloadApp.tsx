@@ -415,8 +415,9 @@ export function DownloadApp(): React.ReactElement {
     <section className="section-spacing bg-white">
       <LayoutContainer className="flex-col space-y-12">
         <SectionHeading
+          as="h1"
           eyebrow="Mobile App"
-          title="Download the VoltHub App"
+          title="The VoltHub EV Charging App"
           description="Take control of your EV charging experience with the VoltHub mobile app. Available on iOS and Android."
         />
 

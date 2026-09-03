@@ -56,6 +56,8 @@ function computeInitialFormState(
         "industrial-solutions": "Industrial Solutions",
         "rural-projects": "Rural Projects",
         "ev-charging-quote": "EV Charging",
+        "charging-operation": "EV Charging Operation (VoltHub App)",
+        "ac-charger-installation": "Home EV Charger Installation (7kW)",
         "solar-installation-quote": "Solar Installation",
         "general-inquiry": "General Inquiry",
       };

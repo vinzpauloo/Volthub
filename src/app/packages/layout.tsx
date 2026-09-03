@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Packages | VoltHub",
+  title: "Solar & EV Charging Packages",
+  alternates: { canonical: "/packages" },
   description:
     "Explore featured installation and charging package options from VoltHub.",
 };

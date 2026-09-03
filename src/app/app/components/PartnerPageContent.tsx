@@ -5,6 +5,7 @@ import { DownloadApp } from "./DownloadApp";
 import { HowToCharge } from "./HowToCharge";
 import { FindFastCharger } from "./FindFastCharger";
 import { EVChargingLearning } from "./EVChargingLearning";
+import { SiteOwnerCta } from "./SiteOwnerCta";
 
 export function PartnerPageContent(): React.ReactElement {
   return (
@@ -12,6 +13,7 @@ export function PartnerPageContent(): React.ReactElement {
       <DownloadApp />
       <HowToCharge />
       <FindFastCharger />
+      <SiteOwnerCta />
       <EVChargingLearning />
       <BackToTopButton />
     </main>

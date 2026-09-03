@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "Rural Projects Energy Solutions - VoltHub",
-  description: "Bringing reliable power to rural communities. Solar street lighting, off-grid power systems, and EV charging for remote areas. Perfect for off-grid and remote locations.",
+  title: "Rural Projects Energy Solutions",
+  description: "Solar street lighting, off-grid power systems and EV charging for remote and island communities in the Philippines.",
   keywords: [
     "rural energy solutions",
     "off-grid power systems",
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: `${siteUrl}/sectors/rural-projects`,
     siteName: "VoltHub Energy",
-    title: "Rural Projects Energy Solutions - VoltHub",
-    description: "Bringing reliable power to rural communities. Solar street lighting, off-grid power systems, and EV charging for remote areas. Perfect for off-grid and remote locations.",
+    title: "Rural Projects Energy Solutions",
+    description: "Solar street lighting, off-grid power systems and EV charging for remote and island communities in the Philippines.",
     images: [
       {
         url: "/HomeBanner/banner1.png",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rural Projects Energy Solutions - VoltHub",
+    title: "Rural Projects Energy Solutions",
     description: "Bringing reliable power to rural communities. Solar street lighting, off-grid power systems, and EV charging for remote areas.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",

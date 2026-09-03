@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://volthub.ph";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 
 export const metadata: Metadata = {
-  title: "Contact Us - VoltHub",
+  title: "Contact Us",
   description: "Get in touch with VoltHub for energy solutions, quotes, and installations. Contact our team for EV charging, solar installation, and power generation systems.",
   keywords: [
     "contact VoltHub",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: `${siteUrl}/contact`,
     siteName: "VoltHub Energy",
-    title: "Contact Us - VoltHub",
+    title: "Contact Us",
     description: "Get in touch with VoltHub for energy solutions, quotes, and installations. Contact our team for EV charging, solar installation, and power generation systems.",
     images: [
       {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Us - VoltHub",
+    title: "Contact Us",
     description: "Get in touch with VoltHub for energy solutions, quotes, and installations. Contact our team for EV charging, solar installation, and power generation systems.",
     images: ["/HomeBanner/banner1.png"],
     creator: "@VoltHubEnergy",
