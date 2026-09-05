@@ -455,8 +455,8 @@ export const resources = [
     description:
       "Comparing VoltHub Sparks, Tesla Wall Connector, Schneider EVlink Home and OEM-bundled chargers on equipment price, installation, and what to confirm before you buy.",
     type: "Guide",
-    image: "/Blog/blog2desc1.png",
-    imageAlt: "Comparing home EV charger brands available in the Philippines",
+    image: "/Blog/ev-charger-charging-in-progress.webp",
+    imageAlt: "VoltHub home EV charger actively charging an electric vehicle",
     faqs: [
       {
         question: "How much is VoltHub's cheapest 7kW home EV charger?",
