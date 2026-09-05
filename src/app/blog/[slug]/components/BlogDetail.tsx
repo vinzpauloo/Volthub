@@ -32,6 +32,237 @@ interface BlogDetailProps {
 }
 
 const blogContent: Record<string, { content: string; author?: string; date?: string; readingTime?: string }> = {
+  "best-home-ev-charger-brand-philippines": {
+    content: `
+      <div class="intro-section">
+        <p class="lead-text">If you want equipment and local installation handled by one supplier, VoltHub is worth comparing: the Sparks 7kW residential unit starts at ₱21,375, and with the standard 15-meter installation estimate that comes to about ₱46,375, VAT-inclusive, per the official price list dated July 9, 2026.</p>
+        <p>Tesla owners can also compare the factory Wall Connector. Your final choice should come down to vehicle compatibility, the all-in installed price, and after-sales support — not brand name alone.</p>
+      </div>
+
+      <h2>Which brand fits you?</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Brand / option</th>
+            <th>Best for</th>
+            <th>Reference price</th>
+            <th>Confirm before buying</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>VoltHub Sparks 7kW residential</strong></td>
+            <td>Buyers who want one local supplier for equipment and installation</td>
+            <td>No-screen unit ₱21,375; equipment + standard installation est. ₱46,375</td>
+            <td>Connector type, power supply, on-site installation scope, and warranty</td>
+          </tr>
+          <tr>
+            <td>Tesla Wall Connector</td>
+            <td>Tesla owners who want the factory-matched unit</td>
+            <td>₱38,000 (PH official price), installation separate</td>
+            <td>Local delivery version, power requirements, and total installed cost</td>
+          </tr>
+          <tr>
+            <td>Schneider Electric EVlink Home</td>
+            <td>Buyers comparing an independent charger brand</td>
+            <td>Specific PH model pricing available on request</td>
+            <td>Stock availability, compatibility, installer, and local warranty</td>
+          </tr>
+          <tr>
+            <td>Charger bundled with your car purchase</td>
+            <td>Buyers whose purchase contract already includes a charger</td>
+            <td>Per your purchase contract</td>
+            <td>Whether installation is included, and fees beyond standard scope</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>VoltHub provides on-site assessment, installation and maintenance. Tesla's official store lists a 24-foot (7.3m) cable and a 4-year residential warranty. Schneider's EVlink Home range spans 3.7kW, 7.4kW and 11kW configurations. This comparison is organized by use case, not a ranking of quality or sales volume. <a href="/services/ev-charging">VoltHub's EV charging service</a> · <a href="https://shop.tesla.com/en_ph/product/wall-connector">Tesla PH store</a> · <a href="https://ckm-content.se.com/ckmContent/sfc/servlet.shepherd/document/download/0698V00000QMVeUQAX">Schneider product datasheet</a></p>
+
+      <h2>How much does a VoltHub charger cost in the Philippines?</h2>
+      <p>Per VoltHub's official price list, the Sparks AC charger line retails from <strong>₱21,375 to ₱51,200</strong> in equipment, depending on power rating, screen, and single- or dual-gun configuration.</p>
+
+      <h3>VoltHub Sparks series pricing</h3>
+      <p>Currency: Philippine peso (PHP). Price list dated July 9, 2026, VAT-inclusive.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Configuration</th>
+            <th>Full model</th>
+            <th>Equipment retail price</th>
+            <th>Standard 15m install (est.)</th>
+            <th>Equipment + install (est.)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Sparks 7kW residential, no screen</td>
+            <td>WS-CDZ-7kW RSL</td>
+            <td>₱21,375</td>
+            <td>₱25,000</td>
+            <td><strong>₱46,375</strong></td>
+          </tr>
+          <tr>
+            <td>Sparks 7kW residential, with screen</td>
+            <td>WS-CDZ-7kW RWS</td>
+            <td>₱23,625</td>
+            <td>₱25,000</td>
+            <td><strong>₱48,625</strong></td>
+          </tr>
+          <tr>
+            <td>Sparks 7kW, screen, 5m cable</td>
+            <td>WS-CDZ-7KW-05m</td>
+            <td>₱24,750</td>
+            <td>₱35,000</td>
+            <td><strong>₱59,750</strong></td>
+          </tr>
+          <tr>
+            <td>Sparks 7kW, screen, 10m cable</td>
+            <td>WS-CDZ-7KW-10m</td>
+            <td>₱30,375</td>
+            <td>₱35,000</td>
+            <td><strong>₱65,375</strong></td>
+          </tr>
+          <tr>
+            <td>Sparks 21kW, screen, single gun</td>
+            <td>WS-CDZ-21KW-S</td>
+            <td>₱40,950</td>
+            <td>₱70,000</td>
+            <td><strong>₱110,950</strong></td>
+          </tr>
+          <tr>
+            <td>Sparks 21kW, screen, dual gun</td>
+            <td>WS-CDZ-21KW-D</td>
+            <td>₱51,200</td>
+            <td>₱70,000</td>
+            <td><strong>₱121,200</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Source: the EV product retail price schedule in VoltHub Electronic Power Generation Services Corporation's official price list.</p>
+      <div class="highlight-box">
+        <p><strong>Installation estimates in this table are not a fixed, one-size-fits-all price.</strong> The price list defines "standard installation" as 15 meters of cabling but doesn't itemize every material, labor task, or extra charge. Longer cable runs, panel upgrades, civil works, logistics, and other site-specific items may cost more — confirm in a written quote.</p>
+      </div>
+      <p>The 5m and 10m cable variants are separate product configurations in the price list, distinct from the "15m standard installation" line item — check both separately when you request pricing. For the 21kW dual-gun unit, also confirm total power output and how power is shared when both guns are used at once.</p>
+
+      <h2>Which model should typical homeowners compare first?</h2>
+      <p><strong>If your main need is everyday overnight top-ups, start by comparing the Sparks 7kW no-screen and with-screen units.</strong></p>
+      <p>Both are listed at 7kW with the same ₱25,000 standard installation estimate. The screen version costs ₱2,250 more, in both equipment price and estimated installed total. Decide based on whether you want an on-unit display, then compare any other feature differences between the two.</p>
+      <p>If you need networked management or usage billing, confirm the exact model that supports it. VoltHub's site describes its Home Charger as a plug-and-charge unit that doesn't require an app or network connection, while its Business Charger supports OCPP and networked management. <strong>Having a screen doesn't mean it has app support</strong> — don't assume a residential unit has commercial-grade features by default. <a href="/services/ev-charging">See VoltHub's product details</a></p>
+
+      <h2>How does VoltHub compare with Tesla on price?</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Unit</th>
+            <th>Equipment price</th>
+            <th>Difference vs. Tesla</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>VoltHub Sparks 7kW, no screen</td>
+            <td>₱21,375</td>
+            <td>₱16,625 less</td>
+          </tr>
+          <tr>
+            <td>VoltHub Sparks 7kW, with screen</td>
+            <td>₱23,625</td>
+            <td>₱14,375 less</td>
+          </tr>
+          <tr>
+            <td>Tesla Wall Connector</td>
+            <td>₱38,000</td>
+            <td>Baseline</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>VoltHub pricing is from the official price list above; Tesla pricing is from the <a href="https://shop.tesla.com/en_ph/product/wall-connector">Philippines official store</a> as checked on September 5, 2026.</p>
+      <p>This is an equipment-price comparison only — it doesn't tell you about features, warranty coverage, or the installed total. Get complete quotes from both for the same vehicle, the same parking spot, and the same cable run before deciding.</p>
+
+      <h2>Is 7kW enough? How long does charging take?</h2>
+      <p>Pick a power rating based on your vehicle's AC charging limit first, then your home's available supply. If your car tops out at 7kW on AC, a higher-powered charger won't push past that ceiling. <a href="https://www.tesla.com/en_ae/support/charging/wall-connector">Reference: charging power specs</a></p>
+      <p>For adding 30kWh to a battery:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Sustained charging power</th>
+            <th>Theoretical time to add 30 kWh</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>3.7 kW</td><td>~8.1 hours</td></tr>
+          <tr><td>7 kW</td><td>~4.3 hours</td></tr>
+          <tr><td>11 kW</td><td>~2.7 hours</td></tr>
+          <tr><td>21 kW</td><td>~1.4 hours</td></tr>
+        </tbody>
+      </table>
+      <p>These times are a simple "30kWh ÷ power" calculation that doesn't account for losses, thermal throttling, or power derating, so real charging usually takes longer. This is an illustrative scenario, not a guarantee every vehicle reaches the listed power.</p>
+
+      <h2>What to confirm before you pay</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>What to get from your supplier</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Full model number</td><td>The exact model and trim matching the price list, not just "7kW charger"</td></tr>
+          <tr><td>Vehicle compatibility</td><td>Model, year, connector type, and AC charging limit</td></tr>
+          <tr><td>Power input</td><td>Voltage, frequency, single- or three-phase requirement</td></tr>
+          <tr><td>Actual output</td><td>Maximum power, adjustable current, and the setting used for your install</td></tr>
+          <tr><td>Protection features</td><td>Grounding, earth-leakage, and DC fault current protection</td></tr>
+          <tr><td>Outdoor rating</td><td>IP rating, operating temperature, and installation limits</td></tr>
+          <tr><td>Cable & install distance</td><td>Charging cable length, cable run included, and rates beyond that</td></tr>
+          <tr><td>Smart features</td><td>Whether a screen, app, scheduling, or load management is included</td></tr>
+          <tr><td>After-sales</td><td>Warranty length for equipment vs. installation, and who's responsible</td></tr>
+        </tbody>
+      </table>
+      <p>VoltHub's price list doesn't spell out full connector specs, IP ratings, or warranty terms — get those from the product datasheet and a written quote.</p>
+
+      <h2>From choosing a brand to installation: 5 steps</h2>
+      <div class="ecosystem-features">
+        <div class="ecosystem-item">
+          <h3>1. Check your vehicle purchase contract</h3>
+          <p>Confirm whether a charger was already bundled with your car, and whether installation is included.</p>
+        </div>
+        <div class="ecosystem-item">
+          <h3>2. Prepare your vehicle and parking details</h3>
+          <p>Have your car's model, year, city, a parking spot photo, and your electrical panel's location ready.</p>
+        </div>
+        <div class="ecosystem-item">
+          <h3>3. Book a site assessment</h3>
+          <p>A qualified installer checks supply capacity, grounding, electrical infrastructure, and the cable route.</p>
+        </div>
+        <div class="ecosystem-item">
+          <h3>4. Get an itemized quote</h3>
+          <p>The quote should list the model, equipment price, taxes, installation scope, extra items, and warranty.</p>
+        </div>
+        <div class="ecosystem-item">
+          <h3>5. Test and accept</h3>
+          <p>Verify charging and protection functions on-site, and keep the invoice, serial number, test records, and after-sales contact.</p>
+        </div>
+      </div>
+
+      <h2>Frequently asked questions</h2>
+      <h3>How much is VoltHub's cheapest 7kW home EV charger?</h3>
+      <p>Per the official price list dated July 9, 2026, the Sparks 7kW residential no-screen unit (model WS-CDZ-7kW RSL) is priced at <strong>₱21,375, VAT-inclusive</strong>.</p>
+      <h3>How much does a VoltHub 7kW home charger cost installed?</h3>
+      <p>The no-screen residential unit is ₱21,375 in equipment plus the price list's ₱25,000 standard 15m installation estimate, for <strong>₱46,375</strong> total. The with-screen unit comes to an estimated <strong>₱48,625</strong>. Your final amount depends on a site assessment and written quote.</p>
+      <h3>Does VoltHub's charger price include installation?</h3>
+      <p><strong>No — the equipment retail price is separate from the installation line item in the price list.</strong> When requesting a quote, ask for the equipment price, the standard installation estimate, and the combined total as distinct figures.</p>
+      <h3>How do I get a quote for my home?</h3>
+      <p>Contact <a href="/services/ev-charging">VoltHub's EV charging service</a> with something like: "I'm in [city], my vehicle is [brand, model, year], and my parking spot is about [distance] from my electrical panel. Please send the compatible charger's full model, tax-inclusive equipment price, an itemized installation quote, and your local warranty terms."</p>
+
+      <div class="cta-section">
+        <h2>Want a quote for your exact setup?</h2>
+        <p>VoltHub installs 7kW and 21kW AC chargers for homes across Metro Manila with flat, quoted-upfront pricing. <a href="/services/ev-charging">See our EV charger installation service</a> or <a href="/tools/ev-charger-roi-calculator">run the numbers in our ROI calculator</a> before you decide.</p>
+      </div>
+    `,
+    author: "VoltHub Energy Team",
+    date: "September 5, 2026",
+    readingTime: "8 mins",
+  },
   "ev-charger-cost-installation-philippines": {
     content: `
       <div class="intro-section">
