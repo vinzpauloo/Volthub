@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { getResourceBySlug, resources } from "@/app/(home)/components/homeData";
 import BlogDetail from "./components/BlogDetail";
 import LayoutContainer from "@/components/layout/LayoutContainer";
-import { jsonLd, seo } from "@/lib/seo";
+import { jsonLd, seo, faqJsonLd } from "@/lib/seo";
 
 const blogContent: Record<string, { author?: string; date?: string; readingTime?: string }> = {
   "ev-charging-trends-philippines-2025": {
@@ -30,6 +30,11 @@ const blogContent: Record<string, { author?: string; date?: string; readingTime?
     author: "VoltHub Investment Team",
     date: "2026-05-23",
     readingTime: "5 mins",
+  },
+  "ev-charger-cost-installation-philippines": {
+    author: "VoltHub Energy Team",
+    date: "2026-09-05",
+    readingTime: "7 mins",
   },
 };
 
@@ -160,6 +165,8 @@ export default async function BlogPage({ params }: BlogPageProps) {
     mainEntityOfPage: articleUrl,
   };
 
+  const resourceFaqs = (resource as { faqs?: Array<{ question: string; answer: string }> }).faqs;
+
   return (
     <main className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-50">
       <script
@@ -167,6 +174,13 @@ export default async function BlogPage({ params }: BlogPageProps) {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: jsonLd(articleJsonLd) }}
       />
+      {resourceFaqs && resourceFaqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{ __html: jsonLd(faqJsonLd(resourceFaqs)) }}
+        />
+      )}
       <LayoutContainer className="py-8 md:py-12 lg:py-16">
         <BlogDetail resource={resource} />
       </LayoutContainer>

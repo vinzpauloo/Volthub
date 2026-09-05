@@ -416,6 +416,38 @@ export const resources = [
     image: "/Blog/blog5T.png",
     imageAlt: "Commercial energy solutions - Peak demand management and cost savings",
   },
+  {
+    slug: "ev-charger-cost-installation-philippines",
+    seoTitle: "Home EV Charger Cost in the Philippines (2026 Price Guide)",
+    title: "How Much Does a Home EV Charger Cost in the Philippines, Installed?",
+    description:
+      "A breakdown of home EV charger and installation costs in the Philippines — equipment price ranges, what installation covers, monthly charging cost estimates, and the questions to ask before you sign a quote.",
+    type: "Guide",
+    image: "/Blog/ev-charger-install-guide.webp",
+    imageAlt: "VoltHub electrician installing a home EV charger on a garage wall",
+    faqs: [
+      {
+        question: "How much does a home EV charger cost in the Philippines, including installation?",
+        answer:
+          "Budget roughly ₱40,000–₱85,000 for a basic 7 kW wallbox with installation, or ₱65,000–₱105,000 for a smart charger with installation, based on published supplier pricing. Your exact total depends on the equipment, cable run length, and whether your electrical panel needs an upgrade — get a site visit for a firm quote.",
+      },
+      {
+        question: "Should I buy a 7kW, 11kW, or 22kW home charger?",
+        answer:
+          "Match the charger to what your EV can actually accept on AC, not the charger's maximum rating. Most Philippine homes run single-phase power, which suits 7 kW chargers well; 11kW and 22kW chargers need three-phase supply and a vehicle that can use that extra power, so confirm both before paying for a higher-powered unit.",
+      },
+      {
+        question: "How much will home EV charging add to my electric bill?",
+        answer:
+          "As a rough estimate, driving 1,000 km a month at 15 kWh/100km with 90% charging efficiency draws about 167 kWh from the grid. At ₱12–₱18 per kWh that's roughly ₱2,000–₱3,000 a month, or about ₱2–₱3 per kilometer. Use your own electricity rate and vehicle's actual consumption for a precise number.",
+      },
+      {
+        question: "What should a home charger installation quote include?",
+        answer:
+          "Ask your supplier to break the quote into equipment, installation labor and materials, any extra cabling, electrical panel upgrades if needed, and other on-site costs — each as a separate line. Also confirm how many meters of cable the 'standard installation' covers and the per-meter rate beyond that.",
+      },
+    ],
+  },
 ];
 
 // Helper function to get resource by slug
