@@ -423,8 +423,8 @@ export const resources = [
     description:
       "A breakdown of home EV charger and installation costs in the Philippines — equipment price ranges, what installation covers, monthly charging cost estimates, and the questions to ask before you sign a quote.",
     type: "Guide",
-    image: "/Blog/blog3T.png",
-    imageAlt: "Home EV charger installation cost guide for the Philippines",
+    image: "/Blog/ev-charger-install-guide.webp",
+    imageAlt: "VoltHub electrician installing a home EV charger on a garage wall",
     faqs: [
       {
         question: "How much does a home EV charger cost in the Philippines, including installation?",
