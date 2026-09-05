@@ -36,6 +36,11 @@ const blogContent: Record<string, { author?: string; date?: string; readingTime?
     date: "2026-09-05",
     readingTime: "7 mins",
   },
+  "best-home-ev-charger-brand-philippines": {
+    author: "VoltHub Energy Team",
+    date: "2026-09-05",
+    readingTime: "8 mins",
+  },
 };
 
 function truncateDescription(text: string, max = 155) {

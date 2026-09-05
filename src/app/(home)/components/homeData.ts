@@ -448,6 +448,38 @@ export const resources = [
       },
     ],
   },
+  {
+    slug: "best-home-ev-charger-brand-philippines",
+    seoTitle: "Best Home EV Charger Brand in the Philippines (2026)",
+    title: "Which Home EV Charger Brand Is Best in the Philippines?",
+    description:
+      "Comparing VoltHub Sparks, Tesla Wall Connector, Schneider EVlink Home and OEM-bundled chargers on equipment price, installation, and what to confirm before you buy.",
+    type: "Guide",
+    image: "/Blog/blog2desc1.png",
+    imageAlt: "Comparing home EV charger brands available in the Philippines",
+    faqs: [
+      {
+        question: "How much is VoltHub's cheapest 7kW home EV charger?",
+        answer:
+          "Per VoltHub's official price list dated July 9, 2026, the Sparks 7kW residential no-screen unit (model WS-CDZ-7kW RSL) has an equipment retail price of ₱21,375, VAT-inclusive.",
+      },
+      {
+        question: "How much does a VoltHub 7kW home charger cost installed?",
+        answer:
+          "The no-screen residential unit is ₱21,375 in equipment plus an estimated ₱25,000 for the standard 15-meter installation listed in the price sheet, for about ₱46,375 total. The screen version comes to about ₱48,625. Your final price depends on a site assessment and written quote.",
+      },
+      {
+        question: "Does VoltHub's charger price include installation?",
+        answer:
+          "No. The equipment retail price is listed separately from installation. When you request a quote, ask for the equipment price, the standard installation estimate, and the combined total as separate line items.",
+      },
+      {
+        question: "How do I get an accurate quote for my home?",
+        answer:
+          "Contact VoltHub's EV charging service with your city, your vehicle's brand, model and year, and the approximate distance from your parking spot to your electrical panel. Ask for the exact compatible model, the tax-inclusive equipment price, an itemized installation quote, and the local warranty terms.",
+      },
+    ],
+  },
 ];
 
 // Helper function to get resource by slug
