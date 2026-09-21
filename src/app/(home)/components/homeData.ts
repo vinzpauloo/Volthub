@@ -449,6 +449,38 @@ export const resources = [
     ],
   },
   {
+    slug: "ev-charging-cost-philippines-home-vs-public",
+    seoTitle: "EV Charging Cost Philippines: Home vs Public (2026)",
+    title: "How Much Does It Cost to Charge an EV in the Philippines?",
+    description:
+      "A source-backed comparison of home, public AC, and public DC EV charging costs in the Philippines using September 2026 Meralco rates and DOE national averages.",
+    type: "Guide",
+    image: "/Blog/ev-charger-charging-in-progress.webp",
+    imageAlt: "Electric vehicle charging in progress at a VoltHub charger in the Philippines",
+    faqs: [
+      {
+        question: "How much does it cost to charge an EV at home in the Philippines?",
+        answer:
+          "Using Meralco's September 2026 overall rate of ₱14.7424 per kWh for a typical household and assuming 90% charging efficiency, adding 60 kWh to an EV battery costs about ₱983. Your actual cost depends on your electricity provider, bill tier, vehicle consumption, and charging losses.",
+      },
+      {
+        question: "How much does public EV charging cost in the Philippines?",
+        answer:
+          "The Department of Energy reported national average charging rates of ₱24.03 per kWh for public AC charging and ₱30.15 per kWh for DC fast charging as of March 31, 2026. At those averages and 90% efficiency, adding 60 kWh costs about ₱1,602 on public AC or ₱2,010 on public DC.",
+      },
+      {
+        question: "How much will charging an EV add to my monthly Meralco bill?",
+        answer:
+          "For 1,000 km per month, an EV using 15 kWh per 100 km draws about 167 kWh from the wall at 90% efficiency. At the September 2026 Meralco reference rate, that is approximately ₱2,457 per month, before any effect from your household's consumption tier.",
+      },
+      {
+        question: "Is home EV charging cheaper than public charging in the Philippines?",
+        answer:
+          "Usually yes. In this guide's September 2026 comparison, the reference cost is about ₱2.46 per km at home, ₱4.01 per km on public AC, and ₱5.03 per km on public DC for an EV consuming 15 kWh per 100 km at 90% charging efficiency.",
+      },
+    ],
+  },
+  {
     slug: "best-home-ev-charger-brand-philippines",
     seoTitle: "Best Home EV Charger Brand in the Philippines (2026)",
     title: "Which Home EV Charger Brand Is Best in the Philippines?",

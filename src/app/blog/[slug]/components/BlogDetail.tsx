@@ -32,6 +32,175 @@ interface BlogDetailProps {
 }
 
 const blogContent: Record<string, { content: string; author?: string; date?: string; readingTime?: string }> = {
+  "ev-charging-cost-philippines-home-vs-public": {
+    content: `
+      <div class="intro-section">
+        <p class="lead-text">At Meralco's September 2026 reference rate, adding 60 kWh to an EV battery at home costs about ₱983 when 90% charging efficiency is included. Using the Department of Energy's national averages, the same energy costs about ₱1,602 on public AC charging or ₱2,010 on public DC fast charging.</p>
+        <p>Home charging is generally the lowest-cost option, while public DC charging costs more in exchange for speed and convenience. Your actual bill depends on your distribution utility, household consumption tier, vehicle efficiency, charging losses, and the station operator's current fees.</p>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Reference rates used:</strong> ₱14.7424/kWh for a typical Meralco residential customer in September 2026; DOE national averages of ₱24.03/kWh for public AC and ₱30.15/kWh for public DC fast charging as of March 31, 2026. All examples assume 90% charging efficiency and are budgeting estimates, not quotations.</p>
+      </div>
+
+      <h2>Home vs public EV charging cost at a glance</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Charging option</th>
+            <th>Reference rate</th>
+            <th>Estimated cost per km</th>
+            <th>Best use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Home charging</strong></td>
+            <td>₱14.7424/kWh</td>
+            <td>₱2.46/km</td>
+            <td>Regular overnight charging</td>
+          </tr>
+          <tr>
+            <td>Public AC charging</td>
+            <td>₱24.03/kWh national average</td>
+            <td>₱4.01/km</td>
+            <td>Longer stops at offices, malls, hotels, or destinations</td>
+          </tr>
+          <tr>
+            <td>Public DC fast charging</td>
+            <td>₱30.15/kWh national average</td>
+            <td>₱5.03/km</td>
+            <td>Road trips and quick top-ups</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The per-kilometer figures assume an EV that uses 15 kWh per 100 km and 90% charging efficiency. They exclude parking, idle, membership, fixed, or time-based charges. DOE rules allow operators to use different fee structures, so check the station's displayed fee before starting a session.</p>
+
+      <h2>How much does a full charge cost?</h2>
+      <p>A battery is rarely charged from exactly 0% to 100%, but full-battery examples make vehicle sizes easier to compare. The table below calculates energy drawn as battery capacity divided by 90% efficiency.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Battery energy added</th>
+            <th>Energy drawn at 90% efficiency</th>
+            <th>Home</th>
+            <th>Public AC</th>
+            <th>Public DC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>40 kWh</td>
+            <td>44.4 kWh</td>
+            <td><strong>₱655</strong></td>
+            <td>₱1,068</td>
+            <td>₱1,340</td>
+          </tr>
+          <tr>
+            <td>60 kWh</td>
+            <td>66.7 kWh</td>
+            <td><strong>₱983</strong></td>
+            <td>₱1,602</td>
+            <td>₱2,010</td>
+          </tr>
+          <tr>
+            <td>80 kWh</td>
+            <td>88.9 kWh</td>
+            <td><strong>₱1,310</strong></td>
+            <td>₱2,136</td>
+            <td>₱2,680</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Use the energy you actually add, not the battery's total capacity, for a normal session. For example, charging a 60 kWh battery from 30% to 80% adds about 30 kWh before losses, not 60 kWh.</p>
+
+      <h2>How much will EV charging add to your monthly bill?</h2>
+      <p>For the examples below, the EV consumes 15 kWh per 100 km and charging efficiency is 90%.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Distance per month</th>
+            <th>Energy drawn</th>
+            <th>Home</th>
+            <th>Public AC</th>
+            <th>Public DC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>500 km</td>
+            <td>83.3 kWh</td>
+            <td><strong>₱1,229</strong></td>
+            <td>₱2,003</td>
+            <td>₱2,513</td>
+          </tr>
+          <tr>
+            <td>1,000 km</td>
+            <td>166.7 kWh</td>
+            <td><strong>₱2,457</strong></td>
+            <td>₱4,005</td>
+            <td>₱5,025</td>
+          </tr>
+          <tr>
+            <td>1,500 km</td>
+            <td>250 kWh</td>
+            <td><strong>₱3,686</strong></td>
+            <td>₱6,008</td>
+            <td>₱7,538</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Adding an EV can move a household into a different consumption tier, so the published Meralco reference rate may not equal the effective rate on your final bill. For the most personal estimate, divide your latest bill's total amount due by its billed kWh and use that result in the formula below.</p>
+
+      <h2>EV charging cost formula</h2>
+      <div class="highlight-box success">
+        <p><strong>Session cost = battery energy added ÷ charging efficiency × electricity or charging rate</strong></p>
+        <p><strong>Monthly cost = monthly distance × vehicle consumption per km ÷ charging efficiency × rate</strong></p>
+      </div>
+      <p>Example: 1,000 km × 0.15 kWh/km ÷ 0.90 × ₱14.7424/kWh = approximately ₱2,457 for home charging.</p>
+
+      <h2>Why your real cost may be different</h2>
+      <ul>
+        <li><strong>Your electricity provider:</strong> Meralco is only one Philippine distribution utility. Rates outside its service area differ.</li>
+        <li><strong>Household consumption tier:</strong> the effective all-in rate changes with total monthly usage.</li>
+        <li><strong>Vehicle efficiency:</strong> a small sedan may use less than 15 kWh/100 km, while a large SUV or van may use more.</li>
+        <li><strong>Charging losses:</strong> temperature, charger type, battery conditioning, and onboard electronics affect efficiency.</li>
+        <li><strong>Public-station fees:</strong> operators may add parking, idle, fixed, time-based, or membership charges.</li>
+        <li><strong>Solar generation:</strong> charging directly from surplus rooftop solar can reduce purchased grid energy, but the value depends on system output and charging time.</li>
+      </ul>
+
+      <h2>When should you use home, public AC, or public DC charging?</h2>
+      <p><strong>Use home charging for routine daily energy.</strong> It is usually the most convenient and lowest-cost option if you have a dedicated parking space and an electrical system that can support the charger. See VoltHub's <a href="/blog/ev-charger-cost-installation-philippines">Philippines EV charger installation cost guide</a> for equipment and installation pricing.</p>
+      <p><strong>Use public AC when the vehicle will already be parked for several hours.</strong> Destination charging works well at workplaces, hotels, condominiums, and shopping centers.</p>
+      <p><strong>Use public DC when time matters.</strong> Fast charging is valuable on long trips or when you need energy quickly, even though the per-kWh price is normally higher.</p>
+
+      <h2>Frequently asked questions</h2>
+      <h3>How much does it cost to charge an EV at home in the Philippines?</h3>
+      <p>Using Meralco's September 2026 overall rate of ₱14.7424 per kWh for a typical household and assuming 90% charging efficiency, adding 60 kWh to an EV battery costs about ₱983. Your actual cost depends on your electricity provider, bill tier, vehicle consumption, and charging losses.</p>
+      <h3>How much does public EV charging cost in the Philippines?</h3>
+      <p>The Department of Energy reported national average charging rates of ₱24.03 per kWh for public AC charging and ₱30.15 per kWh for DC fast charging as of March 31, 2026. At those averages and 90% efficiency, adding 60 kWh costs about ₱1,602 on public AC or ₱2,010 on public DC.</p>
+      <h3>How much will charging an EV add to my monthly Meralco bill?</h3>
+      <p>For 1,000 km per month, an EV using 15 kWh per 100 km draws about 167 kWh from the wall at 90% efficiency. At the September 2026 Meralco reference rate, that is approximately ₱2,457 per month, before any effect from your household's consumption tier.</p>
+      <h3>Is home EV charging cheaper than public charging in the Philippines?</h3>
+      <p>Usually yes. In this guide's September 2026 comparison, the reference cost is about ₱2.46 per km at home, ₱4.01 per km on public AC, and ₱5.03 per km on public DC for an EV consuming 15 kWh per 100 km at 90% charging efficiency.</p>
+
+      <h2>Sources and methodology</h2>
+      <ul>
+        <li><a href="https://company.meralco.com.ph/news-and-advisories/lower-rates-september-2026">Meralco: Lower Rates this September 2026</a> — ₱14.7424/kWh overall rate for a typical household.</li>
+        <li><a href="https://doe.gov.ph/news/press-releases/3402730--doe-welcomes-launch-of-iwas-taas-pamasahe-e-transport-program-cites-critical-role-in-reducing-fuel-dependence">Department of Energy: national average EV charging rates as of March 31, 2026</a> — ₱24.03/kWh AC and ₱30.15/kWh DC fast charging.</li>
+        <li><a href="https://doe.gov.ph/be-informed-doe-electric-vehicle-charging-stations-evcs-unbundled-charging-fees-as-of-31-july-2026">DOE EVCS unbundled charging fees as of July 31, 2026</a> — current operator-level fee reference.</li>
+      </ul>
+      <p>Calculations are rounded to the nearest peso and use 90% charging efficiency. Public charging figures use DOE national averages rather than quoting a specific operator. Rates change, so check your latest electricity bill and the station's displayed fee before relying on an estimate.</p>
+
+      <div class="cta-section">
+        <h2>Want the lowest-cost charging setup for your home?</h2>
+        <p>VoltHub can assess your vehicle, electrical panel, parking space, and cable route, then provide an itemized installation quote. <a href="/services/ev-charging">See our home EV charging service</a> or <a href="/tools/ev-charger-roi-calculator">compare charging economics with the ROI calculator</a>.</p>
+      </div>
+    `,
+    author: "VoltHub Energy Team",
+    date: "September 21, 2026",
+    readingTime: "8 mins",
+  },
   "best-home-ev-charger-brand-philippines": {
     content: `
       <div class="intro-section">
@@ -402,6 +571,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
         </tbody>
       </table>
       <p>This is a sensitivity estimate, not a Meralco rate quote — swap in your own bill's rate and your vehicle's actual consumption for a real number, and remember that shifting to a new usage tier or a different rate schedule after installing a charger can also move your total bill. When comparing against public charging, factor in parking, service fees, and overstay charges too — not just the per-kWh price.</p>
+      <p>For a current Philippines comparison using official Meralco and DOE reference rates, see <a href="/blog/ev-charging-cost-philippines-home-vs-public">how much it costs to charge an EV at home versus a public station</a>.</p>
 
       <h2>Do you need a permit or utility upgrade?</h2>
       <p>There is no single yes-or-no answer for every home. The installation must match the property's electrical capacity and applicable national, utility, LGU, building, and condominium requirements. A detached home with adequate capacity may have a simpler process than a condominium installation, a long cable route through common areas, or a property that needs a service upgrade.</p>
