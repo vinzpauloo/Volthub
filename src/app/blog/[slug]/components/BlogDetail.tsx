@@ -266,51 +266,65 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
   "ev-charger-cost-installation-philippines": {
     content: `
       <div class="intro-section">
-        <p class="lead-text">Budget roughly ₱40,000–₱85,000 for a basic 7 kW home EV charger with installation in the Philippines, or ₱65,000–₱105,000 for a smart charger with installation.</p>
-        <p>Those are reference ranges from published supplier pricing, not a quote for your home — the final number depends on the equipment you choose, how far the charger sits from your electrical panel, and whether your panel needs an upgrade. Start with what your car already came with, then get a site visit before you commit to a number.</p>
+        <p class="lead-text">A VoltHub 7kW home EV charger starts at ₱21,375 VAT-inclusive, and the official price schedule estimates ₱25,000 for a standard 15-meter installation. That puts the indicative installed starting price at ₱46,375 before site-specific extras.</p>
+        <p>Other listed VoltHub 7kW configurations reach about ₱65,375 installed. The final price depends on the equipment model, cable route, panel capacity, grounding, civil work, logistics, and any utility or building requirements. A site assessment and itemized written quote are still required.</p>
       </div>
 
       <div class="highlight-box">
-        <p><strong>Rule of thumb:</strong> a total price is really five line items — equipment, installation labor and materials, extra cabling, any panel upgrade, and site-specific extras. Ask your supplier to quote each one separately, not as one bundled figure.</p>
+        <p><strong>Price basis:</strong> VoltHub Electronic Power Generation Services Corporation's official retail price schedule dated July 9, 2026. Equipment prices are VAT-inclusive. The schedule defines standard installation as 15 meters of cabling, but the exact materials, labor, protection devices, testing, and exclusions must be confirmed in your quote. This guide was reviewed on September 21, 2026.</p>
       </div>
 
-      <h2>What's the price difference between a basic and a smart charger?</h2>
-      <p>"Smart" chargers add app control, scheduled charging, and energy monitoring on top of the same basic job of delivering power to your car. Here's how the equipment-only and equipment-plus-installation ranges compare, based on current supplier pricing:</p>
+      <h2>VoltHub 7kW home charger prices</h2>
+      <p>These are first-party reference prices from VoltHub's price schedule, not a nationwide market average. The installed totals combine the listed equipment price with the schedule's installation estimate and exclude site-specific extras.</p>
 
       <table>
         <thead>
           <tr>
-            <th>Option</th>
-            <th>Equipment only</th>
-            <th>What's included</th>
+            <th>Configuration</th>
+            <th>Full model</th>
+            <th>Equipment</th>
+            <th>Install estimate</th>
+            <th>Indicative total</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Basic 7 kW wallbox</td>
-            <td>₱15,000–₱50,000</td>
-            <td>Equipment price; installation quoted separately</td>
+            <td>7kW residential, no screen</td>
+            <td>WS-CDZ-7kW RSL</td>
+            <td>₱21,375</td>
+            <td>₱25,000</td>
+            <td><strong>₱46,375</strong></td>
           </tr>
           <tr>
-            <td>Smart charger</td>
-            <td>₱40,000–₱70,000</td>
-            <td>App control, scheduling and monitoring; installation quoted separately</td>
+            <td>7kW residential, with screen</td>
+            <td>WS-CDZ-7kW RWS</td>
+            <td>₱23,625</td>
+            <td>₱25,000</td>
+            <td><strong>₱48,625</strong></td>
           </tr>
           <tr>
-            <td>Basic 7 kW + installation</td>
-            <td>₱40,000–₱85,000</td>
-            <td>Bundled budget range from one supplier's published pricing; still needs a site quote</td>
+            <td>7kW, screen, 5m cable</td>
+            <td>WS-CDZ-7KW-05m</td>
+            <td>₱24,750</td>
+            <td>₱35,000</td>
+            <td><strong>₱59,750</strong></td>
           </tr>
           <tr>
-            <td>Smart charger + installation</td>
-            <td>₱65,000–₱105,000</td>
-            <td>Bundled budget range from one supplier's published pricing; still needs a site quote</td>
+            <td>7kW, screen, 10m cable</td>
+            <td>WS-CDZ-7KW-10m</td>
+            <td>₱30,375</td>
+            <td>₱35,000</td>
+            <td><strong>₱65,375</strong></td>
           </tr>
         </tbody>
       </table>
-      <p>OEM wall-mounted chargers from EV brands are also sold as standalone equipment, priced separately from installation — check whether your vehicle already came bundled with one before buying a third-party unit.</p>
+      <p>The 5m and 10m cable entries are charger configurations in the price schedule; they are separate from the 15-meter standard-installation allowance. Confirm both the charger's attached cable length and the building cable route in writing. Also check whether your vehicle purchase already includes a charger or installation package.</p>
 
-      <h2>Should you buy a 7kW, 11kW, or 22kW charger?</h2>
+      <div class="highlight-box">
+        <p><strong>Rule of thumb:</strong> ask for five separate line items — equipment, standard installation labor and materials, extra cabling, panel or service upgrades, and site-specific extras. A single bundled figure makes quotes harder to compare.</p>
+      </div>
+
+      <h2>Should you buy a 7kW, 11kW, or 21/22kW charger?</h2>
       <p>Buying a higher-powered charger doesn't make your car charge faster than its own onboard charger allows. Check what your EV can actually accept on AC power first, then check what your home's electrical supply can deliver — both have to line up.</p>
 
       <table>
@@ -319,7 +333,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
             <th>Spec</th>
             <th>~7.4 kW</th>
             <th>~11 kW</th>
-            <th>~22 kW</th>
+            <th>~21–22 kW</th>
           </tr>
         </thead>
         <tbody>
@@ -345,13 +359,13 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
             <td>Before you buy, confirm</td>
             <td>Your vehicle's AC limit and available home capacity</td>
             <td>Three-phase supply exists and your car can use it</td>
-            <td>Three-phase capacity and that your car supports 22kW AC</td>
+            <td>Three-phase capacity, the charger's rated nameplate output, and your car's AC limit</td>
           </tr>
         </tbody>
       </table>
-      <p>Those charge times are a simple "energy added ÷ power" calculation — they don't account for charging losses, thermal throttling, or power derating, so real-world charging usually takes longer. Most Philippine homes run single-phase supply, which is why 7 kW is the common default; your installer will confirm what your panel can support.</p>
+      <p>Those charge times are a simple "energy added ÷ power" calculation — they don't account for charging losses, thermal throttling, or power derating, so real-world charging usually takes longer. VoltHub labels its three-phase product 21kW; other brands commonly use 22kW for the same general high-power AC class. Use the charger's rated nameplate output when comparing products.</p>
       <div class="highlight-box success">
-        <p><strong>If your EV's onboard charger tops out at 7 kW, a 22 kW charger won't charge it any faster.</strong> The car — not the charger — sets the ceiling.</p>
+        <p><strong>If your EV's onboard charger tops out at 7 kW, a 21kW or 22kW charger won't charge it any faster.</strong> The car — not the charger — sets the ceiling.</p>
       </div>
 
       <h2>How much will home charging add to your electric bill?</h2>
@@ -388,6 +402,10 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
         </tbody>
       </table>
       <p>This is a sensitivity estimate, not a Meralco rate quote — swap in your own bill's rate and your vehicle's actual consumption for a real number, and remember that shifting to a new usage tier or a different rate schedule after installing a charger can also move your total bill. When comparing against public charging, factor in parking, service fees, and overstay charges too — not just the per-kWh price.</p>
+
+      <h2>Do you need a permit or utility upgrade?</h2>
+      <p>There is no single yes-or-no answer for every home. The installation must match the property's electrical capacity and applicable national, utility, LGU, building, and condominium requirements. A detached home with adequate capacity may have a simpler process than a condominium installation, a long cable route through common areas, or a property that needs a service upgrade.</p>
+      <p>The national framework comes from the <a href="https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/96703">EVIDA Implementing Rules and Regulations</a> and the Department of Energy's <a href="https://legacy.doe.gov.ph/laws-and-issuances/memorandum-circular-no-55-s-2024?q=laws-and-issuances%2Fimplementing-guidelines">EVCS requirements, specifications, and interconnectivity guidelines</a>. For changes to electrical service, follow the process of your distribution utility; Meralco publishes its <a href="https://www.meralco.com.ph/residential/electric-service/start-or-modify/start-service">start or modify service guidance</a>. Your installer should identify which approvals apply after the site assessment.</p>
 
       <h2>From quote to installation: 6 steps</h2>
       <div class="ecosystem-features">
@@ -440,14 +458,33 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
       </table>
       <p>When you request quotes, send your vehicle model, city, a photo of your parking spot, and the rough distance from your electrical panel to the parking space all at once. Ask specifically for the <strong>itemized equipment + installation total</strong> — that's what lets you tell whether a quote actually fits your car and your home.</p>
 
+      <h2>Frequently asked questions</h2>
+      <h3>How much does a 7kW home EV charger cost in the Philippines, installed?</h3>
+      <p>Based on VoltHub's official price schedule dated July 9, 2026, a Sparks 7kW residential charger starts at ₱21,375 VAT-inclusive, with an estimated ₱25,000 standard 15-meter installation, for an indicative total of ₱46,375. Other listed 7kW configurations reach about ₱65,375 before panel upgrades, civil work, longer cable runs, logistics, or other site-specific extras.</p>
+      <h3>Should I buy a 7kW, 11kW, or 21/22kW home charger?</h3>
+      <p>Match the charger to your EV's AC charging limit and the supply available at the property. A 7kW charger is the usual starting point for a single-phase home supply. The 21kW and 22kW labels describe the same general three-phase high-power class, but the exact rated output depends on the product; confirm the charger's nameplate, your vehicle's limit, and the site's capacity before buying.</p>
+      <h3>How much will home EV charging add to my electric bill?</h3>
+      <p>As a rough estimate, driving 1,000 km a month at 15 kWh/100km with 90% charging efficiency draws about 167 kWh from the grid. At ₱12–₱18 per kWh that's roughly ₱2,000–₱3,000 a month, or about ₱2–₱3 per kilometer. Use your own electricity rate and vehicle's actual consumption for a precise number.</p>
+      <h3>What should a home charger installation quote include?</h3>
+      <p>Ask your supplier to break the quote into equipment, installation labor and materials, any extra cabling, electrical panel upgrades if needed, and other on-site costs — each as a separate line. Also confirm how many meters of cable the "standard installation" covers and the per-meter rate beyond that.</p>
+
+      <h2>Sources and pricing methodology</h2>
+      <ul>
+        <li>VoltHub Electronic Power Generation Services Corporation official EV product retail price schedule, dated July 9, 2026; VAT-inclusive equipment prices and listed standard-installation estimates.</li>
+        <li><a href="https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/96703">EVIDA Implementing Rules and Regulations</a>, Republic of the Philippines.</li>
+        <li><a href="https://legacy.doe.gov.ph/laws-and-issuances/memorandum-circular-no-55-s-2024?q=laws-and-issuances%2Fimplementing-guidelines">DOE EVCS requirements, specifications, and interconnectivity guidelines</a>.</li>
+        <li><a href="https://www.meralco.com.ph/residential/electric-service/start-or-modify/start-service">Meralco service application and modification guidance</a>.</li>
+      </ul>
+      <p>Prices can change. VoltHub's listed installation figures are estimates rather than universal fixed prices. The totals above are arithmetic combinations of the published equipment and installation lines and should be replaced by an itemized written quote after a site assessment.</p>
+
       <div class="cta-section">
         <h2>Want an exact number for your home?</h2>
         <p>VoltHub installs 7 kW and 21 kW AC chargers for homes across Metro Manila with flat, quoted-upfront pricing. <a href="/services/ev-charging">See our EV charger installation service</a> or <a href="/tools/ev-charger-roi-calculator">run the numbers in our ROI calculator</a> before you decide.</p>
       </div>
     `,
     author: "VoltHub Energy Team",
-    date: "September 5, 2026",
-    readingTime: "7 mins",
+    date: "Updated September 21, 2026",
+    readingTime: "9 mins",
   },
   "ev-charging-trends-philippines-2025": {
     content: `
@@ -1219,4 +1256,3 @@ export default function BlogDetail({ resource }: BlogDetailProps) {
     </article>
   );
 }
-

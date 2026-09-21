@@ -418,23 +418,23 @@ export const resources = [
   },
   {
     slug: "ev-charger-cost-installation-philippines",
-    seoTitle: "Home EV Charger Cost in the Philippines (2026 Price Guide)",
-    title: "How Much Does a Home EV Charger Cost in the Philippines, Installed?",
+    seoTitle: "EV Charger Installation Cost Philippines (2026 Guide)",
+    title: "How Much Does EV Charger Installation Cost in the Philippines?",
     description:
-      "A breakdown of home EV charger and installation costs in the Philippines — equipment price ranges, what installation covers, monthly charging cost estimates, and the questions to ask before you sign a quote.",
+      "A source-backed guide to home EV charger installation costs in the Philippines, including VoltHub equipment prices, installation estimates, monthly charging costs, and quote requirements.",
     type: "Guide",
     image: "/Blog/ev-charger-install-guide.webp",
     imageAlt: "VoltHub electrician installing a home EV charger on a garage wall",
     faqs: [
       {
-        question: "How much does a home EV charger cost in the Philippines, including installation?",
+        question: "How much does a 7kW home EV charger cost in the Philippines, installed?",
         answer:
-          "Budget roughly ₱40,000–₱85,000 for a basic 7 kW wallbox with installation, or ₱65,000–₱105,000 for a smart charger with installation, based on published supplier pricing. Your exact total depends on the equipment, cable run length, and whether your electrical panel needs an upgrade — get a site visit for a firm quote.",
+          "Based on VoltHub's official price schedule dated July 9, 2026, a Sparks 7kW residential charger starts at ₱21,375 VAT-inclusive, with an estimated ₱25,000 standard 15-meter installation, for an indicative total of ₱46,375. Other listed 7kW configurations reach about ₱65,375 before panel upgrades, civil work, longer cable runs, logistics, or other site-specific extras.",
       },
       {
-        question: "Should I buy a 7kW, 11kW, or 22kW home charger?",
+        question: "Should I buy a 7kW, 11kW, or 21/22kW home charger?",
         answer:
-          "Match the charger to what your EV can actually accept on AC, not the charger's maximum rating. Most Philippine homes run single-phase power, which suits 7 kW chargers well; 11kW and 22kW chargers need three-phase supply and a vehicle that can use that extra power, so confirm both before paying for a higher-powered unit.",
+          "Match the charger to your EV's AC charging limit and the supply available at the property. A 7kW charger is the usual starting point for a single-phase home supply. The 21kW and 22kW labels describe the same general three-phase high-power class, but the exact rated output depends on the product; confirm the charger's nameplate, your vehicle's limit, and the site's capacity before buying.",
       },
       {
         question: "How much will home EV charging add to my electric bill?",

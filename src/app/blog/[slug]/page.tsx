@@ -5,7 +5,7 @@ import BlogDetail from "./components/BlogDetail";
 import LayoutContainer from "@/components/layout/LayoutContainer";
 import { jsonLd, seo, faqJsonLd } from "@/lib/seo";
 
-const blogContent: Record<string, { author?: string; date?: string; readingTime?: string }> = {
+const blogContent: Record<string, { author?: string; date?: string; modifiedDate?: string; readingTime?: string }> = {
   "ev-charging-trends-philippines-2025": {
     author: "VoltHub Energy Team",
     date: "2025-01-28",
@@ -34,7 +34,8 @@ const blogContent: Record<string, { author?: string; date?: string; readingTime?
   "ev-charger-cost-installation-philippines": {
     author: "VoltHub Energy Team",
     date: "2026-09-05",
-    readingTime: "7 mins",
+    modifiedDate: "2026-09-21",
+    readingTime: "9 mins",
   },
   "best-home-ev-charger-brand-philippines": {
     author: "VoltHub Energy Team",
@@ -115,6 +116,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
       ],
       type: "article",
       publishedTime: articleMeta.date || undefined,
+      modifiedTime: articleMeta.modifiedDate || articleMeta.date || undefined,
       authors: articleMeta.author ? [articleMeta.author] : undefined,
       section: resource.type,
     },
@@ -131,6 +133,9 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
     other: {
       ...(articleMeta.author && { "article:author": articleMeta.author }),
       ...(articleMeta.date && { "article:published_time": articleMeta.date }),
+      ...((articleMeta.modifiedDate || articleMeta.date) && {
+        "article:modified_time": articleMeta.modifiedDate || articleMeta.date,
+      }),
       ...(articleMeta.readingTime && { "article:reading_time": articleMeta.readingTime }),
       "article:section": resource.type,
     },
@@ -159,7 +164,7 @@ export default async function BlogPage({ params }: BlogPageProps) {
     image: imageUrl,
     url: articleUrl,
     datePublished: articleMeta.date,
-    dateModified: articleMeta.date,
+    dateModified: articleMeta.modifiedDate || articleMeta.date,
     author: {
       "@type": "Organization",
       name: articleMeta.author || "VoltHub Team",
