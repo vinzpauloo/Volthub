@@ -481,6 +481,38 @@ export const resources = [
     ],
   },
   {
+    slug: "home-ev-charger-meralco-upgrade-permit-philippines",
+    seoTitle: "Home EV Charger Permit & Meralco Upgrade Philippines",
+    title: "Do You Need a Meralco Upgrade or Permit for a Home EV Charger?",
+    description:
+      "A Philippine guide to electrical capacity, Meralco service upgrades, LGU permits, condo approvals, and documents to prepare before installing a home EV charger.",
+    type: "Guide",
+    image: "/Blog/ev-charger-install-guide.webp",
+    imageAlt: "Electrician assessing a home electrical panel before installing an EV charger in the Philippines",
+    faqs: [
+      {
+        question: "Do I need to tell Meralco before installing a home EV charger?",
+        answer:
+          "Not in every case. If the charger can be installed safely within the property's existing service capacity, a Meralco service modification may not be needed. If the project increases the service load or changes the meter or service entrance, follow Meralco's Modify Service process. A qualified installer should assess the site first.",
+      },
+      {
+        question: "Does a 7kW home EV charger require a service upgrade?",
+        answer:
+          "It depends on the property. A 7kW charger at 230 volts draws roughly 30 to 32 amperes, but that figure alone does not determine whether an upgrade is needed. An electrician must check the main service rating, panel capacity, existing household loads, cable route, grounding, and required protection.",
+      },
+      {
+        question: "Do I need an LGU electrical permit for a home EV charger?",
+        answer:
+          "Requirements depend on the work performed and the local government unit. New or altered wiring, panel work, or service changes may require an electrical permit, inspection, or Certificate of Inspection. Confirm the exact requirements with the local building official before work begins.",
+      },
+      {
+        question: "Can I install an EV charger in a condominium parking space?",
+        answer:
+          "Usually only after written approval from the condominium or building administration. Expect the property to review the charger location, cable route through common areas, electrical capacity, metering and billing method, fire-safety provisions, contractor credentials, and work schedule.",
+      },
+    ],
+  },
+  {
     slug: "best-home-ev-charger-brand-philippines",
     seoTitle: "Best Home EV Charger Brand in the Philippines (2026)",
     title: "Which Home EV Charger Brand Is Best in the Philippines?",

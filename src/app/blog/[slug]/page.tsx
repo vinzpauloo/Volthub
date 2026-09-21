@@ -42,6 +42,11 @@ const blogContent: Record<string, { author?: string; date?: string; modifiedDate
     date: "2026-09-21",
     readingTime: "8 mins",
   },
+  "home-ev-charger-meralco-upgrade-permit-philippines": {
+    author: "VoltHub Energy Team",
+    date: "2026-09-21",
+    readingTime: "9 mins",
+  },
   "best-home-ev-charger-brand-philippines": {
     author: "VoltHub Energy Team",
     date: "2026-09-05",
