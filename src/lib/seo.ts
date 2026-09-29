@@ -16,6 +16,10 @@ export const seo = {
   playStoreUrl: "https://play.google.com/store/apps/details?id=ph.volthub.app",
   appStoreUrl: "https://apps.apple.com/ph/app/volthub-ph/id6795752536",
   instagramUrl: "https://www.instagram.com/volthubph/",
+  doeAccreditationNumber: "DOE-EUMB-ANA-20260210003",
+  doeAccreditationUrl:
+    "https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003",
+  doeAccreditationValidUntil: "2029-06-07",
 };
 
 export function jsonLd(data: unknown) {
@@ -67,6 +71,20 @@ export const organizationJsonLd = {
       "@type": "EducationalOccupationalCredential",
       credentialCategory: "Business registration",
       name: "SEC Registration No. 2025010184535-18",
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      credentialCategory:
+        "EVCS Provider - Service, Supplier and Operator (National Accreditation Level)",
+      name: `DOE EVCS Accreditation ${seo.doeAccreditationNumber}`,
+      identifier: seo.doeAccreditationNumber,
+      validUntil: seo.doeAccreditationValidUntil,
+      url: seo.doeAccreditationUrl,
+      recognizedBy: {
+        "@type": "GovernmentOrganization",
+        name: "Department of Energy Philippines",
+        url: "https://doe.gov.ph/",
+      },
     },
   ],
   makesOffer: [

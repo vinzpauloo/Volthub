@@ -17,6 +17,18 @@ export default function EvChargingHeroSection() {
             sites, VoltHub can also operate the station for you through the VoltHub
             app.
           </p>
+          <p className="mx-auto max-w-3xl rounded-xl border border-primary/20 bg-primary/5 px-5 py-4 text-sm leading-relaxed text-gray-700">
+            <strong>DOE-accredited nationwide:</strong> VoltHub is listed on the
+            Philippine Department of Energy&apos;s EV Industry Portal as an EVCS
+            Provider — Service, Supplier and Operator. Accreditation No.{" "}
+            <a
+              href="https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003"
+              className="font-semibold text-primary underline underline-offset-4"
+            >
+              DOE-EUMB-ANA-20260210003
+            </a>{" "}
+            is valid through June 7, 2029.
+          </p>
         </LayoutContainer>
       </section>
       <section className="relative min-h-[50vh] pb-0 flex items-center overflow-hidden">

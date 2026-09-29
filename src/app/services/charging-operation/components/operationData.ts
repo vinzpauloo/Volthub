@@ -166,6 +166,6 @@ export const operationFaqs = [
   {
     question: "Is VoltHub a registered charging provider?",
     answer:
-      "VoltHub Electronic Power Generation Services Corporation is a Philippine domestic corporation registered with SEC and BIR, headquartered in BGC, Taguig. Ask us for our DOE EVCS documentation.",
+      "Yes. The Department of Energy's EV Industry Portal lists VoltHub Electronic Power Generation Services Corporation under accreditation number DOE-EUMB-ANA-20260210003. VoltHub holds National Accreditation Level status as an EVCS Provider - Service, Supplier and Operator, valid through June 7, 2029.",
   },
 ];

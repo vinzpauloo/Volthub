@@ -329,6 +329,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
 
       <h2>How to choose an installer</h2>
       <p>Choose a provider that will assess the property, document the design, identify approvals, supply compliant equipment, test the completed installation, and support the charger after handover. DOE publishes a list of accredited EVCS providers and encourages consumers to use accredited providers for EV charging services.</p>
+      <p><strong>VoltHub is independently verifiable on the DOE's EV Industry Portal.</strong> VoltHub Electronic Power Generation Services Corporation holds National Accreditation Level status as an EVCS Provider — Service, Supplier and Operator under <a href="https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003">Accreditation No. DOE-EUMB-ANA-20260210003</a>, valid through June 7, 2029.</p>
       <p>Ask for an itemized quotation that separates the charger, standard installation, extra cable, panel work, utility-service work, permits, civil work, and site-specific costs. For current price examples, see VoltHub's <a href="/blog/ev-charger-cost-installation-philippines">EV charger installation cost guide for the Philippines</a>. For operating costs, compare <a href="/blog/ev-charging-cost-philippines-home-vs-public">home and public EV charging rates</a>.</p>
 
       <h2>Frequently asked questions</h2>
@@ -343,6 +344,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
 
       <h2>Official sources</h2>
       <ul>
+        <li><a href="https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003">DOE EV Industry Portal: VoltHub accreditation details</a> — National Accreditation Level for Service, Supplier and Operator; valid through June 7, 2029.</li>
         <li><a href="https://elibrary.judiciary.gov.ph/thebookshelf/showdocs/2/96703">EVIDA Implementing Rules and Regulations</a> — definitions for own-use and commercial-use charging stations, EVCS providers, and Certificate of Inspection.</li>
         <li><a href="https://www.meralco.com.ph/residential/electric-service/start-or-modify/modify-service">Meralco: Modify Service</a> — published requirements for service-load, meter, and service-entrance changes.</li>
         <li><a href="https://www.meralco.com.ph/residential/help-support/frequently-asked-questions/service-application">Meralco: Service Application FAQs</a> — electrical plans, load schedules, inspections, and application guidance.</li>
@@ -366,6 +368,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
       <div class="intro-section">
         <p class="lead-text">If you want equipment and local installation handled by one supplier, VoltHub is worth comparing: the Sparks 7kW residential unit starts at ₱21,375, and with the standard 15-meter installation estimate that comes to about ₱46,375, VAT-inclusive, per the official price list dated July 9, 2026.</p>
         <p>Tesla owners can also compare the factory Wall Connector. Your final choice should come down to vehicle compatibility, the all-in installed price, and after-sales support — not brand name alone.</p>
+        <p>VoltHub is listed on the Philippine Department of Energy's EV Industry Portal as a nationally accredited EVCS Provider — Service, Supplier and Operator. <a href="https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003">Accreditation No. DOE-EUMB-ANA-20260210003</a> is valid through June 7, 2029.</p>
       </div>
 
       <h2>Which brand fits you?</h2>
