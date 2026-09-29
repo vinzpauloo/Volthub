@@ -8,6 +8,7 @@ import TrustStripSection from "./components/TrustStripSection";
 import SolarCarportPromoSection from "./components/SolarCarportPromoSection";
 import ArticleShowcaseSection from "./components/ArticleShowcaseSection";
 import OperationServiceSection from "./components/OperationServiceSection";
+import AppShowcaseSection from "./components/AppShowcaseSection";
 // import ProductGridShowcase from "./components/ProductGridShowcase";
 import RecommendedProducts from "./components/RecommendedProducts";
 import BlogResourcesSection from "./components/BlogResourcesSection";
@@ -67,6 +68,8 @@ export default function Home() {
       <ArticleShowcaseSection articles={articleShowcases} />
 
       <OperationServiceSection />
+
+      <AppShowcaseSection />
 
       <RecommendedProducts />
 
