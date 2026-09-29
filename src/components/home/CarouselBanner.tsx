@@ -4,20 +4,24 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { RiArrowLeftLine, RiArrowRightLine } from "react-icons/ri";
-// import Link from "next/link";
-// import type { Route } from "next";
+import Link from "next/link";
+import type { Route } from "next";
 
 interface CarouselSlide {
   id: number;
   title: string;
+  titleEmphasis?: string; // Optional gradient-highlighted tail of the headline
   subtitle: string;
   description: string;
   image: string;
   backgroundImage?: string; // Optional background image
+  backgroundPosition?: string; // Desktop-specific background position
   mobileBackgroundImage?: string; // Mobile-specific background image
   mobileBackgroundPosition?: string; // Mobile-specific background position
   buttonText: string;
   buttonLink: string;
+  secondaryButtonText?: string; // Optional second CTA
+  secondaryButtonLink?: string;
   gradient: string;
   showimg?: boolean;
   imageClassName?: string;
@@ -254,17 +258,17 @@ export default function CarouselBanner({
                         ? slide.mobileBackgroundImage
                         : slide.backgroundImage || slide.image
                     })`,
-                    backgroundSize: "stretch",
+                    backgroundSize: "cover",
                     backgroundPosition:
                       isMobile && slide.mobileBackgroundPosition
                         ? slide.mobileBackgroundPosition
-                        : "center",
+                        : slide.backgroundPosition || "center",
                   }}
                 >
                   {/* Gradient Overlay - Reduced opacity to show background */}
                   <div
                     className={`absolute inset-0 ${slide.gradient} transition-opacity duration-1000`}
-                    style={{ opacity: 0.3 }}
+                    style={{ opacity: 0.55 }}
                   />
                 </div>
 
@@ -292,28 +296,38 @@ export default function CarouselBanner({
                     )}
                       
                       {/* Text on Right */}
-                      {/* <div className={slide.descriptionClassName || "w-full md:w-1/2"}>
+                      <div className={slide.descriptionClassName || "w-full md:w-1/2"}>
                         <div className="space-y-3 md:space-y-4">
-                          <p className="font-orbitron tracking-[0.2em] md:tracking-[0.3em] text-xs sm:text-sm text-secondary uppercase animate-fade-in">
+                          <p className="cr-eyebrow">
+                            <span className="cr-rule" />
                             {slide.subtitle}
                           </p>
-                          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight break-words">
-                            <span className="neon-glow block">{slide.title}</span>
+                          <h1 className="cr-hero-title text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight break-words text-white">
+                            {slide.title}
+                            {slide.titleEmphasis && <> <em>{slide.titleEmphasis}</em></>}
                           </h1>
-                          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-100 leading-relaxed break-words">
+                          <p className="cr-hero-desc text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed break-words">
                             {slide.description}
                           </p>
                         </div>
-                        <div className="pt-3 md:pt-4">
+                        <div className="pt-3 md:pt-4 flex flex-wrap items-center gap-3 md:gap-4">
                           <Link
                             href={slide.buttonLink as Route}
-                            className="group inline-flex items-center justify-center gap-2 bg-linear-to-r from-primary to-accent text-white px-6 py-3 md:px-8 md:py-4 rounded-xl text-sm md:text-base font-semibold shadow-lg glow-effect transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                            className="cr-btn-primary group inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-xl text-sm md:text-base font-semibold shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                           >
                             {slide.buttonText}
                             <RiArrowRightLine className="text-base md:text-lg group-hover:translate-x-1 transition-transform" />
                           </Link>
+                          {slide.secondaryButtonText && slide.secondaryButtonLink && (
+                            <Link
+                              href={slide.secondaryButtonLink as Route}
+                              className="cr-btn-line inline-flex items-center justify-center gap-2 px-6 py-3 md:px-8 md:py-4 rounded-xl text-sm md:text-base font-semibold transition-all duration-300"
+                            >
+                              {slide.secondaryButtonText}
+                            </Link>
+                          )}
                         </div>
-                      </div> */}
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -919,3 +919,87 @@ html {
 [data-dropdown-portal]::-webkit-scrollbar-thumb:hover {
   background-color: rgba(255, 255, 255, 0.5);
 }
+/* ============================================================
+   CONTROL ROOM THEME (Stage 1 — homepage redesign, hero only)
+   Scoped under .theme-control-room so it never leaks to other
+   pages. Rolls out to more homepage sections in later stages.
+   ============================================================ */
+.theme-control-room {
+  --cr-bg: #0b1210;
+  --cr-bg-elev: #121b17;
+  --cr-bg-elev-2: #182420;
+  --cr-fg: #eef4ee;
+  --cr-fg-dim: #93a696;
+  --cr-fg-faint: #7c9482;
+  --cr-line: rgba(238, 244, 238, 0.09);
+  --cr-line-strong: rgba(238, 244, 238, 0.16);
+  --cr-brand: #1eb14b;
+  --cr-brand-light: #45d06e;
+  --cr-brand-dark: #127c39;
+}
+
+.cr-eyebrow {
+  font-family: var(--font-orbitron), "Orbitron", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--cr-brand-light);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cr-eyebrow .cr-rule {
+  width: 34px;
+  height: 1px;
+  background: var(--cr-brand-light);
+  display: inline-block;
+}
+
+.cr-hero-title em {
+  font-style: normal;
+  display: inline-block;
+  padding-bottom: 0.05em;
+  background: linear-gradient(100deg, var(--cr-brand) 0%, var(--cr-brand-light) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.cr-hero-desc {
+  color: var(--cr-fg-dim);
+}
+
+.cr-btn-primary {
+  background: linear-gradient(100deg, var(--cr-brand) 0%, var(--cr-brand-light) 100%);
+  color: #06120a;
+}
+
+.cr-btn-primary:hover {
+  filter: brightness(1.06);
+}
+
+.cr-btn-line {
+  background: transparent;
+  color: var(--cr-fg);
+  border: 1px solid var(--cr-line-strong);
+}
+
+.cr-btn-line:hover {
+  border-color: var(--cr-brand-light);
+  color: var(--cr-brand-light);
+}
+
+.cr-bracket {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.85));
+}
+.cr-bracket.tl { top: 14px; left: 14px; border-top: 2px solid var(--cr-brand); border-left: 2px solid var(--cr-brand); }
+.cr-bracket.tr { top: 14px; right: 14px; border-top: 2px solid var(--cr-brand); border-right: 2px solid var(--cr-brand); }
+.cr-bracket.bl { bottom: 14px; left: 14px; border-bottom: 2px solid var(--cr-brand); border-left: 2px solid var(--cr-brand); }
+.cr-bracket.br { bottom: 14px; right: 14px; border-bottom: 2px solid var(--cr-brand); border-right: 2px solid var(--cr-brand); }
