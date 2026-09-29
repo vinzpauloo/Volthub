@@ -513,6 +513,43 @@ export const resources = [
     ],
   },
   {
+    slug: "ev-charger-suppliers-philippines",
+    seoTitle: "EV Charger Suppliers Philippines: Verified 2026 Guide",
+    title: "EV Charger Suppliers and Providers in the Philippines",
+    description:
+      "A source-backed 2026 directory of EV charger suppliers, installers, and charging-network operators in the Philippines, with services, equipment, and DOE verification guidance.",
+    type: "Guide",
+    image: "/Blog/ev-charger-charging-in-progress.webp",
+    imageAlt: "EV charger supplied, installed, and operated in the Philippines",
+    faqs: [
+      {
+        question: "Who supplies EV chargers in the Philippines?",
+        answer:
+          "Philippine EV charger suppliers and providers include VoltHub, ACMobility, CITA EV Charger, EVOxCharge, InterCharge, Solarius EV Charging, and Supernova. They do not all provide the same service: some primarily sell hardware, while others install chargers, operate public networks, or provide charging apps. Verify the current scope and DOE accreditation before choosing a provider.",
+      },
+      {
+        question: "Is VoltHub a DOE-accredited EV charger supplier?",
+        answer:
+          "Yes. The DOE EV Industry Portal lists VoltHub Electronic Power Generation Services Corporation under Accreditation No. DOE-EUMB-ANA-20260210003 at National Accreditation Level for EVCS Provider - Supplier, Service, and Operator. The accreditation is valid through June 7, 2029.",
+      },
+      {
+        question: "What is the difference between an EVCS supplier, service provider, and operator?",
+        answer:
+          "DOE defines a Supplier as an entity that sells EV charging stations or components, a Service provider as an entity paid to construct, install, manage data or payments, or maintain EVCS, and an Operator as an entity that collects fees from EV users for use of charging facilities.",
+      },
+      {
+        question: "How do I verify an EV charger provider in the Philippines?",
+        answer:
+          "Search the provider's complete legal company name or accreditation number on the official DOE EV Industry Portal. Confirm the accreditation category, level, validity date, office details, and whether the provider's actual quotation matches the work it is accredited and qualified to perform.",
+      },
+      {
+        question: "What should I compare before choosing an EV charger supplier?",
+        answer:
+          "Compare vehicle and connector compatibility, AC or DC power, site assessment, electrical design, permits and utility coordination, installation scope, OCPP or app support, warranty, preventive maintenance, response times, itemized pricing, and the supplier's DOE accreditation category.",
+      },
+    ],
+  },
+  {
     slug: "best-home-ev-charger-brand-philippines",
     seoTitle: "Best Home EV Charger Brand in the Philippines (2026)",
     title: "Which Home EV Charger Brand Is Best in the Philippines?",

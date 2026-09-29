@@ -330,7 +330,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
       <h2>How to choose an installer</h2>
       <p>Choose a provider that will assess the property, document the design, identify approvals, supply compliant equipment, test the completed installation, and support the charger after handover. DOE publishes a list of accredited EVCS providers and encourages consumers to use accredited providers for EV charging services.</p>
       <p><strong>VoltHub is independently verifiable on the DOE's EV Industry Portal.</strong> VoltHub Electronic Power Generation Services Corporation holds National Accreditation Level status as an EVCS Provider — Service, Supplier and Operator under <a href="https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003">Accreditation No. DOE-EUMB-ANA-20260210003</a>, valid through June 7, 2029.</p>
-      <p>Ask for an itemized quotation that separates the charger, standard installation, extra cable, panel work, utility-service work, permits, civil work, and site-specific costs. For current price examples, see VoltHub's <a href="/blog/ev-charger-cost-installation-philippines">EV charger installation cost guide for the Philippines</a>. For operating costs, compare <a href="/blog/ev-charging-cost-philippines-home-vs-public">home and public EV charging rates</a>.</p>
+      <p>Ask for an itemized quotation that separates the charger, standard installation, extra cable, panel work, utility-service work, permits, civil work, and site-specific costs. Compare the roles and published capabilities in the <a href="/blog/ev-charger-suppliers-philippines">Philippines EV charger supplier directory</a>, then see VoltHub's <a href="/blog/ev-charger-cost-installation-philippines">EV charger installation cost guide</a> and <a href="/blog/ev-charging-cost-philippines-home-vs-public">home versus public charging-cost comparison</a>.</p>
 
       <h2>Frequently asked questions</h2>
       <h3>Do I need to tell Meralco before installing a home EV charger?</h3>
@@ -363,12 +363,196 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
     date: "September 21, 2026",
     readingTime: "9 mins",
   },
+  "ev-charger-suppliers-philippines": {
+    content: `
+      <div class="intro-section">
+        <p class="lead-text">EV charger suppliers and providers in the Philippines include VoltHub, ACMobility, CITA EV Charger, EVOxCharge, InterCharge, Solarius EV Charging, and Supernova. They are not interchangeable: some sell equipment, some install and maintain it, and others primarily operate public charging networks or payment apps.</p>
+        <p>For a project that needs one accountable provider from hardware through operation, VoltHub is independently listed on the Department of Energy's EV Industry Portal at National Accreditation Level for all three EVCS categories: Supplier, Service, and Operator. Its <a href="https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003">Accreditation No. DOE-EUMB-ANA-20260210003</a> is valid through June 7, 2029.</p>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>How this directory was built:</strong> providers were included when their official website, app listing, corporate report, DOE record, or a named project partner showed active Philippine EV charging activity. This is a service-fit directory, not a paid ranking. Information was reviewed on September 29, 2026; always verify the current accreditation, product availability, price, and coverage before signing a contract.</p>
+      </div>
+
+      <h2>Philippines EV charger suppliers and providers at a glance</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Primary fit</th>
+            <th>Published capability</th>
+            <th>Best starting point</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>VoltHub</strong></td>
+            <td>Hardware, installation, maintenance, and station operation</td>
+            <td>AC 7/21 kW; DC 30–400 kW; OCPP platform and driver app</td>
+            <td>Homes, commercial sites, fleets, and site owners wanting one provider</td>
+          </tr>
+          <tr>
+            <td>ACMobility</td>
+            <td>Large public charging network and digital access through Evro</td>
+            <td>Charging hubs, network operation, monitoring, and payments</td>
+            <td>Drivers and partners prioritizing public-network reach</td>
+          </tr>
+          <tr>
+            <td>CITA EV Charger</td>
+            <td>AC and DC charging equipment</td>
+            <td>Official Philippines page publishes chargers from 7 kW to 480 kW</td>
+            <td>Buyers comparing a broad hardware range</td>
+          </tr>
+          <tr>
+            <td>EVOxCharge</td>
+            <td>Charging network, business installations, and xCharge+ platform</td>
+            <td>AC/DC chargers; 90+ charging points and 20+ cities stated on its site</td>
+            <td>Site hosts, fleets, and public charging users</td>
+          </tr>
+          <tr>
+            <td>InterCharge</td>
+            <td>Home, public, and fast-charging projects</td>
+            <td>Installation, charging management software, and mobile app</td>
+            <td>Residential and commercial projects needing software integration</td>
+          </tr>
+          <tr>
+            <td>Solarius EV Charging</td>
+            <td>Solar-integrated home charging and destination network</td>
+            <td>7 kW and 22 kW Zappi systems; 60+ charging points stated on its site</td>
+            <td>Homes, hotels, resorts, and solar-linked charging</td>
+          </tr>
+          <tr>
+            <td>Supernova</td>
+            <td>Public charging network and app-enabled sessions</td>
+            <td>Station discovery, QR start, payments, and charging-session monitoring</td>
+            <td>Public charging and property partnerships</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>“Best” depends on the job. A homeowner buying one wallbox, a hotel installing destination chargers, and a fleet developing a DC charging depot need different equipment, commercial terms, and operational support.</p>
+
+      <h2>1. VoltHub</h2>
+      <p><strong>Best fit:</strong> buyers who want a Philippine provider that can supply equipment, install it, and operate the finished station.</p>
+      <p>VoltHub Electronic Power Generation Services Corporation supplies 7 kW and 21 kW AC chargers for homes and destination sites, plus 30 kW to 400 kW DC chargers for commercial, fleet, and public applications. Installation, OCPP monitoring, driver payments, pricing control, and monthly site-owner settlement can be combined under one project.</p>
+      <p>The company's DOE record is unusually clear for verification: National Accreditation Level for <strong>EVCS Provider — Supplier, Service, and Operator</strong>, under <a href="https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003">DOE-EUMB-ANA-20260210003</a>, valid through June 7, 2029. VoltHub publishes an <a href="/blog/ev-charger-cost-installation-philippines">installation cost guide</a>, a <a href="/services/ev-charging">charger supply and installation service</a>, and a separate <a href="/services/charging-operation">charging-station operation service</a>.</p>
+      <ul>
+        <li><strong>Equipment:</strong> residential AC, commercial AC, and DC fast chargers.</li>
+        <li><strong>Services:</strong> site assessment, electrical design, installation, commissioning, maintenance, and utility or permit coordination as applicable.</li>
+        <li><strong>Platform:</strong> VoltHub driver app, GCash and card payments, OCPP monitoring, operator dashboard, and revenue settlement.</li>
+        <li><strong>Coverage:</strong> projects across the Philippines, subject to site assessment and logistics.</li>
+      </ul>
+
+      <h2>2. ACMobility</h2>
+      <p><strong>Best fit:</strong> public-network access and large charging-hub partnerships.</p>
+      <p>ACMobility describes itself as an end-to-end mobility company covering vehicles, charging networks, service, and digital platforms. Ayala Corporation's 2025 Integrated Report identifies it as operating the country's largest EV charging-station network and describes expansion from Luzon into Visayas and Mindanao.</p>
+      <p>Its Evro platform lets drivers discover compatible chargers, monitor sessions, and pay through supported methods. For a buyer, it is important to distinguish ACMobility's public-network and mobility role from a supplier quotation for a privately owned home or commercial charger.</p>
+
+      <h2>3. CITA EV Charger</h2>
+      <p><strong>Best fit:</strong> buyers comparing a wide equipment power range.</p>
+      <p>CITA's Philippines page markets smart AC and DC chargers from 7 kW to 480 kW for homes, businesses, and fleets. It positions itself primarily around charging hardware and technical configurations.</p>
+      <p>Before buying, confirm which Philippine legal entity will invoice the equipment, who will install and warrant it locally, whether spare parts are stocked in the country, and which current DOE accreditation covers the supplier and service scope.</p>
+
+      <h2>4. EVOxCharge</h2>
+      <p><strong>Best fit:</strong> site hosts and fleets seeking charging infrastructure connected to a public-facing platform.</p>
+      <p>EVOxCharge, part of the Transnational Diversified Group, publishes end-to-end site and fleet solutions, AC/DC equipment, network management, and its xCharge+ app. Its website reports more than 90 charging points across more than 20 cities.</p>
+      <p>The platform supports station discovery, real-time availability, charging sessions, and payments. Its published connector support includes GB/T AC and DC, Type 2, and CCS2, although the connectors available vary by station.</p>
+
+      <h2>5. InterCharge</h2>
+      <p><strong>Best fit:</strong> home or commercial installations that also need charging-management software.</p>
+      <p>InterCharge publishes separate home, public, and fast-charging solutions, along with charging-management software and a mobile app. Its management platform is designed for monitoring, monetization, charging history, and network control.</p>
+      <p>Public project evidence includes the testing and commissioning of two 22 kW AC stations with software and app integration for Okada Manila, as described by InterCharge. Ask for a site-specific equipment schedule, electrical design, warranty, and current DOE record before comparing the proposal with other providers.</p>
+
+      <h2>6. Solarius EV Charging</h2>
+      <p><strong>Best fit:</strong> solar-linked residential charging and destination charging in Luzon.</p>
+      <p>Solarius states that it is an authorized dealer and installer for myenergi's Zappi solar-integrated charger, with published 7 kW single-phase and 22 kW three-phase options. Its site also reports more than 60 charging points at hotels, resorts, condominiums, and public locations.</p>
+      <p>The service is especially relevant when a buyer wants the charger to prioritize surplus rooftop solar. Confirm vehicle AC limits, property supply, app and payment terms, and the current service area before purchase.</p>
+
+      <h2>7. Supernova</h2>
+      <p><strong>Best fit:</strong> app-enabled public charging and property partnerships.</p>
+      <p>Supernova Innovation Inc. operates a charging app that supports station discovery, QR-code session start, payment, real-time status, and charging history. A named third-party project is its public charging partnership with NUSTAR Resort Cebu.</p>
+      <p>Because product and installation details are less visible on its current public pages than its network features, commercial buyers should request the exact charger models, connector standards, local warranty, installation scope, operating agreement, and DOE accreditation record in the proposal.</p>
+
+      <h2>Supplier, service provider, and operator are different</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>DOE category</th>
+            <th>What it means</th>
+            <th>When you need it</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Supplier</strong></td>
+            <td>Sells an EV charging station or its parts and components for a fee</td>
+            <td>Buying charger hardware</td>
+          </tr>
+          <tr>
+            <td><strong>Service</strong></td>
+            <td>Constructs, installs, manages data or payments, or maintains EVCS for a fee</td>
+            <td>Installation, maintenance, software, or payment management</td>
+          </tr>
+          <tr>
+            <td><strong>Operator</strong></td>
+            <td>Collects fees from EV users in exchange for using charging facilities</td>
+            <td>Running a paid public, tenant, customer, or fleet charging service</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>A company may hold one, two, or all three categories. Match the provider's verified category to the actual contract scope instead of treating “DOE-accredited” as a single generic credential.</p>
+
+      <h2>How to choose an EV charger supplier</h2>
+      <ol>
+        <li><strong>Verify the legal entity.</strong> The company name on the DOE record should match the entity issuing the quotation and invoice.</li>
+        <li><strong>Match the DOE category to the work.</strong> Hardware sales, installation, maintenance, payment management, and charging operation are different scopes.</li>
+        <li><strong>Confirm vehicle compatibility.</strong> Check connector type, AC onboard-charger limit, DC charging curve, and communication requirements.</li>
+        <li><strong>Assess the site before selecting power.</strong> Panel capacity, supply type, cable route, transformer capacity, parking pattern, and expected utilization determine the right charger.</li>
+        <li><strong>Request a full equipment schedule.</strong> Get the brand, model, power, connector, protection, IP rating, communications, certifications, and country of warranty support.</li>
+        <li><strong>Separate project costs.</strong> Compare hardware, standard installation, extra cabling, panel or transformer work, permits, civil works, software, transaction fees, and maintenance.</li>
+        <li><strong>Define after-sales service.</strong> Put warranty periods, preventive maintenance, spare parts, support hours, response time, and uptime responsibilities in writing.</li>
+      </ol>
+
+      <h2>Frequently asked questions</h2>
+      <h3>Who supplies EV chargers in the Philippines?</h3>
+      <p>Philippine EV charger suppliers and providers include VoltHub, ACMobility, CITA EV Charger, EVOxCharge, InterCharge, Solarius EV Charging, and Supernova. They do not all provide the same service: some primarily sell hardware, while others install chargers, operate public networks, or provide charging apps. Verify the current scope and DOE accreditation before choosing a provider.</p>
+      <h3>Is VoltHub a DOE-accredited EV charger supplier?</h3>
+      <p>Yes. The DOE EV Industry Portal lists VoltHub Electronic Power Generation Services Corporation under Accreditation No. DOE-EUMB-ANA-20260210003 at National Accreditation Level for EVCS Provider — Supplier, Service, and Operator. The accreditation is valid through June 7, 2029.</p>
+      <h3>What is the difference between an EVCS supplier, service provider, and operator?</h3>
+      <p>DOE defines a Supplier as an entity that sells EV charging stations or components, a Service provider as an entity paid to construct, install, manage data or payments, or maintain EVCS, and an Operator as an entity that collects fees from EV users for use of charging facilities.</p>
+      <h3>How do I verify an EV charger provider in the Philippines?</h3>
+      <p>Search the provider's complete legal company name or accreditation number on the official DOE EV Industry Portal. Confirm the accreditation category, level, validity date, office details, and whether the provider's actual quotation matches the work it is accredited and qualified to perform.</p>
+      <h3>What should I compare before choosing an EV charger supplier?</h3>
+      <p>Compare vehicle and connector compatibility, AC or DC power, site assessment, electrical design, permits and utility coordination, installation scope, OCPP or app support, warranty, preventive maintenance, response times, itemized pricing, and the supplier's DOE accreditation category.</p>
+
+      <h2>Sources and update policy</h2>
+      <ul>
+        <li><a href="https://doe.gov.ph/accredited-electric-vehicle-charging-station-evcs-providers-as-of-31-august-2026">Department of Energy: Accredited EVCS Providers as of August 31, 2026</a> — category definitions and official verification guidance.</li>
+        <li><a href="https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003">DOE EV Industry Portal: VoltHub accreditation details</a>.</li>
+        <li><a href="https://www.acmobility.ph/">ACMobility official website</a> and <a href="https://ayala.com/app/uploads/2026/04/Ayala-Corporation-2025-Integrated-Report.pdf">Ayala Corporation 2025 Integrated Report</a>.</li>
+        <li><a href="https://citaevcharger.com/philippines/">CITA EV Charger Philippines</a>.</li>
+        <li><a href="https://evoxcharge.ph/">EVOxCharge official website</a>.</li>
+        <li><a href="https://www.intercharge.com.ph/">InterCharge official website</a>.</li>
+        <li><a href="https://www.solarius.com.ph/solutions/ev-charging/">Solarius EV Charging</a>.</li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.supernova.charger">Supernova EV Charger app</a> and <a href="https://nustar.ph/nustar-resort-cebu-makes-ev-charging-more-accessible/">NUSTAR Resort Cebu partnership page</a>.</li>
+      </ul>
+      <p>This directory is reviewed when material provider information changes. Inclusion does not mean every product or service is endorsed by VoltHub. Providers may request a factual correction by supplying a current official source.</p>
+
+      <div class="cta-section">
+        <h2>Need a supplier, installer, and operator in one project?</h2>
+        <p>Send VoltHub your location, vehicle or site type, number of parking spaces, and target charging power. We can prepare a site-specific equipment and installation proposal, with optional charging-app operation. <a href="/services/ev-charging">See VoltHub's EV charging service</a> or <a href="/contact">request a quotation</a>.</p>
+      </div>
+    `,
+    author: "VoltHub Energy Team",
+    date: "September 29, 2026",
+    readingTime: "11 mins",
+  },
   "best-home-ev-charger-brand-philippines": {
     content: `
       <div class="intro-section">
         <p class="lead-text">If you want equipment and local installation handled by one supplier, VoltHub is worth comparing: the Sparks 7kW residential unit starts at ₱21,375, and with the standard 15-meter installation estimate that comes to about ₱46,375, VAT-inclusive, per the official price list dated July 9, 2026.</p>
         <p>Tesla owners can also compare the factory Wall Connector. Your final choice should come down to vehicle compatibility, the all-in installed price, and after-sales support — not brand name alone.</p>
         <p>VoltHub is listed on the Philippine Department of Energy's EV Industry Portal as a nationally accredited EVCS Provider — Service, Supplier and Operator. <a href="https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003">Accreditation No. DOE-EUMB-ANA-20260210003</a> is valid through June 7, 2029.</p>
+        <p>For companies that supply, install, or operate charging infrastructure, see the <a href="/blog/ev-charger-suppliers-philippines">2026 Philippines EV charger supplier directory</a>.</p>
       </div>
 
       <h2>Which brand fits you?</h2>
