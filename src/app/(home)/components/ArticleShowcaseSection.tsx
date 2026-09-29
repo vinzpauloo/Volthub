@@ -16,12 +16,12 @@ function ArticleCard({ article, index }: { article: ArticleShowcase; index: numb
   return (
     <article className="clear-both">
       {/* ── Badge ── */}
-      <p className="text-base font-semibold tracking-[0.15em] uppercase text-amber-600 mb-4">
+      <p className="text-base font-semibold tracking-[0.15em] uppercase text-[var(--cr-brand-light)] mb-4">
         {article.badge}
       </p>
 
       {/* ── Title ── */}
-      <h3 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+      <h3 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
         {article.title}
         <span className={article.titleHighlight.color}>{article.titleHighlight.text}</span>
       </h3>
@@ -38,15 +38,15 @@ function ArticleCard({ article, index }: { article: ArticleShowcase; index: numb
       </div>
 
       {/* ── Description ── */}
-      <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-5 text-justify">
+      <p className="text-lg md:text-xl text-[var(--cr-fg-dim)] leading-relaxed mb-5 text-justify">
         {article.description}
       </p>
 
       {/* ── Implementation steps ── */}
       <div className="space-y-5 mb-6">
         {article.implementationSteps.map((step, i) => (
-          <p key={i} className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
-            <strong className="text-gray-900 font-semibold">{step.step}</strong>
+          <p key={i} className="text-lg md:text-xl text-[var(--cr-fg-dim)] leading-relaxed text-justify">
+            <strong className="text-white font-semibold">{step.step}</strong>
             {step.detail && <>. {step.detail}</>}
           </p>
         ))}
@@ -55,7 +55,7 @@ function ArticleCard({ article, index }: { article: ArticleShowcase; index: numb
       {/* ── CTA ── */}
       <Link
         href={article.ctaLink}
-        className="inline-flex items-center gap-2 text-lg font-bold text-primary hover:text-primary/80 transition-colors group"
+        className="inline-flex items-center gap-2 text-lg font-bold text-[var(--cr-brand-light)] hover:text-[var(--cr-brand)] transition-colors group"
       >
         {article.ctaText}
         <RiArrowRightLine className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -66,7 +66,7 @@ function ArticleCard({ article, index }: { article: ArticleShowcase; index: numb
 
 export default function ArticleShowcaseSection({ articles }: ArticleShowcaseSectionProps) {
   return (
-    <section className="section-spacing bg-white overflow-x-hidden">
+    <section className="section-spacing bg-[var(--cr-bg)] overflow-x-hidden">
       <LayoutContainer className="max-w-full md:max-w-[75%]">
      
 
