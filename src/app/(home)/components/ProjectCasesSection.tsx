@@ -73,7 +73,7 @@ export default function ProjectCasesSection({
   };
 
   return (
-    <section className="section-spacing bg-gradient-to-br from-gray-50 via-white to-gray-50 relative">
+    <section className="section-spacing bg-[var(--cr-bg)] relative">
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
@@ -84,14 +84,14 @@ export default function ProjectCasesSection({
         {/* Header */}
         <div className="text-center mb-8 md:mb-10 reveal-on-scroll">
           <div className="inline-block mb-3">
-            <span className="inline-flex items-center px-3 py-1.5 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full border border-primary/20">
-              <span className="text-xs md:text-sm font-semibold tracking-[0.3em] text-primary uppercase">{badge}</span>
+            <span className="inline-flex items-center px-3 py-1.5 bg-[var(--cr-bg-elev)] rounded-full border border-[var(--cr-line-strong)]">
+              <span className="text-xs md:text-sm font-semibold tracking-[0.3em] text-[var(--cr-brand-light)] uppercase">{badge}</span>
             </span>
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold gradient-text leading-tight mb-2 md:mb-3">
             {title}
           </h2>
-          <p className="text-gray-600 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
+          <p className="text-[var(--cr-fg-dim)] text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
             {description}
           </p>
         </div>

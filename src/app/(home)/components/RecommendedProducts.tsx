@@ -72,13 +72,13 @@ const products: RecommendedProduct[] = [
 
 export default function RecommendedProducts() {
   return (
-    <section className="bg-white py-10 md:py-14">
+    <section className="bg-[var(--cr-bg)] py-10 md:py-14">
       <div className="mx-auto w-full max-w-7xl px-4 md:px-6 lg:px-8">
         <div className="text-center space-y-2 md:space-y-3">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+          <h2 className="text-2xl md:text-3xl font-bold text-white">
             Products Categories
           </h2>
-          <p className="text-sm md:text-base text-gray-600">
+          <p className="text-sm md:text-base text-[var(--cr-fg-dim)]">
             Choose from our products categories and feel free to choose!
           </p>
         </div>
@@ -89,7 +89,7 @@ export default function RecommendedProducts() {
               key={product.title}
               href={product.href as Route}
               className={cn(
-                "group rounded-xl border border-gray-100 bg-white shadow-sm transition-all duration-200 block relative overflow-hidden",
+                "group rounded-xl border border-[var(--cr-line)] bg-[var(--cr-bg-elev)] shadow-sm transition-all duration-200 block relative overflow-hidden",
                 "hover:-translate-y-0.5 hover:shadow-lg",
                 product.hoverBorderClass,
                 product.hoverBgClass
@@ -99,7 +99,7 @@ export default function RecommendedProducts() {
                 <div className={cn("h-10 w-10 text-primary flex items-center justify-center text-[60px] font-large font-bold transition-colors duration-200", product.hoverIconClass)}>
                   <product.Icon />
                 </div>
-                <h3 className={cn("text-lg font-semibold text-gray-900 transition-colors duration-200", product.hoverTextClass)}>
+                <h3 className={cn("text-lg font-semibold text-white transition-colors duration-200", product.hoverTextClass)}>
                   {product.title}
                 </h3>
                 <div className="h-0.5 w-10 bg-primary group-hover:w-12 transition-all duration-200" />

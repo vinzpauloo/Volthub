@@ -41,17 +41,17 @@ export default function BlogResourcesSection({
   };
 
   return (
-    <section className="section-spacing bg-linear-to-br from-gray-50 via-white to-gray-50">
+    <section className="section-spacing bg-[var(--cr-bg)]">
       <LayoutContainer>
         <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-start">
           {/* Title Section */}
           <div className="flex flex-col gap-4 lg:gap-6 lg:w-1/3 lg:sticky lg:top-8">
             <div className="space-y-4 reveal-on-scroll">
-              <p className="text-sm font-semibold tracking-[0.3em] text-accent uppercase">{badge}</p>
+              <p className="text-sm font-semibold tracking-[0.3em] text-[var(--cr-brand-light)] uppercase">{badge}</p>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold gradient-text leading-tight">
                 {title}
               </h2>
-              <p className="text-gray-600 text-base lg:text-lg leading-relaxed">
+              <p className="text-[var(--cr-fg-dim)] text-base lg:text-lg leading-relaxed">
                 {description}
               </p>
             </div>
@@ -63,7 +63,7 @@ export default function BlogResourcesSection({
               <button
                 type="button"
                 onClick={() => scrollBy(-320)}
-                className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-200 shadow-md hover:shadow-lg hover:bg-gray-50 transition-all duration-300 text-gray-700 hover:text-primary"
+                className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--cr-bg-elev)] border border-[var(--cr-line-strong)] shadow-md hover:shadow-lg hover:bg-[var(--cr-bg-elev-2)] transition-all duration-300 text-[var(--cr-fg)] hover:text-[var(--cr-brand-light)]"
                 aria-label="Scroll left"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@ export default function BlogResourcesSection({
               <button
                 type="button"
                 onClick={() => scrollBy(320)}
-                className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-white border border-gray-200 shadow-md hover:shadow-lg hover:bg-gray-50 transition-all duration-300 text-gray-700 hover:text-primary"
+                className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[var(--cr-bg-elev)] border border-[var(--cr-line-strong)] shadow-md hover:shadow-lg hover:bg-[var(--cr-bg-elev-2)] transition-all duration-300 text-[var(--cr-fg)] hover:text-[var(--cr-brand-light)]"
                 aria-label="Scroll right"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +90,7 @@ export default function BlogResourcesSection({
                 <Link
                   key={index}
                   href={resource.slug ? `/blog/${resource.slug}` : "#"}
-                  className="stagger-card snap-start w-[310px] md:w-[460px] min-w-[260px] md:min-w-[300px] lg:min-w-[320px] shrink-0 reveal-on-scroll p-4 md:p-5 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 group cursor-pointer block"
+                  className="stagger-card snap-start w-[310px] md:w-[460px] min-w-[260px] md:min-w-[300px] lg:min-w-[320px] shrink-0 reveal-on-scroll p-4 md:p-5 bg-[var(--cr-bg-elev)] rounded-2xl shadow-lg border border-[var(--cr-line)] hover:shadow-xl transition-all duration-300 group cursor-pointer block"
                   style={{ animationDelay: `${index * 0.08}s` }}
                 >
                   <div className="relative w-full h-40 md:h-44 lg:h-48 rounded-xl overflow-hidden mb-3 md:mb-4">
@@ -104,17 +104,17 @@ export default function BlogResourcesSection({
                     />
                   </div>
                   <div className="mb-3 ">
-                    <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wide">
+                    <span className="inline-block px-3 py-1 rounded-full bg-[var(--cr-bg-elev-2)] text-[var(--cr-brand-light)] text-xs font-semibold uppercase tracking-wide">
                       {resource.type}
                     </span>
                   </div>
-                  <h3 className="text-lg md:text-xl font-semibold mb-3 text-gray-800 group-hover:text-primary transition-colors duration-300 line-clamp-2 leading-snug">
+                  <h3 className="text-lg md:text-xl font-semibold mb-3 text-white group-hover:text-[var(--cr-brand-light)] transition-colors duration-300 line-clamp-2 leading-snug">
                     {resource.title}
                   </h3>
-                  <p className="text-gray-600 mb-4 leading-relaxed text-sm md:text-base line-clamp-3">
+                  <p className="text-[var(--cr-fg-dim)] mb-4 leading-relaxed text-sm md:text-base line-clamp-3">
                     {resource.description}
                   </p>
-                  <div className="flex items-center gap-2 text-primary font-medium group-hover:gap-3 transition-all duration-300 text-sm md:text-base">
+                  <div className="flex items-center gap-2 text-[var(--cr-brand-light)] font-medium group-hover:gap-3 transition-all duration-300 text-sm md:text-base">
                     <span>Read More</span>
                     <RiArrowRightLine className="text-lg" />
                   </div>
@@ -127,7 +127,7 @@ export default function BlogResourcesSection({
         <div className="text-center mt-10 md:mt-12">
           <Link
             href={viewAllLink}
-            className="inline-flex items-center justify-center gap-2 border-2 border-primary text-primary px-6 py-3 md:px-8 md:py-4 rounded-xl font-semibold hover:bg-primary hover:text-white transition-all duration-300 hover:scale-105 group"
+            className="inline-flex items-center justify-center gap-2 border-2 border-[var(--cr-brand)] text-[var(--cr-brand-light)] px-6 py-3 md:px-8 md:py-4 rounded-xl font-semibold hover:bg-[var(--cr-brand)] hover:text-white transition-all duration-300 hover:scale-105 group"
           >
             View All Blogs
             <RiArrowRightLine className="text-xl group-hover:translate-x-2 transition-transform duration-300" />
