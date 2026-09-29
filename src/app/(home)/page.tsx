@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 import CarouselBanner from "@/components/home/CarouselBanner";
 import HoverEffects from "@/components/home/HoverEffects";
+import TrustStripSection from "./components/TrustStripSection";
+import SolarCarportPromoSection from "./components/SolarCarportPromoSection";
 import ArticleShowcaseSection from "./components/ArticleShowcaseSection";
 import OperationServiceSection from "./components/OperationServiceSection";
 // import ProductGridShowcase from "./components/ProductGridShowcase";
@@ -24,7 +26,7 @@ import {
   // userSegments,
   // testimonials,
   // videoItems,
-  // trustBadges,
+  trustBadges,
   resources,
   faqs,
   projectCases,
@@ -56,6 +58,10 @@ export default function Home() {
 
       {/* Carousel Banner */}
       <CarouselBanner slides={carouselSlides} autoPlay={true} autoPlayInterval={6000} />
+
+      <TrustStripSection trustBadges={trustBadges} />
+
+      <SolarCarportPromoSection />
 
       {/* Article Showcase — F-Pattern layout with real installation photos & implementation data */}
       <ArticleShowcaseSection articles={articleShowcases} />
