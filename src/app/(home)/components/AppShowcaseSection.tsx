@@ -33,7 +33,7 @@ export default function AppShowcaseSection() {
           <div className="relative w-[240px] h-[500px] md:w-[260px] md:h-[540px] rounded-[2.4rem] border border-[var(--cr-line-strong)] bg-black p-3 shadow-2xl">
             <div className="relative w-full h-full rounded-[1.9rem] overflow-hidden bg-[var(--cr-bg-elev-2)]">
               <Image
-                src="/HomeBanner/volthub-app-home-screen.jpg"
+                src="/HomeBanner/volthub-app-home-screen.png"
                 alt="VoltHub app home screen showing vehicle, wallet balance and nearby charging stations"
                 fill
                 className="object-cover"
