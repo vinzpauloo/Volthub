@@ -198,35 +198,26 @@ export const timelineEvents = [
   },
 ];
 
-export const futureGoals = [
+export const ourFocus = [
   {
-    title: "Expansion of Solar-Integrated Charging Networks Nationwide",
+    title: "EV Charging Station Installation",
     description:
-      "Strengthen the rollout of EV charging stations across the Philippines powered by solar-energy systems, reducing dependence on grid electricity and promoting sustainable mobility.",
+      "Site survey, charger installation, and commissioning for property owners and businesses across the Philippines.",
   },
   {
-    title: "Development of Vehicle-to-Grid (V2G) Technology for Smart Cities",
+    title: "App-Based Station Management",
     description:
-      "Advance V2G capabilities that allow electric vehicles to store, discharge, and supply energy back to the grid—supporting smart city infrastructure and grid stability.",
+      "Every station is connected to the VoltHub app for driver payments, live monitoring, and support.",
   },
   {
-    title:
-      "Regional Expansion in Southeast Asia to Promote Renewable-Powered Transportation",
+    title: "Ongoing Operations & Monthly Settlement",
     description:
-      "Position Volthub as a regional leader by expanding EV-charging infrastructure into neighboring Southeast Asian countries, focusing on renewable-powered and smart-technology solutions.",
+      "We monitor uptime, handle driver support, and settle revenue to station owners monthly, so you can run a charging site without hiring a charging team.",
   },
   {
-    title:
-      "Large-Scale Deployment and Innovation of Solar Panel Technologies",
+    title: "Solar Carports (Optional Add-On)",
     description:
-      "Accelerate the adoption of advanced solar panel technologies to power EV chargers, office facilities, and large commercial installations.",
-    details: [
-      "Integrating high-efficiency mono-PERC and bifacial panels",
-      "Establishing solar farms dedicated for EV charging hubs",
-      "Investing in R&D for improved durability and efficiency in tropical climates",
-      "Partnering with local and global solar manufacturers for technology transfer",
-      "Supporting nationwide solar rooftop programs for cleaner, decentralized energy",
-    ],
+      "Solar carports are available for charging sites that want added shade and on-site solar generation alongside their chargers.",
   },
 ];
 
