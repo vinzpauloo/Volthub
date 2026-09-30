@@ -1,34 +1,34 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Manrope } from "next/font/google";
 import { ArrowUp } from "lucide-react";
-import CarouselBanner from "@/components/home/CarouselBanner";
-import HoverEffects from "@/components/home/HoverEffects";
+import HeroSection from "./components/HeroSection";
+import TrustStripSection from "./components/TrustStripSection";
+import SolarCarportPromoSection from "./components/SolarCarportPromoSection";
+import StatsSection from "./components/StatsSection";
 import ArticleShowcaseSection from "./components/ArticleShowcaseSection";
 import OperationServiceSection from "./components/OperationServiceSection";
-// import ProductGridShowcase from "./components/ProductGridShowcase";
+import AppShowcaseSection from "./components/AppShowcaseSection";
 import RecommendedProducts from "./components/RecommendedProducts";
-import BlogResourcesSection from "./components/BlogResourcesSection";
-import StatsSection from "./components/StatsSection";
-// import HowItWorksSection from "./components/HowItWorksSection";
-// import UserSegmentationSection from "./components/UserSegmentationSection";
-// import SocialProofSection from "./components/SocialProofSection";
-import FAQSection from "./components/FAQSection";
 import ProjectCasesSection from "./components/ProjectCasesSection";
-// import VideoSection from "./components/VideoSection";
-import {
-  carouselSlides,
-  stats,
-  articleShowcases,
-  // howItWorksSteps,
-  // userSegments,
-  // testimonials,
-  // videoItems,
-  // trustBadges,
-  resources,
-  faqs,
-  projectCases,
-} from "./components/homeData";
+import FAQSection from "./components/FAQSection";
+import BlogResourcesSection from "./components/BlogResourcesSection";
+import FinalCtaSection from "./components/FinalCtaSection";
+import { stats, trustBadges, resources, faqs } from "./components/homeData";
+
+const manrope = Manrope({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-manrope",
+  display: "swap",
+});
+
+const featuredBlogSlugs = [
+  "the-billion-peso-ev-charging-opportunity-in-the-philippines",
+  "ev-charger-cost-installation-philippines",
+  "commercial-energy-solutions-business-guide",
+];
 
 export default function Home() {
   const [showBackToTop, setShowBackToTop] = useState(false);
@@ -48,89 +48,35 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col w-full overflow-x-hidden">
+    <main
+      className={`flex flex-col w-full overflow-x-hidden theme-control-room ${manrope.variable}`}
+    >
       <h1 className="sr-only">
         Solar, Battery Storage and EV Charging Solutions in the Philippines
       </h1>
-      <HoverEffects />
+      <div className="cr-grain" aria-hidden="true" />
 
-      {/* Carousel Banner */}
-      <CarouselBanner slides={carouselSlides} autoPlay={true} autoPlayInterval={6000} />
-
-      {/* Article Showcase — F-Pattern layout with real installation photos & implementation data */}
-      <ArticleShowcaseSection articles={articleShowcases} />
-
+      <HeroSection />
+      <TrustStripSection trustBadges={trustBadges} />
+      <SolarCarportPromoSection />
+      <StatsSection stats={stats} />
+      <ArticleShowcaseSection />
       <OperationServiceSection />
-
+      <AppShowcaseSection />
       <RecommendedProducts />
-
-      {/* How It Works Section */}
-      {/* <HowItWorksSection
-        title="How It Works"
-        description="From consultation to installation, we make the transition to clean energy simple and seamless."
-        steps={howItWorksSteps}
-      /> */}
-
-      {/* User Segmentation Section */}
-      {/* <UserSegmentationSection
-        title="Find Your Perfect Solution"
-        description="Whether you're a homeowner, business owner, or developer, we have the right energy solution for you."
-        segments={userSegments}
-      /> */}
-
-      {/* Project Cases Section */}
-      <ProjectCasesSection
-        title="Customer Project Cases"
-        description="Public Sector, NGO, and Development Projects"
-        badge="Our Work"
-        projectCases={projectCases}
-      />
-
-      {/* Social Proof Section */}
-      {/* <SocialProofSection
-        title="What Our Customers Say"
-        description="Join thousands of satisfied customers who have made the switch to clean energy."
-        testimonials={testimonials}
-        trustBadges={trustBadges}
-        showCertifications={false}
-      /> */}
-
-      {/* Video Section */}
-      {/* <VideoSection
-        title="See VoltHub in Action"
-        description="Discover how VoltHub's energy solutions are transforming homes and businesses worldwide. Watch real customer stories and product demonstrations."
-        videoItems={videoItems}
-      /> */}
-
-      {/* Blog/Resources Section */}
-      {/* <BlogResourcesSection
-        title="Latest Resources & Insights"
-        description="Stay informed with our latest articles, guides, and industry insights on renewable energy."
-        resources={resources}
-      /> */}
-
-      {/* FAQ Section */}
+      <ProjectCasesSection />
       <FAQSection
         title="Frequently Asked Questions"
         description="Find answers to the most common questions about our energy solutions."
         faqs={faqs}
       />
-
-      {/* Lead Capture Section */}
-      {/* <LeadCaptureSection
-        title="Ready to Make the Switch?"
-        description="Join thousands of satisfied customers. Get a free consultation and discover how much you could save with clean energy."
-      /> */}
-
       <BlogResourcesSection
         title="Latest Blogs & Insights"
         description="Stay updated with news, how-to guides, and deep dives on EV charging, solar, and smart energy."
         resources={resources}
-        // viewAllLink="/contact"
+        featuredSlugs={featuredBlogSlugs}
       />
-
-      {/* Stats Section */}
-      <StatsSection stats={stats} />
+      <FinalCtaSection />
 
       {showBackToTop && (
         <button
@@ -142,8 +88,6 @@ export default function Home() {
           <ArrowUp className="h-5 w-5" aria-hidden="true" />
         </button>
       )}
-
-
     </main>
   );
 }
