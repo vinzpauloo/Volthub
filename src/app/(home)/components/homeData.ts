@@ -554,6 +554,43 @@ export const resources = [
     ],
   },
   {
+    slug: "best-ev-charging-apps-philippines",
+    seoTitle: "Best EV Charging Apps Philippines: 2026 Comparison",
+    title: "Best EV Charging Apps in the Philippines",
+    description:
+      "Compare VoltHub, Evro, Solarius, EVOxCharge, Supernova, PlugShare, and the DOE map for finding stations, checking connectors, starting sessions, and paying in the Philippines.",
+    type: "Guide",
+    image: "/Blog/ev-charger-charging-in-progress.webp",
+    imageAlt: "EV driver using a charging station app in the Philippines",
+    faqs: [
+      {
+        question: "What are the main EV charging apps in the Philippines?",
+        answer:
+          "Common EV charging apps and maps used in the Philippines include VoltHub, Evro, Solarius EV Charging, xCharge+ by EVOxCharge, Supernova EV Charger, PlugShare, and the DOE EVCS location portal. Each covers a different network or purpose, so drivers may need more than one app.",
+      },
+      {
+        question: "What can the VoltHub EV charging app do?",
+        answer:
+          "The VoltHub app lets drivers find connected stations, check connector and availability information, start a session by QR code or RFID, monitor charging, pay using available wallet, GCash, or card options, and review charging history. It is available on iOS and Android.",
+      },
+      {
+        question: "Does one app show every EV charging station in the Philippines?",
+        answer:
+          "No single operator app reliably controls every Philippine charging network. Operator apps normally show their connected stations, while community or registry maps may show a broader directory without supporting session start or payment. Check the operator app before travelling.",
+      },
+      {
+        question: "Can VoltHub connect an EV charger from another supplier?",
+        answer:
+          "Yes. If an existing charger supports OCPP, VoltHub can assess it for connection to the VoltHub app and operator platform. Final onboarding requires compatibility testing of the OCPP version, endpoint, security settings, meter values, remote commands, and firmware behavior.",
+      },
+      {
+        question: "Which EV charging app should a station owner use?",
+        answer:
+          "Choose a platform based on charger compatibility, OCPP integration, payments, pricing controls, live monitoring, fault alerts, reporting, driver support, settlement terms, and contract fees. VoltHub offers app-only onboarding for compatible existing OCPP chargers as well as charger-plus-app operation plans.",
+      },
+    ],
+  },
+  {
     slug: "best-home-ev-charger-brand-philippines",
     seoTitle: "Best Home EV Charger Brand in the Philippines (2026)",
     title: "Which Home EV Charger Brand Is Best in the Philippines?",

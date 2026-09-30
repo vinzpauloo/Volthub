@@ -27,7 +27,7 @@ export const operationPlans = [
     unit: "per station / month",
     fees: "7% commission on charging revenue · ₱25,000 one-time onboarding",
     includes: [
-      "Connect any OCPP 1.6J charger you already own",
+      "Connect an existing OCPP charger after compatibility testing",
       "Listed in the VoltHub driver app",
       "Driver payments and wallet",
       "Operator dashboard and monitoring",
@@ -74,9 +74,9 @@ export const operationFeatures = [
       "Revenue by station and by day, session history, kWh delivered, uptime. Export reports for your accountant.",
   },
   {
-    title: "OCPP 1.6J backend",
+    title: "OCPP charger integration",
     description:
-      "Any OCPP-compliant charger connects to our backend. Remote start, stop, reset, firmware updates and load management.",
+      "Connect third-party OCPP chargers after testing the protocol version, security settings, meter values, remote commands, and firmware behavior.",
   },
   {
     title: "Pricing control",
@@ -141,7 +141,7 @@ export const operationFaqs = [
   {
     question: "Do I have to buy VoltHub chargers?",
     answer:
-      "No. The App-only plan connects any OCPP 1.6J charger you already own. The Charger + App plan is cheaper per month because the charger is supplied by us and pre-configured.",
+      "No. If your existing charger supports OCPP, VoltHub can assess it for connection to the app and operator platform. Final onboarding requires compatibility testing. The Charger + App plan is cheaper per month because VoltHub-supplied hardware is pre-configured.",
   },
   {
     question: "How and when do I get paid?",

@@ -417,8 +417,8 @@ export function DownloadApp(): React.ReactElement {
         <SectionHeading
           as="h1"
           eyebrow="Mobile App"
-          title="The VoltHub EV Charging App"
-          description="Take control of your EV charging experience with the VoltHub mobile app. Available on iOS and Android."
+          title="EV Charging App for the Philippines"
+          description="Use the VoltHub app on iOS or Android to find connected charging stations, check connectors and availability, start by QR or RFID, pay, and monitor your session."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">

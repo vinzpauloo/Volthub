@@ -52,7 +52,7 @@ const homeNotIncluded = [
 
 const businessFeatures = [
   "7kW to 400kW — AC & DC options available",
-  "OCPP 2.0 protocol for universal CSMS compatibility",
+  "OCPP support for tested CSMS integration",
   "Remote monitoring, diagnostics & OTA updates",
   "RFID, QR code & mobile app payment support",
   "Load balancing & smart energy management",
@@ -78,7 +78,7 @@ const chargers = [
     name: "Business Charger",
     subtitle: "OCPP-enabled, smart, scalable",
     description:
-      "Built for commercial and fleet use with full OCPP 2.0 protocol support. Connect to any CSMS platform, manage multiple stations remotely, process payments, and scale your charging network with confidence.",
+      "Built for commercial and fleet use with OCPP support. After compatibility testing, connect to a suitable CSMS platform, manage stations remotely, process payments, and scale the charging network.",
     image: "/Product/EV/89.png",
     features: businessFeatures,
     notIncluded: [],

@@ -64,10 +64,10 @@ const services: Service[] = [
   {
     icon: RiPlugLine,
     title: "Network Integration",
-    subtitle: "Smart charging with OCPP 2.0 protocol",
-    desc: "Connect your charging stations to our cloud-based management platform for complete control and visibility. Our OCPP 2.0 compatible system enables remote monitoring, diagnostics, and firmware updates. Integrate with fleet management systems and energy management platforms seamlessly.",
+    subtitle: "Smart charging with OCPP integration",
+    desc: "Connect OCPP charging stations to our cloud-based management platform for control and visibility. After compatibility testing, supported functions can include remote monitoring, diagnostics, commands, and firmware updates, plus fleet and energy-management integrations.",
     features: [
-      "OCPP 2.0 protocol for universal compatibility",
+      "OCPP integration subject to charger compatibility testing",
       "Cloud-based real-time monitoring dashboard",
       "Remote diagnostics and over-the-air updates",
       "Fleet management system integration",

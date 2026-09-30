@@ -52,6 +52,11 @@ const blogContent: Record<string, { author?: string; date?: string; modifiedDate
     date: "2026-09-29",
     readingTime: "11 mins",
   },
+  "best-ev-charging-apps-philippines": {
+    author: "VoltHub Mobility Team",
+    date: "2026-09-30",
+    readingTime: "10 mins",
+  },
   "best-home-ev-charger-brand-philippines": {
     author: "VoltHub Energy Team",
     date: "2026-09-05",

@@ -546,6 +546,181 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
     date: "September 29, 2026",
     readingTime: "11 mins",
   },
+  "best-ev-charging-apps-philippines": {
+    content: `
+      <div class="intro-section">
+        <p class="lead-text">The main EV charging apps and maps used in the Philippines include VoltHub, Evro, Solarius EV Charging, xCharge+ by EVOxCharge, Supernova EV Charger, PlugShare, and the Department of Energy's EVCS location portal. No single app controls every network, so the best choice depends on where you charge and whether you are a driver or a station owner.</p>
+        <p>VoltHub is designed for both sides of the charging session: drivers can find connected stations, start and pay for charging, while station owners can connect existing third-party equipment. If a charger supports OCPP, VoltHub can assess it for integration with the app, payments, monitoring, and operator dashboard after compatibility testing.</p>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Quick answer:</strong> use an operator's own app to start and pay at that operator's stations. Use broader maps such as PlugShare or the DOE portal for discovery and verification, then confirm live status, connector compatibility, and price in the operator app before travelling.</p>
+      </div>
+
+      <h2>Philippines EV charging apps compared</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>App or map</th>
+            <th>Best for</th>
+            <th>Published functions</th>
+            <th>Important limitation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>VoltHub</strong></td>
+            <td>Drivers and station owners using the VoltHub platform</td>
+            <td>Map, connector and availability data, QR/RFID start, payments, session monitoring, history, operator dashboard</td>
+            <td>Shows VoltHub-connected stations, not every charger in the country</td>
+          </tr>
+          <tr>
+            <td>Evro</td>
+            <td>Discovering and using participating Philippine charging networks</td>
+            <td>Station discovery, connector data, session monitoring, GCash or card payment</td>
+            <td>Coverage and control depend on participating charge-point operators</td>
+          </tr>
+          <tr>
+            <td>Solarius EV Charging</td>
+            <td>Solarius destination and public charging network</td>
+            <td>Station availability, directions, QR/RFID access, payment, notifications, history</td>
+            <td>Primarily for the Solarius network</td>
+          </tr>
+          <tr>
+            <td>xCharge+ / EVOxCharge</td>
+            <td>EVOxCharge public stations and business sites</td>
+            <td>Map, live status, QR start, wallet or supported payment, history, AC/DC connector information</td>
+            <td>Session control applies to EVOxCharge-connected stations</td>
+          </tr>
+          <tr>
+            <td>Supernova EV Charger</td>
+            <td>Supernova charging locations</td>
+            <td>Station search, QR start, payment, live session status, transaction history</td>
+            <td>Primarily for the Supernova network</td>
+          </tr>
+          <tr>
+            <td>PlugShare</td>
+            <td>Cross-network discovery and driver check-ins</td>
+            <td>Community map, connector filters, photos, reviews, and check-ins</td>
+            <td>Listing or check-in data may not equal the operator's live status; payment usually happens elsewhere</td>
+          </tr>
+          <tr>
+            <td>DOE EV Industry Portal</td>
+            <td>Official EVCS location and provider verification</td>
+            <td>Government registry and accreditation information</td>
+            <td>Not a universal charging-session and payment app</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>Features and coverage change as networks add stations or integrations. Review the latest store listing and the operator's own station page before relying on an app for a trip.</p>
+
+      <h2>1. VoltHub EV charging app</h2>
+      <p><strong>Best for drivers:</strong> finding and using stations connected to the VoltHub platform.</p>
+      <p>The <a href="/app">VoltHub app</a> is available for iOS and Android. Drivers can browse connected charging locations, filter by connector or power, view availability, start a session by scanning a QR code or using a registered RFID card, monitor charging, pay using the options enabled at the station, and review charging activity.</p>
+      <p>The map is deliberately network-specific: it shows VoltHub-connected locations as they are added, not every public charger in the Philippines. Check the live map before travelling.</p>
+
+      <h2>Why VoltHub matters to charging-station owners</h2>
+      <p>The VoltHub app is also an operating platform. A site owner does not have to replace an existing charger solely to use VoltHub software. <strong>If the charger supports OCPP, VoltHub can assess it for connection</strong> to the driver app and operator dashboard.</p>
+      <p>Third-party charger onboarding can include:</p>
+      <ul>
+        <li>station listing with location, power, connectors, hours, and price;</li>
+        <li>QR or RFID session access;</li>
+        <li>GCash, card, or VoltHub wallet payment options where enabled;</li>
+        <li>live status, session history, energy, revenue, and uptime reporting;</li>
+        <li>remote start, stop, reset, alerts, and pricing controls where supported; and</li>
+        <li>driver support and monthly revenue settlement under the selected plan.</li>
+      </ul>
+      <div class="highlight-box success">
+        <p><strong>Compatibility still has to be tested.</strong> “Supports OCPP” is the starting requirement, not an automatic guarantee. VoltHub checks the protocol version, backend endpoint and security settings, meter values, remote commands, connector behavior, and firmware implementation before a charger goes live.</p>
+      </div>
+      <p>See the <a href="/services/charging-operation">VoltHub charging-station integration and operation plans</a> for charger-plus-app and app-only options.</p>
+
+      <h2>2. Evro</h2>
+      <p>Evro describes itself as a Philippine e-mobility platform working with participating charge-point operators. Its public feature list includes discovering stations, viewing connectors, monitoring sessions, and paying through supported methods such as GCash or credit card.</p>
+      <p>Evro can be useful when a participating operator has integrated its stations. As with any roaming or multi-operator platform, confirm that the specific location and charger are enabled for session control rather than assuming every map listing can be started in the app.</p>
+
+      <h2>3. Solarius EV Charging</h2>
+      <p>The Solarius app is designed around the Solarius destination and public charging network. Its official store listing describes real-time station availability, directions, QR or RFID activation, contactless payment, session notifications, history, and emailed receipts.</p>
+      <p>It is particularly relevant for Solarius-supported hotels, resorts, condominiums, and destination chargers. Check the station connector and operating terms before arrival.</p>
+
+      <h2>4. xCharge+ by EVOxCharge</h2>
+      <p>xCharge+ connects drivers to EVOxCharge stations and provides station status, QR session start, charging progress, payments, and history. EVOxCharge publishes support for AC and DC stations with GB/T AC/DC, Type 2, and CCS2 connectors, depending on the location.</p>
+      <p>For site hosts, EVOxCharge also markets business infrastructure and network-management services, so drivers and property owners should use the part of the platform designed for their role.</p>
+
+      <h2>5. Supernova EV Charger</h2>
+      <p>Supernova's iOS and Android listings describe station discovery, QR-code charging, online payment, real-time charging status, and transaction history. The app is intended for Supernova-supported locations and partnerships.</p>
+
+      <h2>6. PlugShare</h2>
+      <p>PlugShare is useful as a broad, community-supported discovery map. Drivers can filter by connector, read check-ins and reviews, view photos, and see notes from other users.</p>
+      <p>A community listing is not the same as live operator telemetry. A station may be offline, restricted, occupied, or priced differently from an older check-in, so use the relevant operator app for current session and payment information.</p>
+
+      <h2>7. DOE EVCS map and provider portal</h2>
+      <p>The Department of Energy's EV Industry Portal is the official place to verify registered charging infrastructure and EVCS provider accreditation. It is valuable for checking whether a provider is accredited as a Supplier, Service provider, or Operator.</p>
+      <p>For example, <a href="https://evindustry.ph/accreditation-details/DOE-EUMB-ANA-20260210003">VoltHub's official record</a> shows National Accreditation Level for all three categories, valid through June 7, 2029. The DOE portal is a government registry and verification source; it is not a replacement for every operator's live session and payment app.</p>
+
+      <h2>What drivers should check before travelling</h2>
+      <ol>
+        <li><strong>Connector:</strong> Type 2 for AC, CCS2 or another compatible connector for DC, depending on the vehicle.</li>
+        <li><strong>Power:</strong> the station's maximum power and the vehicle's own AC or DC acceptance limit.</li>
+        <li><strong>Availability:</strong> whether a port is online, free, reserved, occupied, or restricted to customers.</li>
+        <li><strong>Access hours:</strong> a 24-hour charger may still be inside a property with its own entry rules.</li>
+        <li><strong>Price:</strong> per-kWh, per-minute, parking, idle, membership, and other fees.</li>
+        <li><strong>Payment:</strong> required app, wallet balance, GCash, card, RFID, or site counter process.</li>
+        <li><strong>Backup:</strong> identify another compatible station before a long trip.</li>
+      </ol>
+
+      <h2>What station owners should compare</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Platform requirement</th>
+            <th>Question to ask</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Charger integration</td><td>Which OCPP versions and charger functions have been tested with this model?</td></tr>
+          <tr><td>Payments</td><td>Which payment methods, fees, refunds, and settlement schedule apply?</td></tr>
+          <tr><td>Pricing</td><td>Can the owner set per-kWh, time, idle, member, and time-of-day rates?</td></tr>
+          <tr><td>Monitoring</td><td>Are live status, faults, sessions, kWh, uptime, and revenue visible?</td></tr>
+          <tr><td>Remote control</td><td>Which start, stop, reset, unlock, update, and configuration commands work?</td></tr>
+          <tr><td>Support</td><td>Who assists drivers, and what is the response path when a station fails?</td></tr>
+          <tr><td>Data and exit</td><td>Can the owner export session and financial data, and what happens at contract end?</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Frequently asked questions</h2>
+      <h3>What are the main EV charging apps in the Philippines?</h3>
+      <p>Common EV charging apps and maps used in the Philippines include VoltHub, Evro, Solarius EV Charging, xCharge+ by EVOxCharge, Supernova EV Charger, PlugShare, and the DOE EVCS location portal. Each covers a different network or purpose, so drivers may need more than one app.</p>
+      <h3>What can the VoltHub EV charging app do?</h3>
+      <p>The VoltHub app lets drivers find connected stations, check connector and availability information, start a session by QR code or RFID, monitor charging, pay using available wallet, GCash, or card options, and review charging history. It is available on iOS and Android.</p>
+      <h3>Does one app show every EV charging station in the Philippines?</h3>
+      <p>No single operator app reliably controls every Philippine charging network. Operator apps normally show their connected stations, while community or registry maps may show a broader directory without supporting session start or payment. Check the operator app before travelling.</p>
+      <h3>Can VoltHub connect an EV charger from another supplier?</h3>
+      <p>Yes. If an existing charger supports OCPP, VoltHub can assess it for connection to the VoltHub app and operator platform. Final onboarding requires compatibility testing of the OCPP version, endpoint, security settings, meter values, remote commands, and firmware behavior.</p>
+      <h3>Which EV charging app should a station owner use?</h3>
+      <p>Choose a platform based on charger compatibility, OCPP integration, payments, pricing controls, live monitoring, fault alerts, reporting, driver support, settlement terms, and contract fees. VoltHub offers app-only onboarding for compatible existing OCPP chargers as well as charger-plus-app operation plans.</p>
+
+      <h2>Sources and methodology</h2>
+      <ul>
+        <li><a href="/app">VoltHub EV charging app and live connected-station map</a>.</li>
+        <li><a href="https://www.evro.ph/">Evro official website</a>.</li>
+        <li><a href="https://play.google.com/store/apps/details?id=ph.com.solarius.app">Solarius EV Charging official Google Play listing</a>.</li>
+        <li><a href="https://evoxcharge.ph/support/">EVOxCharge xCharge+ support and feature guide</a>.</li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.supernova.charger">Supernova EV Charger official Google Play listing</a>.</li>
+        <li><a href="https://www.plugshare.com/">PlugShare station map</a>.</li>
+        <li><a href="https://www.evindustry.ph/">DOE EV Industry Portal</a>.</li>
+      </ul>
+      <p>Comparison is based on publicly described features reviewed on September 30, 2026. It does not claim that every feature is available at every station. Operators, integrations, pricing, and network coverage can change.</p>
+
+      <div class="cta-section">
+        <h2>Connect your charger to the VoltHub app</h2>
+        <p>If you already own an OCPP charger, send VoltHub its brand, model, protocol version, site location, number of connectors, and current backend status. We will assess compatibility for app listing, payments, monitoring, and operation. <a href="/services/charging-operation">Review operation plans</a> or <a href="/contact">request an integration check</a>.</p>
+      </div>
+    `,
+    author: "VoltHub Mobility Team",
+    date: "September 30, 2026",
+    readingTime: "10 mins",
+  },
   "best-home-ev-charger-brand-philippines": {
     content: `
       <div class="intro-section">

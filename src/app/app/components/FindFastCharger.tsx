@@ -473,8 +473,9 @@ export function FindFastCharger(): React.ReactElement {
             Find a Fast Charger Near You
           </h2>
           <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
-            Search for VoltHub fast charging stations across the Philippines by
-            location, connector type, or power output.
+            Search the currently listed VoltHub-connected stations by location,
+            connector type, power output, and availability. Check the live map
+            before travelling as the network expands.
           </p>
         </div>
 

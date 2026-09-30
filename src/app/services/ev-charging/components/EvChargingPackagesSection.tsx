@@ -36,7 +36,7 @@ const packages = [
       "Professional installation & commissioning",
       "Admin dashboard with real-time monitoring",
       "Branded mobile app for your end users",
-      "CSMS with OCPP 2.0 protocol support",
+      "CSMS integration for compatible OCPP chargers",
       "Priority technical support & extended warranty",
     ],
     fees: [
@@ -56,7 +56,7 @@ const packages = [
     features: [
       "CSMS dashboard with station monitoring",
       "Branded mobile app for your end users",
-      "OCPP 2.0 integration with existing chargers",
+      "OCPP integration with existing chargers after compatibility testing",
       "Revenue management & automated billing",
       "Remote diagnostics & OTA firmware updates",
       "Standard email & chat support",

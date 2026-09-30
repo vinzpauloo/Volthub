@@ -24,7 +24,7 @@ const paths = [
     description:
       "Offices, malls, hotels, condos and fleets choose between buying chargers outright and letting VoltHub operate the station on the VoltHub app.",
     points: [
-      "OCPP 1.6J AC and DC chargers up to 400 kW",
+      "OCPP-enabled AC and DC chargers up to 400 kW",
       "Driver app, payments and monitoring",
       "Monthly settlement of charging revenue",
       "Operation plans from ₱1,500 per station per month",
