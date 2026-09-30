@@ -119,17 +119,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="light" suppressHydrationWarning={true}>
-      <body
-        className={cn(
-          geistSans.variable,
-          geistMono.variable,
-          orbitron.variable,
-          "antialiased"
-        )}
-      >
-        <Script
+      <head>
+        <script
           id="openai-measurement-pixel"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,u){
 if(w.oaiq)return;
@@ -141,6 +133,15 @@ var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(js,f);
 oaiq("init",{pixelId:${JSON.stringify(openAiPixelId)}});`,
           }}
         />
+      </head>
+      <body
+        className={cn(
+          geistSans.variable,
+          geistMono.variable,
+          orbitron.variable,
+          "antialiased"
+        )}
+      >
         <Script
           id="gtm-script"
           strategy="afterInteractive"
