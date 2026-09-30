@@ -1,36 +1,28 @@
-import { IconType } from "react-icons";
-import LayoutContainer from "@/components/layout/LayoutContainer";
+import type { IconType } from "react-icons";
 
 interface TrustBadge {
   name: string;
   icon: IconType;
 }
 
-export default function TrustStripSection({
-  trustBadges,
-}: {
+interface TrustStripSectionProps {
   trustBadges: TrustBadge[];
-}) {
+}
+
+export default function TrustStripSection({ trustBadges }: TrustStripSectionProps) {
   return (
-    <div className="relative z-[2] bg-[var(--cr-bg-elev)] border-y border-[var(--cr-line)]">
-      <LayoutContainer className="py-5 flex flex-wrap items-center gap-x-9 gap-y-3.5">
-        {trustBadges.map((badge, i) => {
+    <div className="cr-trust">
+      <div className="cr-trust-row">
+        {trustBadges.map((badge) => {
           const Icon = badge.icon;
           return (
-            <div
-              key={badge.name}
-              className={`relative flex items-center gap-2 text-[12.5px] font-semibold uppercase tracking-wide text-[var(--cr-fg-dim)] ${
-                i > 0
-                  ? "before:content-[''] before:absolute before:-left-[18px] before:top-1/2 before:-translate-y-1/2 before:w-px before:h-3.5 before:bg-[var(--cr-line-strong)]"
-                  : ""
-              }`}
-            >
-              <Icon className="text-base text-[var(--cr-brand-light)]" />
+            <div key={badge.name} className="cr-trust-item">
+              <Icon aria-hidden="true" />
               {badge.name}
             </div>
           );
         })}
-      </LayoutContainer>
+      </div>
     </div>
   );
 }

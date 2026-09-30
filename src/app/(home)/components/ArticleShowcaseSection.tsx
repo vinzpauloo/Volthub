@@ -1,105 +1,109 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
-import { RiArrowRightLine } from "react-icons/ri";
-import LayoutContainer from "@/components/layout/LayoutContainer";
-import type { ArticleShowcase } from "./homeData";
+import type { Route } from "next";
 
-interface ArticleShowcaseSectionProps {
-  articles: ArticleShowcase[];
+interface HomeArticle {
+  badge: string;
+  title: string;
+  description: string;
+  steps: { title: string; detail: string }[];
+  ctaText: string;
+  ctaLink: Route;
+  image: string;
+  reverse?: boolean;
 }
 
-function ArticleCard({ article, index }: { article: ArticleShowcase; index: number }) {
-  const floatDir = index % 2 === 0 ? "md:float-left md:mr-10" : "md:float-right md:ml-10";
+const homeArticles: HomeArticle[] = [
+  {
+    badge: "Commercial EV Infrastructure",
+    title: "How We Build Reliable, Revenue-Grade EV Infrastructure for Your Business",
+    description:
+      "We design, install, and commission high-throughput dual-gun DC fast chargers for commercial hubs, fleet depots, and public charging networks. Each deployment is backed by real-time monitoring and on-site acceptance testing to ensure revenue-grade uptime from day one.",
+    steps: [
+      {
+        title: "Site Survey & Load Study",
+        detail: "Full electrical load assessment and spatial survey before any equipment ships.",
+      },
+      {
+        title: "Civil Works & Trenching",
+        detail: "Concrete pads, cable trenches, and mounting pedestals, pre-approved with engineering drawings.",
+      },
+      {
+        title: "Installation & Commissioning",
+        detail: "Full acceptance test protocol including OCPP backend registration and load-bank verification.",
+      },
+    ],
+    ctaText: "Get a Quote for DC Fast Charging",
+    ctaLink: "/contact" as Route,
+    image: "/Article/article_1.jpg",
+  },
+  {
+    badge: "Solar & Energy Storage",
+    title: "Eliminate Soaring Power Bills with Hybrid and Off-Grid Solar Infrastructure",
+    description:
+      "Relying entirely on the traditional grid leaves your property vulnerable to rising power rates and unexpected blackouts. Our custom-engineered Solar PV and Smart Battery Storage setups are built to give you absolute energy autonomy.",
+    steps: [
+      {
+        title: "Residential Homes",
+        detail: "Smart hybrid configurations that can save up to 80% on monthly power bills.",
+      },
+      {
+        title: "Commercial Hubs",
+        detail: "Smart energy management that automatically shaves down peak-demand charges.",
+      },
+      {
+        title: "Off-Grid Farms & Rural Projects",
+        detail: "Rugged off-grid setups that keep irrigation and cold storage running without diesel.",
+      },
+    ],
+    ctaText: "Calculate Your Solar Energy ROI →",
+    ctaLink: "/tools/roi-calculator" as Route,
+    image: "/aboutimages/solarpanels.jpg",
+    reverse: true,
+  },
+];
 
+export default function ArticleShowcaseSection() {
   return (
-    <article className="clear-both">
-      {/* ── Badge ── */}
-      <p className="text-base font-semibold tracking-[0.15em] uppercase text-[var(--cr-brand-light)] mb-4">
-        {article.badge}
-      </p>
-
-      {/* ── Title ── */}
-      <h3 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
-        {article.title}
-        <span className={article.titleHighlight.color}>{article.titleHighlight.text}</span>
-      </h3>
-
-      {/* ── Floated image — text wraps around it on desktop ── */}
-      <div className={`relative w-full ${article.imageClassName || "md:w-150"} aspect-[4/3] overflow-hidden mb-5 ${floatDir}`}>
-        <Image
-          src={article.image}
-          alt={article.imageAlt}
-          fill
-          className={article.imageFit === "contain" ? "object-contain" : "object-cover"}
-          sizes="(max-width: 768px) 100vw, 1000px"
-        />
-      </div>
-
-      {/* ── Description ── */}
-      <p className="text-lg md:text-xl text-[var(--cr-fg-dim)] leading-relaxed mb-5 text-justify">
-        {article.description}
-      </p>
-
-      {/* ── Implementation steps ── */}
-      <div className="space-y-5 mb-6">
-        {article.implementationSteps.map((step, i) => (
-          <p key={i} className="text-lg md:text-xl text-[var(--cr-fg-dim)] leading-relaxed text-justify">
-            <strong className="text-white font-semibold">{step.step}</strong>
-            {step.detail && <>. {step.detail}</>}
-          </p>
-        ))}
-      </div>
-
-      {/* ── CTA ── */}
-      <Link
-        href={article.ctaLink}
-        className="inline-flex items-center gap-2 text-lg font-bold text-[var(--cr-brand-light)] hover:text-[var(--cr-brand)] transition-colors group"
-      >
-        {article.ctaText}
-        <RiArrowRightLine className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-      </Link>
-    </article>
-  );
-}
-
-export default function ArticleShowcaseSection({ articles }: ArticleShowcaseSectionProps) {
-  return (
-    <section className="section-spacing bg-[var(--cr-bg)] overflow-x-hidden">
-      <LayoutContainer className="max-w-full md:max-w-[75%]">
-     
-
-        {/* ── Article cards ── */}
-        <div className="space-y-24 md:space-y-32">
-          {articles.map((article, index) => (
-            <ArticleCard key={index} article={article} index={index} />
-          ))}
+    <section className="cr-section tight">
+      <div className="cr-wrap">
+        <div className="cr-section-head">
+          <div className="cr-kicker">
+            <span className="cr-rule" />
+            How We Build It
+          </div>
+          <h2>Real installs, real implementation steps</h2>
         </div>
 
-        {/* ── Bottom CTA — clean gradient bar ── */}
-        {/* <div className="mt-24 md:mt-32">
-          <div className="rounded-2xl bg-gradient-to-r from-primary to-accent px-8 py-12 md:px-14 md:py-16 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="text-center md:text-left">
-              <h3 className="text-2xl md:text-3xl font-extrabold text-white leading-tight max-w-lg">
-                Ready to power your site with reliable EV charging?
-              </h3>
-              <p className="text-white/70 text-lg md:text-xl mt-3 max-w-md">
-                Tell us about your project and we&apos;ll put together a tailored proposal —
-                including site photos, load estimates, and ROI projections.
-              </p>
+        {homeArticles.map((article) => (
+          <article
+            key={article.title}
+            className={`cr-article${article.reverse ? " rev" : ""}`}
+          >
+            <div className="cr-article-copy">
+              <div className="cr-article-badge">{article.badge}</div>
+              <h3>{article.title}</h3>
+              <p>{article.description}</p>
+              <div className="cr-article-steps">
+                {article.steps.map((step) => (
+                  <div key={step.title} className="cr-article-step">
+                    <b>{step.title}</b>
+                    <span>{step.detail}</span>
+                  </div>
+                ))}
+              </div>
+              <Link className="cr-btn cr-btn-brand" href={article.ctaLink}>
+                {article.ctaText}
+              </Link>
             </div>
-
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-lg font-bold text-primary shadow-lg transition-all duration-200 hover:bg-gray-50 hover:scale-105 group shrink-0"
-            >
-              Get Your Free Quote
-              <RiArrowRightLine className="h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
-        </div> */}
-      </LayoutContainer>
+            <div
+              className="cr-article-img"
+              role="img"
+              aria-label={article.title}
+              style={{ backgroundImage: `url('${article.image}')` }}
+            />
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

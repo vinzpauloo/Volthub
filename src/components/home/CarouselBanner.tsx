@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
 import { RiArrowLeftLine, RiArrowRightLine } from "react-icons/ri";
 import Link from "next/link";
 import type { Route } from "next";
@@ -125,58 +124,14 @@ export default function CarouselBanner({
     }
     
     setCurrentSlide(index);
-    
-    // Animate slide transition
-    if (carouselRef.current) {
-      const slides = carouselRef.current.querySelectorAll(".carousel-slide");
-      gsap.to(slides[index], {
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-      
-      slides.forEach((slide, i) => {
-        if (i !== index) {
-          gsap.to(slide, {
-            opacity: 0,
-            scale: 1.1,
-            duration: 0.8,
-            ease: "power3.out",
-          });
-        }
-      });
-    }
 
     setTimeout(() => {
       setIsTransitioning(false);
     }, 800);
   };
 
-  // Update slide animations when currentSlide changes
+  // Reset progress bar when slide changes (for auto-play)
   useEffect(() => {
-    if (carouselRef.current) {
-      const slideElements = carouselRef.current.querySelectorAll(".carousel-slide");
-      slideElements.forEach((slide, index) => {
-        if (index === currentSlide) {
-          gsap.to(slide, {
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: "power3.out",
-          });
-        } else {
-          gsap.to(slide, {
-            opacity: 0,
-            scale: 1.1,
-            duration: 0.8,
-            ease: "power3.out",
-          });
-        }
-      });
-    }
-
-    // Reset progress bar when slide changes (for auto-play)
     if (autoPlay && progressRef.current && !isPaused) {
       progressRef.current.style.width = "0%";
       progressRef.current.style.transition = "none";
@@ -242,8 +197,10 @@ export default function CarouselBanner({
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`carousel-slide absolute inset-0 ${
-              index === currentSlide ? "z-10" : "z-0"
+            className={`carousel-slide absolute inset-0 transition-[opacity,transform] duration-700 ease-out ${
+              index === currentSlide
+                ? "z-10 opacity-100 scale-100 pointer-events-auto"
+                : "z-0 opacity-0 scale-105 pointer-events-none"
             }`}
           >
             {slide.layout === "side-by-side" ? (
@@ -302,7 +259,7 @@ export default function CarouselBanner({
                             <span className="cr-rule" />
                             {slide.subtitle}
                           </p>
-                          <h1 className="cr-hero-title text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight break-words text-white">
+                          <h1 className="cr-hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] break-words text-white">
                             {slide.title}
                             {slide.titleEmphasis && <> <em>{slide.titleEmphasis}</em></>}
                           </h1>
