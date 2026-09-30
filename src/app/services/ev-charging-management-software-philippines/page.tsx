@@ -224,11 +224,18 @@ export default function ChargingManagementSoftwarePage() {
               <div className="mt-5 space-y-5 text-sm text-gray-300">
                 <div>
                   <p className="font-semibold text-white">Existing OCPP charger</p>
-                  <p>₱2,500 per station/month + onboarding and revenue commission</p>
+                  <ul className="mt-2 space-y-1">
+                    <li>₱2,500 per station/month</li>
+                    <li>₱2 service fee per kWh charged</li>
+                    <li>₱25,000 one-time onboarding fee</li>
+                  </ul>
                 </div>
                 <div>
                   <p className="font-semibold text-white">VoltHub charger + app</p>
-                  <p>₱2,000 per station/month + applicable transaction and revenue fees</p>
+                  <ul className="mt-2 space-y-1">
+                    <li>From ₱2,000 per station/month</li>
+                    <li>Transaction fees and charging-revenue commission charged separately</li>
+                  </ul>
                 </div>
               </div>
               <p className="mt-5 text-xs text-gray-400">
