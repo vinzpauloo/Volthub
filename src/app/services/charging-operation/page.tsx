@@ -46,6 +46,16 @@ export default function ChargingOperationPage() {
               Run the ROI calculator
             </Link>
           </div>
+          <p className="mt-5 text-sm text-gray-600">
+            Already have charging hardware? Review the{" "}
+            <Link
+              href="/services/ev-charging-management-software-philippines"
+              className="font-semibold text-primary underline underline-offset-4"
+            >
+              VoltHub CSMS and third-party OCPP integration process
+            </Link>
+            .
+          </p>
         </LayoutContainer>
       </section>
 

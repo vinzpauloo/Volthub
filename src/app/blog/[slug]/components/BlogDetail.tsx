@@ -637,7 +637,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
       <div class="highlight-box success">
         <p><strong>Compatibility still has to be tested.</strong> “Supports OCPP” is the starting requirement, not an automatic guarantee. VoltHub checks the protocol version, backend endpoint and security settings, meter values, remote commands, connector behavior, and firmware implementation before a charger goes live.</p>
       </div>
-      <p>See the <a href="/services/charging-operation">VoltHub charging-station integration and operation plans</a> for charger-plus-app and app-only options.</p>
+      <p>See how the <a href="/services/ev-charging-management-software-philippines">VoltHub CSMS and OCPP integration process</a> works, then review the <a href="/services/charging-operation">charging-station operation plans</a> for charger-plus-app and app-only options.</p>
 
       <h2>2. Evro</h2>
       <p>Evro describes itself as a Philippine e-mobility platform working with participating charge-point operators. Its public feature list includes discovering stations, viewing connectors, monitoring sessions, and paying through supported methods such as GCash or credit card.</p>
@@ -720,7 +720,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
 
       <div class="cta-section">
         <h2>Connect your charger to the VoltHub app</h2>
-        <p>If you already own an OCPP charger, send VoltHub its brand, model, protocol version, site location, number of connectors, and current backend status. We will assess compatibility for app listing, payments, monitoring, and operation. <a href="/services/charging-operation">Review operation plans</a> or <a href="/contact">request an integration check</a>.</p>
+        <p>If you already own an OCPP charger, send VoltHub its brand, model, protocol version, site location, number of connectors, and current backend status. We will assess compatibility for app listing, payments, monitoring, and operation. <a href="/services/ev-charging-management-software-philippines">Review the CSMS integration process</a>, <a href="/services/charging-operation">check operation plans</a>, or <a href="/contact">request an integration check</a>.</p>
       </div>
     `,
     author: "VoltHub Mobility Team",

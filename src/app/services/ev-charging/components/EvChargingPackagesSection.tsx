@@ -86,6 +86,13 @@ export default function EvChargingPackagesSection() {
             <Link href="/services/charging-operation" className="text-primary font-semibold hover:underline">
               Full details on the charging operation page
             </Link>
+            . Bringing another supplier&apos;s charger?{" "}
+            <Link
+              href="/services/ev-charging-management-software-philippines"
+              className="text-primary font-semibold hover:underline"
+            >
+              Review the OCPP integration process
+            </Link>
           </p>
         </div>
 

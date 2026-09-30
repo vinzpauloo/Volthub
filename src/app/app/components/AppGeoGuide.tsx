@@ -117,13 +117,20 @@ export function AppGeoGuide() {
             path and required compatibility test.
           </p>
           <Link
-            href="/services/charging-operation"
+            href="/services/ev-charging-management-software-philippines"
             className="inline-flex items-center justify-center rounded-xl bg-primary px-6 py-3 font-semibold text-white hover:opacity-90 transition-opacity"
           >
-            See charger integration and operation plans
+            Explore CSMS and OCPP integration
           </Link>
           <p className="mt-4 text-sm text-gray-600">
-            Choosing an app as a driver or station owner? Read our{" "}
+            See current{" "}
+            <Link
+              href="/services/charging-operation#plans"
+              className="font-semibold text-primary underline underline-offset-4"
+            >
+              charging-station operation plans
+            </Link>{" "}
+            or read our{" "}
             <Link
               href="/blog/best-ev-charging-apps-philippines"
               className="font-semibold text-primary underline underline-offset-4"

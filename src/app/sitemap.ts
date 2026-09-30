@@ -12,6 +12,7 @@ const staticRoutes: Array<{
 }> = [
   { path: "", priority: 1, changeFrequency: "weekly" },
   { path: "/services/charging-operation", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/services/ev-charging-management-software-philippines", priority: 0.9, changeFrequency: "weekly" },
   { path: "/services/ev-charging", priority: 0.9, changeFrequency: "weekly" },
   { path: "/services/solar-installation", priority: 0.9, changeFrequency: "weekly" },
   { path: "/app", priority: 0.8, changeFrequency: "monthly" },
