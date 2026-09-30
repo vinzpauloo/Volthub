@@ -29,6 +29,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-MHLCDHH4";
 const uetId = process.env.NEXT_PUBLIC_UET_ID || "187244204";
 const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID || "1668104927560679";
+const openAiPixelId =
+  process.env.NEXT_PUBLIC_OPENAI_PIXEL_ID || "LH84vHvLftHqmCFWgaQzU3";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -125,6 +127,20 @@ export default function RootLayout({
           "antialiased"
         )}
       >
+        <Script
+          id="openai-measurement-pixel"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,u){
+if(w.oaiq)return;
+var q=function(){q.q.push(arguments)};
+q.q=[];w.oaiq=q;
+var js=d.createElement(s);js.async=true;js.src=u;
+var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(js,f);
+})(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");
+oaiq("init",{pixelId:${JSON.stringify(openAiPixelId)}});`,
+          }}
+        />
         <Script
           id="gtm-script"
           strategy="afterInteractive"

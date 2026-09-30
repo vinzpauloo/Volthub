@@ -7,6 +7,7 @@ import {
   RiCheckLine,
   RiDownloadLine,
 } from "react-icons/ri";
+import { trackOpenAILeadCreated } from "@/lib/openai-pixel";
 
 interface PackageItem {
   id?: string;
@@ -218,6 +219,7 @@ export default function PackagesPage() {
         throw new Error(err.error || "Failed to send quote");
       }
 
+      trackOpenAILeadCreated();
       setQuoteRef(refNo);
       setQuoteSubmitted(true);
     } catch (err: unknown) {

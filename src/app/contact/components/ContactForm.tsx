@@ -9,6 +9,7 @@ import { philippineRegions, interestOptions, socialIcons } from "./contactData";
 import ContactHeader from "./ContactHeader";
 import ContactInfo from "./ContactInfo";
 import { trackGoogleAdsConversion } from "@/lib/google-ads";
+import { trackOpenAILeadCreated } from "@/lib/openai-pixel";
 
 const CONTACT_FORM_CONVERSION_ID = "AW-18143858726/AHm_CLHR9tMcEKag1ctD";
 
@@ -401,6 +402,7 @@ export default function ContactForm() {
         throw new Error("Failed to send message");
       }
 
+      trackOpenAILeadCreated();
       trackGoogleAdsConversion({
         sendTo: CONTACT_FORM_CONVERSION_ID,
       });

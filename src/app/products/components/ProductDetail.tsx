@@ -16,6 +16,7 @@ import {
   RiBatteryChargeLine,
 } from "react-icons/ri";
 import { Product, GroupedProduct, BackendProduct, categories } from "./productData";
+import { trackOpenAILeadCreated } from "@/lib/openai-pixel";
 
 // ── Solar / Hybrid Add-On Options ──
 
@@ -410,6 +411,7 @@ ${includeInstallation || solarSetup ? `
         throw new Error(err.error || "Failed to send quote");
       }
 
+      trackOpenAILeadCreated();
       setQuoteRef(refNo);
       setQuoteSubmitted(true);
     } catch (err: unknown) {
