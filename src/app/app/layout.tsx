@@ -4,23 +4,28 @@ import { faqJsonLd, jsonLd } from "@/lib/seo";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
 const pageUrl = `${siteUrl}/app`;
 const description =
-  "Find connected VoltHub EV charging stations in the Philippines, check availability, start by QR or RFID, and pay with GCash, card, or wallet on iOS and Android.";
+  "Find Philippine EV charging stations recorded by the DOE. At VoltHub-connected stations, use the app or no-download H5 web flow to start, pay, and monitor charging.";
 
 const appFaqs = [
   {
     question: "What is the VoltHub EV charging app?",
     answer:
-      "The VoltHub app is a free iOS and Android app for finding VoltHub-connected charging stations, checking connector availability, starting a charging session by QR code or RFID, monitoring the session, paying, and reviewing charging history.",
+      "The VoltHub app is a free iOS and Android app for finding Philippine EV charging stations recorded by the DOE. At stations connected to the VoltHub platform, drivers can also check live availability, start by QR code or RFID, monitor the session, pay, and review charging history.",
   },
   {
-    question: "Does the VoltHub app show every EV charging station in the Philippines?",
+    question: "Which charging stations are shown in the VoltHub app?",
     answer:
-      "No. The map shows stations connected to the VoltHub platform as they become available. For the current network, locations, connector types, power, and availability, check the live map in the app or on this page before travelling.",
+      "The VoltHub app displays EV charging stations recorded in the DOE EV Industry Portal, including stations operated by other providers. Those third-party stations are shown for discovery; live control, session start, payment, and real-time status are available only when a station is connected to the VoltHub platform.",
   },
   {
     question: "How do I start and pay for charging?",
     answer:
-      "At a connected station, plug in the compatible connector, scan the QR code in the app or use a registered RFID card, confirm the connector and displayed price, then pay with the available wallet, GCash, or card option.",
+      "At a VoltHub-connected station, plug in the compatible connector, scan the QR code in the app or use a registered RFID card, confirm the connector and displayed price, then pay with the available wallet, GCash, or card option. DOE-listed stations that are not connected to VoltHub cannot be controlled through the app.",
+  },
+  {
+    question: "Do I have to download the VoltHub app to charge?",
+    answer:
+      "No. At supported VoltHub-connected stations, drivers can use VoltHub's H5 browser-based charging flow without downloading the mobile app. App and H5 functions depend on the station's VoltHub integration and enabled payment options.",
   },
   {
     question: "Can VoltHub connect a charger supplied by another company?",

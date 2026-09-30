@@ -168,17 +168,19 @@ export const softwareApplicationJsonLd = {
   applicationCategory: "NavigationApplication",
   operatingSystem: ["Android", "iOS"],
   description:
-    "Find VoltHub-connected EV charging stations in the Philippines, check connector availability, start by QR code or RFID, pay, monitor charging, and review session history.",
+    "Find Philippine EV charging stations recorded by the DOE. At VoltHub-connected stations, use the mobile app or no-download H5 web flow to start, pay, and monitor charging.",
   url: `${siteUrl}/app`,
   downloadUrl: [seo.playStoreUrl, seo.appStoreUrl],
   installUrl: [seo.playStoreUrl, seo.appStoreUrl],
   featureList: [
-    "VoltHub-connected charging-station map",
-    "Connector and availability information",
+    "Map of Philippine EV charging stations recorded by the DOE",
+    "Station and connector information",
+    "Live availability at VoltHub-connected stations",
     "QR code and RFID session start",
     "Wallet, GCash, and card payment options",
     "Live charging-session monitoring",
     "Charging history",
+    "No-download H5 browser charging at supported stations",
     "Operator onboarding for compatible OCPP chargers",
   ],
   offers: {

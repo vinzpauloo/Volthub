@@ -550,11 +550,11 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
     content: `
       <div class="intro-section">
         <p class="lead-text">The main EV charging apps and maps used in the Philippines include VoltHub, Evro, Solarius EV Charging, xCharge+ by EVOxCharge, Supernova EV Charger, PlugShare, and the Department of Energy's EVCS location portal. No single app controls every network, so the best choice depends on where you charge and whether you are a driver or a station owner.</p>
-        <p>VoltHub is designed for both sides of the charging session: drivers can find connected stations, start and pay for charging, while station owners can connect existing third-party equipment. If a charger supports OCPP, VoltHub can assess it for integration with the app, payments, monitoring, and operator dashboard after compatibility testing.</p>
+        <p>VoltHub is designed for both sides of the charging session. Its map displays Philippine charging stations recorded by the DOE, including locations operated by other providers. At stations connected to VoltHub, drivers can start and pay through the app or use an H5 web flow without downloading an app. Station owners can also connect existing third-party OCPP equipment after compatibility testing.</p>
       </div>
 
       <div class="highlight-box">
-        <p><strong>Quick answer:</strong> use an operator's own app to start and pay at that operator's stations. Use broader maps such as PlugShare or the DOE portal for discovery and verification, then confirm live status, connector compatibility, and price in the operator app before travelling.</p>
+        <p><strong>Quick answer:</strong> VoltHub can be used to discover charging stations recorded by the DOE, but a map listing does not mean VoltHub can control that charger. Live status, session start, and payment work only at VoltHub-connected stations. At supported connected stations, drivers can charge through the mobile app or VoltHub H5 without downloading an app.</p>
       </div>
 
       <h2>Philippines EV charging apps compared</h2>
@@ -571,8 +571,8 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
           <tr>
             <td><strong>VoltHub</strong></td>
             <td>Drivers and station owners using the VoltHub platform</td>
-            <td>Map, connector and availability data, QR/RFID start, payments, session monitoring, history, operator dashboard</td>
-            <td>Shows VoltHub-connected stations, not every charger in the country</td>
+            <td>DOE-recorded station map; app or H5 charging, live status, QR/RFID, payments, and monitoring at connected stations; operator dashboard</td>
+            <td>Third-party DOE listings are for discovery unless the charger is connected to VoltHub</td>
           </tr>
           <tr>
             <td>Evro</td>
@@ -615,9 +615,13 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
       <p>Features and coverage change as networks add stations or integrations. Review the latest store listing and the operator's own station page before relying on an app for a trip.</p>
 
       <h2>1. VoltHub EV charging app</h2>
-      <p><strong>Best for drivers:</strong> finding and using stations connected to the VoltHub platform.</p>
-      <p>The <a href="/app">VoltHub app</a> is available for iOS and Android. Drivers can browse connected charging locations, filter by connector or power, view availability, start a session by scanning a QR code or using a registered RFID card, monitor charging, pay using the options enabled at the station, and review charging activity.</p>
-      <p>The map is deliberately network-specific: it shows VoltHub-connected locations as they are added, not every public charger in the Philippines. Check the live map before travelling.</p>
+      <p><strong>Best for drivers:</strong> discovering DOE-recorded charging stations and using stations connected to the VoltHub platform.</p>
+      <p>The <a href="/app">VoltHub app</a> is available for iOS and Android. Its map displays Philippine EV charging stations recorded by the DOE, including third-party locations. Drivers can use the directory information to find stations and review published location or connector details.</p>
+      <p>A DOE listing and a VoltHub connection are different. VoltHub cannot remotely control another operator's charger merely because it appears on the map. Live availability, session start, payment, and monitoring are enabled only when the charger is integrated with the VoltHub platform.</p>
+
+      <h2>Charge through VoltHub H5 without downloading the app</h2>
+      <p>Drivers do not always need to install the VoltHub mobile app. At supported VoltHub-connected stations, the H5 browser-based charging flow provides a no-download way to start and complete a charging session. This is useful for occasional users, visitors, and drivers who do not want to create another permanent app installation.</p>
+      <p>The H5 option does not turn a third-party directory listing into a controllable charger. Both mobile-app control and H5 charging require the station to be connected to VoltHub, and the available payment methods depend on that station's configuration.</p>
 
       <h2>Why VoltHub matters to charging-station owners</h2>
       <p>The VoltHub app is also an operating platform. A site owner does not have to replace an existing charger solely to use VoltHub software. <strong>If the charger supports OCPP, VoltHub can assess it for connection</strong> to the driver app and operator dashboard.</p>
@@ -692,9 +696,11 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
       <h3>What are the main EV charging apps in the Philippines?</h3>
       <p>Common EV charging apps and maps used in the Philippines include VoltHub, Evro, Solarius EV Charging, xCharge+ by EVOxCharge, Supernova EV Charger, PlugShare, and the DOE EVCS location portal. Each covers a different network or purpose, so drivers may need more than one app.</p>
       <h3>What can the VoltHub EV charging app do?</h3>
-      <p>The VoltHub app lets drivers find connected stations, check connector and availability information, start a session by QR code or RFID, monitor charging, pay using available wallet, GCash, or card options, and review charging history. It is available on iOS and Android.</p>
+      <p>The VoltHub app displays Philippine EV charging stations recorded by the DOE. At VoltHub-connected stations, drivers can check live information, start by QR code or RFID, monitor charging, pay, and review charging history.</p>
       <h3>Does one app show every EV charging station in the Philippines?</h3>
-      <p>No single operator app reliably controls every Philippine charging network. Operator apps normally show their connected stations, while community or registry maps may show a broader directory without supporting session start or payment. Check the operator app before travelling.</p>
+      <p>The VoltHub app displays charging stations recorded in the DOE EV Industry Portal, including third-party locations. However, no app can control every network: live status, session start, and payment in VoltHub are limited to stations connected to the VoltHub platform.</p>
+      <h3>Can I charge with VoltHub without downloading the app?</h3>
+      <p>Yes. At supported VoltHub-connected stations, drivers can use VoltHub's H5 browser-based charging flow without installing the iOS or Android app. Available functions and payment methods depend on the station configuration.</p>
       <h3>Can VoltHub connect an EV charger from another supplier?</h3>
       <p>Yes. If an existing charger supports OCPP, VoltHub can assess it for connection to the VoltHub app and operator platform. Final onboarding requires compatibility testing of the OCPP version, endpoint, security settings, meter values, remote commands, and firmware behavior.</p>
       <h3>Which EV charging app should a station owner use?</h3>
@@ -702,7 +708,7 @@ const blogContent: Record<string, { content: string; author?: string; date?: str
 
       <h2>Sources and methodology</h2>
       <ul>
-        <li><a href="/app">VoltHub EV charging app and live connected-station map</a>.</li>
+        <li><a href="/app">VoltHub EV charging app, DOE-recorded station map, and connected-station services</a>.</li>
         <li><a href="https://www.evro.ph/">Evro official website</a>.</li>
         <li><a href="https://play.google.com/store/apps/details?id=ph.com.solarius.app">Solarius EV Charging official Google Play listing</a>.</li>
         <li><a href="https://evoxcharge.ph/support/">EVOxCharge xCharge+ support and feature guide</a>.</li>

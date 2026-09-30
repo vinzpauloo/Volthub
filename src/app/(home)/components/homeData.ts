@@ -571,12 +571,17 @@ export const resources = [
       {
         question: "What can the VoltHub EV charging app do?",
         answer:
-          "The VoltHub app lets drivers find connected stations, check connector and availability information, start a session by QR code or RFID, monitor charging, pay using available wallet, GCash, or card options, and review charging history. It is available on iOS and Android.",
+          "The VoltHub app displays Philippine EV charging stations recorded by the DOE. At VoltHub-connected stations, drivers can check live information, start by QR code or RFID, monitor charging, pay, and review charging history.",
       },
       {
         question: "Does one app show every EV charging station in the Philippines?",
         answer:
-          "No single operator app reliably controls every Philippine charging network. Operator apps normally show their connected stations, while community or registry maps may show a broader directory without supporting session start or payment. Check the operator app before travelling.",
+          "The VoltHub app displays charging stations recorded in the DOE EV Industry Portal, including third-party locations. However, no app can control every network: live status, session start, and payment in VoltHub are limited to stations connected to the VoltHub platform.",
+      },
+      {
+        question: "Can I charge with VoltHub without downloading the app?",
+        answer:
+          "Yes. At supported VoltHub-connected stations, drivers can use VoltHub's H5 browser-based charging flow without installing the iOS or Android app. Available functions and payment methods depend on the station configuration.",
       },
       {
         question: "Can VoltHub connect an EV charger from another supplier?",

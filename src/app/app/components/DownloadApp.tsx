@@ -79,7 +79,7 @@ const APP_GROUPS: AppGroup[] = [
         id: "home-nearby",
         label: "Nearby",
         description:
-          "Discover nearby charging stations and available connectors with real-time availability status.",
+          "Discover nearby DOE-recorded charging stations. Real-time availability is shown for stations connected to VoltHub.",
         images: ["/EVpage/AppScreen/Home-Nearby.png", "/EVpage/AppScreen/Home-connetorM.png"],
       },
     ],
@@ -96,14 +96,14 @@ const APP_GROUPS: AppGroup[] = [
         id: "find-map",
         label: "Map",
         description:
-          "Interactive map view to locate charging stations in your area with real-time availability indicators.",
+          "Locate DOE-recorded charging stations in your area, with real-time availability indicators where the station is connected to VoltHub.",
         images: ["/EVpage/AppScreen/Map.png"],
       },
       {
         id: "find-filter",
         label: "Filter",
         description:
-          "Filter stations by connector type, charging speed, availability, power output, and more to find the perfect match.",
+          "Filter stations by connector type, charging speed, power output, and available live information to find a suitable match.",
         images: ["/EVpage/AppScreen/Map-Filter2.png"],
       },
       {
@@ -117,14 +117,14 @@ const APP_GROUPS: AppGroup[] = [
         id: "find-station-detail",
         label: "Station",
         description:
-          "View detailed station information including available connectors, pricing, amenities, and user reviews.",
+          "View published station information. Live connectors, pricing, and session controls are available where the station is connected to VoltHub.",
         images: ["/EVpage/AppScreen/StationA.png", "/EVpage/AppScreen/Station-DetailB.png"],
       },
       {
         id: "find-connector",
         label: "Connector",
         description:
-          "Browse and select the right connector type for your EV — filter by plug type, charging speed, and availability.",
+          "Browse the connector information listed for your EV; live selection and availability require a VoltHub-connected station.",
         images: ["/EVpage/AppScreen/Choose-Connector.png"],
       },
     ],
@@ -418,7 +418,7 @@ export function DownloadApp(): React.ReactElement {
           as="h1"
           eyebrow="Mobile App"
           title="EV Charging App for the Philippines"
-          description="Use the VoltHub app on iOS or Android to find connected charging stations, check connectors and availability, start by QR or RFID, pay, and monitor your session."
+          description="Use VoltHub on iOS or Android to find Philippine EV charging stations recorded by the DOE. At supported VoltHub-connected stations, start, pay, and monitor through the app or use the H5 web flow without downloading."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">

@@ -28,17 +28,22 @@ const appFaqs = [
   {
     question: "What is the VoltHub EV charging app?",
     answer:
-      "The VoltHub app is a free iOS and Android app for finding VoltHub-connected charging stations, checking connector availability, starting a charging session by QR code or RFID, monitoring the session, paying, and reviewing charging history.",
+      "The VoltHub app is a free iOS and Android app for finding Philippine EV charging stations recorded by the DOE. At stations connected to the VoltHub platform, drivers can also check live availability, start by QR code or RFID, monitor the session, pay, and review charging history.",
   },
   {
-    question: "Does the VoltHub app show every EV charging station in the Philippines?",
+    question: "Which charging stations are shown in the VoltHub app?",
     answer:
-      "No. The map shows stations connected to the VoltHub platform as they become available. For the current network, locations, connector types, power, and availability, check the live map in the app or on this page before travelling.",
+      "The VoltHub app displays EV charging stations recorded in the DOE EV Industry Portal, including stations operated by other providers. Those third-party stations are shown for discovery; live control, session start, payment, and real-time status are available only when a station is connected to the VoltHub platform.",
   },
   {
     question: "How do I start and pay for charging?",
     answer:
-      "At a connected station, plug in the compatible connector, scan the QR code in the app or use a registered RFID card, confirm the connector and displayed price, then pay with the available wallet, GCash, or card option.",
+      "At a VoltHub-connected station, plug in the compatible connector, scan the QR code in the app or use a registered RFID card, confirm the connector and displayed price, then pay with the available wallet, GCash, or card option. DOE-listed stations that are not connected to VoltHub cannot be controlled through the app.",
+  },
+  {
+    question: "Do I have to download the VoltHub app to charge?",
+    answer:
+      "No. At supported VoltHub-connected stations, drivers can use VoltHub's H5 browser-based charging flow without downloading the mobile app. App and H5 functions depend on the station's VoltHub integration and enabled payment options.",
   },
   {
     question: "Can VoltHub connect a charger supplied by another company?",
@@ -64,11 +69,13 @@ export function AppGeoGuide() {
             One EV charging app, including chargers you already own
           </h2>
           <p className="text-gray-600 leading-relaxed">
-            Drivers use VoltHub to find connected stations, start charging, pay,
-            and monitor sessions. Charging-station owners can also connect an
-            existing third-party charger: if it supports OCPP, VoltHub can assess
-            it for onboarding to the app, payments, monitoring, and operator
-            dashboard without requiring the purchase of a new VoltHub charger.
+            Drivers use VoltHub to find charging stations recorded by the DOE,
+            including locations operated by other providers. Session control,
+            live status, and payment work only at VoltHub-connected stations.
+            Charging-station owners can connect an existing third-party charger:
+            if it supports OCPP, VoltHub can assess it for onboarding to the app,
+            payments, monitoring, and operator dashboard without requiring the
+            purchase of a new VoltHub charger.
           </p>
         </div>
 
@@ -86,6 +93,18 @@ export function AppGeoGuide() {
               </p>
             </div>
           ))}
+        </div>
+
+        <div className="rounded-2xl border border-gray-200 bg-white p-7 text-center shadow-sm">
+          <h3 className="text-2xl font-bold text-gray-900 mb-3">
+            Charge without downloading an app
+          </h3>
+          <p className="text-gray-600 max-w-3xl mx-auto">
+            At supported VoltHub-connected stations, drivers can use the VoltHub
+            H5 browser-based charging flow. This gives occasional users and
+            visitors a no-download way to charge, while regular drivers can use
+            the iOS or Android app for their account and charging history.
+          </p>
         </div>
 
         <div className="rounded-2xl border border-primary/20 bg-primary/5 p-7 text-center">
