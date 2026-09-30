@@ -63,12 +63,12 @@ export default function ChargingSoftwareLayout({
     offers: [
       {
         name: "App-only OCPP Charger Operation Plan",
-        price: "2000",
+        price: "2500",
         unitText: "per station per month",
       },
       {
         name: "Charger and App Operation Plan",
-        price: "1500",
+        price: "2000",
         unitText: "per station per month",
       },
     ],

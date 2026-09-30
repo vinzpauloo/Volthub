@@ -224,11 +224,11 @@ export default function ChargingManagementSoftwarePage() {
               <div className="mt-5 space-y-5 text-sm text-gray-300">
                 <div>
                   <p className="font-semibold text-white">Existing OCPP charger</p>
-                  <p>₱2,000 per station/month + onboarding and revenue commission</p>
+                  <p>₱2,500 per station/month + onboarding and revenue commission</p>
                 </div>
                 <div>
                   <p className="font-semibold text-white">VoltHub charger + app</p>
-                  <p>From ₱1,500 per station/month + applicable transaction and revenue fees</p>
+                  <p>₱2,000 per station/month + applicable transaction and revenue fees</p>
                 </div>
               </div>
               <p className="mt-5 text-xs text-gray-400">
@@ -297,4 +297,3 @@ export default function ChargingManagementSoftwarePage() {
     </main>
   );
 }
-

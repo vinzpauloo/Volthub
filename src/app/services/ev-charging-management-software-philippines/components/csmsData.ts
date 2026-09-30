@@ -93,7 +93,7 @@ export const csmsFaqs = [
   {
     question: "How much does VoltHub charging station software cost?",
     answer:
-      "VoltHub's published App-only operation plan for an existing compatible OCPP charger is ₱2,000 per station per month, plus a 7% charging-revenue commission and a ₱25,000 one-time onboarding fee, excluding VAT. A Charger + App operation plan starts at ₱1,500 per station per month with separate transaction and revenue fees. Request a proposal to confirm the current scope and commercial terms.",
+      "VoltHub's published App-only operation plan for an existing compatible OCPP charger is ₱2,500 per station per month, plus a 7% charging-revenue commission and a ₱25,000 one-time onboarding fee, excluding VAT. A Charger + App operation plan is ₱2,000 per station per month with separate transaction and revenue fees. Request a proposal to confirm the current scope and commercial terms.",
   },
   {
     question: "Is VoltHub accredited to supply, service, and operate EV charging stations?",
@@ -101,4 +101,3 @@ export const csmsFaqs = [
       "Yes. The DOE EV Industry Portal lists VoltHub Electronic Power Generation Services Corporation under accreditation number DOE-EUMB-ANA-20260210003 with National Accreditation Level status as an EVCS Provider - Service, Supplier and Operator, valid through June 7, 2029.",
   },
 ] as const;
-
