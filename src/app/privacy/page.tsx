@@ -5,7 +5,7 @@ import LegalPageLayout, {
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL || "https://www.volthub.ph";
-const LAST_UPDATED = "April 8, 2026";
+const LAST_UPDATED = "October 31, 2026";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -209,6 +209,39 @@ export default function PrivacyPage() {
             We do <strong>not</strong> purchase personal data from third-party
             data brokers.
           </p>
+          <h3
+            id="meta-messaging"
+            className="text-lg font-semibold text-slate-900 mt-6 scroll-mt-32"
+          >
+            3.4 Messages via Facebook Messenger and Instagram
+          </h3>
+          <p>
+            When you contact VoltHub through our Facebook Page or Instagram
+            account, we receive your message content, your public profile
+            name and your Meta-scoped user ID, and the time of the message. We
+            use this information only to respond to your inquiry, provide
+            product information and quotations, and provide customer support.
+          </p>
+          <p>
+            Messages are stored in a secured cloud database (Supabase) and may
+            be processed by AI tools, including embedding and drafting
+            services from third-party providers (such as OpenAI), to help our
+            staff prepare replies. A VoltHub team member reviews and sends
+            every reply; we do not use fully automated replies. We do{" "}
+            <strong>not</strong> sell this data and do <strong>not</strong>{" "}
+            use it for advertising profiling. We keep these messages for the
+            periods in{" "}
+            <a href="#data-retention">Section 8 (Data Retention)</a>.
+          </p>
+          <p>
+            <strong>Deleting your data</strong>: email{" "}
+            <a href="mailto:customerservice@volthub.ph?subject=Data%20Privacy%20Request">
+              customerservice@volthub.ph
+            </a>{" "}
+            with the subject &ldquo;Data Privacy Request&rdquo; and include
+            your Facebook or Instagram name, and we will delete your messages
+            within 30 days.
+          </p>
         </>
       ),
     },
@@ -323,6 +356,22 @@ export default function PrivacyPage() {
               sent to a third-party AI inference provider for processing. We
               do not store chat conversations on our servers; conversation
               history is maintained only within your browser session.
+            </li>
+            <li>
+              <strong>Meta Platforms, Inc.</strong> (Facebook Messenger,
+              Instagram) &mdash; delivery of messages you send to and receive
+              from our Facebook Page and Instagram account
+            </li>
+            <li>
+              <strong>Supabase Inc.</strong> &mdash; secured cloud database
+              storage for Messenger and Instagram conversations (see{" "}
+              <a href="#meta-messaging">Section 3.4</a>)
+            </li>
+            <li>
+              <strong>OpenAI, L.L.C.</strong> &mdash; AI embedding and drafting
+              services that help our staff prepare replies to Messenger and
+              Instagram messages; every reply is reviewed and sent by a VoltHub
+              team member
             </li>
           </ul>
           <p>
@@ -509,6 +558,12 @@ export default function PrivacyPage() {
             <li>
               <strong>Contact form inquiries (unconverted)</strong>: 2 years
               from last contact
+            </li>
+            <li>
+              <strong>Facebook Messenger and Instagram messages</strong>: 2
+              years from last contact, or as a customer record if the inquiry
+              becomes a sale; deleted earlier on request (see{" "}
+              <a href="#meta-messaging">Section 3.4</a>)
             </li>
             <li>
               <strong>
