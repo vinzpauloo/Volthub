@@ -24,7 +24,7 @@ export default function HistorySection() {
           </h3>
 
           <p className="text-gray-700 leading-relaxed text-base md:text-lg mb-4">
-            VoltHub was incorporated on January 17, 2025, in Taguig City,
+            VoltHub Ph was incorporated on January 17, 2025, in Taguig City,
             Philippines, with a focus on energy infrastructure for the
             country&apos;s transition to electric mobility.
           </p>
